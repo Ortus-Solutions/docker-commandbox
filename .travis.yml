@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - 2.7
+  - 3.5
+
+services:
+  - docker
+
+install:
+  - docker build -t commandbox/test ./
+  - docker run -d -p 127.0.0.1:80:8080 -t commandbox/test
+
+script:
+  - docker ps | grep -q commandbox
