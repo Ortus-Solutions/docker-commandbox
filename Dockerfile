@@ -25,4 +25,6 @@ RUN echo "$COMMANDBOX_VERSION successfully installed"
 
 #ENV LOGFILE_PATH = $( echo ${$BIN_DIR/box server info property=consoleLogPath} | xargs )
 
-CMD cd $BUILD_DIR && box server set web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT} && box server start && sleep 10 && tail -f $( echo $(box server info property=consoleLogPath) | xargs )
+CMD cd $BUILD_DIR && \
+	box server set web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT} && \
+	box server start --console 
