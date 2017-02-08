@@ -14,7 +14,7 @@ About Commandbox
 
 Learn more about CommandBox at https://www.ortussolutions.com/products/commandbox
 
-What Commandbox Can Do 
+What CommandBox Can Do 
 =======================
 
 CommandBox allows you to configure your entire CFML engine environment from a single file in the root of your project.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://ortus.gitbooks.io/commandbox-documentation/). 
