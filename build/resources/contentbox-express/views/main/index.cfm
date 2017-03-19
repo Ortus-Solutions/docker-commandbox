@@ -1,1 +1,0 @@
-﻿<cfoutput>#prc.welcomeMessage#</cfoutput>
