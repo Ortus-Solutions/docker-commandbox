@@ -1,0 +1,2114 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SharedGenerator</title>
+	<meta name="keywords" content="cbfeeds.util.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>cbfeeds v1.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?cbfeeds/util/SharedGenerator.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: cbfeeds.util"><span class="label label-success">cbfeeds.util</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ SharedGenerator</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../../resources/inherit.gif" alt="extended by ">cbfeeds.util.SharedGenerator
+</pre>
+
+
+
+	
+	
+
+
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Direct Known Subclasses:</strong></div>
+  	<div class="panel-body">
+	
+		
+		<a href="../../cbfeeds/util/RSS2Generator.html" title="class in cbfeeds.util">RSS2Generator</a>
+	
+	</div>
+</div>
+
+
+
+
+
+<div id="class-hint">
+	<p>Methods belonging to the FeedGenerator plug-in that specifically relate to feed creation</p>
+</div>
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				output 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="SharedGenerator.html#init()">init</A></strong>()
+				<br>
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#cclicenseGenChannel()">cclicenseGenChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Creative Commons extension channel XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#cclicenseGenItem()">cclicenseGenItem</A></strong>(query items, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Creative Commons extension item XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#cclicenseValChannel()">cclicenseValChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate Creative Commons extension channel element.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#cclicenseValItem()">cclicenseValItem</A></strong>(query fi, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate Creative Commons extension item element.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#createInstances()">createInstances</A></strong>(struct instance)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variables used for the validation and creation of feed data.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#dcmtGenChannel()">dcmtGenChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate DCMI Metadata terms extension channel XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#dcmtGenItem()">dcmtGenItem</A></strong>(query items, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate DCMI Metadata terms extension item XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#generateExtensionNameSpace()">generateExtensionNameSpace</A></strong>(string keys)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the XML namespaces for feed extensions depending on the tags in use.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#generateExtensionPropertyMap()">generateExtensionPropertyMap</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the extensions default property map.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#generateNum1kSeparator()">generateNum1kSeparator</A></strong>(numeric number, [string seperator=','])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserts thousand-seperators into a number.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#generateNumSuffix()">generateNumSuffix</A></strong>(numeric number, [string seperator=','])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attaches an English oral suffix (st,nd,rd,th) to a number.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#generateRFC822Date()">generateRFC822Date</A></strong>(string targetDate)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate an RFC8222 Date from a date object that conforms to GMT.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#ituneseValItem()">ituneseValItem</A></strong>(query fi, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate Apple iTunes extension item element.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#itunesGenChannel()">itunesGenChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Apple iTunes extension channel XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#itunesGenItem()">itunesGenItem</A></strong>(query items, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Apple iTunes extension item XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#itunesValChannel()">itunesValChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate Apple iTunes extension channel element.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#opensearchGenChannel()">opensearchGenChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate OpenSearch extension channel XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#opensearchValChannel()">opensearchValChannel</A></strong>(struct fs)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate OpenSearch extension channel elements.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#parseColumnMap()">parseColumnMap</A></strong>(struct columnMap)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse and validate a column mapper.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#RSSFormat()">RSSFormat</A></strong>(string string)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A CFML XMLFormat() tag replacement that converts high characters to XML safe Unicode.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#slashGenItem()">slashGenItem</A></strong>(query items, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Slash extension channel XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#slashValItem()">slashValItem</A></strong>(query fi, struct map, numeric currentrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate Slash extension item element.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#URLFormat()">URLFormat</A></strong>(string string)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A CFML XMLFormat() tag replacement that converts URL strings into XML safe, escaped mark-up.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validatecommonslicense()">validatecommonslicense</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate targetString object as a URL pointing to the Creative Commons website.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;struct</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateDaysList()">validateDaysList</A></strong>(string targetList)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate list object against the RSS skipDays element requirements.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;struct</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateHoursList()">validateHoursList</A></strong>(string targetList)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate list object against the RSS skipHours element requirements.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateItunesDuration()">validateItunesDuration</A></strong>(string targetTime)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Force iTunes duration formatting.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateNNInteger()">validateNNInteger</A></strong>(string targetInt)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate number object as a non-negative integer (0,1,2,3.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validatePerson()">validatePerson</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate string object against the RSS person scheme containing an e-mail and an optional name.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateRFC1766()">validateRFC1766</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate string object against RFC1766 'Tags for the Identification of Languages'.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateRFC3066()">validateRFC3066</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RFC3066 'Tags for the Identification of Languages'.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateRFC822Date()">validateRFC822Date</A></strong>(string targetDate)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate date object against RFC822 'Date and Time Specification'.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateURI()">validateURI</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate string object against a HTTP or HTTPS, FTP, news, mailto URI.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#validateURL()">validateURL</A></strong>(string targetString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate string object against a URL.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="SharedGenerator.html#XSLFormat()">XSLFormat</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An Extensible Stylesheet (XSL) used to cleanup whitespace within our generated XML code.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p></p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="cclicenseGenChannel()"><!-- --></a>
+	<h3>cclicenseGenChannel</h3>
+	
+	<kbd>public string <strong>cclicenseGenChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate Creative Commons extension channel XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cclicenseGenItem()"><!-- --></a>
+	<h3>cclicenseGenItem</h3>
+	
+	<kbd>public string <strong>cclicenseGenItem</strong>(query items, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate Creative Commons extension item XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cclicenseValChannel()"><!-- --></a>
+	<h3>cclicenseValChannel</h3>
+	
+	<kbd>public string <strong>cclicenseValChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate Creative Commons extension channel element</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cclicenseValItem()"><!-- --></a>
+	<h3>cclicenseValItem</h3>
+	
+	<kbd>public string <strong>cclicenseValItem</strong>(query fi, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate Creative Commons extension item element</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fi</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createInstances()"><!-- --></a>
+	<h3>createInstances</h3>
+	
+	<kbd>public struct <strong>createInstances</strong>(struct instance)</kbd>
+	
+	<br><br>
+
+	
+		<p>Variables used for the validation and creation of feed data</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>instance</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="dcmtGenChannel()"><!-- --></a>
+	<h3>dcmtGenChannel</h3>
+	
+	<kbd>public string <strong>dcmtGenChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate DCMI Metadata terms extension channel XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="dcmtGenItem()"><!-- --></a>
+	<h3>dcmtGenItem</h3>
+	
+	<kbd>public string <strong>dcmtGenItem</strong>(query items, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate DCMI Metadata terms extension item XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="generateExtensionNameSpace()"><!-- --></a>
+	<h3>generateExtensionNameSpace</h3>
+	
+	<kbd>private string <strong>generateExtensionNameSpace</strong>(string keys)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generates the XML namespaces for feed extensions depending on the tags in use</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>keys</code> - A list of distinct column and structures keys</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="generateExtensionPropertyMap()"><!-- --></a>
+	<h3>generateExtensionPropertyMap</h3>
+	
+	<kbd>public struct <strong>generateExtensionPropertyMap</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Generates the extensions default property map</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="generateNum1kSeparator()"><!-- --></a>
+	<h3>generateNum1kSeparator</h3>
+	
+	<kbd>private string <strong>generateNum1kSeparator</strong>(numeric number, [string seperator=','])</kbd>
+	
+	<br><br>
+
+	
+		<p>Inserts thousand-seperators into a number</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>number</code> - Integer</dd>
+		
+		<dd><code>seperator</code> - Seperator character</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="generateNumSuffix()"><!-- --></a>
+	<h3>generateNumSuffix</h3>
+	
+	<kbd>private string <strong>generateNumSuffix</strong>(numeric number, [string seperator=','])</kbd>
+	
+	<br><br>
+
+	
+		<p>Attaches an English oral suffix (st,nd,rd,th) to a number</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>number</code> - Integer</dd>
+		
+		<dd><code>seperator</code> - Seperator character</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="generateRFC822Date()"><!-- --></a>
+	<h3>generateRFC822Date</h3>
+	
+	<kbd>private string <strong>generateRFC822Date</strong>(string targetDate)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate an RFC8222 Date from a date object that conforms to GMT</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetDate</code> - The target date which must be a valid date</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="ituneseValItem()"><!-- --></a>
+	<h3>ituneseValItem</h3>
+	
+	<kbd>public string <strong>ituneseValItem</strong>(query fi, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate Apple iTunes extension item element</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fi</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="itunesGenChannel()"><!-- --></a>
+	<h3>itunesGenChannel</h3>
+	
+	<kbd>public string <strong>itunesGenChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate Apple iTunes extension channel XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="itunesGenItem()"><!-- --></a>
+	<h3>itunesGenItem</h3>
+	
+	<kbd>public string <strong>itunesGenItem</strong>(query items, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate Apple iTunes extension item XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="itunesValChannel()"><!-- --></a>
+	<h3>itunesValChannel</h3>
+	
+	<kbd>public string <strong>itunesValChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate Apple iTunes extension channel element</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="opensearchGenChannel()"><!-- --></a>
+	<h3>opensearchGenChannel</h3>
+	
+	<kbd>public string <strong>opensearchGenChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate OpenSearch extension channel XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="opensearchValChannel()"><!-- --></a>
+	<h3>opensearchValChannel</h3>
+	
+	<kbd>public string <strong>opensearchValChannel</strong>(struct fs)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate OpenSearch extension channel elements</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fs</code> - The structure used to build a feed</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="parseColumnMap()"><!-- --></a>
+	<h3>parseColumnMap</h3>
+	
+	<kbd>public struct <strong>parseColumnMap</strong>(struct columnMap)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse and validate a column mapper</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>columnMap</code> - The column map to parse</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="RSSFormat()"><!-- --></a>
+	<h3>RSSFormat</h3>
+	
+	<kbd>private string <strong>RSSFormat</strong>(string string)</kbd>
+	
+	<br><br>
+
+	
+		<p>A CFML XMLFormat() tag replacement that converts high characters to XML safe Unicode</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>string</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="slashGenItem()"><!-- --></a>
+	<h3>slashGenItem</h3>
+	
+	<kbd>public string <strong>slashGenItem</strong>(query items, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Generate Slash extension channel XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="slashValItem()"><!-- --></a>
+	<h3>slashValItem</h3>
+	
+	<kbd>public string <strong>slashValItem</strong>(query fi, struct map, numeric currentrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate Slash extension item element</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>fi</code> - The feed items</dd>
+		
+		<dd><code>map</code> - The column mapper to map items to queries</dd>
+		
+		<dd><code>currentrow</code> - Current item number</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="URLFormat()"><!-- --></a>
+	<h3>URLFormat</h3>
+	
+	<kbd>private string <strong>URLFormat</strong>(string string)</kbd>
+	
+	<br><br>
+
+	
+		<p>A CFML XMLFormat() tag replacement that converts URL strings into XML safe, escaped mark-up</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>string</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validatecommonslicense()"><!-- --></a>
+	<h3>validatecommonslicense</h3>
+	
+	<kbd>private boolean <strong>validatecommonslicense</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate targetString object as a URL pointing to the Creative Commons website</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateDaysList()"><!-- --></a>
+	<h3>validateDaysList</h3>
+	
+	<kbd>private struct <strong>validateDaysList</strong>(string targetList)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate list object against the RSS skipDays element requirements</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetList</code> - The target list</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateHoursList()"><!-- --></a>
+	<h3>validateHoursList</h3>
+	
+	<kbd>private struct <strong>validateHoursList</strong>(string targetList)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate list object against the RSS skipHours element requirements</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetList</code> - The target list</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateItunesDuration()"><!-- --></a>
+	<h3>validateItunesDuration</h3>
+	
+	<kbd>private boolean <strong>validateItunesDuration</strong>(string targetTime)</kbd>
+	
+	<br><br>
+
+	
+		<p>Force iTunes duration formatting</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetTime</code> - The target duration time</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateNNInteger()"><!-- --></a>
+	<h3>validateNNInteger</h3>
+	
+	<kbd>private boolean <strong>validateNNInteger</strong>(string targetInt)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate number object as a non-negative integer (0,1,2,3..)</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetInt</code> - The target integer</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validatePerson()"><!-- --></a>
+	<h3>validatePerson</h3>
+	
+	<kbd>private boolean <strong>validatePerson</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate string object against the RSS person scheme containing an e-mail and an optional name</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateRFC1766()"><!-- --></a>
+	<h3>validateRFC1766</h3>
+	
+	<kbd>private boolean <strong>validateRFC1766</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate string object against RFC1766 'Tags for the Identification of Languages'</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateRFC3066()"><!-- --></a>
+	<h3>validateRFC3066</h3>
+	
+	<kbd>private boolean <strong>validateRFC3066</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>RFC3066 'Tags for the Identification of Languages'</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateRFC822Date()"><!-- --></a>
+	<h3>validateRFC822Date</h3>
+	
+	<kbd>private boolean <strong>validateRFC822Date</strong>(string targetDate)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate date object against RFC822 'Date and Time Specification'</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetDate</code> - The target date.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateURI()"><!-- --></a>
+	<h3>validateURI</h3>
+	
+	<kbd>private boolean <strong>validateURI</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate string object against a HTTP or HTTPS, FTP, news, mailto URI</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validateURL()"><!-- --></a>
+	<h3>validateURL</h3>
+	
+	<kbd>private boolean <strong>validateURL</strong>(string targetString)</kbd>
+	
+	<br><br>
+
+	
+		<p>Validate string object against a URL</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>targetString</code> - The target string</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="XSLFormat()"><!-- --></a>
+	<h3>XSLFormat</h3>
+	
+	<kbd>public string <strong>XSLFormat</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>An Extensible Stylesheet (XSL) used to cleanup whitespace within our generated XML code</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

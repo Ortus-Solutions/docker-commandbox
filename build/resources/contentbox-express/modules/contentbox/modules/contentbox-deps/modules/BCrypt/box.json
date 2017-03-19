@@ -1,0 +1,31 @@
+{
+    "name":"CryptBox",
+    "version":"2.1.0+0000",
+    "author":"Seth Feldkamp",
+    "homepage":"https://github.com/sfeldkamp/coldbox-plugin-BCrypt",
+    "documentation":"https://github.com/sfeldkamp/coldbox-plugin-BCrypt",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/sfeldkamp/coldbox-plugin-BCrypt"
+    },
+    "bugs":"https://github.com/sfeldkamp/coldbox-plugin-BCrypt/issues",
+    "slug":"BCrypt",
+    "shortDescription":"A ColdBox library for BCrypt for creating cryptographically strong (and slow) password hashes.",
+    "type":"modules",
+    "contributors":[
+        "Seth Feldkamp",
+        "Brad Wood",
+        "Luis Majano"
+    ],
+    "dependencies":{
+        "cbjavaloader":"1.1.0"
+    },
+    "ignore":[
+        "BCryptTest.cfc",
+        "java",
+        "tests"
+    ],
+    "installPaths":{
+        "cbjavaloader":"modules/cbjavaloader"
+    }
+}

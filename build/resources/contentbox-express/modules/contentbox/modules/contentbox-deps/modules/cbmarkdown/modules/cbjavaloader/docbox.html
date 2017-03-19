@@ -1,0 +1,201 @@
+
+
+<table border="0" cellpadding="0" cellspacing="0" bgcolor="white"><tr><td><font color="orange"><b>WARN - [CFTRACE 11:24:54:483][1457972694480 ms (1st trace)][/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc @ line: 34] -  [docbox] <i>Warning! The following script has errors: cbjavaloaderJavaLoaderDSL. {Extended_Info={}, Message={invalid interface definition, can't find interface [coldbox.system.ioc.dsl.IDSLBuilder]}, Detail={}, additional={{}}, TagContext={[{Raw_Trace={javaloaderdsl_cfc$cf.newInstance(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/modules/cbjavaloader/models/JavaLoaderDSL.cfc:7)}, codePrintPlain={5: * The JavaLoader WireBox DSL
+6: */
+7: component implements="coldbox.system.ioc.dsl.IDSLBuilder" accessors="true"{
+8: 
+9: 	/**
+}, column={0}, line={7}, template={/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/modules/cbjavaloader/models/JavaLoaderDSL.cfc}, id={??}, type={cfml}, codePrintHTML={5: * The JavaLoader WireBox DSL<br>
+6: */<br>
+<b>7: component implements=&quot;coldbox.system.ioc.dsl.IDSLBuilder&quot; accessors=&quot;true&quot;{</b><br>
+8: <br>
+9: 	/**<br>
+}}, {Raw_Trace={docbox.docbox_cfc$cf.udfCall(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc:122)}, codePrintPlain={120:                 	var meta = "";
+121: 	                if( Len( packagePath ) ){
+122: 	                    meta = getComponentMetaData( packagePath & "." & cfcName );
+123: 	                } else {
+124: 	                    meta = getComponentMetaData( cfcName );
+}, column={0}, line={122}, template={/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc}, id={??}, type={cfml}, codePrintHTML={120:                 	var meta = &quot;&quot;;<br>
+121: 	                if( Len( packagePath ) ){<br>
+<b>122: 	                    meta = getComponentMetaData( packagePath &amp; &quot;.&quot; &amp; cfcName );</b><br>
+123: 	                } else {<br>
+124: 	                    meta = getComponentMetaData( cfcName );<br>
+}}, {Raw_Trace={docbox.docbox_cfc$cf.udfCall(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc:63)}, codePrintPlain={61: 
+62: 		// build metadata collection
+63: 		var qMetaData = buildMetaDataCollection( thisSource, arguments.excludes );
+64: 
+65: 		// run the strategy
+}, column={0}, line={63}, template={/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc}, id={??}, type={cfml}, codePrintHTML={61: <br>
+62: 		// build metadata collection<br>
+<b>63: 		var qMetaData = buildMetaDataCollection( thisSource, arguments.excludes );</b><br>
+64: <br>
+65: 		// run the strategy<br>
+}}, {Raw_Trace={index_cfm$cf.call(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/index.cfm:10)}, codePrintPlain={8: 		outputDir 		= url.path
+9: 	} );
+10: 	docbox.generate( source=base, mapping=request.moduleName );
+11: </cfscript>
+12: 
+}, column={0}, line={10}, template={/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/index.cfm}, id={??}, type={cfml}, codePrintHTML={8: 		outputDir 		= url.path<br>
+9: 	} );<br>
+<b>10: 	docbox.generate( source=base, mapping=request.moduleName );</b><br>
+11: &lt;/cfscript&gt;<br>
+12: <br>
+}}]}, ErrorCode={0}, ErrNumber={0}, type={expression}, StackTrace={invalid interface definition, can't find interface [coldbox.system.ioc.dsl.IDSLBuilder]
+	at lucee.runtime.component.ComponentLoader.load(ComponentLoader.java:314):314
+	at lucee.runtime.component.ComponentLoader.loadInterface(ComponentLoader.java:63):63
+	at lucee.runtime.InterfaceImpl.loadImplements(InterfaceImpl.java:129):129
+	at lucee.runtime.InterfaceImpl.loadImplements(InterfaceImpl.java:115):115
+	at lucee.runtime.component.InterfaceCollection.<init>(InterfaceCollection.java:38):38
+	at lucee.runtime.ComponentImpl.init(ComponentImpl.java:413):413
+	at javaloaderdsl_cfc$cf.initComponent(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/modules/cbjavaloader/models/JavaLoaderDSL.cfc):-1
+	at javaloaderdsl_cfc$cf.newInstance(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/modules/cbjavaloader/models/JavaLoaderDSL.cfc:7):7
+	at lucee.runtime.component.ComponentLoader.initComponent(ComponentLoader.java:576):576
+	at lucee.runtime.component.ComponentLoader.loadComponent(ComponentLoader.java:457):457
+	at lucee.runtime.component.ComponentLoader.load(ComponentLoader.java:393):393
+	at lucee.runtime.component.ComponentLoader.load(ComponentLoader.java:258):258
+	at lucee.runtime.component.ComponentLoader.loadComponent(ComponentLoader.java:59):59
+	at lucee.runtime.PageContextImpl.loadComponent(PageContextImpl.java:2951):2951
+	at lucee.runtime.functions.other.CreateObject.doComponent(CreateObject.java:228):228
+	at lucee.runtime.functions.other.GetComponentMetaData.call(GetComponentMetaData.java:51):51
+	at docbox.docbox_cfc$cf.udfCall(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc:122):122
+	at lucee.runtime.type.UDFImpl.implementation(UDFImpl.java:111):111
+	at lucee.runtime.type.UDFImpl._call(UDFImpl.java:328):328
+	at lucee.runtime.type.UDFImpl.call(UDFImpl.java:229):229
+	at lucee.runtime.type.scope.UndefinedImpl.call(UndefinedImpl.java:766):766
+	at lucee.runtime.util.VariableUtilImpl.callFunctionWithoutNamedValues(VariableUtilImpl.java:742):742
+	at lucee.runtime.PageContextImpl.getFunction(PageContextImpl.java:1590):1590
+	at docbox.docbox_cfc$cf.udfCall(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/docbox/DocBox.cfc:63):63
+	at lucee.runtime.type.UDFImpl.implementation(UDFImpl.java:111):111
+	at lucee.runtime.type.UDFImpl._call(UDFImpl.java:328):328
+	at lucee.runtime.type.UDFImpl.callWithNamedValues(UDFImpl.java:216):216
+	at lucee.runtime.ComponentImpl._call(ComponentImpl.java:643):643
+	at lucee.runtime.ComponentImpl._call(ComponentImpl.java:524):524
+	at lucee.runtime.ComponentImpl.callWithNamedValues(ComponentImpl.java:1778):1778
+	at lucee.runtime.util.VariableUtilImpl.callFunctionWithNamedValues(VariableUtilImpl.java:773):773
+	at lucee.runtime.PageContextImpl.getFunctionWithNamedValues(PageContextImpl.java:1600):1600
+	at index_cfm$cf.call(/var/www/vhosts/stg.ortussolutions.com/integration/codedepot/cbox-javaloader/apidocs/index.cfm:10):10
+	at lucee.runtime.PageContextImpl.doInclude(PageContextImpl.java:951):951
+	at lucee.runtime.PageContextImpl.doInclude(PageContextImpl.java:903):903
+	at lucee.runtime.listener.ModernAppListener._onRequest(ModernAppListener.java:223):223
+	at lucee.runtime.listener.MixedAppListener.onRequest(MixedAppListener.java:35):35
+	at lucee.runtime.PageContextImpl.execute(PageContextImpl.java:2262):2262
+	at lucee.runtime.PageContextImpl.execute(PageContextImpl.java:2225):2225
+	at lucee.runtime.engine.CFMLEngineImpl.serviceCFML(CFMLEngineImpl.java:456):456
+	at lucee.loader.servlet.CFMLServlet.service(CFMLServlet.java:47):47
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790):790
+	at io.undertow.servlet.handlers.ServletHandler.handleRequest(ServletHandler.java:85):85
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62):62
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36):36
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:131):131
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57):57
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43):43
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46):46
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64):64
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60):60
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77):77
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43):43
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43):43
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43):43
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:284):284
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:263):263
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$000(ServletInitialHandler.java:81):81
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:174):174
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:202):202
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:793):793
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142):1142
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617):617
+	at java.lang.Thread.run(Thread.java:745):745
+}, ExtendedInfo={}}&nbsp;</i></b></font></td></tr></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+
+
+
+
+<h1>Done!</h1>
+<a href="cbjavaloader-APIDocs/index.html">Go to Docs!</a>
+
+

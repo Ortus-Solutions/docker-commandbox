@@ -1,0 +1,30 @@
+{
+    "name":"MessageBox",
+    "author":"Ortus Solutions.com <info@ortussolutions.com>",
+    "version":"2.2.0+10",
+    "location":"http://downloads.ortussolutions.com/ortussolutions/coldbox-modules/cbmessagebox/2.2.0/cbmessagebox-2.2.0.zip",
+    "slug":"cbmessagebox",
+    "type":"modules",
+    "homepage":"https://github.com/coldbox-modules/cbox-messagebox",
+    "documentation":"https://github.com/coldbox-modules/cbox-messagebox/wiki",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/coldbox-modules/cbox-messagebox"
+    },
+    "shortDescription":"A nice producer of flash scoped based messages that's skinnable",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        "Brad Wood <bdw429s@gmail.com>",
+        "Curt Gratz <gratz@computerknowhow.com>"
+    ],
+    "ignore":[
+        "**/.*",
+        "tests",
+        "*/.md"
+    ]
+}

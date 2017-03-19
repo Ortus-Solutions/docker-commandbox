@@ -1,0 +1,33 @@
+{
+    "name":"ColdBox Markdown",
+    "version":"2.0.0+00007",
+    "author":"Ortus Solutions <info@ortussolutions.com",
+    "slug":"cbmarkdown",
+    "type":"modules",
+    "homepage":"https://github.com/ColdBox/cbox-markdown",
+    "documentation":"https://github.com/ColdBox/cbox-markdown",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/ColdBox/cbox-markdown"
+    },
+    "shortDescription":"ColdBox Module that provides markdown processing",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        
+    ],
+    "dependencies":{
+        "cbjavaloader":"1.1.0"
+    },
+    "ignore":[
+        "**/.*",
+        "tests/**"
+    ],
+    "installPaths":{
+        "cbjavaloader":"modules/cbjavaloader"
+    }
+}

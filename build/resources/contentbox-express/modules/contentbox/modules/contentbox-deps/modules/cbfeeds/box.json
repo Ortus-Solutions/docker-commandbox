@@ -1,0 +1,30 @@
+{
+    "name":"CBFeeds",
+    "version":"1.1.0+9",
+    "location":"http://downloads.ortussolutions.com/ortussolutions/coldbox-modules/cbfeeds/1.1.0/cbfeeds-1.1.0.zip",
+    "author":"Ortus Solutions <info@ortussolutions.com",
+    "slug":"cbfeeds",
+    "type":"modules",
+    "homepage":"https://github.com/coldbox-modules/cbox-feeds/",
+    "documentation":"https://github.com/coldbox-modules/cbox-feeds/wiki",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/coldbox-modules/cbox-feeds"
+    },
+    "shortDescription":"A nice way to consume and produce RSS,ATOM feeds the ColdBox way!",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        "Brad Wood <bdw429s@gmail.com>",
+        "Curt Gratz <gratz@computerknowhow.com>"
+    ],
+    "ignore":[
+        "**/.*",
+        "tests",
+        "*/.md"
+    ]
+}

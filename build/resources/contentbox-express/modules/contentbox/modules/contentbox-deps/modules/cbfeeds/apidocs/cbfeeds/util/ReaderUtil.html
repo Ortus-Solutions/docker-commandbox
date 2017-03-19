@@ -1,0 +1,1134 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ReaderUtil</title>
+	<meta name="keywords" content="cbfeeds.util.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>cbfeeds v1.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?cbfeeds/util/ReaderUtil.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: cbfeeds.util"><span class="label label-success">cbfeeds.util</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ ReaderUtil</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../../resources/inherit.gif" alt="extended by ">cbfeeds.util.ReaderUtil
+</pre>
+
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>Feed reader helper</p>
+</div>
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				output 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="ReaderUtil.html#init()">init</A></strong>()
+				<br>
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#arrayOfStructsSort()">arrayOfStructsSort</A></strong>(array aOfS, string key, [string sortOrder='desc'], [string sortType='textnocase'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sorts a structured array by a selected value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findAuthor()">findAuthor</A></strong>(xml itemRoot)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item and find an author.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findCategory()">findCategory</A></strong>(xml itemRoot, array categorynode)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item and find a categories.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findComments()">findComments</A></strong>(xml itemRoot, struct commentsnode)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item and find comments.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findCreatedDate()">findCreatedDate</A></strong>(xml xmlRoot)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse the document to find a created date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findKeywords()">findKeywords</A></strong>(array categoryRoot)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item's category array and find keywords.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findMediaContent()">findMediaContent</A></strong>(xml itemRoot, array attachmentnode)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item and find media content.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findThumbnails()">findThumbnails</A></strong>(xml itemRoot, array attachmentnode)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse an item and find thumbnails.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#findUpdatedDate()">findUpdatedDate</A></strong>(xml xmlRoot)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse the document and find a updated date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#isDateISO8601()">isDateISO8601</A></strong>(string datetime)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if a date is in ISO8601 format.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#normalizeAtomTextConstruct()">normalizeAtomTextConstruct</A></strong>(any entity)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send an element and it will return the appropriate text construct.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#parseAtomItems()">parseAtomItems</A></strong>(any items, [string itemsType='array'], [numeric maxItems='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse the items an return an array of structures.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#parseRSSItems()">parseRSSItems</A></strong>(any items, [string itemsType='array'], [numeric maxItems='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse the items an return an array of structures.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#parseVariablesSet()">parseVariablesSet</A></strong>(struct feed)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set empty structure variables that will be used by parseFeed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>query</code>
+		</td>
+		<td>
+			<strong><a href="ReaderUtil.html#querySortandTrim()">querySortandTrim</A></strong>(query query, numeric maxRecords, string sort, string direction)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sorts a structured array by a selected value.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p></p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="arrayOfStructsSort()"><!-- --></a>
+	<h3>arrayOfStructsSort</h3>
+	
+	<kbd>public array <strong>arrayOfStructsSort</strong>(array aOfS, string key, [string sortOrder='desc'], [string sortType='textnocase'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Sorts a structured array by a selected value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>aOfS</code> - The array to sort</dd>
+		
+		<dd><code>key</code> - Structure Key to sort by</dd>
+		
+		<dd><code>sortOrder</code> - Order to sort by, asc or desc</dd>
+		
+		<dd><code>sortType</code> - Text, textnocase, or numeric</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findAuthor()"><!-- --></a>
+	<h3>findAuthor</h3>
+	
+	<kbd>public string <strong>findAuthor</strong>(xml itemRoot)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item and find an author</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemRoot</code> - The item to look in</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findCategory()"><!-- --></a>
+	<h3>findCategory</h3>
+	
+	<kbd>public array <strong>findCategory</strong>(xml itemRoot, array categorynode)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item and find a categories</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemRoot</code> - The item to look in</dd>
+		
+		<dd><code>categorynode</code> - Existing category to merge with categories</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findComments()"><!-- --></a>
+	<h3>findComments</h3>
+	
+	<kbd>public struct <strong>findComments</strong>(xml itemRoot, struct commentsnode)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item and find comments</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemRoot</code> - The item to look in</dd>
+		
+		<dd><code>commentsnode</code> - Existing comments structure to be updated</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findCreatedDate()"><!-- --></a>
+	<h3>findCreatedDate</h3>
+	
+	<kbd>public string <strong>findCreatedDate</strong>(xml xmlRoot)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse the document to find a created date</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>xmlRoot</code> - The XML root to look in</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findKeywords()"><!-- --></a>
+	<h3>findKeywords</h3>
+	
+	<kbd>public string <strong>findKeywords</strong>(array categoryRoot)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item's category array and find keywords</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>categoryRoot</code> - The category root to look in</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findMediaContent()"><!-- --></a>
+	<h3>findMediaContent</h3>
+	
+	<kbd>public array <strong>findMediaContent</strong>(xml itemRoot, array attachmentnode)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item and find media content</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemRoot</code> - The item to look in</dd>
+		
+		<dd><code>attachmentnode</code> - Existing attachments to merge with media content</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findThumbnails()"><!-- --></a>
+	<h3>findThumbnails</h3>
+	
+	<kbd>public array <strong>findThumbnails</strong>(xml itemRoot, array attachmentnode)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse an item and find thumbnails</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemRoot</code> - The item to look in</dd>
+		
+		<dd><code>attachmentnode</code> - Existing attachments to merge with thumbnails</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findUpdatedDate()"><!-- --></a>
+	<h3>findUpdatedDate</h3>
+	
+	<kbd>public string <strong>findUpdatedDate</strong>(xml xmlRoot)</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse the document and find a updated date</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>xmlRoot</code> - The XML root to look in</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isDateISO8601()"><!-- --></a>
+	<h3>isDateISO8601</h3>
+	
+	<kbd>public boolean <strong>isDateISO8601</strong>(string datetime)</kbd>
+	
+	<br><br>
+
+	
+		<p>Checks if a date is in ISO8601 format</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>datetime</code> - The datetime string to check</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="normalizeAtomTextConstruct()"><!-- --></a>
+	<h3>normalizeAtomTextConstruct</h3>
+	
+	<kbd>public string <strong>normalizeAtomTextConstruct</strong>(any entity)</kbd>
+	
+	<br><br>
+
+	
+		<p>Send an element and it will return the appropriate text construct</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code> - The XML construct</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="parseAtomItems()"><!-- --></a>
+	<h3>parseAtomItems</h3>
+	
+	<kbd>public any <strong>parseAtomItems</strong>(any items, [string itemsType='array'], [numeric maxItems='0'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse the items an return an array of structures</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The xml of items</dd>
+		
+		<dd><code>itemsType</code> - The type of the items either query or array, array is used by default</dd>
+		
+		<dd><code>maxItems</code> - The maximum number of entries to retrieve, default is display all</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="parseRSSItems()"><!-- --></a>
+	<h3>parseRSSItems</h3>
+	
+	<kbd>public any <strong>parseRSSItems</strong>(any items, [string itemsType='array'], [numeric maxItems='0'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Parse the items an return an array of structures</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>items</code> - The xml of items</dd>
+		
+		<dd><code>itemsType</code> - The type of the items either query or array, array is used by default</dd>
+		
+		<dd><code>maxItems</code> - The maximum number of entries to retrieve, default is display all</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="parseVariablesSet()"><!-- --></a>
+	<h3>parseVariablesSet</h3>
+	
+	<kbd>public struct <strong>parseVariablesSet</strong>(struct feed)</kbd>
+	
+	<br><br>
+
+	
+		<p>Set empty structure variables that will be used by parseFeed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feed</code> - Structure of the current state of the parseFeed process</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="querySortandTrim()"><!-- --></a>
+	<h3>querySortandTrim</h3>
+	
+	<kbd>public query <strong>querySortandTrim</strong>(query query, numeric maxRecords, string sort, string direction)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sorts a structured array by a selected value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code> - The query to trim</dd>
+		
+		<dd><code>maxRecords</code> - Trim to maximum records</dd>
+		
+		<dd><code>sort</code> - Sort query by this column</dd>
+		
+		<dd><code>direction</code> - Sort direction, either 'asc' or 'desc'</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

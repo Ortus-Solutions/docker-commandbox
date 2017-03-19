@@ -1,0 +1,44 @@
+{
+    "name":"AntiSamy",
+    "version":"1.3.0+00033",
+    "author":"Luis Majano <lmajano@ortussolutions.com",
+    "slug":"cbantisamy",
+    "type":"modules",
+    "homepage":"https://github.com/ColdBox/cbox-antisamy",
+    "documentation":"https://github.com/ColdBox/cbox-antisamy",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/ColdBox/cbox-antisamy"
+    },
+    "shortDescription":"OWASP AntiSamy Project that provides XSS cleanup operations to ColdBox applications",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        "Brad Wood <bdw429s@gmail.com>",
+        "Curt Gratz <gratz@computerknowhow.com>"
+    ],
+    "engines":[
+        {
+            "type":"lucee",
+            "version":">4.5"
+        },
+        {
+            "type":"adobe",
+            "version":">9.02"
+        }
+    ],
+    "dependencies":{
+        "cbjavaloader":"1.1.0"
+    },
+    "ignore":[
+        "**/.*",
+        "tests/**"
+    ],
+    "installPaths":{
+        "cbjavaloader":"modules/cbjavaloader"
+    }
+}

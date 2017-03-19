@@ -1,0 +1,67 @@
+{
+    "name":"ColdBox Platform",
+    "version":"4.3.0+188",
+    "location":"http://downloads.ortussolutions.com/ortussolutions/coldbox/4.3.0/coldbox-4.3.0.zip",
+    "author":"Ortus Solutions <info@ortussolutions.com>",
+    "slug":"coldbox",
+    "packageDirectory":"coldbox",
+    "type":"mvc",
+    "keywords":"mvc,conventions,coldbox",
+    "homepage":"https://www.coldbox.org",
+    "documentation":"https://coldbox.ortusbooks.com/",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/coldbox/coldbox-platform"
+    },
+    "bugs":"https://ortussolutions.atlassian.net/browse/COLDBOX",
+    "shortDescription":"A conventions based MVC development framework",
+    "engines":[
+        {
+            "type":"adobe",
+            "version":">9.0.2"
+        },
+        {
+            "type":"lucee",
+            "version":">4.5"
+        }
+    ],
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        "Brad Wood <bdw429s@gmail.com>",
+        "Curt Gratz <gratz@computerknowhow.com>"
+    ],
+    "ignore":[
+        "**/.*",
+        "tests",
+        "apidocs",
+        "testbox",
+        "*/.md"
+    ],
+    "testbox":{
+        "runner":[
+            {
+                "default":"http://localhost:8599/tests/runner.cfm"
+            },
+            {
+                "cf10":"http://cf10cboxdev.local/coldbox/tests/runner.cfm"
+            },
+            {
+                "cf11":"http://cf11cboxdev.local/coldbox/tests/runner.cfm"
+            },
+            {
+                "lucee":"http://luceecboxdev.local/coldbox/tests/runner.cfm"
+            }
+        ]
+    },
+    "devDependencies":{
+        "testbox":"be"
+    },
+    "installPaths":{
+        "testbox":"testbox"
+    }
+}

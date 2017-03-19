@@ -1,0 +1,5059 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BaseORMService</title>
+	<meta name="keywords" content="cborm.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../highlighter/styles/shCoreDefault.css">
+	<script src="../highlighter/scripts/shCore.js"></script>
+	<script src="../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>cborm v1.3.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../index.html?cborm/BaseORMService.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: cborm"><span class="label label-success">cborm</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ BaseORMService</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../resources/inherit.gif" alt="extended by ">cborm.BaseORMService
+</pre>
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: true		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="property_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="5">
+			<strong>Property Summary</strong>
+		</th>
+	</tr>
+	<tr class="info">
+		<th align="left">
+			<strong>type</strong>
+		</th>
+		<th align="left">
+			<strong>property</strong>
+		</th>
+		<th align="left">
+			<strong>default</strong>
+		</th>
+		<th align="left">
+			<strong>serializable</strong>
+		</th>
+		<th align="left">
+			<strong>required</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#defaultAsQuery()">defaultAsQuery</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The bit that determines the default return value for list(), createCriteriaQuery() and executeQuery() as query or array.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>true</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#eventHandling()">eventHandling</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The bit that enables event handling via the ORM Event handler such as interceptions when new entities get created, etc, enabled by default.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>true</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#HQLDynamicCache()">HQLDynamicCache</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; All calculated and parsed dynamic finders' and counters' HQL will be stored here for easier execution.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#ORM()">ORM</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The system ORM utility object.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#ORMEventHandler()">ORMEventHandler</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The system ORM event handler to transmitt ORM events to.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#queryCacheRegion()">queryCacheRegion</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The queryCacheRegion name property for all query caching produced in this service.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>ORMService.defaultCache</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#useQueryCaching()">useQueryCaching</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The bit that tells the service to enable query caching, disabled by default.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>false</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#useTransactions()">useTransactions</A></strong> 
+			<br>
+			
+			<!-- only grab the first sentence of the hint -->
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The bit that enables automatic hibernate transactions on all save, saveAll, update, delete methods.
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>true</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	</tr>
+</table>
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="BaseORMService.html#init()">init</A></strong>([string queryCacheRegion='ORMService.defaultCache'], [boolean useQueryCaching='false'], [boolean eventHandling='true'], [boolean useTransactions='true'], [boolean defaultAsQuery='true'])
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$delete()">$delete</A></strong>(any entity, [boolean flush='false'])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$deleteAll()">$deleteAll</A></strong>(string entityName, [boolean flush='false'])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$deleteByID()">$deleteByID</A></strong>(string entityName, any id, [boolean flush='false'])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$deleteByQuery()">$deleteByQuery</A></strong>(string query, [any params], [numeric max='0'], [numeric offset='0'], [boolean flush='false'], [string datasource=''])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$deleteWhere()">$deleteWhere</A></strong>(string entityName)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$save()">$save</A></strong>(any entity, [boolean forceInsert='false'], [boolean flush='false'])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$saveAll()">$saveAll</A></strong>(any entities, [any forceInsert='false'], [any flush='false'])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#$transactioned()">$transactioned</A></strong>(any method, [any argCollection='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My hibernate safe transaction closure wrapper.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#clear()">clear</A></strong>([string datasource='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear the session removes all the entities that are loaded or created in the session.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#compileHQLFromDynamicMethod()">compileHQLFromDynamicMethod</A></strong>([string missingMethodName], [struct missingMethodArguments], [boolean unique='true'], [boolean isCounting='false'], [struct params], [any entityName])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compile HQL from a dynamic method call.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#convertIDValueToJavaType()">convertIDValueToJavaType</A></strong>(any entityName, any id)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coverts an ID, list of ID's, or array of ID's values to the proper java type.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#convertValueToJavaType()">convertValueToJavaType</A></strong>(any entityName, any propertyName, any value)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coverts a value to the correct javaType for the property passed in.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#count()">count</A></strong>(string entityName, [string where=''], [any params='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the count of records in the DB for the given entity name.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#countWhere()">countWhere</A></strong>(string entityName)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the count by passing name value pairs as arguments to this function.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#createCriteriaQuery()">createCriteriaQuery</A></strong>(any entityName, [array criteria='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new hibernate criteria object according to entityname and criterion array objects.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#createService()">createService</A></strong>(string entityName, [boolean useQueryCaching='[runtime expression]'], [string queryCacheRegion='[runtime expression]'], [boolean eventHandling='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a virtual abstract service for a specfic entity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#criteriaCount()">criteriaCount</A></strong>(any entityName, [array criteria='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the record count using hibernate projections and criterion for specific queries.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#criteriaQuery()">criteriaQuery</A></strong>(any entityName, [array criteria='[runtime expression]'], [string sortOrder=''], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [boolean asQuery='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do a hibernate criteria based query with projections.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#delete()">delete</A></strong>(any entity, [boolean flush='false'], [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete an entity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#deleteAll()">deleteAll</A></strong>(string entityName, [boolean flush='false'], [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete all entries for an entity DLM style and transaction safe.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#deleteByID()">deleteByID</A></strong>(string entityName, any id, [boolean flush='false'], [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete using an entity name and an incoming id, you can also flush the session if needed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#deleteByQuery()">deleteByQuery</A></strong>(string query, [any params], [numeric max='0'], [numeric offset='0'], [boolean flush='false'], [boolean transactional='[runtime expression]'], [string datasource=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete by using an HQL query and iterating via the results, it is not performing a delete query but.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#deleteWhere()">deleteWhere</A></strong>(string entityName, [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes entities by using name value pairs as arguments to this function.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#evict()">evict</A></strong>(string entityName, [string collectionName], [any id])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evict an entity from session, the id can be a string or structure for the primary key.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#evictEntity()">evictEntity</A></strong>(any entities)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evict entity objects from session.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#evictQueries()">evictQueries</A></strong>([string cacheName], [string datasource])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evict all queries in the default cache or the cache region passed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#executeQuery()">executeQuery</A></strong>(string query, [any params='[runtime expression]'], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignorecase='false'], [boolean asQuery='[runtime expression]'], [boolean unique='false'], [string datasource=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the execution of HQL queries using several nice arguments and returns either an array of entities or a query as specified by the asQuery argument.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#exists()">exists</A></strong>(any entityName, any id)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given entityName and id exists in the database, this method does not load the entity into session.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findAll()">findAll</A></strong>([string query], [any params='[runtime expression]'], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [any example])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find all the entities for the specified query and params or example.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findAllWhere()">findAllWhere</A></strong>(string entityName, struct criteria, [string sortOrder=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find all entities according to criteria structure.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findByExample()">findByExample</A></strong>([any example], [boolean unique='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find all/single entities by example.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findDynamically()">findDynamically</A></strong>([string missingMethodName], [struct missingMethodArguments], [boolean unique='true'], [boolean isCounting='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A method for finding entity's dynamically, for example:.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findIt()">findIt</A></strong>([string query], [any params='[runtime expression]'], [any example])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds and returns the first result for the given query or null if no entity was found.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#findWhere()">findWhere</A></strong>(string entityName, struct criteria)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find one entity (or null if not found) according to a criteria structure.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#get()">get</A></strong>(string entityName, any id, [boolean returnNew='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get an entity using a primary key, if the id is not found this method returns null, if the id=0 or blank it returns a new entity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getAll()">getAll</A></strong>(string entityName, [any id], [string sortOrder=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve all the instances from the passed in entity name using the id argument if specified.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getDefaultAsQuery()">getDefaultAsQuery</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getEntityGivenName()">getEntityGivenName</A></strong>(any entity)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the entity name from a given entity object via session lookup or if new object via metadata lookup.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getEventHandling()">getEventHandling</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getHQLDynamicCache()">getHQLDynamicCache</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getKey()">getKey</A></strong>(string entityName)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the key (id field) of a given entity, either simple or composite keys.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getORM()">getORM</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getORMEventHandler()">getORMEventHandler</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getPropertyNames()">getPropertyNames</A></strong>(string entityName)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the Property Names of the entity via hibernate metadata.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getQueryCacheRegion()">getQueryCacheRegion</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getRestrictions()">getRestrictions</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get our hibernate org.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getSessionStatistics()">getSessionStatistics</A></strong>([string datasource='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information about the first-level (session) cache for the current session.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getTableName()">getTableName</A></strong>(string entityName)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the table name that the current entity string belongs to via hibernate metadata.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getUseQueryCaching()">getUseQueryCaching</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#getUseTransactions()">getUseTransactions</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#isSessionDirty()">isSessionDirty</A></strong>([string datasource='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the session contains dirty objects that are awaiting persistence.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#list()">list</A></strong>(string entityName, [struct criteria='[runtime expression]'], [string sortOrder=''], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [boolean asQuery='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List all of the instances of the passed in entity class name.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#merge()">merge</A></strong>(any entity)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merge an entity or array of entities back into a session.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#new()">new</A></strong>(string entityName, [struct properties='[runtime expression]'], [boolean composeRelationships='true'], [any nullEmptyInclude=''], [any nullEmptyExclude=''], [boolean ignoreEmpty='false'], [any include=''], [any exclude=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a new entity object by entity name and you can pass in the properties structre also to bind the entity with properties.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#newCriteria()">newCriteria</A></strong>(string entityName, [boolean useQueryCaching='false'], [string queryCacheRegion=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a brand new criteria builder object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#onMissingMethod()">onMissingMethod</A></strong>([string missingMethodName], [struct missingMethodArguments])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A nice onMissingMethod template to create awesome dynamic methods.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#populate()">populate</A></strong>(any target, struct memento, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple map to property population for entities.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#populateFromJSON()">populateFromJSON</A></strong>(any target, string JSONString, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Populate from JSON, for argument definitions look at the populate method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#populateFromQuery()">populateFromQuery</A></strong>(any target, any qry, [numeric rowNumber='1'], [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Populate from Query, for argument definitions look at the populate method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#populateFromXML()">populateFromXML</A></strong>(any target, string xml, [string root=''], [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Populate from XML, for argument definitions look at the populate method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#populateWithPrefix()">populateWithPrefix</A></strong>(any target, struct memento, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'], string prefix)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple map to property population for entities with structure key prefixes.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#refresh()">refresh</A></strong>(any entity)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refresh the state of an entity or array of entities from the database.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#save()">save</A></strong>(any entity, [boolean forceInsert='false'], [boolean flush='false'], [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save an entity using hibernate transactions or not.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#saveAll()">saveAll</A></strong>(any entities, [any forceInsert='false'], [any flush='false'], [boolean transactional='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves an array of passed entities in specified order.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#sessionContains()">sessionContains</A></strong>(any entity)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current session contains the passed in entity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setDefaultAsQuery()">setDefaultAsQuery</A></strong>(boolean defaultAsQuery)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setEventHandling()">setEventHandling</A></strong>(boolean eventHandling)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setHQLDynamicCache()">setHQLDynamicCache</A></strong>(struct HQLDynamicCache)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setORM()">setORM</A></strong>(any ORM)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setORMEventHandler()">setORMEventHandler</A></strong>(any ORMEventHandler)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setQueryCacheRegion()">setQueryCacheRegion</A></strong>(string queryCacheRegion)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setUseQueryCaching()">setUseQueryCaching</A></strong>(boolean useQueryCaching)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseORMService.html#setUseTransactions()">setUseTransactions</A></strong>(boolean useTransactions)
+			<br>
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>([string queryCacheRegion='ORMService.defaultCache'], [boolean useQueryCaching='false'], [boolean eventHandling='true'], [boolean useTransactions='true'], [boolean defaultAsQuery='true'])</kbd>
+
+	<br><br>
+
+	
+	<p>Constructor</p>
+	
+
+	
+	<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+			<dd><code>queryCacheRegion</code> - The default query cache region to use, by default it uses ORMService.defaultCache</dd>
+		
+			<dd><code>useQueryCaching</code> - Activate caching or not</dd>
+		
+			<dd><code>eventHandling</code> - Activate event handling or not</dd>
+		
+			<dd><code>useTransactions</code> - Use cftransactions around all crud operations or not</dd>
+		
+			<dd><code>defaultAsQuery</code> - Return queries or array of objects by default</dd>
+		
+	</dl>
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+	<a name="property_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Property Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	
+		
+		<a name="defaultAsQuery()"><!-- --></a>
+		<h3>defaultAsQuery</h3>
+
+		<kbd>
+			property boolean 
+			<strong>defaultAsQuery</strong>
+			
+			= [true]
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The bit that determines the default return value for list(), createCriteriaQuery() and executeQuery() as query or array</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="eventHandling()"><!-- --></a>
+		<h3>eventHandling</h3>
+
+		<kbd>
+			property boolean 
+			<strong>eventHandling</strong>
+			
+			= [true]
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The bit that enables event handling via the ORM Event handler such as interceptions when new entities get created, etc, enabled by default.</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="HQLDynamicCache()"><!-- --></a>
+		<h3>HQLDynamicCache</h3>
+
+		<kbd>
+			property struct 
+			<strong>HQLDynamicCache</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>All calculated and parsed dynamic finders' and counters' HQL will be stored here for easier execution</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="ORM()"><!-- --></a>
+		<h3>ORM</h3>
+
+		<kbd>
+			property any 
+			<strong>ORM</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The system ORM utility object</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="ORMEventHandler()"><!-- --></a>
+		<h3>ORMEventHandler</h3>
+
+		<kbd>
+			property any 
+			<strong>ORMEventHandler</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The system ORM event handler to transmitt ORM events to</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="queryCacheRegion()"><!-- --></a>
+		<h3>queryCacheRegion</h3>
+
+		<kbd>
+			property string 
+			<strong>queryCacheRegion</strong>
+			
+			= [ORMService.defaultCache]
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The queryCacheRegion name property for all query caching produced in this service</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="useQueryCaching()"><!-- --></a>
+		<h3>useQueryCaching</h3>
+
+		<kbd>
+			property boolean 
+			<strong>useQueryCaching</strong>
+			
+			= [false]
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The bit that tells the service to enable query caching, disabled by default</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="useTransactions()"><!-- --></a>
+		<h3>useTransactions</h3>
+
+		<kbd>
+			property boolean 
+			<strong>useTransactions</strong>
+			
+			= [true]
+			
+		</kbd>
+
+		<br><br>
+		
+			<p>The bit that enables automatic hibernate transactions on all save, saveAll, update, delete methods</p>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="$delete()"><!-- --></a>
+	<h3>$delete</h3>
+	
+	<kbd>private any <strong>$delete</strong>(any entity, [boolean flush='false'])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$deleteAll()"><!-- --></a>
+	<h3>$deleteAll</h3>
+	
+	<kbd>private numeric <strong>$deleteAll</strong>(string entityName, [boolean flush='false'])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$deleteByID()"><!-- --></a>
+	<h3>$deleteByID</h3>
+	
+	<kbd>private numeric <strong>$deleteByID</strong>(string entityName, any id, [boolean flush='false'])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$deleteByQuery()"><!-- --></a>
+	<h3>$deleteByQuery</h3>
+	
+	<kbd>private any <strong>$deleteByQuery</strong>(string query, [any params], [numeric max='0'], [numeric offset='0'], [boolean flush='false'], [string datasource=''])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$deleteWhere()"><!-- --></a>
+	<h3>$deleteWhere</h3>
+	
+	<kbd>private numeric <strong>$deleteWhere</strong>(string entityName)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$save()"><!-- --></a>
+	<h3>$save</h3>
+	
+	<kbd>public any <strong>$save</strong>(any entity, [boolean forceInsert='false'], [boolean flush='false'])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		<dd><code>forceInsert</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$saveAll()"><!-- --></a>
+	<h3>$saveAll</h3>
+	
+	<kbd>private any <strong>$saveAll</strong>(any entities, [any forceInsert='false'], [any flush='false'])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entities</code></dd>
+		
+		<dd><code>forceInsert</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$transactioned()"><!-- --></a>
+	<h3>$transactioned</h3>
+	
+	<kbd>private any <strong>$transactioned</strong>(any method, [any argCollection='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>My hibernate safe transaction closure wrapper</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>method</code> - the method to closure</dd>
+		
+		<dd><code>argCollection</code> - the arguments to passthrough</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clear()"><!-- --></a>
+	<h3>clear</h3>
+	
+	<kbd>public any <strong>clear</strong>([string datasource='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Clear the session removes all the entities that are loaded or created in the session.
+This clears the first level cache and removes the objects that are not yet saved to the database.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="compileHQLFromDynamicMethod()"><!-- --></a>
+	<h3>compileHQLFromDynamicMethod</h3>
+	
+	<kbd>private any <strong>compileHQLFromDynamicMethod</strong>([string missingMethodName], [struct missingMethodArguments], [boolean unique='true'], [boolean isCounting='false'], [struct params], [any entityName])</kbd>
+	
+	<br><br>
+
+	
+		<p>Compile HQL from a dynamic method call</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>missingMethodName</code></dd>
+		
+		<dd><code>missingMethodArguments</code></dd>
+		
+		<dd><code>unique</code></dd>
+		
+		<dd><code>isCounting</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="convertIDValueToJavaType()"><!-- --></a>
+	<h3>convertIDValueToJavaType</h3>
+	
+	<kbd>public any <strong>convertIDValueToJavaType</strong>(any entityName, any id)</kbd>
+	
+	<br><br>
+
+	
+		<p>Coverts an ID, list of ID's, or array of ID's values to the proper java type
+The method returns a coverted array of ID's</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="convertValueToJavaType()"><!-- --></a>
+	<h3>convertValueToJavaType</h3>
+	
+	<kbd>public any <strong>convertValueToJavaType</strong>(any entityName, any propertyName, any value)</kbd>
+	
+	<br><br>
+
+	
+		<p>Coverts a value to the correct javaType for the property passed in
+The method returns the value in the proper Java Type</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>propertyName</code></dd>
+		
+		<dd><code>value</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="count()"><!-- --></a>
+	<h3>count</h3>
+	
+	<kbd>public numeric <strong>count</strong>(string entityName, [string where=''], [any params='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Return the count of records in the DB for the given entity name. You can also pass an optional where statement
+that can filter the count. Ex: count('User','age > 40 AND name="joe"'). You can even use params with this method:
+Ex: count('User','age > ? AND name = ?',[40,"joe"])</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>where</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="countWhere()"><!-- --></a>
+	<h3>countWhere</h3>
+	
+	<kbd>public numeric <strong>countWhere</strong>(string entityName)</kbd>
+	
+	<br><br>
+
+	
+		<p>Returns the count by passing name value pairs as arguments to this function.  One mandatory argument is to pass the 'entityName'.
+The rest of the arguments are used in the where class using AND notation and parameterized.
+Ex: countWhere(entityName="User",age="20");</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createCriteriaQuery()"><!-- --></a>
+	<h3>createCriteriaQuery</h3>
+	
+	<kbd>private any <strong>createCriteriaQuery</strong>(any entityName, [array criteria='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Create a new hibernate criteria object according to entityname and criterion array objects</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createService()"><!-- --></a>
+	<h3>createService</h3>
+	
+	<kbd>public any <strong>createService</strong>(string entityName, [boolean useQueryCaching='[runtime expression]'], [string queryCacheRegion='[runtime expression]'], [boolean eventHandling='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Create a virtual abstract service for a specfic entity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code> - The name of the entity to bind the virtual service to</dd>
+		
+		<dd><code>useQueryCaching</code> - Activate caching or not</dd>
+		
+		<dd><code>queryCacheRegion</code> - The default query cache region to use, by default it uses ORMService.defaultCache</dd>
+		
+		<dd><code>eventHandling</code> - Activate event handling or not</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="criteriaCount()"><!-- --></a>
+	<h3>criteriaCount</h3>
+	
+	<kbd>public numeric <strong>criteriaCount</strong>(any entityName, [array criteria='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Get the record count using hibernate projections and criterion for specific queries</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="criteriaQuery()"><!-- --></a>
+	<h3>criteriaQuery</h3>
+	
+	<kbd>public any <strong>criteriaQuery</strong>(any entityName, [array criteria='[runtime expression]'], [string sortOrder=''], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [boolean asQuery='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Do a hibernate criteria based query with projections. You must pass an array of criterion objects by using the Hibernate Restrictions object that can be retrieved from this service using ''getRestrictions()''.  The Criteria interface allows to create and execute object-oriented queries. It is powerful alternative to the HQL but has own limitations. Criteria Query is used mostly in case of multi criteria search screens, where HQL is not very effective.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		<dd><code>sortOrder</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>timeout</code></dd>
+		
+		<dd><code>ignoreCase</code></dd>
+		
+		<dd><code>asQuery</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="delete()"><!-- --></a>
+	<h3>delete</h3>
+	
+	<kbd>public any <strong>delete</strong>(any entity, [boolean flush='false'], [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Delete an entity. The entity argument can be a single entity
+or an array of entities. You can optionally flush the session also after committing
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deleteAll()"><!-- --></a>
+	<h3>deleteAll</h3>
+	
+	<kbd>public numeric <strong>deleteAll</strong>(string entityName, [boolean flush='false'], [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Delete all entries for an entity DLM style and transaction safe. It also returns all the count of deletions
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deleteByID()"><!-- --></a>
+	<h3>deleteByID</h3>
+	
+	<kbd>public numeric <strong>deleteByID</strong>(string entityName, any id, [boolean flush='false'], [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Delete using an entity name and an incoming id, you can also flush the session if needed. The id parameter can be a single id or an array of IDs to delete
+The method returns the count of deleted entities.
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deleteByQuery()"><!-- --></a>
+	<h3>deleteByQuery</h3>
+	
+	<kbd>public any <strong>deleteByQuery</strong>(string query, [any params], [numeric max='0'], [numeric offset='0'], [boolean flush='false'], [boolean transactional='[runtime expression]'], [string datasource=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Delete by using an HQL query and iterating via the results, it is not performing a delete query but
+it actually is a select query that should retrieve objects to remove
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deleteWhere()"><!-- --></a>
+	<h3>deleteWhere</h3>
+	
+	<kbd>public numeric <strong>deleteWhere</strong>(string entityName, [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Deletes entities by using name value pairs as arguments to this function.  One mandatory argument is to pass the 'entityName'.
+The rest of the arguments are used in the where class using AND notation and parameterized.
+Ex: deleteWhere(entityName="User",age="4",isActive=true);
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="evict()"><!-- --></a>
+	<h3>evict</h3>
+	
+	<kbd>public any <strong>evict</strong>(string entityName, [string collectionName], [any id])</kbd>
+	
+	<br><br>
+
+	
+		<p>Evict an entity from session, the id can be a string or structure for the primary key
+You can also pass in a collection name to evict from the collection</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>collectionName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="evictEntity()"><!-- --></a>
+	<h3>evictEntity</h3>
+	
+	<kbd>public any <strong>evictEntity</strong>(any entities)</kbd>
+	
+	<br><br>
+
+	
+		<p>Evict entity objects from session.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entities</code> - The argument can be one persistence entity or an array of entities</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="evictQueries()"><!-- --></a>
+	<h3>evictQueries</h3>
+	
+	<kbd>public any <strong>evictQueries</strong>([string cacheName], [string datasource])</kbd>
+	
+	<br><br>
+
+	
+		<p>Evict all queries in the default cache or the cache region passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>cacheName</code></dd>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="executeQuery()"><!-- --></a>
+	<h3>executeQuery</h3>
+	
+	<kbd>public any <strong>executeQuery</strong>(string query, [any params='[runtime expression]'], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignorecase='false'], [boolean asQuery='[runtime expression]'], [boolean unique='false'], [string datasource=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Allows the execution of HQL queries using several nice arguments and returns either an array of entities or a query as specified by the asQuery argument.
+The params filtering can be using named or positional.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>timeout</code></dd>
+		
+		<dd><code>ignorecase</code></dd>
+		
+		<dd><code>asQuery</code></dd>
+		
+		<dd><code>unique</code></dd>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="exists()"><!-- --></a>
+	<h3>exists</h3>
+	
+	<kbd>public boolean <strong>exists</strong>(any entityName, any id)</kbd>
+	
+	<br><br>
+
+	
+		<p>Checks if the given entityName and id exists in the database, this method does not load the entity into session</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findAll()"><!-- --></a>
+	<h3>findAll</h3>
+	
+	<kbd>public array <strong>findAll</strong>([string query], [any params='[runtime expression]'], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [any example])</kbd>
+	
+	<br><br>
+
+	
+		<p>Find all the entities for the specified query and params or example</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>timeout</code></dd>
+		
+		<dd><code>ignoreCase</code></dd>
+		
+		<dd><code>example</code> - DEPRECATED use findByExample() this will be dropped in 3.5</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findAllWhere()"><!-- --></a>
+	<h3>findAllWhere</h3>
+	
+	<kbd>public array <strong>findAllWhere</strong>(string entityName, struct criteria, [string sortOrder=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Find all entities according to criteria structure</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		<dd><code>sortOrder</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findByExample()"><!-- --></a>
+	<h3>findByExample</h3>
+	
+	<kbd>public any <strong>findByExample</strong>([any example], [boolean unique='false'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Find all/single entities by example</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>example</code></dd>
+		
+		<dd><code>unique</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findDynamically()"><!-- --></a>
+	<h3>findDynamically</h3>
+	
+	<kbd>public any <strong>findDynamically</strong>([string missingMethodName], [struct missingMethodArguments], [boolean unique='true'], [boolean isCounting='false'])</kbd>
+	
+	<br><br>
+
+	
+		<p>A method for finding entity's dynamically, for example:
+findByLastNameAndFirstName('User', 'Tester', 'Test');
+findByLastNameOrFirstName('User', 'Tester', 'Test')
+findAllByLastNameIsNotNull('User');
+The first argument must be the 'entityName' or a named agument called 'entityname'
+Any argument which is a structure will be used as options for the query: { ignorecase, maxresults, offset, cacheable, cachename, timeout }</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>missingMethodName</code></dd>
+		
+		<dd><code>missingMethodArguments</code></dd>
+		
+		<dd><code>unique</code></dd>
+		
+		<dd><code>isCounting</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findIt()"><!-- --></a>
+	<h3>findIt</h3>
+	
+	<kbd>public any <strong>findIt</strong>([string query], [any params='[runtime expression]'], [any example])</kbd>
+	
+	<br><br>
+
+	
+		<p>Finds and returns the first result for the given query or null if no entity was found.
+You can either use the query and params combination or send in an example entity to find.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>query</code></dd>
+		
+		<dd><code>params</code></dd>
+		
+		<dd><code>example</code> - DEPRECATED. Use findByExample() instead, deprecated by 3.5</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findWhere()"><!-- --></a>
+	<h3>findWhere</h3>
+	
+	<kbd>public any <strong>findWhere</strong>(string entityName, struct criteria)</kbd>
+	
+	<br><br>
+
+	
+		<p>Find one entity (or null if not found) according to a criteria structure</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="get()"><!-- --></a>
+	<h3>get</h3>
+	
+	<kbd>public any <strong>get</strong>(string entityName, any id, [boolean returnNew='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Get an entity using a primary key, if the id is not found this method returns null, if the id=0 or blank it returns a new entity.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code> - the name of the entity to retrieve</dd>
+		
+		<dd><code>id</code> - An optional primary key to use to retrieve the entity, if the id is 0 or empty</dd>
+		
+		<dd><code>returnNew</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getAll()"><!-- --></a>
+	<h3>getAll</h3>
+	
+	<kbd>public array <strong>getAll</strong>(string entityName, [any id], [string sortOrder=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Retrieve all the instances from the passed in entity name using the id argument if specified
+The id can be a list of IDs or an array of IDs or none to retrieve all.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>id</code></dd>
+		
+		<dd><code>sortOrder</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getDefaultAsQuery()"><!-- --></a>
+	<h3>getDefaultAsQuery</h3>
+	
+	<kbd>public string <strong>getDefaultAsQuery</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getEntityGivenName()"><!-- --></a>
+	<h3>getEntityGivenName</h3>
+	
+	<kbd>public any <strong>getEntityGivenName</strong>(any entity)</kbd>
+	
+	<br><br>
+
+	
+		<p>Returns the entity name from a given entity object via session lookup or if new object via metadata lookup</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getEventHandling()"><!-- --></a>
+	<h3>getEventHandling</h3>
+	
+	<kbd>public string <strong>getEventHandling</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getHQLDynamicCache()"><!-- --></a>
+	<h3>getHQLDynamicCache</h3>
+	
+	<kbd>public string <strong>getHQLDynamicCache</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getKey()"><!-- --></a>
+	<h3>getKey</h3>
+	
+	<kbd>public any <strong>getKey</strong>(string entityName)</kbd>
+	
+	<br><br>
+
+	
+		<p>Returns the key (id field) of a given entity, either simple or composite keys.
+If the key is a simple pk then it will return a string, if it is a composite key then it returns an array</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getORM()"><!-- --></a>
+	<h3>getORM</h3>
+	
+	<kbd>public string <strong>getORM</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getORMEventHandler()"><!-- --></a>
+	<h3>getORMEventHandler</h3>
+	
+	<kbd>public string <strong>getORMEventHandler</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPropertyNames()"><!-- --></a>
+	<h3>getPropertyNames</h3>
+	
+	<kbd>public array <strong>getPropertyNames</strong>(string entityName)</kbd>
+	
+	<br><br>
+
+	
+		<p>Returns the Property Names of the entity via hibernate metadata</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getQueryCacheRegion()"><!-- --></a>
+	<h3>getQueryCacheRegion</h3>
+	
+	<kbd>public string <strong>getQueryCacheRegion</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getRestrictions()"><!-- --></a>
+	<h3>getRestrictions</h3>
+	
+	<kbd>public any <strong>getRestrictions</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Get our hibernate org.hibernate.criterion.Restrictions proxy object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getSessionStatistics()"><!-- --></a>
+	<h3>getSessionStatistics</h3>
+	
+	<kbd>public struct <strong>getSessionStatistics</strong>([string datasource='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Information about the first-level (session) cache for the current session</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTableName()"><!-- --></a>
+	<h3>getTableName</h3>
+	
+	<kbd>public string <strong>getTableName</strong>(string entityName)</kbd>
+	
+	<br><br>
+
+	
+		<p>Returns the table name that the current entity string belongs to via hibernate metadata</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUseQueryCaching()"><!-- --></a>
+	<h3>getUseQueryCaching</h3>
+	
+	<kbd>public string <strong>getUseQueryCaching</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUseTransactions()"><!-- --></a>
+	<h3>getUseTransactions</h3>
+	
+	<kbd>public string <strong>getUseTransactions</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isSessionDirty()"><!-- --></a>
+	<h3>isSessionDirty</h3>
+	
+	<kbd>public boolean <strong>isSessionDirty</strong>([string datasource='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Checks if the session contains dirty objects that are awaiting persistence</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>datasource</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="list()"><!-- --></a>
+	<h3>list</h3>
+	
+	<kbd>public any <strong>list</strong>(string entityName, [struct criteria='[runtime expression]'], [string sortOrder=''], [numeric offset='0'], [numeric max='0'], [numeric timeout='0'], [boolean ignoreCase='false'], [boolean asQuery='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>List all of the instances of the passed in entity class name. You can pass in several optional arguments like
+a struct of filtering criteria, a sortOrder string, offset, max, ignorecase, and timeout.
+Caching for the list is based on the useQueryCaching class property and the cachename property is based on
+the queryCacheRegion class property.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code></dd>
+		
+		<dd><code>criteria</code></dd>
+		
+		<dd><code>sortOrder</code></dd>
+		
+		<dd><code>offset</code></dd>
+		
+		<dd><code>max</code></dd>
+		
+		<dd><code>timeout</code></dd>
+		
+		<dd><code>ignoreCase</code></dd>
+		
+		<dd><code>asQuery</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="merge()"><!-- --></a>
+	<h3>merge</h3>
+	
+	<kbd>public any <strong>merge</strong>(any entity)</kbd>
+	
+	<br><br>
+
+	
+		<p>Merge an entity or array of entities back into a session</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code> - A single or an array of entities to re-merge</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Same entity if one passed, array if an array of entities passed.</dd>
+		</dl>
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="new()"><!-- --></a>
+	<h3>new</h3>
+	
+	<kbd>public any <strong>new</strong>(string entityName, [struct properties='[runtime expression]'], [boolean composeRelationships='true'], [any nullEmptyInclude=''], [any nullEmptyExclude=''], [boolean ignoreEmpty='false'], [any include=''], [any exclude=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Get a new entity object by entity name and you can pass in the properties structre also to bind the entity with properties</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code> - The entity to create</dd>
+		
+		<dd><code>properties</code> - The structure of data to populate the entity with. By default we will inspect for many-to-one, one-to-many and many-to-many relationships and compose them for you.</dd>
+		
+		<dd><code>composeRelationships</code> - Automatically attempt to compose relationships from the incoming properties memento</dd>
+		
+		<dd><code>nullEmptyInclude</code> - A list of keys to NULL when empty</dd>
+		
+		<dd><code>nullEmptyExclude</code> - A list of keys to NOT NULL when empty</dd>
+		
+		<dd><code>ignoreEmpty</code> - Ignore empty values on populations, great for ORM population</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population from the incoming properties memento</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude in the population from the incoming properties memento</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="newCriteria()"><!-- --></a>
+	<h3>newCriteria</h3>
+	
+	<kbd>public any <strong>newCriteria</strong>(string entityName, [boolean useQueryCaching='false'], [string queryCacheRegion=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Get a brand new criteria builder object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entityName</code> - The name of the entity to bind this criteria query to</dd>
+		
+		<dd><code>useQueryCaching</code> - Activate query caching for the list operations</dd>
+		
+		<dd><code>queryCacheRegion</code> - The query cache region to use, which defaults to criterias.{entityName}</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="onMissingMethod()"><!-- --></a>
+	<h3>onMissingMethod</h3>
+	
+	<kbd>public any <strong>onMissingMethod</strong>([string missingMethodName], [struct missingMethodArguments])</kbd>
+	
+	<br><br>
+
+	
+		<p>A nice onMissingMethod template to create awesome dynamic methods.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>missingMethodName</code></dd>
+		
+		<dd><code>missingMethodArguments</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="populate()"><!-- --></a>
+	<h3>populate</h3>
+	
+	<kbd>public any <strong>populate</strong>(any target, struct memento, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Simple map to property population for entities</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		<dd><code>memento</code> - The map/struct to populate the entity with</dd>
+		
+		<dd><code>scope</code> - Use scope injection instead of setter injection, no need of setters, just tell us what scope to inject to</dd>
+		
+		<dd><code>trustedSetter</code> - Do not check if the setter exists, just call it, great for usage with onMissingMethod() and virtual properties</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population ONLY</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude from the population</dd>
+		
+		<dd><code>ignoreEmpty</code></dd>
+		
+		<dd><code>nullEmptyInclude</code></dd>
+		
+		<dd><code>nullEmptyExclude</code></dd>
+		
+		<dd><code>composeRelationships</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="populateFromJSON()"><!-- --></a>
+	<h3>populateFromJSON</h3>
+	
+	<kbd>public any <strong>populateFromJSON</strong>(any target, string JSONString, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Populate from JSON, for argument definitions look at the populate method</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		<dd><code>JSONString</code> - The JSON packet to use for population</dd>
+		
+		<dd><code>scope</code> - Use scope injection instead of setter injection, no need of setters, just tell us what scope to inject to</dd>
+		
+		<dd><code>trustedSetter</code> - Do not check if the setter exists, just call it, great for usage with onMissingMethod() and virtual properties</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population ONLY</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude from the population</dd>
+		
+		<dd><code>ignoreEmpty</code></dd>
+		
+		<dd><code>nullEmptyInclude</code></dd>
+		
+		<dd><code>nullEmptyExclude</code></dd>
+		
+		<dd><code>composeRelationships</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="populateFromQuery()"><!-- --></a>
+	<h3>populateFromQuery</h3>
+	
+	<kbd>public any <strong>populateFromQuery</strong>(any target, any qry, [numeric rowNumber='1'], [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Populate from Query, for argument definitions look at the populate method</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		<dd><code>qry</code> - The query to use for population</dd>
+		
+		<dd><code>rowNumber</code> - The row number to use for population</dd>
+		
+		<dd><code>scope</code> - Use scope injection instead of setter injection, no need of setters, just tell us what scope to inject to</dd>
+		
+		<dd><code>trustedSetter</code> - Do not check if the setter exists, just call it, great for usage with onMissingMethod() and virtual properties</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population ONLY</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude from the population</dd>
+		
+		<dd><code>ignoreEmpty</code></dd>
+		
+		<dd><code>nullEmptyInclude</code></dd>
+		
+		<dd><code>nullEmptyExclude</code></dd>
+		
+		<dd><code>composeRelationships</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="populateFromXML()"><!-- --></a>
+	<h3>populateFromXML</h3>
+	
+	<kbd>public any <strong>populateFromXML</strong>(any target, string xml, [string root=''], [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Populate from XML, for argument definitions look at the populate method</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		<dd><code>xml</code> - The XML string or packet or XML object to populate from</dd>
+		
+		<dd><code>root</code> - The XML root element to start from</dd>
+		
+		<dd><code>scope</code> - Use scope injection instead of setter injection, no need of setters, just tell us what scope to inject to</dd>
+		
+		<dd><code>trustedSetter</code> - Do not check if the setter exists, just call it, great for usage with onMissingMethod() and virtual properties</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population ONLY</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude from the population</dd>
+		
+		<dd><code>ignoreEmpty</code></dd>
+		
+		<dd><code>nullEmptyInclude</code></dd>
+		
+		<dd><code>nullEmptyExclude</code></dd>
+		
+		<dd><code>composeRelationships</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="populateWithPrefix()"><!-- --></a>
+	<h3>populateWithPrefix</h3>
+	
+	<kbd>public any <strong>populateWithPrefix</strong>(any target, struct memento, [string scope=''], [boolean trustedSetter='false'], [string include=''], [string exclude=''], [boolean ignoreEmpty='false'], [string nullEmptyInclude=''], [string nullEmptyExclude=''], [boolean composeRelationships='true'], string prefix)</kbd>
+	
+	<br><br>
+
+	
+		<p>Simple map to property population for entities with structure key prefixes</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		<dd><code>memento</code> - The map/struct to populate the entity with</dd>
+		
+		<dd><code>scope</code> - Use scope injection instead of setter injection, no need of setters, just tell us what scope to inject to</dd>
+		
+		<dd><code>trustedSetter</code> - Do not check if the setter exists, just call it, great for usage with onMissingMethod() and virtual properties</dd>
+		
+		<dd><code>include</code> - A list of keys to include in the population ONLY</dd>
+		
+		<dd><code>exclude</code> - A list of keys to exclude from the population</dd>
+		
+		<dd><code>ignoreEmpty</code></dd>
+		
+		<dd><code>nullEmptyInclude</code></dd>
+		
+		<dd><code>nullEmptyExclude</code></dd>
+		
+		<dd><code>composeRelationships</code></dd>
+		
+		<dd><code>prefix</code> - The prefix used to filter, Example: 'user' would apply to the following formfield: 'user_id' and 'user_name' but not 'address_id'</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="refresh()"><!-- --></a>
+	<h3>refresh</h3>
+	
+	<kbd>public any <strong>refresh</strong>(any entity)</kbd>
+	
+	<br><br>
+
+	
+		<p>Refresh the state of an entity or array of entities from the database</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="save()"><!-- --></a>
+	<h3>save</h3>
+	
+	<kbd>public any <strong>save</strong>(any entity, [boolean forceInsert='false'], [boolean flush='false'], [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Save an entity using hibernate transactions or not. You can optionally flush the session also</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		<dd><code>forceInsert</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="saveAll()"><!-- --></a>
+	<h3>saveAll</h3>
+	
+	<kbd>public any <strong>saveAll</strong>(any entities, [any forceInsert='false'], [any flush='false'], [boolean transactional='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Saves an array of passed entities in specified order
+Transactions are used if useTransactions bit is set or the transactional argument is passed</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entities</code> - An array of entities to save</dd>
+		
+		<dd><code>forceInsert</code></dd>
+		
+		<dd><code>flush</code></dd>
+		
+		<dd><code>transactional</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="sessionContains()"><!-- --></a>
+	<h3>sessionContains</h3>
+	
+	<kbd>public boolean <strong>sessionContains</strong>(any entity)</kbd>
+	
+	<br><br>
+
+	
+		<p>Checks if the current session contains the passed in entity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>entity</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setDefaultAsQuery()"><!-- --></a>
+	<h3>setDefaultAsQuery</h3>
+	
+	<kbd>public any <strong>setDefaultAsQuery</strong>(boolean defaultAsQuery)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>defaultAsQuery</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setEventHandling()"><!-- --></a>
+	<h3>setEventHandling</h3>
+	
+	<kbd>public any <strong>setEventHandling</strong>(boolean eventHandling)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>eventHandling</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setHQLDynamicCache()"><!-- --></a>
+	<h3>setHQLDynamicCache</h3>
+	
+	<kbd>public any <strong>setHQLDynamicCache</strong>(struct HQLDynamicCache)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>HQLDynamicCache</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setORM()"><!-- --></a>
+	<h3>setORM</h3>
+	
+	<kbd>public any <strong>setORM</strong>(any ORM)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ORM</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setORMEventHandler()"><!-- --></a>
+	<h3>setORMEventHandler</h3>
+	
+	<kbd>public any <strong>setORMEventHandler</strong>(any ORMEventHandler)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ORMEventHandler</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setQueryCacheRegion()"><!-- --></a>
+	<h3>setQueryCacheRegion</h3>
+	
+	<kbd>public any <strong>setQueryCacheRegion</strong>(string queryCacheRegion)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>queryCacheRegion</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setUseQueryCaching()"><!-- --></a>
+	<h3>setUseQueryCaching</h3>
+	
+	<kbd>public any <strong>setUseQueryCaching</strong>(boolean useQueryCaching)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>useQueryCaching</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setUseTransactions()"><!-- --></a>
+	<h3>setUseTransactions</h3>
+	
+	<kbd>public any <strong>setUseTransactions</strong>(boolean useTransactions)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>useTransactions</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

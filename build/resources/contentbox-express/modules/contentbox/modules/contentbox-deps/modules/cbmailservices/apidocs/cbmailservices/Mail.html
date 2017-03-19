@@ -1,0 +1,3738 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mail</title>
+	<meta name="keywords" content="cbmailservices.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../highlighter/styles/shCoreDefault.css">
+	<script src="../highlighter/scripts/shCore.js"></script>
+	<script src="../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>cbmailservices v1.2.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../index.html?cbmailservices/Mail.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: cbmailservices"><span class="label label-success">cbmailservices</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ Mail</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../resources/inherit.gif" alt="extended by ">cbmailservices.Mail
+</pre>
+
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>I model a cfmail object with extra pizzazz</p>
+</div>
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				output 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="Mail.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Initialize the Mail object.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#addAttachments()">addAttachments</A></strong>(any files, [boolean remove='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add attachment(s) to this payload using a list or array of file locations.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#addMailParam()">addMailParam</A></strong>([any contentID], [any disposition], [any file], [any type], [any name], [any value], [boolean remove], [any content])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add mail params to this payload.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#addMailPart()">addMailPart</A></strong>([string charset], [string type], [numeric wraptext], [string body])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new mail part to this mail payload.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../cbmailservices/Mail.html" title="class in cbmailservices">Mail</a></code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#config()">config</A></strong>([string from], [string to], [string body], [string bcc], [string cc], [string charset], [boolean debug], [string failto], [string group], [boolean groupcasesensitive], [string mailerid], [numeric maxrows], [string mimeattach], [string password], [numeric port], [string priority], [string query], [string replyto], [string server], [boolean spoolenable], [numeric startrow], [string subject], [numeric timeout], [string type], [string username], [boolean useSSL], [boolean useTLS], [numeric wraptext])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure the Mail object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getBcc()">getBcc</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the bcc property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getBody()">getBody</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get body.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getBodyTokens()">getBodyTokens</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the bodyTokens property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getCc()">getCc</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the cc property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getCharset()">getCharset</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the charset property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getDebug()">getDebug</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the debug property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getFailto()">getFailto</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the failto property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getFrom()">getFrom</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the from property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getGroup()">getGroup</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the group property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getGroupcasesensitive()">getGroupcasesensitive</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the groupcasesensitive property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMailerid()">getMailerid</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mailerid property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMailParams()">getMailParams</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mailParams property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMailParts()">getMailParts</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mailParts defined in this Mail object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMaxrows()">getMaxrows</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the maxrows property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMemento()">getMemento</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getMimeattach()">getMimeattach</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mimeattach property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getPassword()">getPassword</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the password property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getPort()">getPort</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the port property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getPriority()">getPriority</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the priority property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getQuery()">getQuery</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the query property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getReplyto()">getReplyto</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the replyto property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getServer()">getServer</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the server property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getSpoolenable()">getSpoolenable</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the spoolenable property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getStartrow()">getStartrow</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the startrow property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getSubject()">getSubject</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the subject property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getTimeout()">getTimeout</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the timeout property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getTo()">getTo</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the to property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getType()">getType</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the type property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getUsername()">getUsername</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the username property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getUseSSL()">getUseSSL</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the useSSL property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getUseTLS()">getUseTLS</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the useTLS property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#getWraptext()">getWraptext</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the wraptext property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#propertyExists()">propertyExists</A></strong>(string property)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if a mail property exists.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setBcc()">setBcc</A></strong>(string newBcc)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the bcc property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setBody()">setBody</A></strong>(string Body)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set Body.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setBodyTokens()">setBodyTokens</A></strong>(struct tokenMap)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new struct of body tokens that can be used for replacement when the mail is sent.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setCc()">setCc</A></strong>(string newCc)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the cc property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setCharset()">setCharset</A></strong>(string newCharset)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the charset property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setDebug()">setDebug</A></strong>(boolean newDebug)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the debug property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setFailto()">setFailto</A></strong>(string newFailto)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the failto property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setFrom()">setFrom</A></strong>(string newFrom)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the from property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setGroup()">setGroup</A></strong>(string newGroup)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the group property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setGroupcasesensitive()">setGroupcasesensitive</A></strong>(boolean newGroupcasesensitive)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the groupcasesensitive property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setHTML()">setHTML</A></strong>([any body])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets up a mail part that is HTML using utf8 for you by calling addMailpart().
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setMailerid()">setMailerid</A></strong>(string newMailerid)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the mailerid property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setMaxrows()">setMaxrows</A></strong>(numeric newMaxrows)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the maxrows property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>void</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setMemento()">setMemento</A></strong>([struct memento])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setMimeattach()">setMimeattach</A></strong>(string newMimeattach)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the mimeattach property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setPassword()">setPassword</A></strong>(string newPassword)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the password property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setPort()">setPort</A></strong>(numeric newPort)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the port property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setPriority()">setPriority</A></strong>(string newPriority)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the priority property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setQuery()">setQuery</A></strong>(string newQuery)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the query property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setReadReceipt()">setReadReceipt</A></strong>([any email])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the email address that will receive read receipts.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setReplyto()">setReplyto</A></strong>(string newReplyto)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the replyto property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setSendReceipt()">setSendReceipt</A></strong>([any email])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the email that get's notified once the email is delivered by setting the appropriate mail headers.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setServer()">setServer</A></strong>(string newServer)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the server property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setSpoolenable()">setSpoolenable</A></strong>(boolean newSpoolenable)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the spoolenable property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setStartrow()">setStartrow</A></strong>(numeric newStartrow)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the startrow property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setSubject()">setSubject</A></strong>(string newSubject)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the subject property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setText()">setText</A></strong>([any body])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets up a mail part that is TEXT using utf8 for you by calling addMailpart().
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setTimeout()">setTimeout</A></strong>(numeric newTimeout)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the timeout property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setTo()">setTo</A></strong>(string newTo)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the to property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setType()">setType</A></strong>(string newType)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the type property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setUsername()">setUsername</A></strong>(string newUsername)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the username property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setUseSSL()">setUseSSL</A></strong>(boolean newUseSSL)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the useSSL property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setUseTLS()">setUseTLS</A></strong>(boolean newUseTLS)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the useTLS property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#setWraptext()">setWraptext</A></strong>(numeric newWraptext)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets a new value for the wraptext property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Mail.html#validate()">validate</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validates the basic fields of To, From and Body.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>Initialize the Mail object</p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="addAttachments()"><!-- --></a>
+	<h3>addAttachments</h3>
+	
+	<kbd>public any <strong>addAttachments</strong>(any files, [boolean remove='false'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Add attachment(s) to this payload using a list or array of file locations</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>files</code> - A list or array of files to attach to this payload</dd>
+		
+		<dd><code>remove</code> - If true, ColdFusion removes attachment files (if any) after the mail is successfully delivered.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addMailParam()"><!-- --></a>
+	<h3>addMailParam</h3>
+	
+	<kbd>public any <strong>addMailParam</strong>([any contentID], [any disposition], [any file], [any type], [any name], [any value], [boolean remove], [any content])</kbd>
+	
+	<br><br>
+
+	
+		<p>Add mail params to this payload</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>contentID</code> - Initial value for the contentID property.</dd>
+		
+		<dd><code>disposition</code> - Initial value for the dispositio nproperty.</dd>
+		
+		<dd><code>file</code> - Initial value for the file property.</dd>
+		
+		<dd><code>type</code> - Initial value for the type property.</dd>
+		
+		<dd><code>name</code> - Initial value for the name property.</dd>
+		
+		<dd><code>value</code> - Initial value for the value property.</dd>
+		
+		<dd><code>remove</code> - If true, ColdFusion removes attachment files (if any) after the mail is successfully delivered.</dd>
+		
+		<dd><code>content</code> - Lets you send the contents of a ColdFusion variable as an attachment.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addMailPart()"><!-- --></a>
+	<h3>addMailPart</h3>
+	
+	<kbd>public any <strong>addMailPart</strong>([string charset], [string type], [numeric wraptext], [string body])</kbd>
+	
+	<br><br>
+
+	
+		<p>Add a new mail part to this mail payload</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>charset</code> - Initial value for the charset property.</dd>
+		
+		<dd><code>type</code> - Initial value for the type property.</dd>
+		
+		<dd><code>wraptext</code> - Initial value for the wraptext property.</dd>
+		
+		<dd><code>body</code> - Initial value for the body property.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="config()"><!-- --></a>
+	<h3>config</h3>
+	
+	<kbd>public <a href="../cbmailservices/Mail.html" title="class in cbmailservices">Mail</a> <strong>config</strong>([string from], [string to], [string body], [string bcc], [string cc], [string charset], [boolean debug], [string failto], [string group], [boolean groupcasesensitive], [string mailerid], [numeric maxrows], [string mimeattach], [string password], [numeric port], [string priority], [string query], [string replyto], [string server], [boolean spoolenable], [numeric startrow], [string subject], [numeric timeout], [string type], [string username], [boolean useSSL], [boolean useTLS], [numeric wraptext])</kbd>
+	
+	<br><br>
+
+	
+		<p>Configure the Mail object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>from</code> - Initial value for the from property.</dd>
+		
+		<dd><code>to</code> - Initial value for the to property.</dd>
+		
+		<dd><code>body</code> - Initial value for the email body.</dd>
+		
+		<dd><code>bcc</code> - Initial value for the bcc property.</dd>
+		
+		<dd><code>cc</code> - Initial value for the cc property.</dd>
+		
+		<dd><code>charset</code> - Initial value for the charset property.</dd>
+		
+		<dd><code>debug</code> - Initial value for the debug property.</dd>
+		
+		<dd><code>failto</code> - Initial value for the failto property.</dd>
+		
+		<dd><code>group</code> - Initial value for the group property.</dd>
+		
+		<dd><code>groupcasesensitive</code> - Initial value for the groupcasesensitive property.</dd>
+		
+		<dd><code>mailerid</code> - Initial value for the mailerid property.</dd>
+		
+		<dd><code>maxrows</code> - Initial value for the maxrows property.</dd>
+		
+		<dd><code>mimeattach</code> - Initial value for the mimeattach property.</dd>
+		
+		<dd><code>password</code> - Initial value for the password property.</dd>
+		
+		<dd><code>port</code> - Initial value for the port property.</dd>
+		
+		<dd><code>priority</code> - Initial value for the priority property.</dd>
+		
+		<dd><code>query</code> - Initial value for the query property.</dd>
+		
+		<dd><code>replyto</code> - Initial value for the replyto property.</dd>
+		
+		<dd><code>server</code> - Initial value for the server property.</dd>
+		
+		<dd><code>spoolenable</code> - Initial value for the spoolenable property.</dd>
+		
+		<dd><code>startrow</code> - Initial value for the startrow property.</dd>
+		
+		<dd><code>subject</code> - Initial value for the subject property.</dd>
+		
+		<dd><code>timeout</code> - Initial value for the timeout property.</dd>
+		
+		<dd><code>type</code> - Initial value for the type property.</dd>
+		
+		<dd><code>username</code> - Initial value for the username property.</dd>
+		
+		<dd><code>useSSL</code> - Initial value for the useSSL property.</dd>
+		
+		<dd><code>useTLS</code> - Initial value for the useTLS property.</dd>
+		
+		<dd><code>wraptext</code> - Initial value for the wraptext property.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getBcc()"><!-- --></a>
+	<h3>getBcc</h3>
+	
+	<kbd>public any <strong>getBcc</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the bcc property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getBody()"><!-- --></a>
+	<h3>getBody</h3>
+	
+	<kbd>public string <strong>getBody</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Get body</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getBodyTokens()"><!-- --></a>
+	<h3>getBodyTokens</h3>
+	
+	<kbd>public any <strong>getBodyTokens</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the bodyTokens property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCc()"><!-- --></a>
+	<h3>getCc</h3>
+	
+	<kbd>public any <strong>getCc</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the cc property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCharset()"><!-- --></a>
+	<h3>getCharset</h3>
+	
+	<kbd>public any <strong>getCharset</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the charset property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getDebug()"><!-- --></a>
+	<h3>getDebug</h3>
+	
+	<kbd>public any <strong>getDebug</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the debug property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFailto()"><!-- --></a>
+	<h3>getFailto</h3>
+	
+	<kbd>public any <strong>getFailto</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the failto property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFrom()"><!-- --></a>
+	<h3>getFrom</h3>
+	
+	<kbd>public any <strong>getFrom</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the from property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getGroup()"><!-- --></a>
+	<h3>getGroup</h3>
+	
+	<kbd>public any <strong>getGroup</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the group property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getGroupcasesensitive()"><!-- --></a>
+	<h3>getGroupcasesensitive</h3>
+	
+	<kbd>public any <strong>getGroupcasesensitive</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the groupcasesensitive property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMailerid()"><!-- --></a>
+	<h3>getMailerid</h3>
+	
+	<kbd>public any <strong>getMailerid</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the mailerid property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMailParams()"><!-- --></a>
+	<h3>getMailParams</h3>
+	
+	<kbd>public array <strong>getMailParams</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the mailParams property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMailParts()"><!-- --></a>
+	<h3>getMailParts</h3>
+	
+	<kbd>public array <strong>getMailParts</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the mailParts defined in this Mail object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMaxrows()"><!-- --></a>
+	<h3>getMaxrows</h3>
+	
+	<kbd>public any <strong>getMaxrows</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the maxrows property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMemento()"><!-- --></a>
+	<h3>getMemento</h3>
+	
+	<kbd>public struct <strong>getMemento</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMimeattach()"><!-- --></a>
+	<h3>getMimeattach</h3>
+	
+	<kbd>public any <strong>getMimeattach</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the mimeattach property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPassword()"><!-- --></a>
+	<h3>getPassword</h3>
+	
+	<kbd>public any <strong>getPassword</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the password property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPort()"><!-- --></a>
+	<h3>getPort</h3>
+	
+	<kbd>public any <strong>getPort</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the port property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPriority()"><!-- --></a>
+	<h3>getPriority</h3>
+	
+	<kbd>public any <strong>getPriority</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the priority property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getQuery()"><!-- --></a>
+	<h3>getQuery</h3>
+	
+	<kbd>public any <strong>getQuery</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the query property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getReplyto()"><!-- --></a>
+	<h3>getReplyto</h3>
+	
+	<kbd>public any <strong>getReplyto</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the replyto property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getServer()"><!-- --></a>
+	<h3>getServer</h3>
+	
+	<kbd>public any <strong>getServer</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the server property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getSpoolenable()"><!-- --></a>
+	<h3>getSpoolenable</h3>
+	
+	<kbd>public any <strong>getSpoolenable</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the spoolenable property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStartrow()"><!-- --></a>
+	<h3>getStartrow</h3>
+	
+	<kbd>public any <strong>getStartrow</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the startrow property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getSubject()"><!-- --></a>
+	<h3>getSubject</h3>
+	
+	<kbd>public any <strong>getSubject</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the subject property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTimeout()"><!-- --></a>
+	<h3>getTimeout</h3>
+	
+	<kbd>public any <strong>getTimeout</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the timeout property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTo()"><!-- --></a>
+	<h3>getTo</h3>
+	
+	<kbd>public any <strong>getTo</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the to property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getType()"><!-- --></a>
+	<h3>getType</h3>
+	
+	<kbd>public any <strong>getType</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the type property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUsername()"><!-- --></a>
+	<h3>getUsername</h3>
+	
+	<kbd>public any <strong>getUsername</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the username property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUseSSL()"><!-- --></a>
+	<h3>getUseSSL</h3>
+	
+	<kbd>public any <strong>getUseSSL</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the useSSL property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUseTLS()"><!-- --></a>
+	<h3>getUseTLS</h3>
+	
+	<kbd>public any <strong>getUseTLS</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the useTLS property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getWraptext()"><!-- --></a>
+	<h3>getWraptext</h3>
+	
+	<kbd>public any <strong>getWraptext</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets the wraptext property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="propertyExists()"><!-- --></a>
+	<h3>propertyExists</h3>
+	
+	<kbd>public boolean <strong>propertyExists</strong>(string property)</kbd>
+	
+	<br><br>
+
+	
+		<p>Checks if a mail property exists</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>property</code> - The property to check</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setBcc()"><!-- --></a>
+	<h3>setBcc</h3>
+	
+	<kbd>public any <strong>setBcc</strong>(string newBcc)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the bcc property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newBcc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setBody()"><!-- --></a>
+	<h3>setBody</h3>
+	
+	<kbd>public any <strong>setBody</strong>(string Body)</kbd>
+	
+	<br><br>
+
+	
+		<p>Set Body</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>Body</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setBodyTokens()"><!-- --></a>
+	<h3>setBodyTokens</h3>
+	
+	<kbd>public any <strong>setBodyTokens</strong>(struct tokenMap)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new struct of body tokens that can be used for replacement when the mail is sent. The tokens are replaced in the body content ast @token@ delimmitted.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>tokenMap</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setCc()"><!-- --></a>
+	<h3>setCc</h3>
+	
+	<kbd>public any <strong>setCc</strong>(string newCc)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the cc property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newCc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setCharset()"><!-- --></a>
+	<h3>setCharset</h3>
+	
+	<kbd>public any <strong>setCharset</strong>(string newCharset)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the charset property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newCharset</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setDebug()"><!-- --></a>
+	<h3>setDebug</h3>
+	
+	<kbd>public any <strong>setDebug</strong>(boolean newDebug)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the debug property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newDebug</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFailto()"><!-- --></a>
+	<h3>setFailto</h3>
+	
+	<kbd>public any <strong>setFailto</strong>(string newFailto)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the failto property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newFailto</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFrom()"><!-- --></a>
+	<h3>setFrom</h3>
+	
+	<kbd>public any <strong>setFrom</strong>(string newFrom)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the from property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newFrom</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setGroup()"><!-- --></a>
+	<h3>setGroup</h3>
+	
+	<kbd>public any <strong>setGroup</strong>(string newGroup)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the group property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newGroup</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setGroupcasesensitive()"><!-- --></a>
+	<h3>setGroupcasesensitive</h3>
+	
+	<kbd>public any <strong>setGroupcasesensitive</strong>(boolean newGroupcasesensitive)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the groupcasesensitive property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newGroupcasesensitive</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setHTML()"><!-- --></a>
+	<h3>setHTML</h3>
+	
+	<kbd>public any <strong>setHTML</strong>([any body])</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets up a mail part that is HTML using utf8 for you by calling addMailpart()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>body</code> - The HTML content to set in the mail part</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMailerid()"><!-- --></a>
+	<h3>setMailerid</h3>
+	
+	<kbd>public any <strong>setMailerid</strong>(string newMailerid)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the mailerid property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newMailerid</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMaxrows()"><!-- --></a>
+	<h3>setMaxrows</h3>
+	
+	<kbd>public any <strong>setMaxrows</strong>(numeric newMaxrows)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the maxrows property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newMaxrows</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMemento()"><!-- --></a>
+	<h3>setMemento</h3>
+	
+	<kbd>public void <strong>setMemento</strong>([struct memento])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>memento</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMimeattach()"><!-- --></a>
+	<h3>setMimeattach</h3>
+	
+	<kbd>public any <strong>setMimeattach</strong>(string newMimeattach)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the mimeattach property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newMimeattach</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPassword()"><!-- --></a>
+	<h3>setPassword</h3>
+	
+	<kbd>public any <strong>setPassword</strong>(string newPassword)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the password property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newPassword</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPort()"><!-- --></a>
+	<h3>setPort</h3>
+	
+	<kbd>public any <strong>setPort</strong>(numeric newPort)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the port property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newPort</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPriority()"><!-- --></a>
+	<h3>setPriority</h3>
+	
+	<kbd>public any <strong>setPriority</strong>(string newPriority)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the priority property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newPriority</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setQuery()"><!-- --></a>
+	<h3>setQuery</h3>
+	
+	<kbd>public any <strong>setQuery</strong>(string newQuery)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the query property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newQuery</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setReadReceipt()"><!-- --></a>
+	<h3>setReadReceipt</h3>
+	
+	<kbd>public any <strong>setReadReceipt</strong>([any email])</kbd>
+	
+	<br><br>
+
+	
+		<p>Set the email address that will receive read receipts. I just place the appropriate mail headers</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>email</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setReplyto()"><!-- --></a>
+	<h3>setReplyto</h3>
+	
+	<kbd>public any <strong>setReplyto</strong>(string newReplyto)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the replyto property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newReplyto</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setSendReceipt()"><!-- --></a>
+	<h3>setSendReceipt</h3>
+	
+	<kbd>public any <strong>setSendReceipt</strong>([any email])</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets the email that get's notified once the email is delivered by setting the appropriate mail headers</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>email</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setServer()"><!-- --></a>
+	<h3>setServer</h3>
+	
+	<kbd>public any <strong>setServer</strong>(string newServer)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the server property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newServer</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setSpoolenable()"><!-- --></a>
+	<h3>setSpoolenable</h3>
+	
+	<kbd>public any <strong>setSpoolenable</strong>(boolean newSpoolenable)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the spoolenable property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newSpoolenable</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setStartrow()"><!-- --></a>
+	<h3>setStartrow</h3>
+	
+	<kbd>public any <strong>setStartrow</strong>(numeric newStartrow)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the startrow property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newStartrow</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setSubject()"><!-- --></a>
+	<h3>setSubject</h3>
+	
+	<kbd>public any <strong>setSubject</strong>(string newSubject)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the subject property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newSubject</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setText()"><!-- --></a>
+	<h3>setText</h3>
+	
+	<kbd>public any <strong>setText</strong>([any body])</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets up a mail part that is TEXT using utf8 for you by calling addMailpart()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>body</code> - The HTML content to set in the mail part</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setTimeout()"><!-- --></a>
+	<h3>setTimeout</h3>
+	
+	<kbd>public any <strong>setTimeout</strong>(numeric newTimeout)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the timeout property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newTimeout</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setTo()"><!-- --></a>
+	<h3>setTo</h3>
+	
+	<kbd>public any <strong>setTo</strong>(string newTo)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the to property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newTo</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setType()"><!-- --></a>
+	<h3>setType</h3>
+	
+	<kbd>public any <strong>setType</strong>(string newType)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the type property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newType</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setUsername()"><!-- --></a>
+	<h3>setUsername</h3>
+	
+	<kbd>public any <strong>setUsername</strong>(string newUsername)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the username property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newUsername</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setUseSSL()"><!-- --></a>
+	<h3>setUseSSL</h3>
+	
+	<kbd>public any <strong>setUseSSL</strong>(boolean newUseSSL)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the useSSL property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newUseSSL</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setUseTLS()"><!-- --></a>
+	<h3>setUseTLS</h3>
+	
+	<kbd>public any <strong>setUseTLS</strong>(boolean newUseTLS)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the useTLS property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newUseTLS</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setWraptext()"><!-- --></a>
+	<h3>setWraptext</h3>
+	
+	<kbd>public any <strong>setWraptext</strong>(numeric newWraptext)</kbd>
+	
+	<br><br>
+
+	
+		<p>Sets a new value for the wraptext property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>newWraptext</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validate()"><!-- --></a>
+	<h3>validate</h3>
+	
+	<kbd>public boolean <strong>validate</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>validates the basic fields of To, From and Body</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

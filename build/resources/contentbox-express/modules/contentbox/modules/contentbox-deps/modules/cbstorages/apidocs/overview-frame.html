@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>	overview </title>
+	<meta name="keywords" content="overview">
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<link rel="stylesheet" href="jstree/themes/default/style.min.css" />
+</head>
+
+<body>
+	<h3><strong>cbstorages v1.3.0</strong></h3>
+
+	
+	<input type="text" id="classSearch" placeholder="Search..."><br><br>
+	
+	<div id="classTree">
+		<ul>
+			
+			<li data-jstree='{ "type" : "package" }' linkhref="cbstorages/package-summary.html" searchlist="cbstorages" thissort="1">cbstorages<ul><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/ApplicationStorage.html" searchlist="cbstorages.ApplicationStorage" thissort="2">ApplicationStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/CacheStorage.html" searchlist="cbstorages.CacheStorage" thissort="2">CacheStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/ClusterStorage.html" searchlist="cbstorages.ClusterStorage" thissort="2">ClusterStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/CookieStorage.html" searchlist="cbstorages.CookieStorage" thissort="2">CookieStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/ClientStorage.html" searchlist="cbstorages.ClientStorage" thissort="2">ClientStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/RequestStorage.html" searchlist="cbstorages.RequestStorage" thissort="2">RequestStorage</li><li data-jstree='{ "type" : "component" }' linkhref="cbstorages/SessionStorage.html" searchlist="cbstorages.SessionStorage" thissort="2">SessionStorage</li></ul></li>
+		</ul>
+	</div>
+	
+	<script src="jstree/jstree.min.js"></script>
+	<script language="javascript">
+		$(function () { 
+			// Initialize tree
+			$('#classTree')
+				.jstree({
+					// Shortcut types to control icons
+				    "types" : {
+				      "package" : {
+				        "icon" : "glyphicon glyphicon-folder-open"
+				      },
+				      "component" : {
+				        "icon" : "glyphicon glyphicon-file"
+				      },
+				      "interface" : {
+				        "icon" : "glyphicon glyphicon-info-sign"
+				      }
+				    },
+				    // Smart search callback to do lookups on full class name and aliases 
+				    "search" : {
+				    	"show_only_matches" : true,
+				    	"search_callback" : function( q, node ) {
+				    		q = q.toUpperCase();
+				    		var searchArray = node.li_attr.searchlist.split(',');
+				    		var isClass = node.li_attr.thissort != 1;
+				    		for( var i in searchArray ) {
+				    			var item = searchArray[ i ];
+				    			// classes must be a super set of the search string, but packages are reversed
+				    			// This is so "testbox" AND "run" highlight when you serach for "testbox run"
+				    			if( ( isClass && item.toUpperCase().indexOf( q ) > -1 )
+				    				|| ( !isClass && q.indexOf( item.toUpperCase() ) > -1 ) ) {
+				    				return true;
+				    			}
+				    		}
+				    		return false;
+				    	}
+				    },
+				    // Custom sorting to force packages to the top
+				    "sort" : function( id1, id2 ) {
+				    			var node1 = this.get_node( id1 );
+				    			var node2 = this.get_node( id2 );
+				    			// Concat sort to name and use that
+					    		var node1String = node1.li_attr.thissort + node1.text;
+					    		var node2String = node2.li_attr.thissort + node2.text;
+					    		
+								return ( node1String > node2String ? 1 : -1);						
+				    },
+				    "plugins" : [ "types", "search", "sort" ]
+				  })
+				.on("changed.jstree", function (e, data) {
+					var obj = data.instance.get_node(data.selected[0]).li_attr;
+					if( obj.linkhref ) {
+						window.parent.frames['classFrame'].location.href = obj.linkhref;					
+					}
+			});
+			
+			// Bind search to text box
+			var to = false;
+			$('#classSearch').keyup(function () {
+				if(to) { clearTimeout(to); }
+				to = setTimeout(function () {
+					var v = $('#classSearch').val();
+					$('#classTree').jstree(true).search(v);
+				}, 250);
+			});
+			
+		 });
+	</script>
+</body>
+</html>

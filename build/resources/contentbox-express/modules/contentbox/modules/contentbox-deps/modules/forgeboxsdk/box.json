@@ -1,0 +1,31 @@
+{
+    "name":"ForgeBox SDK",
+    "author":"Ortus Solutions <info@ortussolutions.com>",
+    "version":"1.0.0",
+    "location":"https://github.com/coldbox-modules/cbox-forgeboxsdk/archive/v1.0.0.zip",
+    "slug":"forgeboxsdk",
+    "type":"modules",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/ColdBox/cbox-forgeboxsdk"
+    },
+    "description":"A module that connects any application to the ForgeBox.io API",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "ignore":[
+        "tests/*",
+        "server.json",
+        ".travis.yml",
+        ".git*"
+    ],
+    "devDependencies":{
+        "testbox":"^2.3.0+00044"
+    },
+    "installPaths":{
+        "testbox":"testbox"
+    }
+}

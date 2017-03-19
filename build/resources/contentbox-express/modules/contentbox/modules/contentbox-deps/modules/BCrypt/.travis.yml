@@ -1,0 +1,19 @@
+language: java
+sudo: required
+dist: trusty
+before_install:
+- sudo apt-key adv --keyserver keys.gnupg.net --recv 6DA70622
+- sudo echo "deb http://downloads.ortussolutions.com/debs/noarch /" | sudo tee -a
+  /etc/apt/sources.list.d/commandbox.list
+install:
+- sudo apt-get update && sudo apt-get --assume-yes install commandbox
+- cd tests
+- box install
+- box server start
+before_script:
+# Startup the app
+- curl http://localhost:49615/
+script: > 
+    testResults="echo $(box testbox run)";
+    echo "$testResults";
+    if grep -i "\[Failures: [1-9][0-9]\?[0-9]\?\]\|\[Errors: [1-9][0-9]\?[0-9]\?\]\|<t[^>]*>\|<b[^>]*>" <<< $testResults;  then exit 1; fi

@@ -1,0 +1,6 @@
+{
+    "app":{
+        "cfengine":"lucee@5",
+        "serverHomeDirectory":".engine"
+    }
+}
