@@ -56,11 +56,11 @@ Environment Variables
 
 The CommandBox Docker image support the use of environmental variables in configuration your servers.  Specifically, the image includes the [`cfconfig` CommandBox module](https://www.forgebox.io/view/commandbox-cfconfig), which allows you to provide custom settings for your engine, including the admin password.
 
-* $PORT - The port which your server should start on.  The default is `8080`.
-* $SSL_PORT - If applicable, the ssl port used by your server The default is `8443`.
+* `$PORT` - The port which your server should start on.  The default is `8080`.
+* `$SSL_PORT` - If applicable, the ssl port used by your server The default is `8443`.
 * `cfconfig_` - Any environment variable provided which includes this prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}`.
 * `CFCONFIG` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.
-* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome`
+* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
 
 Issues
 ================
