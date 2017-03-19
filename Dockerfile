@@ -9,18 +9,17 @@ ENV SSL_PORT ${SSL_PORT:-8443}
 EXPOSE ${PORT} ${SSL_PORT}
 
 # Directory Mappings
-RUN mkdir ~/build
 ENV APP_DIR /app
-ENV BUILD_DIR ~/build
+ENV BUILD_DIR $HOME/build
 ENV BIN_DIR /usr/bin
+WORKDIR ${APP_DIR}
+RUN mkdir $HOME/build
+COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
 RUN ls -la ${BUILD_DIR}
 
 RUN chmod +x ${BUILD_DIR}/dependencies.sh
 RUN chmod +x ${BUILD_DIR}/run.sh
 RUN ${BUILD_DIR}/dependencies.sh
-
-COPY ./test/ ${APP_DIR}/
-WORKDIR ${APP_DIR}
 
 CMD $BUILD_DIR/run.sh

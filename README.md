@@ -49,7 +49,18 @@ By default the exposed ports of the container are 8080 (insecure) and 8443 (secu
 docker pull -expose-list 80 443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
 ```
 
-To create your own, customized Docker image, use [our Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile) as the baseline.
+To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox) as the baseline to begin your customizations.
+
+Environment Variables
+=====================
+
+The CommandBox Docker image support the use of environmental variables in configuration your servers.  Specifically, the image includes the [`cfconfig` CommandBox module](https://www.forgebox.io/view/commandbox-cfconfig), which allows you to provide custom settings for your engine, including the admin password.
+
+* $PORT - The port which your server should start on.  The default is `8080`.
+* $SSL_PORT - If applicable, the ssl port used by your server The default is `8443`.
+* `cfconfig_` - Any environment variable provided which includes this prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}`.
+* `CFCONFIG` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.
+* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome`
 
 Issues
 ================
