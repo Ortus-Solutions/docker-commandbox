@@ -3,11 +3,12 @@ FROM openjdk:8-jre
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
+# Port Mappings
 ENV PORT ${PORT:-8080}
 ENV SSL_PORT ${SSL_PORT:-8443}
 EXPOSE ${PORT} ${SSL_PORT}
 
-RUN mkdir ~/tmp
+# Directory Mappings
 RUN mkdir ~/build
 ENV APP_DIR /app
 ENV BUILD_DIR ~/build
