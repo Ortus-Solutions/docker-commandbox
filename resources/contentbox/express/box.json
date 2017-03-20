@@ -1,0 +1,14 @@
+{
+	"app":{
+		"cfengine":"lucee@4.5"
+	},
+	"web":{
+		"rewrites":{
+            "enable":true
+        }
+	},
+    "dependencies":{
+        "contentbox":"^3.5.0-snapshot",
+        "coldbox":"^4.3.0"
+    }
+}
