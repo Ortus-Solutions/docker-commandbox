@@ -1,19 +1,19 @@
 cd $APP_DIR
 
 # H2 Database Directory
-mkdir ./.db
+mkdir $APP_DIR/.db
 
 # ContentBox Dependencies
 box install
 
 # If our installer flag has been passed, then add that
-if [[ $installer ]]; then
-	box install contentbox-installer
+if [[ -z "${installer}" ]]; then
+	box install contentbox-installer@be
 fi
 
-#if [[ ! $ENV{"contentbox.cb_media_directoryRoot"} ]]; then
+if [[ ! $(printenv contentbox.cb_media_directoryRoot) ]]; then
 	env "contentbox.cb_media_directoryRoot=/app/includes/shared/media" bash
-#fi
+fi
 
 mkdir -p $ENV{"contentbox.cb_media_directoryRoot"}
 
