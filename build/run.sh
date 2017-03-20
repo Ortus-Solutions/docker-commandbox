@@ -8,20 +8,19 @@ if [[ -f $APP_DIR/box.json ]]; then
 fi
 
 # Default values for engine and home directory - so we can use cfconfig 
-SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=$HOME/serverHome}"
-echo "Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
+SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
 CFENGINE="${CFENGINE:=lucee@4.5}"
-echo "CF Engine set to: ${CFENGINE}"
 ENGINE_VERSION=${CFENGINE#*@}
 ENGINE_VENDOR=${CFENGINE%%@*}
 
-# Custom format name required by cfconfig ( JIRA:CFCONFIG-1 )
+echo "Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
 echo "CF Engine set to ${CFENGINE}"
 echo "Engine vendor: ${ENGINE_VENDOR}"
 echo "Engine version: ${ENGINE_VERSION}"
 
 #Lucee has a different syntax than ACF, since there are two passwords
 if [[ $ENGINE_VENDOR == 'lucee' ]]; then
+	# Custom format name required by cfconfig ( JIRA:CFCONFIG-1 )
 	CFCONFIG_FORMAT="${ENGINE_VENDOR}Server@${ENGINE_VERSION}"
 	WEB_CONFIG_FORMAT="${ENGINE_VENDOR}Web@${ENGINE_VERSION}"
 else
