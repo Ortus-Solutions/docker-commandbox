@@ -2,15 +2,30 @@
 cd $APP_DIR
 
 # Check for a defined server home directory in box.json
-if [[ -f $APP_DIR/box.json ]]; then
-	SERVER_HOME_DIRECTORY="$(cat $APP_DIR/box.json | jq -r '.app.serverHomeDirectory')"
-	CFENGINE="$(cat $APP_DIR/box.json | jq -r '.app.cfengine')"
+if [[ -f server.json ]]; then
+	SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
+	CFENGINE=$(cat server.json | jq -r '.app.cfengine')
+
+	# ensure our string nulls are true nulls
+	if [[ $SERVER_HOME_DIRECTORY == 'null' ]]; then
+		unset $SERVER_HOME_DIRECTORY
+	else
+		echo "Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
+	fi
+
+	if [[ $CFENGINE == 'null' ]]; then
+		unset $CFENGINE
+	else
+		echo "CF Engine defined as ${CFENGINE}"
+	fi
+
 fi
 
 # Default values for engine and home directory - so we can use cfconfig 
 SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
 CFENGINE="${CFENGINE:=lucee@4.5}"
-ENGINE_VERSION=${CFENGINE#*@}
+FULL_VERSION=${CFENGINE#*@*}
+ENGINE_VERSION=${FULL_VERSION%%.*}
 ENGINE_VENDOR=${CFENGINE%%@*}
 
 echo "Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
@@ -23,6 +38,10 @@ if [[ $ENGINE_VENDOR == 'lucee' ]]; then
 	# Custom format name required by cfconfig ( JIRA:CFCONFIG-1 )
 	CFCONFIG_FORMAT="${ENGINE_VENDOR}Server@${ENGINE_VERSION}"
 	WEB_CONFIG_FORMAT="${ENGINE_VENDOR}Web@${ENGINE_VERSION}"
+	LUCEE_WEB_HOME="${LUCEE_WEB_HOME:-${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-web}"
+	echo "Lucee web home set to: ${LUCEE_WEB_HOME}"
+	LUCEE_SERVER_HOME="${LUCEE_SERVER_HOME:-${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-server}" 
+	echo "Lucee server home set to: ${LUCEE_SERVER_HOME}"
 else
 	CFCONFIG_FORMAT="${ENGINE_VENDOR}@${ENGINE_VERSION}"
 fi
@@ -43,8 +62,8 @@ while IFS='=' read -r name value ; do
 		
 		if [[ $ENGINE_VENDOR == 'lucee' ]]; then
 
-			box cfconfig set ${settingName}=${value} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-server toFormat=${CFCONFIG_FORMAT} >> /dev/null
-			box cfconfig set ${settingName}=${value} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-web toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
+			box cfconfig set ${settingName}=${value} to=${LUCEE_SERVER_HOME} toFormat=${CFCONFIG_FORMAT} >> /dev/null
+			box cfconfig set ${settingName}=${value} to=${LUCEE_WEB_HOME} toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
 		
 		else
 		
@@ -87,9 +106,10 @@ if [[ ! $ADMIN_PASSWORD_SET ]]; then
 fi
 
 # We need to do this all on one line because escaped line breaks 
-# aren't picked up correctly by CommandBox ( JIRA:COMMANDBOX-598 )
+# aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
 box server set app.serverHomeDirectory=${SERVER_HOME_DIRECTORY} web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT}
 box server start
+
 #Sleep for ACF servers
 sleep 10
 tail -f $( echo $(box server info property=consoleLogPath) | xargs )
