@@ -1,0 +1,8 @@
+sut:
+  environment:
+    IMAGE_TESTING_IN_PROGRESS: "true"
+  build: .
+  command: /build/test.sh
+  volumes: 
+    - ./test:/app
+    - ./build:/build

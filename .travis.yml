@@ -8,8 +8,7 @@ services:
   - docker
 
 install:
-  - docker build -t commandbox/test ./
-  - docker run -d -p 127.0.0.1:80:8080 -t commandbox/test
+  - docker-compose -f docker-compose.test.yml build
 
 script:
-  - docker ps | grep -q commandbox
+  - docker-compose -f docker-compose.test.yml up
