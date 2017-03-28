@@ -2,7 +2,7 @@
 cd $APP_DIR
 
 # CFConfig Available Password Keys
-CFCONFIG_PASSWORD_KEYS=( "adminPassword","adminPasswordDefault","hspw","pw","defaultHspw","defaultPw","ACF11Password" )
+CFCONFIG_PASSWORD_KEYS=( "adminPassword" "adminPasswordDefault" "hspw" "pw" "defaultHspw" "defaultPw" "ACF11Password" )
 ADMIN_PASSWORD_SET=false
 
 # Check for a defined server home directory in box.json
@@ -86,7 +86,7 @@ if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
 	#if our admin password is provided, flag it as set
 	for pwKey in "${CFCONFIG_PASSWORD_KEYS[@]}"
 	do
-		if [[ $(cat ${CFCONFIG} | jq -r '.${pwKey}') != 'null' ]]; then
+		if [[ $( key=".${pwKey}"; cat ${CFCONFIG} | jq -r "${key}") != 'null' ]]; then
 			ADMIN_PASSWORD_SET=true
 			break
 		fi
