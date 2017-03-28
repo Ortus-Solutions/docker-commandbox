@@ -28,29 +28,42 @@ if [[ ! -f ${APP_DIR}/index.cfm ]]; then
 fi
 
 cd $BUILD_DIR
-# Test default environment with no additional variables
-./run.sh
 
 printf "\n\n*******************\n\n"
 
-# Generic run tests
+# Test default environment with no additional variables
 echo "Tests that a generic server is up and running"
+
+./run.sh
 ./tests/test.up.sh
+
+# cleanup
+cd $APP_DIR
+box server stop
+rm -f $APP_DIR/server.json
+
 echo "Generic server tests completed"
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR
 
 # CFConfig Variables
-echo "Tests the ability to specify a cfconfig variable"
+echo "Testing the ability to specify a cfconfig variable"
+
 export cfconfig_adminPassword="testing"
 
 ./tests/test.cfconfig.env.sh
-./tests/test.up.sh
 
 unset cfconfig_adminPassword
 
 echo "CFConfig environment variable tests completed successfully"
+
+# CFConfig Variables
+echo "Tests the ability to specify a cfconfig file"
+
+./tests/test.cfconfig.file.sh
+
+echo "CFConfig file tests completed successfully"
 
 
 printf "\n\n*******************\n\n"

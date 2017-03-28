@@ -99,7 +99,8 @@ if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
 		SERVER_ADMIN_PASSWORD=$(cat ${CFCONFIG} | jq -r '.adminPassword')
 		
 		# if our admin password is set, set the web context password as well
-		if [[ $SERVER_ADMIN_PASSWORD != 'null' ]] && [[ $(cat ${CFCONFIG} | jq -r '.adminDefaultPassword') != 'null' ]]; then
+		if [[ $SERVER_ADMIN_PASSWORD != 'null' ]] && [[ $(cat ${CFCONFIG} | jq -r '.adminDefaultPassword') == 'null' ]]; then
+			echo "Setting Lucee web administrator password to the same value as the server password, since no additional default was detected"
 			box cfconfig set adminPassword=${ADMIN_PASSWORD_SET} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-web toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
 		fi
 

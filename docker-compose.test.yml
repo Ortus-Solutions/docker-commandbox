@@ -3,6 +3,7 @@ sut:
     IMAGE_TESTING_IN_PROGRESS: "true"
   build: .
   command: /build/test.sh
+  #Mount our test directory ( and our build directory to make local testing easier )
   volumes: 
     - ./test:/app
     - ./build:/build
