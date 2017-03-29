@@ -40,10 +40,10 @@ docker pull ortussolutions/commandbox
 Then, from the root of your project, start with
 
 ```
-docker run -v "/path/to/your/app:/app" ortussolutions/commandbox 
+docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/app" ortussolutions/commandbox 
 ```
 
-By default the exposed ports of the container are 8080 (insecure) and 8443 (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port.  You may also specify both port arguments in your `run` command to assign the exposed
+By default the process ports of the container are 8080 (insecure) and 8443 (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
 
 ```
 docker pull -expose-list 80 443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
