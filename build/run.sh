@@ -1,25 +1,41 @@
 #!/bin/bash
+set -e
 cd $APP_DIR
+
+# CFConfig Available Password Keys
+CFCONFIG_PASSWORD_KEYS=( "adminPassword" "adminPasswordDefault" "hspw" "pw" "defaultHspw" "defaultPw" "ACF11Password" )
+ADMIN_PASSWORD_SET=false
 
 # Check for a defined server home directory in box.json
 if [[ -f server.json ]]; then
+
 	SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
 	CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 
 	# ensure our string nulls are true nulls
-	if [[ $SERVER_HOME_DIRECTORY == 'null' ]]; then
-		unset $SERVER_HOME_DIRECTORY
+	if [[ $SERVER_HOME_DIRECTORY = 'null' ]] || [[ ! $SERVER_HOME_DIRECTORY ]] ; then
+		SERVER_HOME_DIRECTORY=''
 	else
 		echo "Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
+		#Assume our admin password has been set if we are including a custom server home
+		ADMIN_PASSWORD_SET=true
 	fi
 
-	if [[ $CFENGINE == 'null' ]]; then
-		unset $CFENGINE
+	if [[ $CFENGINE = 'null' ]] || [[ ! $CFENGINE ]]; then
+		CFENGINE=''
 	else
 		echo "CF Engine defined as ${CFENGINE}"
 	fi
 
+else
+
+	CFENGINE='lucee@4.5'
+	SERVER_HOME_DIRECTORY=${HOME}/serverHome
+
 fi
+
+echo $CFENGINE
+echo $SERVER_HOME_DIRECTORY
 
 # Default values for engine and home directory - so we can use cfconfig 
 SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
@@ -54,10 +70,10 @@ while IFS='=' read -r name value ; do
 		settingName=${name#*_}
 
 		#if our setting is for the admin password, flag it as set
-		if [[ $settingName == 'adminPassword' ]]; then
+		if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
 			ADMIN_PASSWORD_SET=true
 		fi
-
+	
 		echo "Setting cfconfig variable ${settingName}"
 		
 		if [[ $ENGINE_VENDOR == 'lucee' ]]; then
@@ -78,14 +94,23 @@ if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
 	echo "Engine configuration file detected at ${CFCONFIG}"
 
 	#if our admin password is provided, flag it as set
-	ADMIN_PASSWORD_SET="$(cat ${CFCONFIG} | jq -r '.adminPassword')"
+	for pwKey in "${CFCONFIG_PASSWORD_KEYS[@]}"
+	do
+		if [[ $( key=".${pwKey}"; cat ${CFCONFIG} | jq -r "${key}") != 'null' ]]; then
+			ADMIN_PASSWORD_SET=true
+			break
+		fi
+	done
 
 	if [[ $ENGINE_VENDOR == 'lucee' ]]; then
-	
+
 		box cfconfig import from=${CFCONFIG} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-server toFormat=${CFCONFIG_FORMAT}
+
+		SERVER_ADMIN_PASSWORD=$(cat ${CFCONFIG} | jq -r '.adminPassword')
 		
 		# if our admin password is set, set the web context password as well
-		if [[ $ADMIN_PASSWORD_SET ]]; then
+		if [[ $SERVER_ADMIN_PASSWORD != 'null' ]] && [[ $(cat ${CFCONFIG} | jq -r '.adminDefaultPassword') == 'null' ]]; then
+			echo "Setting Lucee web administrator password to the same value as the server password, since no additional default was detected"
 			box cfconfig set adminPassword=${ADMIN_PASSWORD_SET} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-web toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
 		fi
 
@@ -99,10 +124,14 @@ fi
 
 # If our admin password was not provided send a warning. 
 # We can't set it, because a custom server home may be provided
-if [[ ! $ADMIN_PASSWORD_SET ]]; then
+if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
 
 	echo "No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
 
+fi
+
+if [[ $INSTALL ]] || [[ $install ]]; then
+	box install
 fi
 
 # We need to do this all on one line because escaped line breaks 
@@ -112,4 +141,8 @@ box server start
 
 #Sleep for ACF servers
 sleep 10
-tail -f $( echo $(box server info property=consoleLogPath) | xargs )
+
+# Skip our tail output when running our tests
+if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
+	tail -f $( echo $(box server info property=consoleLogPath) | xargs )
+fi

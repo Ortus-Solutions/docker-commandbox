@@ -1,14 +1,18 @@
-FROM ortussolutions/commandbox:3.6.0-snapshot
+FROM ortussolutions/commandbox:latest
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-# Copy Contentbox-specific Files
-COPY ./resources/contentbox/ ${BUILD_DIR}/
+COPY ./resources/contentbox/ ${APP_DIR}/
+COPY ./resources/contentbox-dependencies.sh ${BUILD_DIR}/
+COPY ./resources/run-contentbox.sh ${BUILD_DIR}/
+
+# Move our executables to the build directory
+RUN chmod +x ${BUILD_DIR}/contentbox-dependencies.sh
+RUN chmod +x ${BUILD_DIR}/run-contentbox.sh
+
 RUN ls -la ${BUILD_DIR}
 
-RUN chmod +x ${BUILD_DIR}/dependencies.sh
-RUN chmod +x ${BUILD_DIR}/run-contentbox.sh
-RUN ${BUILD_DIR}/dependencies.sh
+RUN ${BUILD_DIR}/contentbox-dependencies.sh
 
-CMD $BUILD_DIR/run-contentbox.sh
+CMD ${BUILD_DIR}/run-contentbox.sh
