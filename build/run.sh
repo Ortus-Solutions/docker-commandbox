@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 cd $APP_DIR
 
 # CFConfig Available Password Keys
@@ -7,25 +8,34 @@ ADMIN_PASSWORD_SET=false
 
 # Check for a defined server home directory in box.json
 if [[ -f server.json ]]; then
+
 	SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
 	CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 
 	# ensure our string nulls are true nulls
-	if [[ $SERVER_HOME_DIRECTORY == 'null' ]]; then
-		unset $SERVER_HOME_DIRECTORY
+	if [[ $SERVER_HOME_DIRECTORY = 'null' ]] || [[ ! $SERVER_HOME_DIRECTORY ]] ; then
+		SERVER_HOME_DIRECTORY=''
 	else
 		echo "Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
 		#Assume our admin password has been set if we are including a custom server home
 		ADMIN_PASSWORD_SET=true
 	fi
 
-	if [[ $CFENGINE == 'null' ]]; then
-		unset $CFENGINE
+	if [[ $CFENGINE = 'null' ]] || [[ ! $CFENGINE ]]; then
+		CFENGINE=''
 	else
 		echo "CF Engine defined as ${CFENGINE}"
 	fi
 
+else
+
+	CFENGINE='lucee@4.5'
+	SERVER_HOME_DIRECTORY=${HOME}/serverHome
+
 fi
+
+echo $CFENGINE
+echo $SERVER_HOME_DIRECTORY
 
 # Default values for engine and home directory - so we can use cfconfig 
 SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
@@ -118,6 +128,10 @@ if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
 
 	echo "No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
 
+fi
+
+if [[ $INSTALL ]] || [[ $install ]]; then
+	box install
 fi
 
 # We need to do this all on one line because escaped line breaks 
