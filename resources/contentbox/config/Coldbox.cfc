@@ -10,13 +10,16 @@ component{
 	// Configure ColdBox Application
 	function configure(){
 
+		var system = createObject( "java", "java.lang.System" );
+		var systemEnv = system.getenv();
+
 		// coldbox directives
 		coldbox = {
 			//Application Setup
 			appName 					= "ContentBox Modular CMS",
 
 			//Development Settings
-			reinitPassword				= "@fwPassword@",
+			reinitPassword				= structKeyExists( systemEnv, "REINIT_PW") ? systemEnv[ "REINIT_PW" ] : "@fwPassword@",
 			handlersIndexAutoReload 	= false,
 
 			//Implicit Events

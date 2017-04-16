@@ -41,11 +41,6 @@ component{
 	this.mappings[ "/contentbox-deps" ] 	= COLDBOX_APP_ROOT_PATH & "modules/contentbox/modules/contentbox-deps";
 	this.mappings[ "/cborm" ] 	 			= this.mappings[ "/contentbox-deps" ] & "/modules/cborm";
 
-	this.datasources[ "contentbox" ] = {
-		class 			: 'org.hsqldb.jdbcDriver',
-		connectionString: 'jdbc:hsqldb:file:#COLDBOX_APP_ROOT_PATH#/.db/"contentbox"'
-	};
-
 	// THE DATASOURCE FOR CONTENTBOX MANDATORY
 	this.datasource = "contentbox";
 	// ORM SETTINGS
@@ -70,6 +65,9 @@ component{
 		// THIS IS ADDED SO OTHER CFML ENGINES CAN WORK WITH CONTENTBOX
 		skipCFCWithError	= true
 	};
+
+	include "config/datasourceMixins.cfm";
+
 
 	/************************************** METHODS *********************************************/
 
