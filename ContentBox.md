@@ -21,13 +21,13 @@ This section assumes you are using the [Official Docker Image](https://hub.docke
 
 To deploy a new application, first pull the image:
 
-```
+```bash
 docker pull ortussolutions/contentbox
 ```
 
 The image is packaged with a self-contained "express" version, which uses an in-memory HSQL database.  To stand up an image for testing purposes, using an unconfigured express edition, simply run:
 
-```
+```bash
 docker run -p 8080:8080 \
 	-e express=true \
 	-e install=true \
@@ -35,7 +35,7 @@ docker run -p 8080:8080 \
 ```
 
 
-A new image will be spun up and, upon opening your browser to `http://[docker machine ip]:8080`, you will be directed to configure your [ContentBox](https://www.ortussolutions.com/products/contentbox) installation.
+A new container will be spun up from the image and, upon opening your browser to `http://[docker machine ip]:8080`, you will be directed to configure your [ContentBox](https://www.ortussolutions.com/products/contentbox) installation.
 
 This image is self-contained, which means it will be destroyed when the container is stopped.  To persist your data and shared files, you will need to provide a mount point to store your information.  
 
@@ -92,7 +92,7 @@ To use the `DB_DRIVER` syntax for Adobe Coldfusion, an example `run` command wou
 
 ```
 docker run -p 8080:8080 \
-	-e 'CFENGINE=adobe@11'
+	-e 'CFENGINE=adobe@11' \
 	-e 'installer=true' \
 	-e 'cfconfig_adminPassword=myS3cur3P455' \
 	-e 'DB_DRIVER=MSSQLServer' \
