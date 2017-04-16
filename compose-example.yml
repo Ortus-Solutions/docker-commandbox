@@ -14,7 +14,7 @@ services:
     links:
       - app:luceehost  
   
-  #WEAT Application Server
+  # Application Server
   app:
     image: ortussolutions/commandbox 
     environment:
