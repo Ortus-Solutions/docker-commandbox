@@ -5,6 +5,9 @@ apt-get install --assume-yes rsync zip unzip
 cd ${APP_DIR} && box install
 ls -la
 
+# Ensure the modules_app directory exists or ACF will blow up
+mkdir -p ${APP_DIR}/modules_app
+
 cd $BUILD_DIR
 ls -la
 

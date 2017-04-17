@@ -60,8 +60,8 @@ component{
 		// DO NOT REMOVE THE FOLLOWING LINE OR AUTO-UPDATES MIGHT FAIL.
 		dbcreate = "update",
 		// FILL OUT: IF YOU WANT CHANGE SECONDARY CACHE, PLEASE UPDATE HERE
-		secondarycacheenabled = true,
-		cacheprovider		= "hashtable",
+		secondarycacheenabled = false,
+		cacheprovider		= "EhCache",
 		// ORM SESSION MANAGEMENT SETTINGS, DO NOT CHANGE
 		logSQL 				= false,
 		flushAtRequestEnd 	= false,

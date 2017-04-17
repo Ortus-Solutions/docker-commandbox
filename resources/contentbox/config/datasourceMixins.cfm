@@ -4,11 +4,13 @@
 
 	if( structKeyExists( systemEnv, "express" ) || structKeyExists( systemEnv, "EXPRESS" ) ){
 		dbDirectory = structKeyExists( systemEnv, "HSQL_DIR" ) ? systemEnv[ "HSQL_DIR" ] : '/data/contentbox/db';
+		
 		datasourceConfig = {
 			class 			 : 'org.hsqldb.jdbcDriver',
 			connectionString : 'jdbc:hsqldb:file:' & dbDirectory & '/contentbox',
 			storage			 : true
 		};
+
 	} else {
 
 		//ACF Syntax Datasources
@@ -31,7 +33,7 @@
 				database		: systemEnv[ 'DB_NAME' ],
 				username		: systemEnv[ 'DB_USER' ],
 				storage			: true
-			}
+			};
 
 			if( structKeyExists( systemEnv, "DB_PASSWORD" ) ){
 				datasourceConfig[ "password" ] = systemEnv[ "DB_PASSWORD" ];
@@ -77,10 +79,5 @@
 	if( !isNull( datasourceConfig ) ){
 		this.datasources["contentbox"] = datasourceConfig;	
 	}
-
-
-	
-
-
 
 </cfscript>
