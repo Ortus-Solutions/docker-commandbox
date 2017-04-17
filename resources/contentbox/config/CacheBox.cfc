@@ -49,7 +49,24 @@ component{
 						maxObjects = 300,
 						objectStore = "ConcurrentSoftReferenceStore" //memory sensitive
 					}
-				}		
+				},
+
+				// JDBC Stored Cache, can be used if requested to distribute content
+				jdbc = {
+					provider 	= "coldbox.system.cache.providers.CacheBoxProvider",
+					properties 	= {
+						objectDefaultTimeout = 120,
+						objectDefaultLastAccessTimeout = 30,
+						useLastAccessTimeouts = true,
+						reapFrequency = 2,
+						evictionPolicy = "LRU",
+						evictCount = 5,
+						maxObjects = 1000,
+						objectStore = "JDBCStore",
+						dsn   = "contentbox",
+						table = "cachebox_content"
+					}
+				}
 			}		
 		};
 	}	

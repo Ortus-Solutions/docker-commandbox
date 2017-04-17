@@ -10,8 +10,8 @@ component{
 	// Configure ColdBox Application
 	function configure(){
 
-		var system = createObject( "java", "java.lang.System" );
-		var systemEnv = system.getenv();
+		var system 		= createObject( "java", "java.lang.System" );
+		var systemEnv 	= system.getenv();
 
 		// coldbox directives
 		coldbox = {
@@ -111,16 +111,43 @@ component{
 			{ class="coldbox.system.interceptors.SES" }
 		];
 
+		// Choose a distributed cache
+		var distributedCache = structKeyExists( systemEnv, "DISTRIBUTED_CACHE" ) ? systemEnv[ "DISTRIBUTED_CACHE" ] : "jdbc";
+		
 		// ContentBox Runtime Overrides
 		contentbox = {
 			// Runtime Settings Override by site slug
 		  	settings = {
 		  		// Default site
 		  		default = {
-		  			//"cb_media_directoryRoot" 	= "/docker/mount"
+		  			// Distributed Cache For ContentBox
+					cb_content_cacheName   = distributedCache,
+					cb_rss_cacheName       = distributedCache,
+					cb_site_settings_cache = distributedCache
 		  		}
 		  	}
 		}
+
+		// Distributed Cache Flash
+		flash = {
+		    scope = "cache",
+		    properties = {
+		    	cacheName = distributedCache
+		    },
+		    inflateToRC = true,
+		    inflateToPRC = false,
+		    autoPurge = true,
+		    autoSave = true
+		};
+
+		// Distributed Cache Storage
+		storages = {
+		    // Cache Storage Settings
+		    cacheStorage = {
+		        cachename   = distributedCache,
+		        timeout     = 120
+		    }
+		};
 
 	}
 

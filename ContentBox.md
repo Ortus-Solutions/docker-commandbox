@@ -112,12 +112,12 @@ Available environment variables, specific to the ContentBox image, include:
 * `express=true` - Uses an HSQL, in-memory database.  Useful for very small sites or for testing the image
 * `install=true` (alias: `installer`) - Adds the installer module at runtime, to assit in configuring your installation.  You would omit this from your `run` command, once your database has been configured
 * `FWREINIT_PW` - Allows you to specify the reinit password for the ColdBox framework
-* `SESSION_STORAGE` - Allows the customization of session storage.  Allows any valid `this.sessionStorage` value, available in [Application.cfc](http://docs.lucee.org/reference/tags/application.html).
+* `SESSION_STORAGE` - Allows the customization of session storage.  Allows any valid `this.sessionStorage` value, available in [Application.cfc](http://docs.lucee.org/reference/tags/application.html).  By default it will use the JDBC connection to store your sessions in your database of choice.
+* `DISTRIBUTED_CACHE` - Allows you to specify a CacheBox cache region for distributing ContentBox content, flash messages, cache storage, RSS feeds, sitemaps and settings.  There are only three cache regions defined in this image: `default`, `template` and `jdbc`.  `jdbc` is the default cache that will distribute your data, `default` and `template` are in-memory caches.  Please see the distributed caching section below to see how to register more caches.
 * `HSQL_DIR` - Allows you to specify a custom directory path for your HSQL database.  By convention, this is set to `/data/contentbox/db` within the container
 * `contentbox_*` - All [Contentbox](https://www.ortussolutions.com/products/contentbox) "[Geek Settings](https://contentbox.ortusbooks.com/content/using/system/settings.html)" may be provided as environment variables, allowing granular control of your ContentBox settings.  
 * `ORM_SECONDARY_CACHE` - If `true` it will activate the ORM secondary cash to the `hashtable` provider.  By default it is turned off.
 * `ORM_DIALECT` - You can choose the specific ORM dialect if needed, if not we will try to auto-detect it for you.
-
 
 In addition, the CommandBox docker image environment variables are also available to use in your container.  For CommandBox image environment variable options, please read [the description text in `ortussolutions/commandbox`](https://hub.docker.com/r/ortussolutions/commandbox/). For additional information on using the CommandBox docker image, see [the initial release blog entry](https://www.ortussolutions.com/blog/commandbox-docker-image-360-released). 
 
