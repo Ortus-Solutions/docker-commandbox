@@ -128,17 +128,19 @@ component{
 		  	}
 		}
 
-		// Distributed Cache Flash
-		flash = {
-		    scope = "cache",
-		    properties = {
-		    	cacheName = distributedCache
-		    },
-		    inflateToRC = true,
-		    inflateToPRC = false,
-		    autoPurge = true,
-		    autoSave = true
-		};
+		// Distributed Cache Flash, only in non installer mode
+		if( !structKeyExists( systemEnv, "installer" ) && !structKeyExists( systemEnv, "install" ) ){
+			flash = {
+			    scope = "cache",
+			    properties = {
+			    	cacheName = distributedCache
+			    },
+			    inflateToRC = true,
+			    inflateToPRC = false,
+			    autoPurge = true,
+			    autoSave = true
+			};
+		}
 
 		// Distributed Cache Storage
 		storages = {

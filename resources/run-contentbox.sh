@@ -5,17 +5,19 @@ cd $APP_DIR
 
 if [[ $express ]] || [[ $EXPRESS ]]; then
 
-	echo "Express installation specified.  Configuring HSQL Database."
+	echo "Express installation specified.  Configuring H2 Database."
 
-	if [[ ! $HSQL_DIR ]]; then
-		export HSQL_DIR=/data/contentbox/db
+	if [[ ! $H2_DIR ]]; then
+		export H2_DIR=/data/contentbox/db
 		# H2 Database Directory
-		mkdir -p ${HSQL_DIR}
+		mkdir -p ${H2_DIR}
 	fi
 
+	echo "H2 Database set to ${H2_DIR}"
+
 	#check for a lock file and remove it so we can start up
-	if [[ -f ${HSQL_DIR}/contentbox.lck ]]; then
-		rm -f ${HSQL_DIR}/contentbox.lck
+	if [[ -f ${H2_DIR}/contentbox.lck ]]; then
+		rm -f ${H2_DIR}/contentbox.lck
 	fi
 
 fi
