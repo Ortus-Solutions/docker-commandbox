@@ -19,7 +19,7 @@ component{
 			appName 					= "ContentBox Modular CMS",
 
 			//Development Settings
-			reinitPassword				= structKeyExists( systemEnv, "FWREINT_PW") ? systemEnv[ "FWREINT_PW" ] : "@fwPassword@",
+			reinitPassword				= structKeyExists( systemEnv, "FWREINIT_PW") ? systemEnv[ "FWREINIT_PW" ] : "@fwPassword@",
 			handlersIndexAutoReload 	= false,
 
 			//Implicit Events
