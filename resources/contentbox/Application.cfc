@@ -60,7 +60,7 @@ component{
 		// DO NOT REMOVE THE FOLLOWING LINE OR AUTO-UPDATES MIGHT FAIL.
 		dbcreate = "update",
 		// FILL OUT: IF YOU WANT CHANGE SECONDARY CACHE, PLEASE UPDATE HERE
-		secondarycacheenabled = true,
+		secondarycacheenabled = structKeyExists( systemEnv, "ORM_SECONDARY_CACHE" ) ? systemEnv[ "ORM_SECONDARY_CACHE" ] : false,
 		cacheprovider		= "hashtable",
 		// ORM SESSION MANAGEMENT SETTINGS, DO NOT CHANGE
 		logSQL 				= false,
