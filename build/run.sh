@@ -130,7 +130,7 @@ if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
 
 fi
 
-if [[ $INSTALL ]] || [[ $install ]]; then
+if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then
 	box install
 fi
 
