@@ -1,14 +1,13 @@
 <cfscript>
-	system = createObject( "java", "java.lang.System" );
-	systemEnv = system.getenv();
 
 	systemEngine = structKeyExists( systemEnv, "CFENGINE" ) ? systemEnv[ "CFENGINE" ] : "lucee@4.5";
 
 	if( structKeyExists( systemEnv, "express" ) || structKeyExists( systemEnv, "EXPRESS" ) ){
 		dbDirectory = structKeyExists( systemEnv, "HSQL_DIR" ) ? systemEnv[ "HSQL_DIR" ] : '/data/contentbox/db';
 		datasourceConfig = {
-			class 			: 'org.hsqldb.jdbcDriver',
-			connectionString: 'jdbc:hsqldb:file:' & dbDirectory & '/contentbox'
+			class 			 : 'org.hsqldb.jdbcDriver',
+			connectionString : 'jdbc:hsqldb:file:' & dbDirectory & '/contentbox',
+			storage			 : true
 		};
 	} else {
 
@@ -26,11 +25,12 @@
 			}
 
 			datasourceConfig = {
-				  driver		: systemEnv[ 'DB_DRIVER' ]
-				, host 			: systemEnv[ 'DB_HOST' ]
-				, port 			: systemEnv[ 'DB_PORT' ]
-				, database		: systemEnv[ 'DB_NAME' ]
-				, username		: systemEnv[ 'DB_USER' ]
+				driver			: systemEnv[ 'DB_DRIVER' ],
+				host 			: systemEnv[ 'DB_HOST' ],
+				port 			: systemEnv[ 'DB_PORT' ],
+				database		: systemEnv[ 'DB_NAME' ],
+				username		: systemEnv[ 'DB_USER' ],
+				storage			: true
 			}
 
 			if( structKeyExists( systemEnv, "DB_PASSWORD" ) ){
@@ -54,9 +54,10 @@
 			}
 
 			datasourceConfig = {
-				class: systemEnv[ "DB_CLASS" ],
+				class           : systemEnv[ "DB_CLASS" ],
 				connectionString: systemEnv[ "DB_CONNECTION_STRING" ],
-				username: systemEnv[ "DB_USER" ]
+				username        : systemEnv[ "DB_USER" ],
+				storage         : true
 			};
 
 			if( structKeyExists( systemEnv, "DB_PASSWORD" ) ){

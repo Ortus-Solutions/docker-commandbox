@@ -6,11 +6,17 @@
 * Application Bootstrap
 */
 component{
-
 	// Application properties, modify as you see fit
 	this.name 				= "ContentBox" & hash( getCurrentTemplatePath() );
+	
+	system = createObject( "java", "java.lang.System" );
+	systemEnv = system.getenv();
+
 	this.sessionManagement 	= true;
 	this.sessionTimeout 	= createTimeSpan( 0, 1, 0, 0 );
+	// We can set our application timeout to a year, since restarting the Docker service will restart the server
+	this.applicationTimeout = createTimeSpan( 365, 0, 0, 0 );
+	this.sessionStorage 	= structKeyExists( systemEnv, "SESSION_STORAGE" ) ? systemEnv[ "SESSION_STORAGE" ] : "contentbox";
 	this.setClientCookies 	= true;
 	this.setDomainCookies 	= true;
 	this.scriptProtect		= false;
@@ -66,6 +72,9 @@ component{
 		skipCFCWithError	= true
 	};
 
+	/**
+	* Custom Datasource Dynamic configs for docker
+	**/
 	include "config/datasourceMixins.cfm";
 
 
