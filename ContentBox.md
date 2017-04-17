@@ -111,7 +111,7 @@ Available environment variables, specific to the ContentBox image, include:
 
 * `express=true` - Uses an HSQL, in-memory database.  Useful for very small sites or for testing the image
 * `install=true` (alias: `installer`) - Adds the installer module at runtime, to assit in configuring your installation.  You would omit this from your `run` command, once your database has been configured
-* `FWREINT_PW` - Allows you to specify the reinit password for the ColdBox framework
+* `FWREINIT_PW` - Allows you to specify the reinit password for the ColdBox framework
 * `HSQL_DIR` - Allows you to specify a custom directory path for your HSQL database.  By convention, this is set to `/data/contentbox/db` within the container
 * `contentbox_*` - All [Contentbox](https://www.ortussolutions.com/products/contentbox) "[Geek Settings](https://contentbox.ortusbooks.com/content/using/system/settings.html)" may be provided as environment variables, allowing granular control of your ContentBox settings.  
 
