@@ -121,6 +121,14 @@ Available environment variables, specific to the ContentBox image, include:
 
 In addition, the CommandBox docker image environment variables are also available to use in your container.  For CommandBox image environment variable options, please read [the description text in `ortussolutions/commandbox`](https://hub.docker.com/r/ortussolutions/commandbox/). For additional information on using the CommandBox docker image, see [the initial release blog entry](https://www.ortussolutions.com/blog/commandbox-docker-image-360-released). 
 
+
+Distributed Cache
+================
+
+By default, this image is configured to use the connected database as a caching storage as well.  This will allow you to distribute your stack with pseudo-caching enabled.  
+
+However, if you would like to have a real distributed cache like Redis or Couchbase connected to your images, you will need to use the appropriate CacheBox providers and your own custom `CacheBox.cfc` configuration file.  For an example of using Redis, check out our compose repository: [https://github.com/Ortus-Solutions/docker-contentbox-distributed](https://github.com/Ortus-Solutions/docker-contentbox-distributed).
+
 Issues
 ================
 
