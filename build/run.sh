@@ -9,8 +9,13 @@ ADMIN_PASSWORD_SET=false
 # Check for a defined server home directory in box.json
 if [[ -f server.json ]]; then
 
-	SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
-	CFENGINE=$(cat server.json | jq -r '.app.cfengine')
+	if [[ ! $SERVER_HOME_DIRECTORY ]]; then	
+		SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
+	fi
+
+	if [[ ! $CFENGINE ]]; then	
+		CFENGINE=$(cat server.json | jq -r '.app.cfengine')
+	fi
 
 	# ensure our string nulls are true nulls
 	if [[ $SERVER_HOME_DIRECTORY = 'null' ]] || [[ ! $SERVER_HOME_DIRECTORY ]] ; then
@@ -27,15 +32,7 @@ if [[ -f server.json ]]; then
 		echo "CF Engine defined as ${CFENGINE}"
 	fi
 
-else
-
-	CFENGINE='lucee@4.5'
-	SERVER_HOME_DIRECTORY=${HOME}/serverHome
-
 fi
-
-echo $CFENGINE
-echo $SERVER_HOME_DIRECTORY
 
 # Default values for engine and home directory - so we can use cfconfig 
 SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
@@ -136,7 +133,7 @@ fi
 
 # We need to do this all on one line because escaped line breaks 
 # aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
-box server set app.serverHomeDirectory=${SERVER_HOME_DIRECTORY} web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT}
+box server set app.cfengine=${CFENGINE} app.serverHomeDirectory=${SERVER_HOME_DIRECTORY} web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT}
 box server start
 
 #Sleep for ACF servers
