@@ -78,7 +78,6 @@ component{
 	**/
 	include "config/datasourceMixins.cfm";
 
-
 	/************************************** METHODS *********************************************/
 
 	// application start

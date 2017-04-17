@@ -116,6 +116,7 @@ Available environment variables, specific to the ContentBox image, include:
 * `HSQL_DIR` - Allows you to specify a custom directory path for your HSQL database.  By convention, this is set to `/data/contentbox/db` within the container
 * `contentbox_*` - All [Contentbox](https://www.ortussolutions.com/products/contentbox) "[Geek Settings](https://contentbox.ortusbooks.com/content/using/system/settings.html)" may be provided as environment variables, allowing granular control of your ContentBox settings.  
 * `ORM_SECONDARY_CACHE` - If `true` it will activate the ORM secondary cash to the `hashtable` provider.  By default it is turned off.
+* `ORM_DIALECT` - You can choose the specific ORM dialect if needed, if not we will try to auto-detect it for you.
 
 
 In addition, the CommandBox docker image environment variables are also available to use in your container.  For CommandBox image environment variable options, please read [the description text in `ortussolutions/commandbox`](https://hub.docker.com/r/ortussolutions/commandbox/). For additional information on using the CommandBox docker image, see [the initial release blog entry](https://www.ortussolutions.com/blog/commandbox-docker-image-360-released). 
