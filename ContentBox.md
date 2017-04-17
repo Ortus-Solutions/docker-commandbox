@@ -125,3 +125,22 @@ Issues
 ================
 
 Please submit issues to our repository: [https://github.com/Ortus-Solutions/docker-commandbox/issues](https://github.com/Ortus-Solutions/docker-commandbox/issues)
+
+Building Locally + Contributing
+===============================
+
+You can use the following to build the image locally:
+
+```
+docker build --no-cache -f ./ContentBox.Dockerfile ./
+```
+
+Once the hash is returned, you can use the following for publishing to the Ortus repos (If you have access)
+
+```
+docker tag [hash] ortussolutions/contentbox:3.5.1
+docker tag ortussolutions/contentbox:3.5.1 ortussolutions/contentbox:latest
+docker tag ortussolutions/contentbox:3.5.1 ortussolutions/contentbox:snapshot
+docker push ortussolutions/contentbox
+```
+
