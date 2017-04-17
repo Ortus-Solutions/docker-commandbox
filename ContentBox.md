@@ -135,6 +135,12 @@ You can use the following to build the image locally:
 docker build --no-cache -f ./ContentBox.Dockerfile ./
 ```
 
+You can test the image built correctly:
+
+```
+docker run -p 8080:8080 -e 'express=true' -e 'install=true' [hash]
+```
+
 Once the hash is returned, you can use the following for publishing to the Ortus repos (If you have access)
 
 ```
