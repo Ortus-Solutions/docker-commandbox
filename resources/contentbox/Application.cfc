@@ -60,7 +60,7 @@ component{
 		// DO NOT REMOVE THE FOLLOWING LINE OR AUTO-UPDATES MIGHT FAIL.
 		dbcreate = "update",
 		// FILL OUT: IF YOU WANT CHANGE SECONDARY CACHE, PLEASE UPDATE HERE
-		secondarycacheenabled = false,
+		secondarycacheenabled = structKeyExists( systemEnv, "ORM_SECONDARY_CACHE" ) ? systemEnv[ "ORM_SECONDARY_CACHE" ] : false,
 		cacheprovider		= "EhCache",
 		// ORM SESSION MANAGEMENT SETTINGS, DO NOT CHANGE
 		logSQL 				= false,
@@ -77,7 +77,6 @@ component{
 	* Custom Datasource Dynamic configs for docker
 	**/
 	include "config/datasourceMixins.cfm";
-
 
 	/************************************** METHODS *********************************************/
 
