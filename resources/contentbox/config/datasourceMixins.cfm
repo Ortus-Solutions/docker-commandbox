@@ -5,9 +5,10 @@
 	systemEngine = structKeyExists( systemEnv, "CFENGINE" ) ? systemEnv[ "CFENGINE" ] : "lucee@4.5";
 
 	if( structKeyExists( systemEnv, "express" ) || structKeyExists( systemEnv, "EXPRESS" ) ){
+		dbDirectory = structKeyExists( systemEnv, "HSQL_DIR" ) ? systemEnv[ "HSQL_DIR" ] : '/data/contentbox/db';
 		datasourceConfig = {
 			class 			: 'org.hsqldb.jdbcDriver',
-			connectionString: 'jdbc:hsqldb:file:/data/contentbox/db'
+			connectionString: 'jdbc:hsqldb:file:' & dbDirectory & '/contentbox'
 		};
 	} else {
 
