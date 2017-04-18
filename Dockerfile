@@ -22,4 +22,7 @@ RUN chmod +x ${BUILD_DIR}/dependencies.sh
 RUN chmod +x ${BUILD_DIR}/run.sh
 RUN ${BUILD_DIR}/dependencies.sh
 
+ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
+HEALTHCHECK --interval=1m --timeout=30s --retries=5 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
+
 CMD $BUILD_DIR/run.sh
