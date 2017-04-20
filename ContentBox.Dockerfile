@@ -15,4 +15,7 @@ RUN ls -la ${BUILD_DIR}
 
 RUN ${BUILD_DIR}/contentbox-dependencies.sh
 
+# Override our default healthcheck URI so the first CFML request doesn't load Coldbox and serves a static file
+ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/robots.txt"
+
 CMD ${BUILD_DIR}/run-contentbox.sh
