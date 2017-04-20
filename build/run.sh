@@ -80,7 +80,7 @@ while IFS='=' read -r name value ; do
 		
 		else
 		
-			box cfconfig set ${settingName}=${value} to=${SERVER_HOME_DIRECTORY} toFormat=${CFCONFIG_FORMAT} >> /dev/null
+			box cfconfig set ${settingName}=${value} to=${SERVER_HOME_DIRECTORY}/WEB-INF/cfusion toFormat=${CFCONFIG_FORMAT} >> /dev/null
 		
 		fi
 	fi
@@ -113,7 +113,7 @@ if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
 
 	else
 	
-		box cfconfig import from=${CFCONFIG} to=${SERVER_HOME_DIRECTORY} toFormat=${CFCONFIG_FORMAT}
+		box cfconfig import from=${CFCONFIG} to=${SERVER_HOME_DIRECTORY}/WEB-INF/cfusion toFormat=${CFCONFIG_FORMAT}
 	
 	fi
 
