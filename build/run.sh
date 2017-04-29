@@ -137,7 +137,10 @@ box server set app.cfengine=${CFENGINE} app.serverHomeDirectory=${SERVER_HOME_DI
 box server start
 
 #Sleep for ACF servers
-sleep 10
+if [[ $ENGINE_VENDOR == 'adobe' ]]; then
+	sleep 10
+fi
+
 
 # Skip our tail output when running our tests
 if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
