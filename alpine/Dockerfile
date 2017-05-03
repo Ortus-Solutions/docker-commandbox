@@ -31,22 +31,25 @@ RUN ls -la ${BUILD_DIR}
 RUN chmod +x $BUILD_DIR/*.sh
 
 #Commandbox Installation
-RUN curl --location 'https://www.ortussolutions.com/parent/download/commandbox/type/bin' -o /tmp/box.zip
-RUN unzip /tmp/box.zip -d ${BIN_DIR} && chmod +x ${BIN_DIR}/box
-ENV COMMANDBOX_VERSION="$(box version)"
-RUN echo "$COMMANDBOX_VERSION successfully installed"
+RUN $BUILD_DIR/util/install-commandbox.sh
 
 #CFConfig Installation
-RUN box install commandbox-cfconfig
-RUN ${BUILD_DIR}/optimize.sh
+RUN $BUILD_DIR/util/install-cfconfig.sh
 
+#Cleanup and Optimize our Installation
+RUN ${BUILD_DIR}/util/optimize.sh
+
+
+# Default Port Environment Variables
+ENV PORT 8080
+ENV SSL_PORT 8443
+
+# Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
-HEALTHCHECK --interval=1m --timeout=30s --retries=5 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
 
+# Our healthcheck interval doesn't allow dynamic intervals - Default is 20s intervals with 15 retries
+HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
 
-# Port Mappings
-ENV PORT ${PORT:-8080}
-ENV SSL_PORT ${SSL_PORT:-8443}
 EXPOSE ${PORT} ${SSL_PORT}
 
 CMD $BUILD_DIR/run.sh

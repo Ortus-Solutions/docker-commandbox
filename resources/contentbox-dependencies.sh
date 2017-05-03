@@ -1,7 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-apt-get update
 apt-get install --assume-yes rsync zip unzip
 
 # Run the full contentbox install to pre-seed everything

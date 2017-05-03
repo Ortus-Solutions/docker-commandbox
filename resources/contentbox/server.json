@@ -1,0 +1,16 @@
+{
+    "app":{
+        "serverHomeDirectory":"/root/serverHome",
+        "cfengine":"lucee@4.5"
+    },
+    "openbrowser":"false",
+    "web":{
+        "host":"0.0.0.0",
+        "ssl":{
+            "port":"8443"
+        },
+        "http":{
+            "port":"8080"
+        }
+    }
+}

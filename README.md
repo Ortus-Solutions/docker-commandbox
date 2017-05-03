@@ -56,13 +56,24 @@ Environment Variables
 
 The CommandBox Docker image support the use of environmental variables for the configuration of your servers.  Specifically, the image includes the [`cfconfig` CommandBox module](https://www.forgebox.io/view/commandbox-cfconfig), which allows you to provide custom settings for your engine, including the admin password.
 
+##### Port Variables
+
 * `$PORT` - The port which your server should start on.  The default is `8080`.
 * `$SSL_PORT` - If applicable, the ssl port used by your server The default is `8443`.
+
+
+##### Server Configuration Variables
+
 * `$CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container
-* `$HEALTHCHECK_URI` - Specifies the URI endpoint for container health checks.  By default, this is set `http://127.0.0.1:${PORT}/` at 1 minute intervals with 5 retries and a timeout of 30s 
 * `$cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
 * `$CFCONFIG` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines
 * `$SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
+* `$HEADLESS` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces
+* `$BOX_INSTALL` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
+
+##### Docker Runtime Variables
+
+* `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
 
 Issues
 ================

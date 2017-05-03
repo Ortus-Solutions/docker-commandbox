@@ -1,8 +1,18 @@
 language: python
 
-python:
-  - 2.7
-  - 3.5
+matrix:
+  - env:
+    - BUILD_IMAGE_DOCKERFILE:Dockerfile
+    - BUILD_IMAGE_TAG:ortussolutions/commandbox
+  - env:
+    - BUILD_IMAGE_DOCKERFILE:alpine/Dockerfile
+    - BUILD_IMAGE_TAG:ortussolutions/commandbox:alpine
+  - env:
+    - BUILD_IMAGE_DOCKERFILE:engines/Dockerfile.Lucee4
+    - BUILD_IMAGE_TAG:ortussolutions/commandbox:ubuntu-Lucee45
+  - env:
+    - BUILD_IMAGE_DOCKERFILE:engines/Dockerfile.Adobe2016
+    - BUILD_IMAGE_TAG:ortussolutions/commandbox:ubuntu-Adobe2016
 
 services:
   - docker
@@ -12,3 +22,8 @@ install:
 
 script:
   - docker-compose -f docker-compose.test.yml up
+
+deploy:
+  skip_cleanup: true
+  script:
+    - ./resources/publish.sh

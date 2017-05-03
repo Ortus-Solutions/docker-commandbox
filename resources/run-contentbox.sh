@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 cd $APP_DIR
@@ -33,7 +33,7 @@ if [[ ! -f ${APP_DIR}/server.json ]] || [[ $rewrites ]] || [[ $rewritesEnable ]]
 fi
 
 # If our installer flag has not been passed, then remove that module
-if [[ ! $installer ]] && [[ ! $install ]]; then
+if [[ ! $installer ]] && [[ ! $install ]] && [[ ! $INSTALL ]]; then
 	rm -rf ${APP_DIR}/modules/contentbox-installer
 fi
 
