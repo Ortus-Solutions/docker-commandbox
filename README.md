@@ -7,14 +7,19 @@ This is the repository for official Dockerfiles for Commandbox
 
 The Docker files in this repository can be used to create your own custom Docker container for running CFML applications on CommandBox.   Leveraging CommandBox allows you to configure your entire CFML engine environment from a single `server.json` file in the root of your project.
 
-About CommandBox
-================
+Tags
+======
 
-*CommandBox* is a standalone, native tool for Windows, Mac, and Linux that will provide you with a Command Line Interface (CLI) for developer productivity, tool interaction, package management, embedded CFML server, application scaffolding, and some sweet ASCII art. It seamlessly integrates to work with any of our *Box products but it is also open for extensibility for any ColdFusion (CFML) project as it is also written in ColdFusion (CFML) using our concepts of CommandBox Commands.  It tightly integrates with our contribution community; ForgeBox, so developers can share modules world-wide.
+* `:latest`, `:3.6.0` - Latest stable version
+* `:snapshot` - Development/BE version
+* `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:ubuntu-Lucee45-snapshot`)
+* `:alpine` - Alpine Linux version - approximately 70MB lighter _++_
+* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start ( ie. - `:lucee45`, `:lucee5`, `:adobe11` ,`:adobe2016` )
 
-Learn more about CommandBox at https://www.ortussolutions.com/products/commandbox
+_++_ - *Note: Dependency installation using the `BOX_INSTALL` flag is currently not supported in Alpines images due to a [resolved, but as yet unpublished issue with a JRE library](https://github.com/fusesource/jansi/issues/58).*
 
-What CommandBox Can Do 
+
+Description 
 =======================
 
 CommandBox allows you to configure your entire CFML engine environment from a single file in the root of your project.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://ortus.gitbooks.io/commandbox-documentation/). 
@@ -74,6 +79,15 @@ The CommandBox Docker image support the use of environmental variables for the c
 ##### Docker Runtime Variables
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
+
+About CommandBox
+================
+
+*CommandBox* is a standalone, native, [modular](https://www.forgebox.io/type/commandbox-modules) CFML development and deployment tool for Windows, Mac, and Linux which provides a CLI for server orchestration, developer productivity, tool interaction, package management, application scaffolding, and some sweet ASCII art. 
+It is open for extensibility for any ColdFusion (CFML) project and is written in CFML, allowing developers to easily write their own [modules](https://www.forgebox.io/type/commandbox-modules).  It tightly integrates with the CFML open source hub [ForgeBox](https://www.forgebox.io/), so developers can share modules world-wide.
+
+[Learn more about CommandBox](https://www.ortussolutions.com/products/commandbox)
+
 
 Issues
 ================
