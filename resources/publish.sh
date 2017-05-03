@@ -26,7 +26,7 @@ else
 fi
 
 # Push our new image and tags to the registry
-echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}-${TRAVIS_COMMIT}"
+echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}"
 docker push ${BUILD_IMAGE_TAG}
 
 
