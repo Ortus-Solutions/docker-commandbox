@@ -1,18 +1,11 @@
 language: python
 
-matrix:
-  - env:
-    - BUILD_IMAGE_DOCKERFILE:Dockerfile
-    - BUILD_IMAGE_TAG:ortussolutions/commandbox
-  - env:
-    - BUILD_IMAGE_DOCKERFILE:alpine/Dockerfile
-    - BUILD_IMAGE_TAG:ortussolutions/commandbox:alpine
-  - env:
-    - BUILD_IMAGE_DOCKERFILE:engines/Dockerfile.Lucee4
-    - BUILD_IMAGE_TAG:ortussolutions/commandbox:ubuntu-Lucee45
-  - env:
-    - BUILD_IMAGE_DOCKERFILE:engines/Dockerfile.Adobe2016
-    - BUILD_IMAGE_TAG:ortussolutions/commandbox:ubuntu-Adobe2016
+env:
+  matrix:
+    - BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
+    - BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee4 BUILD_IMAGE_TAG=ortussolutions/commandbox:ubuntu-Lucee45
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016 BUILD_IMAGE_TAG=ortussolutions/commandbox:ubuntu-Adobe2016
 
 services:
   - docker
