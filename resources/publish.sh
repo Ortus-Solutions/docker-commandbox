@@ -8,11 +8,15 @@ echo "INFO: Docker image successfully built"
 docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 echo "INFO: Successfully logged in to Docker Hub!"
 
-# Tag our image with the build reference and also as :latest
-docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}-${TRAVIS_COMMIT}
+if [[ $TRAVIS_BRANCH == 'development' ]]; then
+	BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
+fi
+
+# Tag our image with the build reference
 docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
 
-if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
+# Add :latest tag, if applicable
+if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
 fi
 
@@ -21,7 +25,7 @@ echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}-${TRAVIS_COMMIT}"
 docker push ${BUILD_IMAGE_TAG}
 
 
-if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
+if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker push ${BUILD_IMAGE_TAG}:latest
 fi
 
