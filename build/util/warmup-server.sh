@@ -6,6 +6,10 @@ export cfconfig_adminPassword=commandbox
 ${BUILD_DIR}/run.sh
 # Stop our server
 cd ${APP_DIR} && box server stop
+# Clear out our warmup logs
+cd ${APP_DIR} && echo "" > $( echo $(box server info property=consoleLogPath) | xargs )
+# Clean our artifacts so we don't keep a duplicate copy of the WAR download
+box artifacts clean --force
 # Remove our testing flag, so that our container will start normally when its run
 unset IMAGE_TESTING_IN_PROGRESS
 unset cfconfig_adminPassword
