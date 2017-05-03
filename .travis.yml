@@ -6,8 +6,10 @@ env:
   matrix:
     - BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
     - BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee4 BUILD_IMAGE_TAG=ortussolutions/commandbox:ubuntu-Lucee45
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016 BUILD_IMAGE_TAG=ortussolutions/commandbox:ubuntu-Adobe2016
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee4 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee5 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe11 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
 
 services:
   - docker
