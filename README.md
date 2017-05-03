@@ -10,11 +10,11 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest`, `:3.6.0` - Latest stable version
+* `:latest`, `:3.6.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:ubuntu-Lucee45-snapshot`)
-* `:alpine` - Alpine Linux version - approximately 70MB lighter _++_
-* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start ( ie. - `:lucee45`, `:lucee5`, `:adobe11` ,`:adobe2016` )
+* `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/alpine/Dockerfile)) - Alpine Linux version - approximately 70MB lighter _++_
+* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start - `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee4)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee5)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe11)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe2016))
 
 _++_ - *Note: Dependency installation using the `BOX_INSTALL` flag is currently not supported in Alpines images due to a [resolved, but as yet unpublished issue with a JRE library](https://github.com/fusesource/jansi/issues/58).*
 
