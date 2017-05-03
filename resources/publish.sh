@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Build Base Image
 docker build --no-cache -t ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} -f ./${BUILD_IMAGE_DOCKERFILE} ./
