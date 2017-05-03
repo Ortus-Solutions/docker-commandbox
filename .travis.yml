@@ -22,5 +22,5 @@ deploy:
     branch: 
       - master
       - development
-  script:
-    - ./resources/publish.sh
+  provider: script
+  script: ./resources/publish.sh
