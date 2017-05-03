@@ -16,7 +16,7 @@ fi
 docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
 
 # Add :latest tag, if applicable
-if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
 fi
 
@@ -25,7 +25,7 @@ echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}-${TRAVIS_COMMIT}"
 docker push ${BUILD_IMAGE_TAG}
 
 
-if[[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker push ${BUILD_IMAGE_TAG}:latest
 fi
 
