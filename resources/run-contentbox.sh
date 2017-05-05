@@ -5,7 +5,7 @@ cd $APP_DIR
 
 if [[ $express ]] || [[ $EXPRESS ]]; then
 
-	echo "Express installation specified.  Configuring H2 Database."
+	echo "INFO: Express installation specified.  Configuring H2 Database."
 
 	if [[ ! $H2_DIR ]]; then
 		export H2_DIR=/data/contentbox/db
@@ -13,7 +13,7 @@ if [[ $express ]] || [[ $EXPRESS ]]; then
 		mkdir -p ${H2_DIR}
 	fi
 
-	echo "H2 Database set to ${H2_DIR}"
+	echo "INFO: H2 Database set to ${H2_DIR}"
 
 	#check for a lock file and remove it so we can start up
 	if [[ -f ${H2_DIR}/contentbox.lck ]]; then
@@ -24,11 +24,11 @@ fi
 
 
 # ContentBox Dependencies
-echo "Installing ContentBox Dependencies."
+echo "INFO: Installing ContentBox Dependencies."
 box install
 
 if [[ ! -f ${APP_DIR}/server.json ]] || [[ $rewrites ]] || [[ $rewritesEnable ]]; then
-	echo "Enabling rewrites..."
+	echo "INFO: Enabling rewrites..."
 	box server set web.rewrites.enable=true
 fi
 
@@ -44,7 +44,7 @@ fi
 
 mkdir -p $contentbox_cb_media_directoryRoot
 
-echo "Contentbox media root set as ${contentbox_cb_media_directoryRoot}"
+echo "INFO: Contentbox media root set as ${contentbox_cb_media_directoryRoot}"
 
 # Now that we've set up contentbox, stand-up the rest with our normal runfile
 cd $BUILD_DIR
