@@ -149,11 +149,7 @@ box server start
 
 # Sleep until server is ready for traffic
 echo "INFO: Waiting for server to become available..."
-if [[ $ENGINE_VENDOR == 'adobe' ]]; then
 	while [ ! -f "${SERVER_HOME_DIRECTORY}/logs/server.out.txt" ] ; do sleep 2; done
-else
-	while [ ! -f "${LUCEE_WEB_HOME}/logs/application.log" ] ; do sleep 2; done
-fi
 echo "INFO: Server engine up and running."
 
 echo "INFO: Configuration processed and server started in ${SECONDS} seconds."
