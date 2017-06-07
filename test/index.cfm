@@ -27,7 +27,15 @@
 	</cfswitch>
 	<cfoutput>#serializeJSON( debugOutput )#</cfoutput>
 <cfelse>
-	<cfoutput>
-		<h1>CommandBox is up and Running on Docker</h1>
-	</cfoutput>
+	<body style="background-color: #efefef; margin-top:100px">
+		<h1>
+			<div style="text-align: center">
+				<img src="CommandBoxLogo300.png" > <br>
+				Is up and Running on Docker!
+			</div>
+		</h1>
+		<p style="text-align: center">
+			If you want to see some debugging information for this instance, click on the debug link: <a href="index.cfm?debug=true">see debugging</a>
+		</p>
+	</body>
 </cfif>
