@@ -1,5 +1,6 @@
 FROM ortussolutions/commandbox:latest
 
+LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 

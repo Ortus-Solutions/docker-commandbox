@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Push Version into Images: $IMAGE_VERSION IS SET IN TRAVIS
+sed "s/@version@/$IMAGE_VERSION/" $TRAVIS_BUILD_DIR/Dockerfile | tee $TRAVIS_BUILD_DIR/Dockerfile
+sed "s/@version@/$IMAGE_VERSION/" $TRAVIS_BUILD_DIR/ContentBox.Dockerfile | tee $TRAVIS_BUILD_DIR/ContentBox.Dockerfile
+sed "s/@version@/$IMAGE_VERSION/" $TRAVIS_BUILD_DIR/alpine/Dockerfile | tee $TRAVIS_BUILD_DIR/alpine/Dockerfile
+
 # Build Base Image
 docker build --no-cache -t ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} -f ./${BUILD_IMAGE_DOCKERFILE} ./
 echo "INFO: Docker image successfully built"
