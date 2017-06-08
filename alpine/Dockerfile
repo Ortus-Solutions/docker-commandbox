@@ -16,7 +16,6 @@ RUN apk add curl jq bash
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-
 # BIN_DIR = Where the box binary goes
 ENV BIN_DIR /usr/bin
 WORKDIR $BIN_DIR
@@ -39,7 +38,6 @@ RUN $BUILD_DIR/util/install-cfconfig.sh
 
 #Cleanup and Optimize our Installation
 RUN ${BUILD_DIR}/util/optimize.sh
-
 
 # Default Port Environment Variables
 ENV PORT 8080
