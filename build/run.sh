@@ -124,23 +124,23 @@ fi
 # If our admin password was not provided send a warning. 
 # We can't set it, because a custom server home may be provided
 if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
-
 	echo "WARN: No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
-
 fi
 
+# If box install flag is up, do installation
 if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then
 	box install
 fi
 
 # If the headless flag is up, remove our administrative interfaces
 if [[ $HEADLESS ]] || [[ $headless ]]; then
-
 	$BUILD_DIR/util/env-headless.sh
-
 fi
 
-
+# If Server URL Rewrites are set, then activate it 
+if [[ $URL_REWRITES ]] || [[ $url_rewrites ]]; then
+	$BUILD_DIR/util/env-rewrites.sh
+fi
 
 # We need to do this all on one line because escaped line breaks 
 # aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
