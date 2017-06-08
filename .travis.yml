@@ -2,6 +2,7 @@ language: python
 
 env:
   global:
+    - IMAGE_VERSION=2.0.0
     - COMMANDBOX_VERSION=3.6.0
   matrix:
     - BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox

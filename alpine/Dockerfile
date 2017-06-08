@@ -1,5 +1,6 @@
 FROM openjdk:8-jre-alpine
 
+LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
@@ -14,7 +15,6 @@ RUN apk add curl jq bash
 # APP_DIR = the directory where the application runs
 ENV APP_DIR /app
 WORKDIR $APP_DIR
-
 
 # BIN_DIR = Where the box binary goes
 ENV BIN_DIR /usr/bin
@@ -38,7 +38,6 @@ RUN $BUILD_DIR/util/install-cfconfig.sh
 
 #Cleanup and Optimize our Installation
 RUN ${BUILD_DIR}/util/optimize.sh
-
 
 # Default Port Environment Variables
 ENV PORT 8080
