@@ -38,13 +38,13 @@ if [[ ! $installer ]] && [[ ! $install ]] && [[ ! $INSTALL ]]; then
 fi
 
 # Check for path environment variables and then apply convention routes to them if not specified
-if [[ ! $contentbox_cb_media_directoryRoot ]]; then
-	export contentbox_cb_media_directoryRoot=/app/includes/shared/media 
+if [[ ! $contentbox_default_cb_media_directoryRoot ]]; then
+	export contentbox_default_cb_media_directoryRoot=/app/includes/shared/media 
 fi
 
-mkdir -p $contentbox_cb_media_directoryRoot
+mkdir -p $contentbox_default_cb_media_directoryRoot
 
-echo "INFO: Contentbox media root set as ${contentbox_cb_media_directoryRoot}"
+echo "INFO: Contentbox media root set as ${contentbox_default_cb_media_directoryRoot}"
 
 # Now that we've set up contentbox, stand-up the rest with our normal runfile
 cd $BUILD_DIR
