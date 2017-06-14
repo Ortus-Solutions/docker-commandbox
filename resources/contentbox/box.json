@@ -1,6 +1,6 @@
 {
     "dependencies":{
-        "contentbox":"~3.5.1",
+        "contentbox":"^3.5.1",
         "coldbox":"^4.3.0"
     },
     "installPaths":{
