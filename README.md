@@ -1,11 +1,11 @@
-Official Commandbox Dockerfiles [![Build Status](https://travis-ci.org/Ortus-Solutions/docker-commandbox.svg)](https://travis-ci.org/Ortus-Solutions/docker-commandbox)
+Official CommandBox Dockerfiles [![Build Status](https://travis-ci.org/Ortus-Solutions/docker-commandbox.svg)](https://travis-ci.org/Ortus-Solutions/docker-commandbox)
 =========================
 
 This is the repository for official Dockerfiles for Commandbox
 
 ## How it works
 
-The Docker files in this repository can be used to create your own custom Docker container for running CFML applications on CommandBox.   Leveraging CommandBox allows you to configure your entire CFML engine environment from a single `server.json` file in the root of your project.
+The Docker files in this repository can be used to create your own custom Docker container for running ColdFusion CFML applications on CommandBox.   Leveraging CommandBox allows you to configure your entire ColdFusion CFML engine environment from a single `server.json` file in the root of your project.
 
 Tags
 ======
@@ -36,7 +36,7 @@ Usage
 
 This section assumes you are using the [Official Docker Image](https://hub.docker.com/r/ortussolutions/commandbox/)
 
-By default, the directory `/app` in the container is mapped as Commandbox home.  To deploy a new application, first pull the image:
+By default, the directory `/app` in the container is mapped as the Commandbox home.  To deploy a new application, first pull the image:
 
 ```
 docker pull ortussolutions/commandbox
@@ -48,7 +48,7 @@ Then, from the root of your project, start with
 docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/app" ortussolutions/commandbox 
 ```
 
-By default the process ports of the container are 8080 (insecure) and 8443 (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
+By default the process ports of the container are `8080` (insecure) and `8443` (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
 
 ```
 docker pull -expose-list 80 443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
@@ -73,8 +73,9 @@ The CommandBox Docker image support the use of environmental variables for the c
 * `$cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
 * `$CFCONFIG` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines
 * `$SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
-* `$HEADLESS` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces
+* `$HEADLESS` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure no admin access deployment.
 * `$BOX_INSTALL` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
+* `$URL_REWRITES` - When set to true, this will make sure the CommandBox default URL rewrites are enabled on the server. This setting is `true` by default.
 
 ##### Docker Runtime Variables
 
