@@ -65,6 +65,23 @@ echo "Tests the ability to specify a cfconfig file"
 
 echo "CFConfig file tests completed successfully"
 
+# Rewrites Environment variables
+echo "Testing the ability to specify to turn rewrites on via an environment variable"
+
+export URL_REWRITE="true"
+
+./run.sh
+./tests/test.up.sh
+
+# cleanup
+cd $APP_DIR
+box server stop
+rm -f $APP_DIR/server.json
+
+unset URL_REWRITE
+
+echo "Rewrite environment tests completed successfully"
+
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR
