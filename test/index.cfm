@@ -1,4 +1,3 @@
-<cfsetting enablecfoutputonly="true"/>
 <cfif structKeyExists( url, "debug" )>
 	<cfscript>
 		system = createObject( "java", "java.lang.System" );
@@ -27,7 +26,7 @@
 	</cfswitch>
 	<cfoutput>#serializeJSON( debugOutput )#</cfoutput>
 <cfelse>
-	<body style="background-color: #efefef; margin-top:100px">
+	<body style="background-color: ##efefef; margin-top:100px">
 		<h1>
 			<div style="text-align: center">
 				<img src="CommandBoxLogo300.png" > <br>
