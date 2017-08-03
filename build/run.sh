@@ -65,59 +65,29 @@ fi
 #Check for cfconfig specific environment variables
 while IFS='=' read -r name value ; do
 	if [[ $name == *'cfconfig_'* ]]; then
-		prefix=${name%%_*}
-		settingName=${name#*_}
-
 		#if our setting is for the admin password, flag it as set
 		if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
 			ADMIN_PASSWORD_SET=true
 		fi
-	
-		echo "INFO: Setting cfconfig variable ${settingName}"
-		
-		if [[ $ENGINE_VENDOR == 'lucee' ]]; then
-
-			box cfconfig set ${settingName}=${value} to=${LUCEE_SERVER_HOME} toFormat=${CFCONFIG_FORMAT} >> /dev/null
-			box cfconfig set ${settingName}=${value} to=${LUCEE_WEB_HOME} toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
-		
-		else
-		
-			box cfconfig set ${settingName}=${value} to=${SERVER_HOME_DIRECTORY}/WEB-INF/cfusion toFormat=${CFCONFIG_FORMAT} >> /dev/null
-		
-		fi
 	fi
 done < <(env)
 
-# Convention environment variable for CFConfig file
 if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
-	echo "INFO: Engine configuration file detected at ${CFCONFIG}"
+	export cfconfigfile=$CFCONFIG
+fi
+
+# Convention environment variable for CFConfig file
+if [[ $cfconfigfile ]] && [[ -f $cfconfigfile ]]; then
+	echo "INFO: Engine configuration file detected at ${cfconfigfile}"
 
 	#if our admin password is provided, flag it as set
 	for pwKey in "${CFCONFIG_PASSWORD_KEYS[@]}"
 	do
-		if [[ $( key=".${pwKey}"; cat ${CFCONFIG} | jq -r "${key}") != 'null' ]]; then
+		if [[ $( key=".${pwKey}"; cat ${cfconfigfile} | jq -r "${key}") != 'null' ]]; then
 			ADMIN_PASSWORD_SET=true
 			break
 		fi
 	done
-
-	if [[ $ENGINE_VENDOR == 'lucee' ]]; then
-
-		box cfconfig import from=${CFCONFIG} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-server toFormat=${CFCONFIG_FORMAT}
-
-		SERVER_ADMIN_PASSWORD=$(cat ${CFCONFIG} | jq -r '.adminPassword')
-		
-		# if our admin password is set, set the web context password as well
-		if [[ $SERVER_ADMIN_PASSWORD != 'null' ]] && [[ $(cat ${CFCONFIG} | jq -r '.adminDefaultPassword') == 'null' ]]; then
-			echo "INFO: Setting Lucee web administrator password to the same value as the server password, since no additional default was detected"
-			box cfconfig set adminPassword=${ADMIN_PASSWORD_SET} to=${SERVER_HOME_DIRECTORY}/WEB-INF/lucee-web toFormat=${WEB_CONFIG_FORMAT} >> /dev/null
-		fi
-
-	else
-	
-		box cfconfig import from=${CFCONFIG} to=${SERVER_HOME_DIRECTORY}/WEB-INF/cfusion toFormat=${CFCONFIG_FORMAT}
-	
-	fi
 
 fi
 
