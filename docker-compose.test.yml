@@ -2,7 +2,7 @@ sut:
   environment:
     IMAGE_TESTING_IN_PROGRESS: "true"
   build: .
-  dockerfile: ./`BUILD_IMAGE_DOCKERFILE`
+  dockerfile: "./${BUILD_IMAGE_DOCKERFILE}"
   command: /build/test.sh
   #Mount our test directory ( and our build directory to make local testing easier )
   volumes: 
