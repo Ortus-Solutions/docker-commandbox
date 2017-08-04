@@ -4,10 +4,10 @@ LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-#Since alpine runs as a single user, we need to create a "root" direcotry
+# Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-#Basic Dependencies
+# Basic Dependencies
 RUN apk update
 RUN apk add curl jq bash
 
@@ -30,13 +30,13 @@ COPY ./build/ ${BUILD_DIR}/
 RUN ls -la ${BUILD_DIR}
 RUN chmod +x $BUILD_DIR/*.sh
 
-#Commandbox Installation
+# Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
-#CFConfig Installation
+# CFConfig Installation
 RUN $BUILD_DIR/util/install-cfconfig.sh
 
-#Cleanup and Optimize our Installation
+# Cleanup and Optimize our Installation
 RUN ${BUILD_DIR}/util/optimize.sh
 
 # Default Port Environment Variables
