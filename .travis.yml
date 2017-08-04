@@ -10,16 +10,14 @@ env:
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee4 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee5 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
+    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016-3 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016.0.3
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe11 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
 
 services:
   - docker
 
-install:
-  - docker-compose -f docker-compose.test.yml build
-
 script:
-  - docker-compose -f docker-compose.test.yml up
+  - docker-compose -f docker-compose.test.yml up --build
 
 deploy:
   skip_cleanup: true
