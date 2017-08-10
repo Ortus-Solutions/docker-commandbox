@@ -6,15 +6,8 @@ cd $TRAVIS_BUILD_DIR
 echo "CWD: $PWD"
 echo "Dockerfile: $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}"
 
-
-echo "Before version sed Dockerfile contents:"
-cat $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
-
 # Push Version into Images: $IMAGE_VERSION IS SET IN TRAVIS
 sed -i -e "s/@version@/$IMAGE_VERSION/g" $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
-
-echo "After version sed Dockerfile contents:"
-cat $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
 
 # Build Base Image
 docker build --no-cache -t ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} -f $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE} $TRAVIS_BUILD_DIR/
