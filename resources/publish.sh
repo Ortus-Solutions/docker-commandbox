@@ -11,7 +11,7 @@ echo "Before version sed Dockerfile contents:"
 cat $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
 
 # Push Version into Images: $IMAGE_VERSION IS SET IN TRAVIS
-sed -i -e 's/@version@/$IMAGE_VERSION/g' $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
+sed -i -e "s/@version@/$IMAGE_VERSION/g" $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
 
 echo "After version sed Dockerfile contents:"
 cat $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
