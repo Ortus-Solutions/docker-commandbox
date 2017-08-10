@@ -9,6 +9,7 @@ component{
 	// Application properties, modify as you see fit
 	this.name 				= "ContentBox" & hash( getCurrentTemplatePath() );
 	
+	// Add Environment Access
 	system = createObject( "java", "java.lang.System" );
 	systemEnv = system.getenv();
 
@@ -48,6 +49,12 @@ component{
 	this.mappings[ "/contentbox-deps" ] 	= COLDBOX_APP_ROOT_PATH & "modules/contentbox/modules/contentbox-deps";
 	this.mappings[ "/cborm" ] 	 			= this.mappings[ "/contentbox-deps" ] & "/modules/cborm";
 
+	/**
+	* Custom Datasource Dynamic configs for docker
+	* Moved here, before ORM definitions exist.
+	**/
+	include "config/datasourceMixins.cfm";
+
 	// THE DATASOURCE FOR CONTENTBOX MANDATORY
 	this.datasource = "contentbox";
 	// ORM SETTINGS
@@ -73,17 +80,12 @@ component{
 		skipCFCWithError	= true
 	};
 
-	/**
-	* Custom Datasource Dynamic configs for docker
-	**/
-	include "config/datasourceMixins.cfm";
-
 	/************************************** METHODS *********************************************/
 
 	// application start
 	public boolean function onApplicationStart(){
 		//Set a high timeout for any orm updates
-		setting requestTimeout="180";
+		setting requestTimeout="300";
 		application.cbBootstrap = new coldbox.system.Bootstrap( COLDBOX_CONFIG_FILE, COLDBOX_APP_ROOT_PATH, COLDBOX_APP_KEY, COLDBOX_APP_MAPPING );
 		application.cbBootstrap.loadColdbox();
 		return true;
@@ -140,5 +142,51 @@ component{
 		onApplicationStart();
 	}
 
-	//@cf9-onError@
+	/**
+	 * Load the datasource by convention by looking at `config/runtime.properties.cfm` 
+	 * or if not, load by default name of `contentbox` which needs to be registered in the CFML engine
+	 * This is mostly used for baking docker images with seeded datasources.
+	 */
+	private void function loadDatasource(){
+		// Load our Runtime Properties, which will dynamically create our datasource from config/runtime.properties, 
+		// if it does not exist
+		var runtimeProperties = COLDBOX_APP_ROOT_PATH & 'config/runtime.properties.cfm';
+		if( fileExists( runtimeProperties ) ){
+			var props = createObject( "java", "java.util.Properties" ).init();
+			props.load( createObject( "java", "java.io.FileInputStream" ).init( runtimeProperties ) );
+
+			// Init the datasource with shared engine properties
+			var dsn = {
+				username 	= props.getProperty( "DB_USERNAME", "" ),
+				password 	= props.getProperty( "DB_PASSWORD", "" ),
+				storage 	= props.getProperty( "DB_STORAGE", "false" ),
+				clob 		= true,
+				blob 		= true
+			};
+
+			// Check for full JDBC Connection strings and classes
+			var connectionString = props.getProperty( "DB_CONNECTIONSTRING", "" );
+			// If no connection string, add required common host/database params
+			if( !len( connectionString ) ){
+				dsn.host     	= props.getProperty( "DB_HOST" );
+				dsn.port     	= props.getProperty( "DB_PORT" );
+				dsn.database 	= props.getProperty( "DB_DATABASE" );
+				// Lucee Driver Type
+				dsn.type 	 	= props.getProperty( "DB_TYPE", "" );
+				// ACF Driver Type
+				dsn.driver 		= props.getProperty( "DB_DRIVER", "" );
+			}
+			// Leverages Connection strings
+			else {
+				if( structKeyExists( server, "lucee" ) ){
+					dsn.connectionString = connectionString;
+					dsn.class 			 = props.getProperty( "DB_CLASS" );
+				} else {
+					dsn.url = connectionString;
+				}
+			}
+			// Set it
+			this.datasources[ "contentbox" ] = dsn;
+		}
+	}
 }

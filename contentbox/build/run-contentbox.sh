@@ -22,10 +22,9 @@ if [[ $express ]] || [[ $EXPRESS ]]; then
 
 fi
 
-
 # ContentBox Dependencies
-echo "INFO: Installing ContentBox Dependencies."
-box install
+#echo "INFO: Installing ContentBox Dependencies."
+#box install
 
 if [[ ! -f ${APP_DIR}/server.json ]] || [[ $rewrites ]] || [[ $rewritesEnable ]]; then
 	echo "INFO: Enabling rewrites..."
@@ -34,6 +33,7 @@ fi
 
 # If our installer flag has not been passed, then remove that module
 if [[ ! $installer ]] && [[ ! $install ]] && [[ ! $INSTALL ]]; then
+	echo "INFO: Removing installer..."
 	rm -rf ${APP_DIR}/modules/contentbox-installer
 fi
 
@@ -41,11 +41,11 @@ fi
 if [[ ! $contentbox_default_cb_media_directoryRoot ]]; then
 	export contentbox_default_cb_media_directoryRoot=/app/includes/shared/media 
 fi
-
+# Create media directory, just in case.
 mkdir -p $contentbox_default_cb_media_directoryRoot
 
 echo "INFO: Contentbox media root set as ${contentbox_default_cb_media_directoryRoot}"
 
-# Now that we've set up contentbox, stand-up the rest with our normal runfile
+# Now that we've set up contentbox, stand-up the rest with our normal CommandBox Build File
 cd $BUILD_DIR
 ./run.sh

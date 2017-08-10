@@ -62,7 +62,6 @@ component{
 		// create a function with the name of the environment so it can be executed if that environment is detected
 		// the value of the environment is a list of regex patterns to match the cgi.http_host.
 		environments = {
-			development = "local,127\.0\.0\.1"
 		};
 
 		// Module Directives
@@ -114,16 +113,25 @@ component{
 		// Choose a distributed cache
 		var distributedCache = structKeyExists( systemEnv, "DISTRIBUTED_CACHE" ) ? systemEnv[ "DISTRIBUTED_CACHE" ] : "jdbc";
 		
+		// ContentBox relies on the Cache Storage for tracking sessions, which delegates to a Cache provider
+		storages = {
+		    // Cache Storage Settings
+		    cacheStorage = {
+		        cachename   = "sessions",
+		        timeout     = 60 // The default timeout of the session bucket, defaults to 60
+		    }
+		};
+
 		// ContentBox Runtime Overrides
-		contentbox = {
+		"contentbox" = {
 			// Runtime Settings Override by site slug
-		  	settings = {
+		  	"settings" = {
 		  		// Default site
-		  		default = {
+		  		"default" = {
 		  			// Distributed Cache For ContentBox
-					cb_content_cacheName   = distributedCache,
-					cb_rss_cacheName       = distributedCache,
-					cb_site_settings_cache = distributedCache
+					"cb_content_cacheName"   = distributedCache,
+					"cb_rss_cacheName"       = distributedCache,
+					"cb_site_settings_cache" = distributedCache
 		  		}
 		  	}
 		}
@@ -166,7 +174,7 @@ component{
 		logbox.appenders.files = { 
 			class="coldbox.system.logging.appenders.RollingFileAppender",
 			properties = {
-				filename = "ContentBox", filePath="logs", async=true
+				filename = "ContentBox", filePath="/logs", async=true
 			}
 		};
 
@@ -174,7 +182,7 @@ component{
 		mailsettings.protocol = {
 			class = "cbmailservices.models.protocols.FileProtocol",
 			properties = {
-				filePath = "logs"
+				filePath = "/logs"
 			}
 		};
 		//logbox.debug 	= ["coldbox.system.interceptors.Security"];

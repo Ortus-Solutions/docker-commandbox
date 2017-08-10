@@ -27,8 +27,8 @@ component{
 				reapFrequency = 2,
 				freeMemoryPercentageThreshold = 0,
 				evictionPolicy = "LRU",
-				evictCount = 1,
-				maxObjects = 300,
+				evictCount = 5,
+				maxObjects = 5000,
 				objectStore = "ConcurrentStore", //guaranteed objects
 				coldboxEnabled = true
 			},
@@ -45,9 +45,26 @@ component{
 						freeMemoryPercentageThreshold = 0,
 						reapFrequency = 2,
 						evictionPolicy = "LRU",
-						evictCount = 2,
-						maxObjects = 300,
+						evictCount = 5,
+						maxObjects = 5000,
 						objectStore = "ConcurrentSoftReferenceStore" //memory sensitive
+					}
+				},
+				
+				// ContentBox Sessions
+				sessions = 	{
+					provider = "coldbox.system.cache.providers.CacheBoxColdBoxProvider",
+					properties = {
+						objectDefaultTimeout = 60,
+						objectDefaultLastAccessTimeout = 0,
+						useLastAccessTimeouts = false,
+						reapFrequency = 2,
+						evictionPolicy = "LRU",
+						evictCount = 5,
+						maxObjects = 1000,
+						objectStore = "JDBCStore",
+						dsn   = "contentbox",
+						table = "cachebox_sessions"
 					}
 				},
 

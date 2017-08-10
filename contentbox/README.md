@@ -1,13 +1,15 @@
 Tags
 ======
 
-* `:latest`, `:3.5.1.0` - Latest stable version
-* `:snapshot` - Development/BE version
+* `:latest`, `:3.7.0` - Latest stable version
+* `:snapshot` - Development/BE version of this image (Not of ContentBox)
+
+> Look in the tags section for other specific ContentBox versions
 
 Description 
 ================
 
-ContentBox is a professional open source (Apache 2 License) modular content management engine that allows you to easily build websites, blogs, wikis, complex web applications and even power mobile or cloud applications. Built with a secure and flexible modular core, designed to scale, and combined with world-class support, ContentBox can be deployed to any JEE server or ColdFusion (CFML) server.
+ContentBox is a professional open source (Apache 2 License) modular content management engine that allows you to easily build websites, blogs, wikis, complex web applications and even power mobile or cloud applications. Built with a secure and flexible modular core, designed to scale, and combined with world-class support, ContentBox can be deployed to any Java server or ColdFusion (CFML) server.
 
 Learn more about ContentBox at https://www.ortussolutions.com/products/contentbox
 
@@ -25,7 +27,7 @@ To deploy a new application, first pull the image:
 docker pull ortussolutions/contentbox
 ```
 
-The image is packaged with a self-contained "express" version, which uses an in-memory [H2 database engine](http://www.h2database.com/html/main.html).  To stand up an image for testing purposes, using an unconfigured express edition, simply run:
+The image is packaged with a self-contained **express** version, which uses an in-memory [H2 database engine](http://www.h2database.com/html/main.html).  To stand up an image for testing purposes, using an unconfigured express edition, simply run:
 
 ```bash
 docker run -p 8080:8080 \
@@ -35,9 +37,9 @@ docker run -p 8080:8080 \
 ```
 
 
-A new container will be spun up from the image and, upon opening your browser to `http://[docker machine ip]:8080`, you will be directed to configure your [ContentBox](https://www.ortussolutions.com/products/contentbox) installation.
+A new container will be spun up from the image and, upon opening your browser to `http://[docker machine ip]:8080`, you will be directed to configure your [ContentBox](https://www.ortussolutions.com/products/contentbox) installation wizard.
 
-This image is self-contained, which means it will be destroyed when the container is stopped.  To persist your data and shared files, you will need to provide a mount point to store your information.  
+This image is self-contained, which means it will be destroyed when the container is stopped.  To persist your data and shared files, you will need to provide a mount point to store your information.
 
 The directory `/app`, within the container, is mapped as the application web root.  Custom configurations, modules and directories can be mounted within the web root to customize your [ContentBox](https://www.ortussolutions.com/products/contentbox)/[Coldbox](https://www.ortussolutions.com/products/coldbox) installation.
 
@@ -61,7 +63,7 @@ See environment variables below for advanced database and shared asset configura
 Environment Variables
 =====================
 
-Contentbox allows you to pass a number of environment variables in to the image to allow for configuration of installation.
+ContentBox allows you to pass a number of environment variables in to the image to allow for configuration of installation.
 
 For advanced configurations to external DBMS systems, all of the supported JDBC drivers in your CMFL engine can be configured by specifying the environment variables to connect.  Alternately, you may specify a `CFCONFIG` environment variable which points to file containing your engine configuration, including datasources.  For more information on runtime configuration using `CFCONFIG`, see the [Forgebox Instructions](https://www.forgebox.io/view/commandbox-cfconfig)  By convention, the datasource expected for the image should be named `contentbox`.
 
@@ -111,6 +113,7 @@ Available environment variables, specific to the ContentBox image, include:
 
 * `express=true` - Uses an H2, in-memory database.  Useful for very small sites or for testing the image. See http://www.h2database.com/html/main.html
 * `install=true` (alias: `installer`) - Adds the installer module at runtime, to assit in configuring your installation.  You would omit this from your `run` command, once your database has been configured
+* `BE=true` - Uses the bleeding edge snapshot of the ContentBox CMS, else we will defer to the latest stable version of ContentBox.
 * `FWREINIT_PW` - Allows you to specify the reinit password for the ColdBox framework
 * `SESSION_STORAGE` - Allows the customization of session storage.  Allows any valid `this.sessionStorage` value, available in [Application.cfc](http://docs.lucee.org/reference/tags/application.html).  By default it will use the JDBC connection to store your sessions in your database of choice.
 * `DISTRIBUTED_CACHE` - Allows you to specify a CacheBox cache region for distributing ContentBox content, flash messages, cache storage, RSS feeds, sitemaps and settings.  There are only three cache regions defined in this image: `default`, `template` and `jdbc`.  `jdbc` is the default cache that will distribute your data, `default` and `template` are in-memory caches.  Please see the distributed caching section below to see how to register more caches.
@@ -140,13 +143,13 @@ Building Locally + Contributing
 You can use the following to build the image locally:
 
 ```
-docker build --no-cache -f ./ContentBox.Dockerfile ./
+docker build --no-cache -f ./Dockerfile ./
 ```
 
 You can test the image built correctly:
 
 ```
-docker run -p 8080:8080 -e 'express=true' -e 'install=true' [hash]
+docker run -t -p 8080:8080 -e 'express=true' -e 'install=true' [hash]
 ```
 
 Once the hash is returned, you can use the following for publishing to the Ortus repos (If you have access)
