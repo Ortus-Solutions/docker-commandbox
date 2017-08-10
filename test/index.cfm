@@ -21,7 +21,7 @@
 			<cfset debugOutput = { "server":SERVER, "CGI":CGI, "env":env }>	
 		</cfcase>
 		<cfdefaultcase>
-			<cfset debugOutput = { "error":true, "message":"No debug parameter provided" }>
+			<cfset debugOutput = { "error":true, "message":"No debug parameter provided. Available parameters are: cgi, server, env, all" }>
 		</cfdefaultcase>
 	</cfswitch>
 	<cfoutput>#serializeJSON( debugOutput )#</cfoutput>
