@@ -155,9 +155,9 @@ docker run -t -p 8080:8080 -e 'express=true' -e 'install=true' [hash]
 Once the hash is returned, you can use the following for publishing to the Ortus repos (If you have access)
 
 ```
-docker tag [hash] ortussolutions/contentbox:3.5.1
-docker tag ortussolutions/contentbox:3.5.1 ortussolutions/contentbox:latest
-docker tag ortussolutions/contentbox:3.5.1 ortussolutions/contentbox:snapshot
+docker tag [hash] ortussolutions/contentbox:3.7.0
+docker tag ortussolutions/contentbox:3.7.0 ortussolutions/contentbox:latest
+docker tag ortussolutions/contentbox:3.7.0 ortussolutions/contentbox:snapshot
 docker push ortussolutions/contentbox
 ```
 
