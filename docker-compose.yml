@@ -3,7 +3,7 @@ version: '2.1'
 services:
 
   test:
-    image: ortussolutions/commandbox:3.6.0-snapshot
+    image: ortussolutions/commandbox:3.7.0-snapshot
     environment:
       cfconfig_adminPassword: testing
     volumes:
