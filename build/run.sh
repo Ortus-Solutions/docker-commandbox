@@ -92,9 +92,17 @@ if [[ $cfconfigfile ]] && [[ -f $cfconfigfile ]]; then
 fi
 
 # If our admin password was not provided send a warning. 
-# We can't set it, because a custom server home may be provided
 if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
-	echo "WARN: No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
+	if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
+		#Generate a random password
+		openssl rand -base64 64 | tr -d '\n\/\+=' > $BUILD_DIR/admin-pwd.txt
+		export cfconfing_adminPassword=`cat $BUILD_DIR/admin-pwd.txt`
+		export cfconfing_adminPasswordDefault=`cat $BUILD_DIR/admin-pwd.txt`
+		rm $BUILD_DIR/admin-pwd.txt
+	else
+		# We can't set it, because a custom server home may be provided
+		echo "WARN: No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
+	fi
 fi
 
 # If box install flag is up, do installation
