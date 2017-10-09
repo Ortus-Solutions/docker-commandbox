@@ -34,8 +34,17 @@ printf "\n\n*******************\n\n"
 # Test default environment with no additional variables
 echo "Tests that a generic server is up and running"
 
-./run.sh
+runOutput="$( ${BUILD_DIR}/run.sh )"
+
+printf "${runOutput}"
+
 ./tests/test.up.sh
+
+# Test our opinionated password setting when the default is not changed
+if [[ ${runOutput} != *"Configuration did not detect any known mechanisms for changing the default password"* ]];then
+	echo "The default password was not changed when no password was specified"
+	exit 1
+fi
 
 # cleanup
 cd $APP_DIR
@@ -65,13 +74,24 @@ echo "Tests the ability to specify a cfconfig file"
 
 echo "CFConfig file tests completed successfully"
 
+
+printf "\n\n*******************\n\n"
+
 # Rewrites Environment variables
 echo "Testing the ability to specify to turn rewrites on via an environment variable"
 
 export URL_REWRITE="true"
 
-./run.sh
+runOutput="$( ${BUILD_DIR}/run.sh )"
+
+printf "${runOutput}"
+
 ./tests/test.up.sh
+
+if [[ ${runOutput} != *"Set web.rewrites.enable = true"* ]];then
+	echo "Rewrites were not enabled from the environment variable!"
+	exit 1
+fi
 
 # cleanup
 cd $APP_DIR

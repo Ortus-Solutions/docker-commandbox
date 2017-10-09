@@ -25,7 +25,9 @@ if [[ -f server.json ]]; then
 	else
 		echo "INFO: Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
 		#Assume our admin password has been set if we are including a custom server home
-		ADMIN_PASSWORD_SET=true
+		if [[ ${SERVER_HOME_DIRECTORY} != "${HOME}/serverHome" ]]; then
+			ADMIN_PASSWORD_SET=true
+		fi
 	fi
 
 	if [[ $CFENGINE = 'null' ]] || [[ ! $CFENGINE ]]; then
@@ -91,17 +93,29 @@ if [[ $cfconfigfile ]] && [[ -f $cfconfigfile ]]; then
 
 fi
 
-# If our admin password was not provided send a warning. 
-if [[ ! $ADMIN_PASSWORD_SET ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
+#Check for a previously set password
+if [[ -f ${HOME}/.enginePwd ]]; then
+	echo "INFO: A previous random password was generated for the server administration. Marking as set."
+	ADMIN_PASSWORD_SET=true
+fi
+
+
+if [[ $ADMIN_PASSWORD_SET == false ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
 	if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
 		#Generate a random password
-		openssl rand -base64 64 | tr -d '\n\/\+=' > $BUILD_DIR/admin-pwd.txt
-		export cfconfing_adminPassword=`cat $BUILD_DIR/admin-pwd.txt`
-		export cfconfing_adminPasswordDefault=`cat $BUILD_DIR/admin-pwd.txt`
-		rm $BUILD_DIR/admin-pwd.txt
+		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
+		export cfconfing_adminPassword=`cat ${HOME}/.enginePwd`
+		export cfconfing_adminPasswordDefault=`cat ${HOME}/.enginePwd`
+		echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine password has been set to:"
+		echo `cat ${HOME}/.enginePwd`
+		# Keep this file so that restarts can test for its existence - unless we are testing or building 
+		if $IMAGE_TESTING_IN_PROGRESS; then
+			rm -f ${HOME}/.enginePwd
+		fi
 	else
+		# If we still don't have an admin password flag up, send a warning. 
 		# We can't set it, because a custom server home may be provided
-		echo "WARN: No admin password was provided in the environment variables.  If you do not have a custom server home directory in your app, your server is insecure!"
+		echo "WARN: No admin password was provided in the environment variables or you have specified a custom server home directory.  If you have not explicitly set the password, your server is insecure!"
 	fi
 fi
 
