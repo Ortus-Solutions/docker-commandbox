@@ -106,7 +106,8 @@ if [[ $ADMIN_PASSWORD_SET == false ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; th
 		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
 		export cfconfing_adminPassword=`cat ${HOME}/.enginePwd`
 		export cfconfing_adminPasswordDefault=`cat ${HOME}/.enginePwd`
-		echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine password has been set to:"
+		export cfconfing_RDSPassword=`cat ${HOME}/.enginePwd`
+		echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine administrative password has been set to:"
 		echo `cat ${HOME}/.enginePwd`
 		# Keep this file so that restarts can test for its existence - unless we are testing or building 
 		if $IMAGE_TESTING_IN_PROGRESS; then
