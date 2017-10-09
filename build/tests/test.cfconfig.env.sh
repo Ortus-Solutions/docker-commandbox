@@ -7,7 +7,7 @@ printf "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${runOutput} != *"Setting cfconfig variable adminPassword"* ]];then
+if [[ ${runOutput} != *"[adminPassword] set"* ]];then
 	echo "CFCONFIG environment variable was not detected or set"
 	exit 1
 fi
