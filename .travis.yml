@@ -15,12 +15,12 @@ env:
 
 matrix:
   allow_failures:
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee4
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee5
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016-3
-    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe11
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee4
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee5
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016-3
+    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe11
 
 services:
   - docker
