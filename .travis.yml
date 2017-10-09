@@ -13,6 +13,15 @@ env:
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016-3 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016.0.3
     - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe11 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
 
+matrix:
+  allow_failures:
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee4
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee5
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016-3
+    - env: BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe11
+
 services:
   - docker
 
