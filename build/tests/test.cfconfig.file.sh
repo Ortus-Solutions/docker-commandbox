@@ -23,7 +23,7 @@ if [[ ${runOutput} != *"Engine configuration file detected"* ]];then
 fi
 
 # Since we have a Lucee server, check that the web and server passwords were set to the same
-if [[ ${runOutput} != *"Setting Lucee web administrator password"* ]];then
+if [[ ${runOutput} != *"[adminPassword] set"* ]];then
 	echo "Default Lucee administrator password not set to web admin password"
 	exit 1
 fi
