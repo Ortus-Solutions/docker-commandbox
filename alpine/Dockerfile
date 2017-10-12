@@ -1,4 +1,4 @@
-FROM openjdk:8u121-jre-alpine
+FROM frolvlad/alpine-oraclejdk8
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
