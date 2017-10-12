@@ -32,6 +32,15 @@ cd $BUILD_DIR
 printf "\n\n*******************\n\n"
 
 # Test default environment with no additional variables
+echo "Tests that basic commandbox system commands work in this environment"
+
+./tests/test.commandbox.sh
+
+echo "CommandBox successfully tested"
+
+printf "\n\n*******************\n\n"
+
+# Test default environment with no additional variables
 echo "Tests that a generic server is up and running"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
