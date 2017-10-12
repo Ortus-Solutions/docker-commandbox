@@ -8,4 +8,4 @@ box install CommandBox-Chuck-Norris
 box uninstall Commandbox-Chuck-Norris
 
 # cleanup
-rm -f $APP_DIR/modules
+rm -rf $APP_DIR/modules
