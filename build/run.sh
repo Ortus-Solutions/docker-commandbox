@@ -131,7 +131,7 @@ if [[ $HEADLESS ]] || [[ $headless ]]; then
 fi
 
 # If Server URL Rewrites are set, then activate it 
-if [[ $URL_REWRITES ]] || [[ $url_rewrites ]] || [[ -z "$URL_REWRITES" ]]; then
+if [[ $URL_REWRITES ]] || [[ $url_rewrites ]]; then
 	$BUILD_DIR/util/env-rewrites.sh
 fi
 
