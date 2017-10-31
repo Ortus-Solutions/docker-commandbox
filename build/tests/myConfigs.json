@@ -1,0 +1,3 @@
+{
+    "adminPassword": "${TEST_DOCKER_SECRET}"
+}
