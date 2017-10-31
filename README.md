@@ -82,37 +82,6 @@ The CommandBox Docker image supports the use of environmental variables for the 
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
 
-Docker Secrets
-==============
-
-[Docker secrets](https://docs.docker.com/engine/swarm/secrets/) can use two storage mechanisms:
-
-* Secret values stored as files on the host (non-swarm mode).
-* `docker secret`-managed key/value pairs (swarm mode).
-
-To use secrets as variables in this image, a placeholder is specified (e.g., `{{DOCKER-SECRET:test_docker_secret}}`) as the variable's value. At run-time, the environment variable's value is replaced with the secret.
-
-Example with a secret using host file storage:
-
-```yml
-version: '3.1'
-
-services:
-
-  sut:
-    environment:
-      - IMAGE_TESTING_IN_PROGRESS=true
-      #- ENV_SECRETS_DEBUG # uncomment to debug the placeholder replacements
-      # this is a placeholder that will be replaced at runtime with the secret value
-      - TEST_DOCKER_SECRET={{DOCKER-SECRET:test_docker_secret}}
-    ...
-    
-secrets:
-  test_docker_secret:
-    # this is the file containing the secret value
-    file: ./build/tests/secrets/test_docker_secret
-```
-
 About CommandBox
 ================
 

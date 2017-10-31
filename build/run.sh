@@ -2,8 +2,6 @@
 set -e
 cd $APP_DIR
 
-. $BUILD_DIR/util/env-secrets-expand.sh
-
 SECONDS=0
 
 # CFConfig Available Password Keys
