@@ -10,7 +10,7 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest`, `:3.7.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
+* `:latest`, `:3.8.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:ubuntu-Lucee45-snapshot`)
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/alpine/Dockerfile)) - Alpine Linux version - approximately 70MB lighter _++_
@@ -69,14 +69,16 @@ The CommandBox Docker image supports the use of environmental variables for the 
 
 ##### Server Configuration Variables
 
-* `$CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container
-* `$cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
-* `$CFCONFIG` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines
-* `$APP_DIR` - Application directory (web root). By default, this is `/app`.
-* `$SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
-* `$HEADLESS` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure no admin access deployment.
-* `$BOX_INSTALL` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
-* `$URL_REWRITES` - When set to true, this will make sure the CommandBox default URL rewrites are enabled on the server. This setting is `true` by default.
+The following environment variables may be provided to modify your runtime server configuration.  Please note that environment variables are case sensitive and, while some lower/upper case aliases are accounted for, you should use consistent casing in order for these variables to take effect.
+
+* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
+* `APP_DIR` - Application directory (web root). By default, this is `/app`.  If you are deploying an application with mappings outside of the root, you would want to provide this environment variable to point to the webroot ( e.g. `/app/wwwroot` )
+* `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
+* `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
+* `cfconfigfile` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines.  _Note: The value `CFCONFIG` is aliased to this parameter, but is deprecated._
+* `HEADLESS`/`headless` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure deployment with no administrator access.
+* `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
+* `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
 
 ##### Docker Runtime Variables
 
@@ -112,6 +114,56 @@ secrets:
     # this is the file containing the secret value
     file: ./build/tests/secrets/test_docker_secret
 ```
+
+Deployment
+==========
+
+Because, with the exception of the CommandBox default engine of Lucee 4.5, the CFML server engines are downloaded and installed at container runtime, it is recommended that builds for production use employ a custom `Dockerfile` for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
+
+For a basic example, the following will suffice:
+
+```
+FROM ortussolutions/commandbox
+
+# Copy application files to root
+COPY ./ ${APP_DIR}/
+
+# Warm up our server
+RUN ${BUILD_DIR}/util/warmup-server.sh
+```
+
+In many cases, you will have tier-specific builds, with custom configuration options.  The following employs a `build` directory, which includes additional configuration files for tier-based deployments:
+
+```
+FROM ortussolutions/commandbox
+
+ARG CI_ENVIRONMENT_NAME
+
+# Copy application files to root
+COPY ./ ${APP_DIR}/
+
+# Copy tier-only files over
+COPY ./build/env/${CI_ENVIRONMENT_NAME}/tier/ ${APP_DIR}/
+
+# Install our box.json dependencies
+RUN cd ${APP_DIR} && box install
+
+# Warm up our server
+RUN ${APP_DIR}/build/env/setup-env.sh
+
+RUN rm -rf ${APP_DIR}/build
+
+# Set our healthcheck to a non-framework route - in this case we only need to know that CFML pages are being served
+ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/config/Routes.cfm"
+
+# Set our healthcheck action to allow invalid cert responses 
+HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --insecure --fail ${HEALTHCHECK_URI} || exit 1
+
+```
+
+In the above case, the `setup-env.sh` file performs the server warmup and validation, where in the former case, the built-in `warmup-server.sh` file in build directory accomplishes the task.
+
+Once your `Dockerfile` has downloaded and &ldquo;warmed up&rdquo; the server, you can run the generated image directly, or publish it to a [private registry](https://docs.docker.com/registry/) 
 
 About CommandBox
 ================
