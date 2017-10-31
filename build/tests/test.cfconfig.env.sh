@@ -3,7 +3,7 @@ cd $APP_DIR
 echo "Starting server with cfconfig environment variable set"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
-printf "${runOutput}"
+printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 

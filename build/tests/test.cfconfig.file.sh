@@ -13,7 +13,7 @@ echo "Starting server with cfconfig file variable set"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}"
+printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
