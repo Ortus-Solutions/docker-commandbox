@@ -151,14 +151,11 @@ RUN cd ${APP_DIR} && box install
 # Warm up our server
 RUN ${APP_DIR}/build/env/setup-env.sh
 
+# Remove our build directory from our deployable image
 RUN rm -rf ${APP_DIR}/build
 
 # Set our healthcheck to a non-framework route - in this case we only need to know that CFML pages are being served
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/config/Routes.cfm"
-
-# Set our healthcheck action to allow invalid cert responses 
-HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --insecure --fail ${HEALTHCHECK_URI} || exit 1
-
 ```
 
 In the above case, the `setup-env.sh` file performs the server warmup and validation, where in the former case, the built-in `warmup-server.sh` file in build directory accomplishes the task.
