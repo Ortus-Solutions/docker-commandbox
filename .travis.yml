@@ -27,6 +27,7 @@ services:
 
 script:
   - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
+  - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
 deploy:
   skip_cleanup: true

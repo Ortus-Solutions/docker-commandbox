@@ -87,9 +87,9 @@ echo "CFConfig file tests completed successfully"
 printf "\n\n*******************\n\n"
 
 # Rewrites Environment variables
-echo "Testing the ability to specify to turn rewrites on via an environment variable"
+echo "Testing the ability to specify to turn rewrites off via an environment variable"
 
-export URL_REWRITE="true"
+export URL_REWRITES=true
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
@@ -103,11 +103,9 @@ if [[ ${runOutput} != *"Set web.rewrites.enable = true"* ]];then
 fi
 
 # cleanup
+unset URL_REWRITES
 cd $APP_DIR
 box server stop
-rm -f $APP_DIR/server.json
-
-unset URL_REWRITE
 
 echo "Rewrite environment tests completed successfully"
 

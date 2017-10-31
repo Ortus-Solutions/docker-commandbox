@@ -32,4 +32,3 @@ fi
 # cleanup
 unset CFCONFIG
 box server stop
-rm -f $APP_DIR/*.json

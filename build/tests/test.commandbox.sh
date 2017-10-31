@@ -6,6 +6,3 @@ box install cbi18n
 # Test the ability to install and uninstall a commandbox module
 box install CommandBox-Chuck-Norris
 box uninstall Commandbox-Chuck-Norris
-
-# cleanup
-rm -rf $APP_DIR/modules
