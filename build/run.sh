@@ -140,8 +140,7 @@ fi
 
 # We need to do this all on one line because escaped line breaks 
 # aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
-box server set app.cfengine=${CFENGINE} app.serverHomeDirectory=${SERVER_HOME_DIRECTORY} web.host=0.0.0.0 openbrowser=false web.http.port=${PORT} web.ssl.port=${SSL_PORT}
-box server start
+box server start cfengine=${CFENGINE} serverHomeDirectory=${SERVER_HOME_DIRECTORY} host=0.0.0.0 openbrowser=false port=${PORT} sslPort=${SSL_PORT} --noSaveSettings
 
 # Sleep until server is ready for traffic
 echo "INFO: Waiting for server to become available..."
