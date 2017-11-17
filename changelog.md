@@ -3,6 +3,10 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 3.9.0/2.1.2
+- Updates to CommandBox v3.9.0
+- Fixes server setting argument name
+
 
 ## 3.8.0/2.1.1
 - Updates CMD to not persist container runtime settings to server.json
