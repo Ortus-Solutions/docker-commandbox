@@ -3,6 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 3.9.1/2.1.3
+- Fixes a regression where `SSL_PORT` environment variables were being ignored
+
 ## 3.9.0/2.1.2
 - Updates to CommandBox v3.9.0
 - Fixes server setting argument name
