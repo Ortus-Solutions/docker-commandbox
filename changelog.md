@@ -3,7 +3,7 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
-## 3.9.2/2.1.3
+## 3.9.2/2.1.4
 
 - Updates to Commandbox v3.9.2
 - Changes Docker secrets placeholder for bash compatibility
