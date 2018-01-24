@@ -15,11 +15,11 @@ env_secret_debug()
 #    ie: env_secret_expand 'XYZ_DB_PASSWORD'
 # (will check for "$XYZ_DB_PASSWORD" variable value for a placeholder that defines the
 #  name of the docker secret to use instead of the original value. For example:
-# XYZ_DB_PASSWORD={{DOCKER-SECRET:my-db.secret}}
+# XYZ_DB_PASSWORD=<<SECRET:my-db.secret>>
 env_secret_expand() {
     var="$1"
     eval val=\$$var
-    if secret_name=$(expr match "$val" "{{DOCKER-SECRET:\([^}]\+\)}}$"); then
+    if secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$"); then
         secret="${ENV_SECRETS_DIR}/${secret_name}"
         env_secret_debug "Secret file for $var: $secret"
         if [ -f "$secret" ]; then

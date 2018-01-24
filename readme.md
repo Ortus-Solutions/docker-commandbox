@@ -92,7 +92,7 @@ Docker Secrets
 * Secret values stored as files on the host (non-swarm mode).
 * `docker secret`-managed key/value pairs (swarm mode).
 
-To use secrets as variables in this image, a placeholder is specified (e.g., `{{DOCKER-SECRET:test_docker_secret}}`) as the variable's value. At run-time, the environment variable's value is replaced with the secret.
+To use secrets as variables in this image, a placeholder is specified (e.g., `<<SECRET:test_docker_secret>>`) as the variable's value. At run-time, the environment variable's value is replaced with the secret.
 
 Example with a secret using host file storage:
 
@@ -106,7 +106,7 @@ services:
       - IMAGE_TESTING_IN_PROGRESS=true
       #- ENV_SECRETS_DEBUG # uncomment to debug the placeholder replacements
       # this is a placeholder that will be replaced at runtime with the secret value
-      - TEST_DOCKER_SECRET={{DOCKER-SECRET:test_docker_secret}}
+      - TEST_DOCKER_SECRET=<<SECRET:test_docker_secret>>
     ...
     
 secrets:
