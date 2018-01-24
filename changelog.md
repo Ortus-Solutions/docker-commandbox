@@ -3,12 +3,18 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 3.9.2/2.1.3
+
+- Updates to Commandbox v3.9.2
+- Changes Docker secrets placeholder for bash compatibility
+
 ## 3.9.0/2.1.2
+
 - Updates to CommandBox v3.9.0
 - Fixes server setting argument name
 
-
 ## 3.8.0/2.1.1
+
 - Updates CMD to not persist container runtime settings to server.json
 
 ## 3.8.0/2.1.0

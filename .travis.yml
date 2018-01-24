@@ -2,8 +2,8 @@ language: python
 
 env:
   global:
-    - IMAGE_VERSION=2.1.1
-    - COMMANDBOX_VERSION=3.9.0
+    - IMAGE_VERSION=2.1.3
+    - COMMANDBOX_VERSION=3.9.2
   matrix:
     - BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
     - BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
