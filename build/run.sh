@@ -5,7 +5,7 @@ cd $APP_DIR
 SECONDS=0
 
 # Handle secret expansion before any other environmental variables are processed
-$BUILD_DIR/util/env-secrets-expand.sh
+. $BUILD_DIR/util/env-secrets-expand.sh
 
 # CFConfig Available Password Keys
 CFCONFIG_PASSWORD_KEYS=( "adminPassword" "adminPasswordDefault" "hspw" "pw" "defaultHspw" "defaultPw" "ACF11Password" )
