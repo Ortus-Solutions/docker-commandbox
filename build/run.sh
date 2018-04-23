@@ -109,7 +109,8 @@ if [[ $ADMIN_PASSWORD_SET == false ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; th
 		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
 		export cfconfig_adminPassword=`cat ${HOME}/.enginePwd`
 		export cfconfig_adminPasswordDefault=`cat ${HOME}/.enginePwd`
-		export cfconfig_RDSPassword=`cat ${HOME}/.enginePwd`
+		export cfconfig_adminRDSPassword=`cat ${HOME}/.enginePwd`
+		export cfconfig_ACF11RDSPassword=`cat ${HOME}/.enginePwd`
 		echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine administrative password has been set to:"
 		echo `cat ${HOME}/.enginePwd`
 		# Keep this file so that restarts can test for its existence - unless we are testing or building 
