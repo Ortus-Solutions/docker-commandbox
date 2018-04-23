@@ -43,7 +43,7 @@ fi
 
 # Default values for engine and home directory - so we can use cfconfig 
 export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
-export CFENGINE="${CFENGINE:=lucee@4.5}"
+export CFENGINE="${CFENGINE:=lucee@5}"
 FULL_VERSION=${CFENGINE#*@*}
 export ENGINE_VERSION=${FULL_VERSION%%.*}
 export ENGINE_VENDOR=${CFENGINE%%@*}
@@ -107,9 +107,9 @@ if [[ $ADMIN_PASSWORD_SET == false ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; th
 	if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
 		#Generate a random password
 		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
-		export cfconfing_adminPassword=`cat ${HOME}/.enginePwd`
-		export cfconfing_adminPasswordDefault=`cat ${HOME}/.enginePwd`
-		export cfconfing_RDSPassword=`cat ${HOME}/.enginePwd`
+		export cfconfig_adminPassword=`cat ${HOME}/.enginePwd`
+		export cfconfig_adminPasswordDefault=`cat ${HOME}/.enginePwd`
+		export cfconfig_RDSPassword=`cat ${HOME}/.enginePwd`
 		echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine administrative password has been set to:"
 		echo `cat ${HOME}/.enginePwd`
 		# Keep this file so that restarts can test for its existence - unless we are testing or building 
