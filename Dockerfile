@@ -1,4 +1,4 @@
-FROM openjdk:8u121-jre
+FROM openjdk:8-jdk-slim
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -9,7 +9,7 @@ ENV HOME /root
 
 # Basic Dependencies
 RUN apt-get update
-RUN apt-get install --assume-yes jq
+RUN apt-get install --assume-yes jq curl apt-utils
 
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs
