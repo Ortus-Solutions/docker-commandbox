@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 4.0.0/2.2.0
+- Ubuntu base version to use OpenJDK Slim
+- Updates to CommandBox v4.0.0
 
 ## 3.9.2/2.1.3
 

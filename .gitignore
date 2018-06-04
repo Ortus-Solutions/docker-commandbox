@@ -1,3 +1,5 @@
 build/resources
 test/*.json
 /.project
+/*.log
+/.vscode
