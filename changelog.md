@@ -5,6 +5,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 ## 4.0.0/2.2.0
 - Ubuntu base version to use OpenJDK Slim
 - Updates to CommandBox v4.0.0
+- Changes default CommandBox server engine to Lucee 5
 
 ## 3.9.2/2.1.4
 
