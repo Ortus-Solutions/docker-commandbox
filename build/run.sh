@@ -70,6 +70,9 @@ fi
 #Check for cfconfig specific environment variables
 while IFS='=' read -r name value ; do
 	if [[ $name == *'cfconfig_'* ]]; then
+		settingName=${name//cfconfig_}
+		echo "$settingName cfconfig setting found"
+		box cfconfig set ${settingName}=${value}
 		#if our setting is for the admin password, flag it as set
 		if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
 			ADMIN_PASSWORD_SET=true
