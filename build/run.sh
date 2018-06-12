@@ -22,6 +22,10 @@ if [[ -f server.json ]]; then
 		CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 	fi
 
+	if [[ ! $HEAP_SIZE ]]; then	
+		HEAP_SIZE=$(cat server.json | jq -r '.jvm.heapSize')
+	fi
+
 	# ensure our string nulls are true nulls
 	if [[ ! $SERVER_HOME_DIRECTORY ]] ||  [[ $SERVER_HOME_DIRECTORY = 'null' ]] ; then
 		SERVER_HOME_DIRECTORY=''
@@ -48,6 +52,10 @@ FULL_VERSION=${CFENGINE#*@*}
 export ENGINE_VERSION=${FULL_VERSION%%.*}
 export ENGINE_VENDOR=${CFENGINE%%@*}
 
+# Default Heap Size which matches the CommandBox default
+export HEAP_SIZE="${HEAP_SIZE:=512}"
+echo "INFO: The JVM heap size for this container is set to ${HEAP_SIZE}"
+
 echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
 echo "INFO: CF Engine set to ${CFENGINE}"
 echo "INFO: Engine vendor: ${ENGINE_VENDOR}"
@@ -72,7 +80,7 @@ while IFS='=' read -r name value ; do
 	if [[ $name == *'cfconfig_'* ]]; then
 		settingName=${name//cfconfig_}
 		echo "$settingName cfconfig setting found"
-		box cfconfig set ${settingName}=${value}
+		box cfconfig set ${settingName}=${value} to=$SERVER_HOME_DIRECTORY toFormat=$CFCONFIG_FORMAT
 		#if our setting is for the admin password, flag it as set
 		if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
 			ADMIN_PASSWORD_SET=true
@@ -144,7 +152,7 @@ fi
 
 # We need to do this all on one line because escaped line breaks 
 # aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
-box server start cfengine=${CFENGINE} serverHomeDirectory=${SERVER_HOME_DIRECTORY} host=0.0.0.0 openbrowser=false port=${PORT} sslPort=${SSL_PORT} saveSettings=false
+box server start cfengine=${CFENGINE} serverHomeDirectory=${SERVER_HOME_DIRECTORY} host=0.0.0.0 openbrowser=false port=${PORT} sslPort=${SSL_PORT} heapSize=${HEAP_SIZE} saveSettings=false
 
 # Sleep until server is ready for traffic
 echo "INFO: Waiting for server to become available..."

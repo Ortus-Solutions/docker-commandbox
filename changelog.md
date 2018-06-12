@@ -2,6 +2,10 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 4.0.0/2.2.1
+- Adds ability to specify `HEAP_SIZE` environment variable
+- Fixes an issue with `cfconfig_` prefixed environment variables failing
+
 ## 4.0.0/2.2.0
 - Ubuntu base version to use OpenJDK Slim
 - Updates to CommandBox v4.0.0
