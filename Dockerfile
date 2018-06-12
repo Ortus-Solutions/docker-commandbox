@@ -11,16 +11,13 @@ ENV HOME /root
 RUN apt-get update
 RUN apt-get install --assume-yes jq curl apt-utils
 
-# Symlink our bin directory
-RUN ln -s /usr/bin /bin
-
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
 # BIN_DIR = Where the box binary goes
-ENV BIN_DIR /usr/bin
+ENV BIN_DIR /usr/local/bin
 WORKDIR $BIN_DIR
 
 # BUILD_DIR = WHERE runtime scripts go
