@@ -2,6 +2,8 @@ cd $APP_DIR
 
 echo "Starting server with cfconfig environment variable set"
 
+export cfconfig_adminPassword=1am53cur3
+
 runOutput="$( ${BUILD_DIR}/run.sh )"
 printf "${runOutput}\n"
 
@@ -13,4 +15,5 @@ if [[ ${runOutput} != *"[adminPassword] set"* ]];then
 fi
 
 # cleanup
+unset cfconfig_adminPassword
 box server stop
