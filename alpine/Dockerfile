@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8
+FROM openjdk:8-alpine
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -9,7 +9,7 @@ ENV HOME /root
 
 # Basic Dependencies
 RUN apk update
-RUN apk add curl jq bash
+RUN apk add curl jq bash openssl
 
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs
