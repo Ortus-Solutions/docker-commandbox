@@ -2,6 +2,10 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 4.0.0/2.2.2
+- Changes alpine image to use `openjdk:8-alpine`
+- Changes image tag in Dockerfile for base Debian image to match official tags on Docker Hub
+
 ## 4.0.0/2.2.1
 - Adds ability to specify `HEAP_SIZE` environment variable
 - Fixes an issue with `cfconfig_` prefixed environment variables failing
