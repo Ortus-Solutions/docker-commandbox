@@ -22,9 +22,10 @@ if [[ -f server.json ]]; then
 		CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 	fi
 
-	if [[ ! $HEAP_SIZE ]]; then	
-		HEAP_SIZE=$(cat server.json | jq -r '.jvm.heapSize')
-	fi
+	# Removing support for this parsing temporarily due to environment variables not being able to parsed accurately
+	# if [[ ! $HEAP_SIZE ]]; then	
+	# 	HEAP_SIZE=$(cat server.json | jq -r '.jvm.heapSize')
+	# fi
 
 	# ensure our string nulls are true nulls
 	if [[ ! $SERVER_HOME_DIRECTORY ]] ||  [[ $SERVER_HOME_DIRECTORY = 'null' ]] ; then
@@ -53,8 +54,8 @@ export ENGINE_VERSION=${FULL_VERSION%%.*}
 export ENGINE_VENDOR=${CFENGINE%%@*}
 
 # Default Heap Size which matches the CommandBox default
-export HEAP_SIZE="${HEAP_SIZE:=512}"
-echo "INFO: The JVM heap size for this container is set to ${HEAP_SIZE}"
+# export HEAP_SIZE="${HEAP_SIZE:=512}"
+# echo "INFO: The JVM heap size for this container is set to ${HEAP_SIZE}"
 
 echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
 echo "INFO: CF Engine set to ${CFENGINE}"
@@ -152,7 +153,7 @@ fi
 
 # We need to do this all on one line because escaped line breaks 
 # aren't picked up correctly by CommandBox on this base image ( JIRA:COMMANDBOX-598 )
-box server start cfengine=${CFENGINE} serverHomeDirectory=${SERVER_HOME_DIRECTORY} host=0.0.0.0 openbrowser=false port=${PORT} sslPort=${SSL_PORT} heapSize=${HEAP_SIZE} saveSettings=false
+box server start cfengine=${CFENGINE} serverHomeDirectory=${SERVER_HOME_DIRECTORY} host=0.0.0.0 openbrowser=false port=${PORT} sslPort=${SSL_PORT} saveSettings=false
 
 # Sleep until server is ready for traffic
 echo "INFO: Waiting for server to become available..."
