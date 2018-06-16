@@ -10,13 +10,12 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest`, `:3.9.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
+* `:latest`, `:4.0.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
 * `:snapshot` - Development/BE version
-* `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:ubuntu-Lucee45-snapshot`)
+* `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/alpine/Dockerfile)) - Alpine Linux version - approximately 70MB lighter _++_
 * `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start - `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee4)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee5)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe11)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe2016))
-
-_++_ - *Note: Dependency installation using the `BOX_INSTALL` flag is currently not supported in Alpines images due to a [resolved, but as yet unpublished issue with a JRE library](https://github.com/fusesource/jansi/issues/58).*
+`:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee4)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee5)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe11)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe2016))
 
 
 Description 
@@ -27,7 +26,7 @@ CommandBox allows you to configure your entire CFML engine environment from a si
 Current CFML engines supported are:
 
 - Lucee:  4+ & 5+
-- Adobe ColdFusion 10+
+- Adobe ColdFusion 11+
 
 You may also specify a custom WAR for deployment, using the `server.json` configuration.
 
@@ -54,7 +53,29 @@ By default the process ports of the container are `8080` (insecure) and `8443` (
 docker run -p 8080:8080 -p 8443:8443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
 ```
 
-To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox) as the baseline to begin your customizations.
+To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox) as a reference to begin your customizations.  You can extend any of the base images and add your own additional functionality or modules.  For example, to install the [Ortus Couchbase extension for Lucee](https://www.ortussolutions.com/products/couchbase-lucee):
+
+```
+FROM ortussolutions/commandbox:lucee5
+
+ARG COUCHBASE_EMAIL
+ARG COUCHBASE_LICENSE_KEY
+ARG COUCHBASE_ACTIVATION_CODE
+
+# Copy Couchbase Extension into place for install
+ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex /root/serverHome/WEB-INF/lucee-server/deploy/couchbase-cache.lex
+
+# Seed Couchbase Extension License
+ENV COUCHBASE_LICENSE_FILE /root/serverHome/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
+RUN touch "${CI_PROJECT_DIR}/build/license.properties" \
+  && printf "email=${COUCHBASE_EMAIL}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "licenseKey=${COUCHBASE_LICENSE_KEY}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "activationCode=${COUCHBASE_ACTIVATION_CODE}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "serverType=Production\n" >> ${COUCHBASE_LICENSE_FILE}
+
+# WARM UP THE SERVER WITH THE NEW EXTENSION
+RUN ${BUILD_DIR}/util/warmup-server.sh
+```
 
 Environment Variables
 =====================
