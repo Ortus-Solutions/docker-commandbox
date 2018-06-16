@@ -1,7 +1,7 @@
 Official CommandBox Dockerfiles [![Build Status](https://travis-ci.org/Ortus-Solutions/docker-commandbox.svg)](https://travis-ci.org/Ortus-Solutions/docker-commandbox)
 =========================
 
-This is the repository for official Dockerfiles for Commandbox
+This is the repository for official Dockerfiles for Commandbox images
 
 ## How it works
 
@@ -141,24 +141,21 @@ secrets:
 Deployment
 ==========
 
-Because, with the exception of the CommandBox default engine of Lucee 4.5, the CFML server engines are downloaded and installed at container runtime, it is recommended that builds for production use employ a custom `Dockerfile` for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
+Because, with the exception of the CommandBox default engine of Lucee 5, the CFML server engines are downloaded and installed at container runtime. This can result in significant startup time increases ( even with Lucee 5 already downloaded in the base image, there is a time penalty for a "cold start" ). It is recommended that builds for production use employ a the engine-specific variations for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
 
 For a basic example, the following will suffice:
 
 ```
-FROM ortussolutions/commandbox
+FROM ortussolutions/commandbox:lucee5
 
 # Copy application files to root
 COPY ./ ${APP_DIR}/
-
-# Warm up our server
-RUN ${BUILD_DIR}/util/warmup-server.sh
 ```
 
 In many cases, you will have tier-specific builds, with custom configuration options.  The following employs a `build` directory, which includes additional configuration files for tier-based deployments:
 
 ```
-FROM ortussolutions/commandbox
+FROM ortussolutions/commandbox:lucee5
 
 ARG CI_ENVIRONMENT_NAME
 
@@ -171,7 +168,7 @@ COPY ./build/env/${CI_ENVIRONMENT_NAME}/tier/ ${APP_DIR}/
 # Install our box.json dependencies
 RUN cd ${APP_DIR} && box install
 
-# Warm up our server
+# Warm up and validate our server
 RUN ${APP_DIR}/build/env/setup-env.sh
 
 # Remove our build directory from our deployable image
@@ -181,9 +178,9 @@ RUN rm -rf ${APP_DIR}/build
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/config/Routes.cfm"
 ```
 
-In the above case, the `setup-env.sh` file performs the server warmup and validation, where in the former case, the built-in `warmup-server.sh` file in build directory accomplishes the task.
+In the above case, the `setup-env.sh` file might perform an additional server warmup and validation, where in the former case, the server was previously warmed up when the image was built.
 
-Once your `Dockerfile` has downloaded and &ldquo;warmed up&rdquo; the server, you can run the generated image directly, or publish it to a [private registry](https://docs.docker.com/registry/) 
+Once your customized `Dockerfile` has has been built, you can run the generated image directly, or publish it to a [private registry](https://docs.docker.com/registry/) 
 
 About CommandBox
 ================
