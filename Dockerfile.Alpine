@@ -8,8 +8,7 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 ENV HOME /root
 
 # Basic Dependencies
-RUN apk update
-RUN apk add curl jq bash openssl
+RUN apk update && apk add curl jq bash openssl && rm -f /var/cache/apk/*
 
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs

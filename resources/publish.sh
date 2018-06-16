@@ -9,7 +9,7 @@ echo "Dockerfile: $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}"
 # Push Version into Images: $IMAGE_VERSION IS SET IN TRAVIS
 sed -i -e "s/@version@/$IMAGE_VERSION/g" $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE}
 
-# Build Base Image
+# Build our deployment image fresh so that no artifacts remain
 docker build --no-cache -t ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} -f $TRAVIS_BUILD_DIR/${BUILD_IMAGE_DOCKERFILE} $TRAVIS_BUILD_DIR/
 echo "INFO: Docker image successfully built"
 
