@@ -10,10 +10,11 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest`, `:4.0.0` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
+* `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
+* `:4.0.0` - Stable image tagged with the version of CommandBox used to build the image ( `:3.9.0`, `:3.9.1`, `:3.9.2` )
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
-* `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/alpine/Dockerfile)) - Alpine Linux version - approximately 70MB lighter _++_
+* `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/alpine/Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
 * `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee4)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee5)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe11)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe2016))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
 `:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee4)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Lucee5)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe11)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/engines/Dockerfile.Adobe2016))
