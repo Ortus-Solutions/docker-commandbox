@@ -2,6 +2,8 @@
 # Set any error to exit non-zero
 set -e
 
+export DEBUG=true
+
 # Test that expected variables and binaries are in place
 if [[ ! $BUILD_DIR ]]; then
 	echo "BUILD_DIR environment variable not defined."

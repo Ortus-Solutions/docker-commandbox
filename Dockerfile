@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM openjdk:8
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
