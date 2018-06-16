@@ -8,8 +8,7 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 ENV HOME /root
 
 # Basic Dependencies
-RUN apt-get update
-RUN apt-get install --assume-yes jq curl apt-utils
+RUN apt-get update && apt-get install --assume-yes jq curl apt-utils && apt-get clean
 
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs

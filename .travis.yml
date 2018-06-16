@@ -2,28 +2,27 @@ language: python
 
 env:
   global:
-    - IMAGE_VERSION=2.2.3
+    - IMAGE_VERSION=2.2.4
     - COMMANDBOX_VERSION=4.0.0
   matrix:
-    - BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
-    - BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee4 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Lucee5 BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe2016 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
-    - BUILD_IMAGE_DOCKERFILE=engines/Dockerfile.Adobe11 BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
-
-matrix:
-  allow_failures:
-    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile
-    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee4
-    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Lucee5
-    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe2016
-    - env: TRAVIS_BRANCH=development BUILD_IMAGE_DOCKERFILE=alpine/Dockerfile.Adobe11
+    # Debian Builds
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Base BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Lucee4 BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Lucee5 BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Adobe2016 BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Adobe11 BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
+    # Alpine builds
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Base.Alpine BASE_BUILD_FILE=Dockerfile.Alpine BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Lucee4 BASE_BUILD_FILE=Dockerfile.Alpine BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Lucee5 BASE_BUILD_FILE=Dockerfile.Alpine BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Adobe2016 BASE_BUILD_FILE=Dockerfile.Alpine BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Adobe11 BASE_BUILD_FILE=Dockerfile.Alpine BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
 
 services:
   - docker
 
 script:
+  - docker build --no-cache -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
   - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
   - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
