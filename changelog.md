@@ -3,18 +3,28 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 4.0.0/2.2.4
+
+- Revises Travis build structure to better support concurrent image builds
+- Adds warmed-up engine builds for Alpine images
+- Additional optimizations to reduce image size
+
 ## 4.0.0/2.2.3
+
 - Temporarily removes support for `HEAP_SIZE` environment variable due to parse failures with env variables in `server.json`
 
 ## 4.0.0/2.2.2
+
 - Changes alpine image to use `openjdk:8-alpine`
 - Changes image tag in Dockerfile for base Debian image to match official tags on Docker Hub
 
 ## 4.0.0/2.2.1
+
 - Adds ability to specify `HEAP_SIZE` environment variable
 - Fixes an issue with `cfconfig_` prefixed environment variables failing
 
 ## 4.0.0/2.2.0
+
 - Ubuntu base version to use OpenJDK Slim
 - Updates to CommandBox v4.0.0
 - Changes default CommandBox server engine to Lucee 5
