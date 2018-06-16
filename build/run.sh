@@ -76,12 +76,10 @@ else
 fi
 			
 
-#Check for cfconfig specific environment variables
+#Check for cfconfig specific environment variables - the CommandBox binary will handle these on start
 while IFS='=' read -r name value ; do
 	if [[ $name == *'cfconfig_'* ]]; then
 		settingName=${name//cfconfig_}
-		echo "$settingName cfconfig setting found"
-		box cfconfig set ${settingName}=${value} to=$SERVER_HOME_DIRECTORY toFormat=$CFCONFIG_FORMAT
 		#if our setting is for the admin password, flag it as set
 		if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
 			ADMIN_PASSWORD_SET=true
