@@ -24,8 +24,5 @@ rm -rf /root/.CommandBox/logs/*
 rm -rf /root/.CommandBox/cfml/system/mdCache/*
 # Remove the felix cache
 rm -rf /root/.CommandBox/engine/cfml/cli/lucee-server/felix-cache/*
-# Remove jGit jars as the commands have been removed
-rm -rf /root/.CommandBox/lib/org.eclipse.jgit-*.jar
-rm -rf /root/.CommandBox/lib/ortus-jgit.jar
 # Clear downloaded artificacts
 box artifacts clean --force
