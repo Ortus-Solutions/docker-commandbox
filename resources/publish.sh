@@ -38,6 +38,9 @@ fi
 echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}"
 docker push ${BUILD_IMAGE_TAG}
 
+docker tag ${BUILD_IMAGE_TAG} ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
+docker push ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
+
 
 if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker push ${BUILD_IMAGE_TAG}:latest
