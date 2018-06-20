@@ -4,6 +4,8 @@ LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
+ARG COMMANDBOX_VERSION
+
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
