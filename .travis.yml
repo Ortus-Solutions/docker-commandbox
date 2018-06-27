@@ -2,7 +2,7 @@ language: python
 
 env:
   global:
-    - IMAGE_VERSION=2.2.4
+    - IMAGE_VERSION=2.2.5
     - COMMANDBOX_VERSION=4.1.0
   matrix:
     # Debian Builds

@@ -3,6 +3,10 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 4.1.0/2.2.5
+- Updates CommandBox binary to v4.1.0
+
+
 ## 4.0.0/2.2.4
 
 - Revises Travis build structure to better support concurrent image builds
