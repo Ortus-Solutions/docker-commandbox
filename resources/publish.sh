@@ -42,11 +42,11 @@ docker push ${BUILD_IMAGE_TAG}
 if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
     docker push ${BUILD_IMAGE_TAG}:latest
     docker push ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
-fi
-
-if [[ $TRAVIS_BRANCH == 'master' ]]; then
+elif [[ $TRAVIS_BRANCH == 'master' ]]; then
 	docker tag ${BUILD_IMAGE_TAG} ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
 	docker push ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
 fi
+
+
 
 echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
