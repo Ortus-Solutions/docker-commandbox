@@ -2,8 +2,8 @@ language: python
 
 env:
   global:
-    - IMAGE_VERSION=2.2.5
-    - COMMANDBOX_VERSION=4.1.0
+    - IMAGE_VERSION=2.2.6
+    - COMMANDBOX_VERSION=4.2.0
   matrix:
     # Debian Builds
     - BUILD_IMAGE_DOCKERFILE=builds/Dockerfile.Base BASE_BUILD_FILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox

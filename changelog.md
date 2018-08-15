@@ -3,6 +3,10 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+
+## 4.2.0/2.2.6
+- Updates CommandBox binary to v4.2.0
+
 ## 4.1.0/2.2.5
 - Updates CommandBox binary to v4.1.0
 
