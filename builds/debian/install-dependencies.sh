@@ -20,5 +20,7 @@ apt-get update && apt-get \install --assume-yes \
 
 chmod +x /usr/local/bin/docker-java-home
 
-# Cleanup
-apt-get clean
+# Cleanup before the layer is committed
+apt-get clean autoclean
+apt-get autoremove -y
+rm -rf /var/lib/apt/lists/*

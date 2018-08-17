@@ -7,12 +7,10 @@ rm -rf $HOME/.CommandBox/logs/*
 rm -rf $HOME/.CommandBox/cfml/system/mdCache/*
 # Remove the felix cache
 rm -rf $HOME/.CommandBox/engine/cfml/cli/lucee-server/felix-cache/*
-# Clear downloaded artificacts
+# Clear downloaded artifacts
 box artifacts clean --force
 
 # Cleanup
-apt-get clean autoclean
-apt-get autoremove -y
 # More unecessary files
 rm -rf /var/lib/{apt,dpkg,cache,log}/
 # Remove Unecessary OS FIles

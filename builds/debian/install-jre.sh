@@ -24,5 +24,6 @@ set -ex; \
 
 /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-# Cleanup
-apt-get clean
+# Cleanup before the layer is committed
+apt-get clean autoclean
+apt-get autoremove -y
