@@ -3,6 +3,9 @@ echo "Starting up container in test mode"
 export IMAGE_TESTING_IN_PROGRESS=true
 export cfconfig_adminPassword=commandbox
 
+# Remove any previous engine artifacts
+rm -rf $HOME/.CommandBox/server/*
+
 # Run our normal build script, which will warm up our server and add it to the image
 ${BUILD_DIR}/run.sh
 
@@ -19,3 +22,5 @@ box artifacts clean --force
 unset IMAGE_TESTING_IN_PROGRESS
 unset cfconfig_adminPassword
 echo "Container successfully warmed up"
+
+$BUILD_DIR/util/optimize.sh
