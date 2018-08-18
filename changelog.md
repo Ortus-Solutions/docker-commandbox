@@ -6,6 +6,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 ## 4.2.0/2.3.0
 - Remove no longer needed engine detection from run scripts
 - Optimization and reductions to Debian-based image sizes
+- Adds additional APK binaries to Alpine images to support PDF/CFDocument rendering
 
 ## 4.2.0/2.2.6
 - Updates CommandBox binary to v4.2.0
