@@ -9,8 +9,19 @@ ARG COMMANDBOX_VERSION
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-# Basic Dependencies
-RUN apk update && apk add curl jq bash openssl && rm -f /var/cache/apk/*
+# Basic Dependencies including binaries for PDF rendering
+RUN apk update && apk add curl \
+                        jq \
+                        bash \
+                        openssl \
+                        libgcc \
+                        libstdc++ \
+                        libx11 \
+                        glib \
+                        libxrender \
+                        libxext \
+                        libintl \
+                        && rm -f /var/cache/apk/*
 
 ### Directory Mappings ###
 # APP_DIR = the directory where the application runs
