@@ -49,7 +49,6 @@ fi
 # Default values for engine and home directory - so we can use cfconfig 
 export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
 export CFENGINE="${CFENGINE:=lucee@5}"
-FULL_VERSION=${CFENGINE#*@*}
 
 # Default Heap Size which matches the CommandBox default
 # export HEAP_SIZE="${HEAP_SIZE:=512}"
@@ -95,7 +94,7 @@ if [[ -f ${HOME}/.enginePwd ]]; then
 fi
 
 
-if [[ $ADMIN_PASSWORD_SET == false ]] || [[ $ADMIN_PASSWORD_SET == 'null' ]]; then
+if [[ $ADMIN_PASSWORD_SET !== true ]]; then
 	if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
 		#Generate a random password
 		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
