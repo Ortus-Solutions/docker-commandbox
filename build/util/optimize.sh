@@ -12,6 +12,6 @@ box artifacts clean --force
 
 # Cleanup
 # More unecessary files
-rm -rf /var/lib/{apt,dpkg,cache,log}/
+rm -rf /var/lib/{cache,log}/
 # Remove Unecessary OS FIles
 rm -rf /usr/share/icons /usr/share/doc /usr/share/man /usr/share/locale /tmp/*.*
