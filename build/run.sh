@@ -94,7 +94,7 @@ if [[ -f ${HOME}/.enginePwd ]]; then
 fi
 
 
-if [[ $ADMIN_PASSWORD_SET !== true ]]; then
+if [[ $ADMIN_PASSWORD_SET != true ]]; then
 	if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
 		#Generate a random password
 		openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
