@@ -19,7 +19,6 @@ Tags
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
 `:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Dockerfile.Lucee4)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Dockerfile.Lucee5)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Dockerfile.Adobe11)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Dockerfile.Adobe2016))
 
-
 Description 
 =======================
 
