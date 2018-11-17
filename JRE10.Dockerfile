@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM buildpack-deps:sid-curl
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -33,7 +33,7 @@ RUN ${BUILD_DIR}/debian/install-dependencies.sh
 RUN ln -svT "/usr/lib/jvm/java-10-openjdk-$(dpkg --print-architecture)" /docker-java-home
 ENV JAVA_HOME /docker-java-home
 ENV JAVA_VERSION 10.0.2
-ENV JAVA_DEBIAN_VERSION 10.0.2+13-1
+ENV JAVA_DEBIAN_VERSION 10.0.2+13-2
 
 RUN set -ex; \
     \
@@ -73,6 +73,9 @@ RUN $BUILD_DIR/util/install-commandbox.sh
 
 # CFConfig Installation
 RUN $BUILD_DIR/util/install-cfconfig.sh
+
+# CommandBox-DotEnv Installation - Removed from installation until dotenv is Java 10 compatible
+# RUN $BUILD_DIR/util/install-dotenv.sh
 
 # Default Port Environment Variables
 ENV PORT 8080
