@@ -48,6 +48,9 @@ RUN $BUILD_DIR/util/install-commandbox.sh
 # CFConfig Installation
 RUN $BUILD_DIR/util/install-cfconfig.sh
 
+# CommandBox-DotEnv Installation
+RUN $BUILD_DIR/util/install-dotenv.sh
+
 # Cleanup and Optimize our Installation
 RUN ${BUILD_DIR}/util/optimize.sh
 
