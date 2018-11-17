@@ -3,6 +3,10 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 4.4.0/2.4.0
+- Updates CommandBox binary to v4.4.0
+- Adds the `commandbox-dotenv` module in to all base images
+
 ## 4.2.0/2.3.0
 - Remove no longer needed engine detection from run scripts
 - Optimization and reductions to Debian-based image sizes
