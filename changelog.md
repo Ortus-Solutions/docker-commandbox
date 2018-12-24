@@ -3,6 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 4.5.0/2.5.0
+- Updates CommandBox binary to v4.5.0
+
 ## 4.4.0/2.4.0
 - Updates CommandBox binary to v4.4.0
 - Adds the `commandbox-dotenv` module in to all base images
