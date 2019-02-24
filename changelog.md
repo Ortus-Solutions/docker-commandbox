@@ -5,8 +5,8 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 
 ## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds
-- Adds a `SERVER_JRE` environment variable which can be used to customize the startup JRE of the server
-- Changes the JRE used for Adobe Coldufusion images to JRE11
+- Adds a `javaVersion` environment variable which can be used to customize the startup JRE of the server
+- Changes the JRE used for Adobe Coldfusion 2018 images to JRE11
 
 ## 4.5.0/2.5.0
 - Updates CommandBox binary to v4.5.0

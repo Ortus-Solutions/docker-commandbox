@@ -101,7 +101,7 @@ The following environment variables may be provided to modify your runtime serve
 * `HEADLESS`/`headless` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure deployment with no administrator access.
 * `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 * `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
-* `SERVER_JRE` - When provided the server will [start on a custom JRE](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/custom-java-version) specified by the environment variable.
+* `javaVersion` - When provided the server will [start on a custom JRE](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/custom-java-version) specified by the environment variable.
 
 ##### Docker Runtime Variables
 

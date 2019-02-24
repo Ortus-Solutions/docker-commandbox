@@ -131,10 +131,10 @@ if [[ $URL_REWRITES ]] || [[ $url_rewrites ]]; then
 fi
 
 # Server startup
-if [[ -z $SERVER_JRE ]]; then
+if [[ -z $javaVersion ]]; then
 	$BUILD_DIR/util/start-server.sh
 else
-	echo "INFO: Customer JRE argument detected. Starting the server using ${SERVER_JRE}"
+	echo "INFO: Customer JRE argument detected. Starting the server using ${javaVersion}"
 	$BUILD_DIR/util/start-server-jre.sh	
 fi
 
