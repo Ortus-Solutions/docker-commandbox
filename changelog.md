@@ -3,10 +3,10 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
-## 4.5.0/2.5.1
+## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds
 - Adds a `SERVER_JRE` environment variable which can be used to customize the startup JRE of the server
-- Adds additional image for Adobe Coldfusion 2018 which starts the server on JRE 11 ( `ortussolutions/commandbox:adobe2018-jre11` ).  The caveat, however, is that this adds additional weight to the image due to the current need to use two JRE versions.
+- Changes the JRE used for Adobe Coldufusion images to JRE11
 
 ## 4.5.0/2.5.0
 - Updates CommandBox binary to v4.5.0
