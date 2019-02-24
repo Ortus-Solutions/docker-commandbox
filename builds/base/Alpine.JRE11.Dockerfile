@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:alpine-slim
 
-LABEL version="@version@"
+LABEL version "@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
