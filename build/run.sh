@@ -131,7 +131,12 @@ if [[ $URL_REWRITES ]] || [[ $url_rewrites ]]; then
 fi
 
 # Server startup
-$BUILD_DIR/util/start-server.sh
+if [[ -z $SERVER_JRE ]]; then
+	$BUILD_DIR/util/start-server.sh
+else
+	echo "INFO: Customer JRE argument detected. Starting the server using ${SERVER_JRE}"
+	$BUILD_DIR/util/start-server-jre.sh	
+fi
 
 # Sleep until server is ready for traffic
 echo "INFO: Waiting for server to become available..."

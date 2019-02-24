@@ -1,40 +1,33 @@
-FROM openjdk:8-alpine
+FROM adoptopenjdk/openjdk8:slim
 
 LABEL version="@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 ARG COMMANDBOX_VERSION
+# Default to UTF-8 file.encoding
+ENV LANG C.UTF-8
 
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-# Basic Dependencies including binaries for PDF rendering
-RUN apk update && apk add curl \
-                        jq \
-                        bash \
-                        openssl \
-                        libgcc \
-                        libstdc++ \
-                        libx11 \
-                        glib \
-                        libxrender \
-                        libxext \
-                        libintl \
-                        && rm -f /var/cache/apk/*
-
 ### Directory Mappings ###
-# APP_DIR = the directory where the application runs
-ENV APP_DIR /app
-WORKDIR $APP_DIR
-
 # BIN_DIR = Where the box binary goes
-ENV BIN_DIR /usr/bin
+ENV BIN_DIR /usr/local/bin
 WORKDIR $BIN_DIR
 
 # BUILD_DIR = WHERE runtime scripts go
 ENV BUILD_DIR $HOME/build
 WORKDIR $BUILD_DIR
+
+# APP_DIR = the directory where the application runs
+ENV APP_DIR /app
+WORKDIR $APP_DIR
+
+COPY ./builds/debian ${BUILD_DIR}/debian  
+
+# Basic Dependencies
+RUN ${BUILD_DIR}/debian/install-dependencies.sh
 
 # Copy file system
 COPY ./test/ ${APP_DIR}/
@@ -50,9 +43,6 @@ RUN $BUILD_DIR/util/install-cfconfig.sh
 
 # CommandBox-DotEnv Installation
 RUN $BUILD_DIR/util/install-dotenv.sh
-
-# Cleanup and Optimize our Installation
-RUN ${BUILD_DIR}/util/optimize.sh
 
 # Default Port Environment Variables
 ENV PORT 8080

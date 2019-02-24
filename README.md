@@ -10,17 +10,17 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Dockerfile)) - Latest stable version
+* `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version
 * `:4.0.0` - Stable image tagged with the version of CommandBox used to build the image ( `:3.9.0`, `:3.9.1`, `:3.9.2` )
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
-* `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
+* `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
 * `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
 `:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile))
 
 Description 
-=======================
+=================
 
 CommandBox allows you to configure your entire CFML engine environment from a single file in the root of your project.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://ortus.gitbooks.io/commandbox-documentation/). 
 
@@ -101,6 +101,7 @@ The following environment variables may be provided to modify your runtime serve
 * `HEADLESS`/`headless` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure deployment with no administrator access.
 * `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 * `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
+* `SERVER_JRE` - When provided the server will [start on a custom JRE](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/custom-java-version).
 
 ##### Docker Runtime Variables
 
