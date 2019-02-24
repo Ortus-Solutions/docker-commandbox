@@ -6,21 +6,21 @@ env:
     - COMMANDBOX_VERSION=4.5.0
   matrix:
     # Debian Builds
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.JRE11.Dockerfile BASE_BUILD_FILE=build/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-jre11
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.JRE11.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-jre11
     # Alpine builds
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.JRE11.Dockerfile BASE_BUILD_FILE=build/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine-jre11
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.JRE11.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine-jre11
 
 services:
   - docker
