@@ -3,6 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 4.6.0/2.6.1
+- Updates CommandBox binary to v4.6.0
+
 ## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds
 - Adds a `javaVersion` environment variable which can be used to customize the startup JRE of the server

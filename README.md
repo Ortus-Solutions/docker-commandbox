@@ -11,7 +11,7 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version
-* `:4.0.0` - Stable image tagged with the version of CommandBox used to build the image ( `:3.9.0`, `:3.9.1`, `:3.9.2` )
+* `:4.0.0` - Stable image tagged with the version of CommandBox used to build the image ( `:4.0.0`, `:4.5.0`, `:4.6.0` )
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
