@@ -5,6 +5,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 
 ## 4.6.0/2.6.1
 - Updates CommandBox binary to v4.6.0
+- Adds `fontconfig` for Debian and Alpine to fix PDF generation errors on AdoptOpenJDK base
 
 ## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds

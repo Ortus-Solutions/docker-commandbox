@@ -1,13 +1,12 @@
 #!/bin/bash
-
 apt-get update && apt-get \install --assume-yes \
                                 apt-utils \
                                 ca-certificates \
                                 curl \
                                 jq \
-                                curl \
                                 bzip2 \
                                 unzip \
+                                fontconfig \
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
 # based on whether the JDK or only the JRE is installed
