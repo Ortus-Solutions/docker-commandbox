@@ -25,7 +25,7 @@ services:
 
 script:
   # update our version numbers before building
-  - find ./builds/base -type f -exec sed -i '' -e "s/@version@/2\.6\.0/g" {} \;
+  - find ./builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \;
   - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
   - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
   - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
