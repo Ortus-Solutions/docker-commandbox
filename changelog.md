@@ -5,6 +5,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 ## 4.6.0/2.6.1
 - Updates all ACF engines to latest hotfix
 - Omits forgebox from module cleanup
+- Additional error handling and utilities for manual install
 
 ## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds
