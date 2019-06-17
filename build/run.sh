@@ -38,8 +38,9 @@ if [[ -f server.json ]]; then
 		fi
 	fi
 
-	if [[ $CFENGINE = 'null' ]] || [[ ! $CFENGINE ]]; then
-		CFENGINE=''
+	# Nullify if we have a string null returned by jq
+	if [[ $CFENGINE = 'null' ]]; then
+		unset CFENGINE
 	else
 		echo "INFO: CF Engine defined as ${CFENGINE}"
 	fi
@@ -48,14 +49,12 @@ fi
 
 # Default values for engine and home directory - so we can use cfconfig 
 export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
-export CFENGINE="${CFENGINE:=lucee@5}"
 
-# Default Heap Size which matches the CommandBox default
-# export HEAP_SIZE="${HEAP_SIZE:=512}"
-# echo "INFO: The JVM heap size for this container is set to ${HEAP_SIZE}"
+if [[ $CFENGINE ]]; then
+	echo "INFO: CF Engine set to ${CFENGINE}"	
+fi
 
-echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"
-echo "INFO: CF Engine set to ${CFENGINE}"			
+echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"		
 
 #Check for cfconfig specific environment variables - the CommandBox binary will handle these on start
 while IFS='=' read -r name value ; do
