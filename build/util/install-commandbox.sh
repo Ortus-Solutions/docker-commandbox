@@ -7,7 +7,7 @@ unzip /tmp/box.zip -d ${BIN_DIR} && chmod +x ${BIN_DIR}/box
 echo "$(box version) successfully installed"
 
 # Cleanup CommandBox modules which would not be necessary in a Container environment
-SYSTEM_EXCLUDES=( "coldbox" "contentbox" "cachebox" "forgebox" "logbox" "games" "wirebox" )
+SYSTEM_EXCLUDES=( "coldbox" "contentbox" "cachebox" "logbox" "games" "wirebox" )
 MODULE_EXCLUDES=( "cfscriptme-command" "cb-module-template" )
 
 for mod in "${SYSTEM_EXCLUDES[@]}"
