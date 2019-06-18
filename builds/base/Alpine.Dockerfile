@@ -21,6 +21,7 @@ RUN apk update && apk add curl \
                         libxrender \
                         libxext \
                         libintl \
+                        shadow \
                         && rm -f /var/cache/apk/*
 
 ### Directory Mappings ###
