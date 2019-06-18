@@ -3,6 +3,7 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 ## 4.6.0/2.6.1
+- Implements the ability to specify a non-root user to run server ( via `USER` environment variable )
 - Updates all ACF engines to latest hotfix
 - Omits forgebox from module cleanup
 - Additional error handling and utilities for manual install
