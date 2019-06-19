@@ -3,35 +3,40 @@ set -e
 
 # If a custom user is requested set it before we begin
 if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
-	id -u $USER &>/dev/null || useradd $USER 
+	echo "INFO: Configuration set to non-root user: ${USER}"
 	export EXISTING_BUILD_DIR="${BUILD_DIR}"
 	export EXISTING_SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=/root/serverHome}"
 	export HOME=/home/$USER
 	export BUILD_DIR=$HOME/build
 	export SERVER_HOME_DIRECTORY=$HOME/serverHome
 
-	# Ensure our user home directory exists - we need to create it manually for Alpine builds
-	mkdir -p $HOME
+	# If the user exists then we skip the directory migrations as the container is in restart
+	if ! id -u $USER > /dev/null 2>&1; then
+		useradd $USER 
+		# Ensure our user home directory exists - we need to create it manually for Alpine builds
+		mkdir -p $HOME
+		# Ensure the server home directory exists before we try to move it
+		mkdir -p $EXISTING_SERVER_HOME_DIRECTORY
+		
+		mv $EXISTING_SERVER_HOME_DIRECTORY $SERVER_HOME_DIRECTORY
+		
+		# Copy our build directory and scripts
+		cp -r $EXISTING_BUILD_DIR $BUILD_DIR
+	fi
+
+	# Ensure required permissions
 	chown -R $USER $HOME
-	# Ensure the server home directory exists before we try to move it
-	mkdir -p $EXISTING_SERVER_HOME_DIRECTORY
-	
-	mv $EXISTING_SERVER_HOME_DIRECTORY $SERVER_HOME_DIRECTORY
 	chown -R $USER $SERVER_HOME_DIRECTORY
-	
-	# Copy our build directory and scripts
-	cp -r $EXISTING_BUILD_DIR $BUILD_DIR
 	chown -R $USER $BUILD_DIR
-
 	chmod a+rx $(which box)
-
-	# Permissions Updates
 	chown -R $USER $APP_DIR
+
+	# Re-use the existing CommandBox home
 	export CommandBox_home=/root/.CommandBox
 	chown -R $USER $CommandBox_home
 	chmod a+x /root
 	chmod a+x -R $CommandBox_home
-	export USER_IS_MIGRATED=true
+
 	cd $BUILD_DIR
 	su --preserve-environment -c /home/$USER/build/run.sh $USER
 
