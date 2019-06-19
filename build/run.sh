@@ -2,7 +2,7 @@
 set -e
 
 # If a custom user is requested set it before we begin
-if [[ $USER != $(whoami) ]] && [[ $USER != $(whoami) ]]; then
+if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 	id -u $USER &>/dev/null || useradd $USER 
 	export EXISTING_BUILD_DIR="${BUILD_DIR}"
 	export EXISTING_SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=/root/serverHome}"
