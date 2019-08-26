@@ -3,11 +3,11 @@
 <urlrewrite>
 
 	<rule>
-		<note>Deny Administrative Access</note>
-		<!-- These are paths that don't exist on disk, but shouldn't get rewritten since the CF engine treats them special. -->
+		<note>Deny Admin Access</note>
 		<condition type="request-uri" operator="equal">/(cfide\/administrator|CFIDE\/administrator|lucee\/admin)/.*</condition>
-		<from>^/(.+)$</from>
-		<to type="passthrough" last="true">/404.hml</to>
+        <from>^/(.+)$</from>
+		<to type="passthrough" last="true">/403.html</to>
+		<set type="status">403</set>
 	</rule>
 
 	<rule>

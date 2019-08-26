@@ -163,7 +163,7 @@ else
 
 	# If the headless flag is up, remove our administrative interfaces
 	if [[ $HEADLESS ]] || [[ $headless ]]; then
-		$BUILD_DIR/util/env-headless.sh
+		. $BUILD_DIR/util/env-headless.sh
 	fi
 
 	# If Server URL Rewrites are set, then activate it 
