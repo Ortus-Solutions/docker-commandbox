@@ -4,13 +4,13 @@ CHANGELOG
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 ## 4.6.0/2.7.0
 - Implements the ability to specify a non-root user to run server ( via `USER` environment variable )
-- Updates all ACF engines to latest hotfix
 - Omits forgebox from module cleanup
 - Additional error handling and utilities for manual install
+- Adds `fontconfig` for Debian and Alpine to fix PDF generation errors on AdoptOpenJDK base
 
 ## 4.6.0/2.6.1
+- Updates all ACF engines to latest hotfix
 - Updates CommandBox binary to v4.6.0
-- Adds `fontconfig` for Debian and Alpine to fix PDF generation errors on AdoptOpenJDK base
 
 ## 4.5.0/2.6.0
 - Updates all java versions to use AdoptOpenJDK builds
