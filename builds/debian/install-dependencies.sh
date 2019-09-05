@@ -6,7 +6,7 @@ apt-get update && apt-get \install --assume-yes \
                                 jq \
                                 bzip2 \
                                 unzip \
-                                fontconfig \
+                                fontconfig
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
 # based on whether the JDK or only the JRE is installed

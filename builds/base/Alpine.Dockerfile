@@ -21,6 +21,7 @@ RUN apk update && apk add curl \
                         libxrender \
                         libxext \
                         libintl \
+                        shadow \
                         fontconfig \
                         && rm -f /var/cache/apk/*
 
