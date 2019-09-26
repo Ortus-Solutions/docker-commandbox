@@ -142,7 +142,7 @@ secrets:
 Deployment
 ==========
 
-Because, with the exception of the CommandBox default engine of Lucee 5, the CFML server engines are downloaded and installed at container runtime. This can result in significant startup time increases ( even with Lucee 5 already downloaded in the base image, there is a time penalty for a "cold start" ). It is recommended that builds for production use employ a the engine-specific variations for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
+Because, with the exception of the CommandBox default engine of Lucee 5, the CFML server engines are downloaded and installed at container runtime. This can result in significant startup time increases ( even with Lucee 5 already downloaded in the base image, there is a time penalty for a "cold start" ). It is recommended that builds for production use employ an engine-specific variation for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
 
 For a basic example, the following will suffice:
 
@@ -214,3 +214,4 @@ Holy Ghost which is given unto us. ." Romans 5:5
 
 #### THE DAILY BREAD
  > "I am the way, and the truth, and the life; no one comes to the Father, but by me (JESUS)" Jn 14:1-12
+fv
