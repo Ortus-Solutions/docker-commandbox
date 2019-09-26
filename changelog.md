@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 4.8.0/2.7.2
+- Updates CommandBox binary to 4.8.0
+
 ## 4.6.0/2.7.1
 - Implements the ability to specify a non-root user to run server ( via `USER` environment variable )
 - Updates all ACF engines to latest hotfix
