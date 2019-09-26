@@ -7,7 +7,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 - Updates all ACF engines to latest hotfix
 
 ## 4.7.0/2.7.1
-- Updates Commandbox binary to 4.8.0
+- Updates Commandbox binary to 4.7.0
 
 ## 4.6.0/2.7.0
 - Implements the ability to specify a non-root user to run server ( via `USER` environment variable )
