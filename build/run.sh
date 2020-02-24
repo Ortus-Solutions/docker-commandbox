@@ -188,7 +188,7 @@ else
 
 	# Skip our tail output when running our tests - flag for 500 lines so we can see our context creation
 	if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
-		tail -n 500 -f $( echo $(box server info property=consoleLogPath) | xargs )
+		tail -n 500 -F $( echo $(box server info property=consoleLogPath) | xargs )
 	fi
 
 
