@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 4.8.0/2.7.3
+- Fixes an issue where log output would stop because of rotation
+
 ## 4.8.0/2.7.2
 - Updates CommandBox binary to 4.8.0
 - Updates all ACF engines to latest hotfix
