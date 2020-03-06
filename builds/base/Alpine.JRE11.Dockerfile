@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk13:alpine-slim
+FROM adoptopenjdk/openjdk11:alpine-slim
 
 LABEL version "@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -43,7 +43,7 @@ COPY ./build/ ${BUILD_DIR}/
 RUN ls -la ${BUILD_DIR}
 RUN chmod +x $BUILD_DIR/*.sh
 
-# Set up our environment to allow CommandBox to run on JRE13
+# Set up our environment to allow CommandBox to run on JRE11
 ENV BOX_JAVA_ARGS="-Djdk.attach.allowAttachSelf=true"
 
 # Commandbox Installation
