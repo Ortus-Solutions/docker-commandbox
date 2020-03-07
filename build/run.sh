@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Remove any previous generated startup scripts so that the config is re-read
+rm -f $BIN_DIR/startup.sh
+
 # If a custom user is requested set it before we begin
 if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 	echo "INFO: Configuration set to non-root user: ${USER}"
@@ -172,24 +175,6 @@ else
 	fi
 
 	# Server startup
-	if [[ -z $javaVersion ]]; then
-		$BUILD_DIR/util/start-server.sh
-	else
-		echo "INFO: Customer JRE argument detected. Starting the server using ${javaVersion}"
-		$BUILD_DIR/util/start-server-jre.sh	
-	fi
-
-	# Sleep until server is ready for traffic
-	echo "INFO: Waiting for server to become available..."
-		while [ ! -f "${SERVER_HOME_DIRECTORY}/logs/server.out.txt" ] ; do sleep 2; done
-	echo "INFO: Server engine up and running."
-
-	echo "INFO: Configuration processed and server started in ${SECONDS} seconds."
-
-	# Skip our tail output when running our tests - flag for 500 lines so we can see our context creation
-	if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
-		tail -n 500 -F $( echo $(box server info property=consoleLogPath) | xargs )
-	fi
-
+	$BUILD_DIR/util/start-server.sh
 
 fi
