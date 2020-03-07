@@ -3,7 +3,13 @@ DEBUG_FLAG=false
 DRY_RUN_FLAG=true
 SCRIPT_TYPE=bash
 REWRITES_FILE=$BUILD_DIR/resources/urlrewrite.xml
-REWRITES_ENABLE=false
+
+if [[ $URL_REWRITES ]]; then
+    REWRITES_ENABLE=$URL_REWRITES
+else
+    # Default to the CommandBox default
+    REWRITES_ENABLE=false
+fi
 
 
 if [[ $IMAGE_TESTING_IN_PROGRESS ]]; then
