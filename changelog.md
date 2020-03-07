@@ -2,6 +2,10 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 5.0.0/2.8.0
+- Updates CommandBox binary to 5.0.0
+- Changes startup mechanism to use CommandBox generated bash script ( removes need for `box` process wrapper )
+
 ## 4.8.0/2.7.2
 - Updates CommandBox binary to 4.8.0
 - Updates all ACF engines to latest hotfix
