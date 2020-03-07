@@ -5,6 +5,7 @@ SCRIPT_TYPE=bash
 REWRITES_FILE=$BUILD_DIR/resources/urlrewrite.xml
 
 if [[ $URL_REWRITES ]]; then
+    echo "INFO: URL Rewrite variable detected in the environment. Setting to ${URL_REWRITES}..."
     REWRITES_ENABLE=$URL_REWRITES
 else
     # Default to the CommandBox default

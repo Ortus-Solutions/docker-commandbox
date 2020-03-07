@@ -99,7 +99,7 @@ printf "${runOutput}"
 
 ./tests/test.up.sh
 
-if [[ ${runOutput} != *"Set web.rewrites.enable = true"* ]];then
+if [[ ${runOutput} != *"URL Rewrite variable detected"* ]];then
 	echo "Rewrites were not enabled from the environment variable!"
 	exit 1
 fi
