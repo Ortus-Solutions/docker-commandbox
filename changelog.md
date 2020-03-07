@@ -3,7 +3,8 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 ## 5.0.0/2.8.1
-- ( snapshot updates )
+- Sets default CommandBox rewrite rules to deny "hidden" files ( e.g. `.env` ) and common config files ( `server.json` )
+- Refactor `$HEADLESS` implementation in to startup routine
 
 ## 5.0.0/2.8.0
 - Updates CommandBox binary to 5.0.0
