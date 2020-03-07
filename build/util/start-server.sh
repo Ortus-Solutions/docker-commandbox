@@ -88,14 +88,29 @@ fi
 
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
 if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
-    echo "INFO: Starting server using script at ${BIN_DIR}/startup.sh"
 
     # use exec so Java gets to be PID 1 - will be resolved in CommandBox 5.1
     sed -i 's/\/opt\/java/exec \/opt\/java/' ./server-start.sh
-    
-    mv ./server-start.sh $BIN_DIR/startup.sh
 
-    chmod +x $BIN_DIR/startup.sh
-    $BIN_DIR/startup.sh
+    if [[ ! $FINALIZE_STARTUP ]]; then
+        
+        echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"
+
+        mv ./server-start.sh $BIN_DIR/startup.sh
+
+        chmod +x $BIN_DIR/startup.sh
+
+        $BIN_DIR/startup.sh
+
+    else
+
+        echo "INFO: Seeding finalized server startup script to ${BIN_DIR}/startup-final.sh"
+
+        # If our image is being finalized, then we move the script to the terminal script location, which bypasses re-evaluation
+        mv ./server-start.sh $BIN_DIR/startup-final.sh
+
+        chmod +x $BIN_DIR/startup-final.sh
+
+    fi
 
 fi
