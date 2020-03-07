@@ -164,16 +164,6 @@ else
 		box install
 	fi
 
-	# If the headless flag is up, remove our administrative interfaces
-	if [[ $HEADLESS ]] || [[ $headless ]]; then
-		. $BUILD_DIR/util/env-headless.sh
-	fi
-
-	# If Server URL Rewrites are set, then activate it 
-	if [[ $URL_REWRITES ]] || [[ $url_rewrites ]]; then
-		$BUILD_DIR/util/env-rewrites.sh
-	fi
-
 	# Server startup
 	$BUILD_DIR/util/start-server.sh
 

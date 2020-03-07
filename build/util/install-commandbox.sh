@@ -28,4 +28,8 @@ do
 	rm -rf $HOME/.CommandBox/cfml/modules/${mod}
 done
 
+# Copy our more secure default rewrite config to the system config directory
+rm -f $HOME/.CommandBox/cfml/system/config/urlrewrite.xml
+cp $BUILD_DIR/resources/urlrewrite.xml $HOME/.CommandBox/cfml/system/config/urlrewrite.xml
+
 $BUILD_DIR/util/optimize.sh
