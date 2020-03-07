@@ -36,7 +36,7 @@ RUN ls -la ${BUILD_DIR}
 RUN chmod +x $BUILD_DIR/*.sh
 
 # Set up our environment to allow CommandBox to run on JRE11
-ENV _JAVA_OPTIONS="-Djdk.attach.allowAttachSelf=true"
+ENV BOX_JAVA_ARGS="-Djdk.attach.allowAttachSelf=true"
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
