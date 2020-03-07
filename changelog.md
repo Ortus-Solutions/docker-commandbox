@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+## 5.0.0/2.8.1
+- ( snapshot updates )
+
 ## 5.0.0/2.8.0
 - Updates CommandBox binary to 5.0.0
 - Changes startup mechanism to use CommandBox generated bash script ( removes need for `box` process wrapper )
