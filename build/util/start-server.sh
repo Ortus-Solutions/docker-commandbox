@@ -30,8 +30,8 @@ if [[ $HEADLESS ]] || [[ $headless ]]; then
     echo "INFO: Headless startup flag detected, disabling admin web interfaces..."
     
     #ACF Lockdown
-    export cfconfig_adminAllowedIPList=$(hostname -I)
-    export cfconfig_debuggingIPList=$(hostname -I)
+    export cfconfig_adminAllowedIPList=127.0.0.1
+    export cfconfig_debuggingIPList=127.0.0.1
 
     echo "INFO: ACF administrative access restricted to ${cfconfig_adminAllowedIPList}"
 
