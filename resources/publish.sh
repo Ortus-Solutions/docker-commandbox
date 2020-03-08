@@ -22,10 +22,11 @@ echo "INFO: Successfully logged in to Docker Hub!"
 # Tag Builds
 if [[ $TRAVIS_TAG ]]; then
 	
+	# Strip the `v` from the start of the tag
 	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:$TRAVIS_TAG"
+		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:VAR=${TRAVIS_TAG#v}"
 	else
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-$TRAVIS_TAG"
+		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
 	fi
 	
 	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
@@ -51,14 +52,14 @@ docker push ${BUILD_IMAGE_TAG}
 echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 
 # Now create any suppplimentary tags
-if [[ $TRAVIS_TAG ]]; then
-	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
-	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}"
-	docker push ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
-elif [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
 	# Add :latest tag, if applicable
     docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
 	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:latest"
 	docker push ${BUILD_IMAGE_TAG}:latest
+	# Add commandbox version tag
+    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:commandbox-${COMMMANDBOX_VERSION}
+	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:commandbox-${COMMMANDBOX_VERSION}"
+	docker push ${BUILD_IMAGE_TAG}:${BUILD_IMAGE_TAG}:commandbox-${COMMMANDBOX_VERSION}
 fi
 
