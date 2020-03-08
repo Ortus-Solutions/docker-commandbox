@@ -44,6 +44,5 @@ deploy:
   - provider : script
     skip_cleanup: true
     on:
-      tags : true
-      condition: "$TRAVIS_BRANCH = master"
+      condition: "$TRAVIS_BRANCH = $TRAVIS_TAG"
     script: ./resources/publish.sh
