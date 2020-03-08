@@ -12,6 +12,8 @@ set -ex
 mkdir -p /tmp
 curl -k  -o /tmp/box.zip -location "https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/commandbox-bin-${COMMANDBOX_VERSION}.zip"
 unzip /tmp/box.zip -d ${BIN_DIR} && chmod 755 ${BIN_DIR}/box
+echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
+
 echo "$(box version) successfully installed"
 
 # Cleanup CommandBox modules which would not be necessary in a Container environment
@@ -20,16 +22,16 @@ MODULE_EXCLUDES=( "cfscriptme-command" "cb-module-template" )
 
 for mod in "${SYSTEM_EXCLUDES[@]}"
 do
-	rm -rf $HOME/.CommandBox/cfml/system/modules_app/${mod}-commands
+	rm -rf ${COMMANDBOX_HOME}/cfml/system/modules_app/${mod}-commands
 done
 
 for mod in "${MODULE_EXCLUDES[@]}"
 do
-	rm -rf $HOME/.CommandBox/cfml/modules/${mod}
+	rm -rf ${COMMANDBOX_HOME}/cfml/modules/${mod}
 done
 
 # Copy our more secure default rewrite config to the system config directory
-rm -f $HOME/.CommandBox/cfml/system/config/urlrewrite.xml
-cp $BUILD_DIR/resources/urlrewrite.xml $HOME/.CommandBox/cfml/system/config/urlrewrite.xml
+rm -f ${COMMANDBOX_HOME}/cfml/system/config/urlrewrite.xml
+cp $BUILD_DIR/resources/urlrewrite.xml ${COMMANDBOX_HOME}/cfml/system/config/urlrewrite.xml
 
 $BUILD_DIR/util/optimize.sh

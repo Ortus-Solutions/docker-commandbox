@@ -64,10 +64,10 @@ ARG COUCHBASE_LICENSE_KEY
 ARG COUCHBASE_ACTIVATION_CODE
 
 # Copy Couchbase Extension into place for install
-ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex /root/serverHome/WEB-INF/lucee-server/deploy/couchbase-cache.lex
+ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/deploy/couchbase-cache.lex
 
 # Seed Couchbase Extension License
-ENV COUCHBASE_LICENSE_FILE /root/serverHome/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
+ENV COUCHBASE_LICENSE_FILE $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
 RUN touch "${CI_PROJECT_DIR}/build/license.properties" \
   && printf "email=${COUCHBASE_EMAIL}\n" >> ${COUCHBASE_LICENSE_FILE} \
   && printf "licenseKey=${COUCHBASE_LICENSE_KEY}\n" >> ${COUCHBASE_LICENSE_FILE} \
@@ -93,7 +93,7 @@ The CommandBox Docker image supports the use of environmental variables for the 
 
 The following environment variables may be provided to modify your runtime server configuration.  Please note that environment variables are case sensitive and, while some lower/upper case aliases are accounted for, you should use consistent casing in order for these variables to take effect.
 
-* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/root/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
+* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/usr/local/var/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
 * `APP_DIR` - Application directory (web root). By default, this is `/app`.  If you are deploying an application with mappings outside of the root, you would want to provide this environment variable to point to the webroot ( e.g. `/app/wwwroot` )
 * `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
 * `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.

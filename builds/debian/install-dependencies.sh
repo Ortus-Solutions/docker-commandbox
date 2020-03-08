@@ -17,7 +17,12 @@ apt-get update && apt-get \install --assume-yes \
 		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
 	} > /usr/local/bin/docker-java-home
 
-chmod +x /usr/local/bin/docker-java-home
+# Ensure all runwar users have permission on the java home
+chown -R $(whomami):${WORKGROUP} /usr/local/bin/docker-java-home
+chmod g+x /usr/local/bin/docker-java-home
+
+# Ensure all runwar users have permission on the build scripts
+chown -R $(whomami):${WORKGROUP} $BUILD_DIR
 
 # Cleanup before the layer is committed
 apt-get clean autoclean

@@ -4,7 +4,7 @@ export IMAGE_TESTING_IN_PROGRESS=true
 export cfconfig_adminPassword=commandbox
 
 # Remove any previous engine artifacts
-rm -rf $HOME/.CommandBox/server/*
+rm -rf $COMMANDBOX_HOME/server/*
 
 # Run our normal build script, which will warm up our server and add it to the image
 ${BUILD_DIR}/run.sh

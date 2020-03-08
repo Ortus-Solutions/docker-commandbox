@@ -1,12 +1,12 @@
 #!/bin/bash
 # Remove any temp files
-rm -rf $HOME/.CommandBox/temp/*
+rm -rf $COMMANDBOX_HOME/temp/*
 # Remove any log files
-rm -rf $HOME/.CommandBox/logs/*
+rm -rf $COMMANDBOX_HOME/logs/*
 # Remove cachebox caches
-rm -rf $HOME/.CommandBox/cfml/system/mdCache/*
+rm -rf $COMMANDBOX_HOME/cfml/system/mdCache/*
 # Remove the felix cache
-rm -rf $HOME/.CommandBox/engine/cfml/cli/lucee-server/felix-cache/*
+rm -rf $COMMANDBOX_HOME/engine/cfml/cli/lucee-server/felix-cache/*
 # Clear downloaded artifacts
 box artifacts clean --force
 

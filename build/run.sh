@@ -10,44 +10,53 @@ else
 	# Remove any previous generated startup scripts so that the config is re-read
 	rm -f $BIN_DIR/startup.sh
 
+	box config set verboseErrors=true
+
 	# If a custom user is requested set it before we begin
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 		echo "INFO: Configuration set to non-root user: ${USER}"
-		export EXISTING_BUILD_DIR="${BUILD_DIR}"
-		export EXISTING_SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=/root/serverHome}"
 		export HOME=/home/$USER
-		export BUILD_DIR=$HOME/build
-		export SERVER_HOME_DIRECTORY=$HOME/serverHome
+			
+		if [[ -f /etc/alpine-release ]]; then
+			# If the user exists then we skip the directory migrations as the container is in restart
+			if ! id -u $USER > /dev/null 2>&1; then
+				adduser $USER --home $HOME --disabled-password --ingroup $WORKGROUP
+			fi
 
-		# If the user exists then we skip the directory migrations as the container is in restart
-		if ! id -u $USER > /dev/null 2>&1; then
-			useradd $USER 
-			# Ensure our user home directory exists - we need to create it manually for Alpine builds
-			mkdir -p $HOME
-			# Ensure the server home directory exists before we try to move it
-			mkdir -p $EXISTING_SERVER_HOME_DIRECTORY
+		else
+			# If the user exists then we skip the directory migrations as the container is in restart
+			if ! id -u $USER > /dev/null 2>&1; then
+				useradd $USER 
+				usermod -a -G $WORKGROUP $USER
+				# Ensure our user home directory exists - we need to create it manually for Alpine builds
+				mkdir -p $HOME
+			fi
 			
-			mv $EXISTING_SERVER_HOME_DIRECTORY $SERVER_HOME_DIRECTORY
-			
-			# Copy our build directory and scripts
-			cp -r $EXISTING_BUILD_DIR $BUILD_DIR
 		fi
 
-		# Ensure required permissions
-		chown -R $USER $HOME
-		chown -R $USER $SERVER_HOME_DIRECTORY
-		chown -R $USER $BUILD_DIR
-		chmod a+rx $(which box)
-		chown -R $USER $APP_DIR
+		# Ensure permissions on relevant directories and any files created previously
+		chown -R $USER:$WORKGROUP $HOME
+		chown -R $USER:$WORKGROUP $APP_DIR
+		chown -R $USER:$WORKGROUP $BUILD_DIR
+		chown -R $USER:$WORKGROUP $COMMANDBOX_HOME
+		chown -R root:$WORKGROUP $BIN_DIR
+		chmod g+wrx $BIN_DIR
+		mkdir -p ${LIB_DIR}/serverHome
+		chown -R $USER:$WORKGROUP ${LIB_DIR}/serverHome
+		
 
-		# Re-use the existing CommandBox home
-		export CommandBox_home=/root/.CommandBox
-		chown -R $USER $CommandBox_home
-		chmod a+x /root
-		chmod a+x -R $CommandBox_home
+		if [ $SERVER_HOME_DIRECTORY ]; then
+			chown -R $USER $SERVER_HOME_DIRECTORY
+		fi
 
-		cd $BUILD_DIR
-		su --preserve-environment -c /home/$USER/build/run.sh $USER
+		cd $APP_DIR
+
+
+		if [[ -f /etc/alpine-release ]]; then
+			su -p -c $BUILD_DIR/run.sh $USER
+		else 
+			su --preserve-environment -c $BUILD_DIR/run.sh $USER
+		fi
 
 	else
 
@@ -84,7 +93,7 @@ else
 			else
 				echo "INFO: Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
 				#Assume our admin password has been set if we are including a custom server home
-				if [[ ${SERVER_HOME_DIRECTORY} != "${HOME}/serverHome" ]]; then
+				if [[ ${SERVER_HOME_DIRECTORY} != "${LIB_DIR}/serverHome" ]]; then
 					ADMIN_PASSWORD_SET=true
 				fi
 			fi
@@ -99,7 +108,7 @@ else
 		fi
 
 		# Default values for engine and home directory - so we can use cfconfig 
-		export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${HOME}/serverHome}"
+		export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${LIB_DIR}/serverHome}"
 
 		if [[ $CFENGINE ]]; then
 			echo "INFO: CF Engine set to ${CFENGINE}"	
@@ -145,7 +154,7 @@ else
 
 
 		if [[ $ADMIN_PASSWORD_SET != true ]]; then
-			if [[ ${SERVER_HOME_DIRECTORY} == "${HOME}/serverHome" ]]; then
+			if [[ ${SERVER_HOME_DIRECTORY} == "${LIB_DIR}/serverHome" ]]; then
 				#Generate a random password
 				openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
 				export cfconfig_adminPassword=`cat ${HOME}/.enginePwd`

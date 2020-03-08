@@ -11,14 +11,23 @@ ENV LANG C.UTF-8
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
+# Add a working group which any dynamic users can be assigned
+ENV WORKGROUP runwar
+RUN groupadd $WORKGROUP && usermod -a -G $WORKGROUP root
+
 ### Directory Mappings ###
 # BIN_DIR = Where the box binary goes
 ENV BIN_DIR /usr/local/bin
+# LIB_DIR = Where the build files go
+ENV LIB_DIR /usr/local/lib
 WORKDIR $BIN_DIR
 
 # BUILD_DIR = WHERE runtime scripts go
-ENV BUILD_DIR $HOME/build
+ENV BUILD_DIR $LIB_DIR/build
 WORKDIR $BUILD_DIR
+
+# COMMANDBOX_HOME = Where CommmandBox Lives
+ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 
 # APP_DIR = the directory where the application runs
 ENV APP_DIR /app
@@ -32,8 +41,10 @@ RUN ${BUILD_DIR}/debian/install-dependencies.sh
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
-RUN ls -la ${BUILD_DIR}
 RUN chmod +x $BUILD_DIR/*.sh
+
+# Ensure all runwar users have permission on the build scripts
+RUN chown -R $(whomami):${WORKGROUP} $BUILD_DIR
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
