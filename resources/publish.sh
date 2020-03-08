@@ -18,13 +18,23 @@ docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 echo "INFO: Successfully logged in to Docker Hub!"
 
 # Tag our image with the build reference
-# Add :latest tag, if applicable
-if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
-	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
-    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
-else
 
+# Tag Builds
+if [[ $TRAVIS_TAG ]]; then
+	
+	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]
+		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:$TRAVIS_TAG"
+	else
+		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-$TRAVIS_TAG"
+	fi
+	
+	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
+
+elif [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+	# Master Builds
+    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
+else
+	# Snapshot tagging
 	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'development' ]]; then
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:snapshot"
 	elif [[ $TRAVIS_BRANCH == 'development' ]]; then
@@ -38,15 +48,17 @@ fi
 echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}"
 docker push ${BUILD_IMAGE_TAG}
 
+echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 
-if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-    docker push ${BUILD_IMAGE_TAG}:latest
-    docker push ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
-elif [[ $TRAVIS_BRANCH == 'master' ]]; then
-	docker tag ${BUILD_IMAGE_TAG} ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
-	docker push ${BUILD_IMAGE_TAG}-${IMAGE_VERSION}
+# Now create any suppplimentary tags
+if [[ $TRAVIS_TAG ]]; then
+	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
+	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}"
+	docker push ${BUILD_IMAGE_TAG}:${COMMANDBOX_VERSION}
+elif [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+	# Add :latest tag, if applicable
+    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
+	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:latest"
+	docker push ${BUILD_IMAGE_TAG}:latest
 fi
 
-
-
-echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
