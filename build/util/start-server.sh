@@ -61,6 +61,7 @@ if [[ $CFENGINE ]]; then
         serverHomeDirectory=${SERVER_HOME_DIRECTORY} \
         rewritesEnable=${REWRITES_ENABLE} \
         rewritesConfig=${REWRITES_FILE} \
+        trayEnable=false \
         host=0.0.0.0 \
         openbrowser=false \
         port=${PORT} \
@@ -75,6 +76,7 @@ else
         serverHomeDirectory=${SERVER_HOME_DIRECTORY} \
         rewritesEnable=${REWRITES_ENABLE} \
         rewritesConfig=${REWRITES_FILE} \
+        trayEnable=false \
         host=0.0.0.0 \
         openbrowser=false \
         port=${PORT} \
