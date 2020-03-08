@@ -24,7 +24,7 @@ if [[ $TRAVIS_TAG ]]; then
 	
 	# Strip the `v` from the start of the tag
 	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:VAR=${TRAVIS_TAG#v}"
+		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:${TRAVIS_TAG#v}"
 	else
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
 	fi
