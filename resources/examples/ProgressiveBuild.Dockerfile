@@ -4,7 +4,8 @@ FROM ortussolutions/commandbox:lucee5-snapshot as workbench
 ENV FINALIZE_STARTUP true
 RUN $BUILD_DIR/run.sh
 
-FROM adoptopenjdk/openjdk11:slim as app
+# Debian Slim is the smallest OpenJDK image on that kernel. For most apps, this should work to run your applications
+FROM adoptopenjdk/openjdk11:debianslim-jre as app
 
 # COPY our generated files
 COPY --from=workbench /app /app
