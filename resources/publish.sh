@@ -22,7 +22,7 @@ echo "INFO: Successfully logged in to Docker Hub!"
 # Tag Builds
 if [[ $TRAVIS_TAG ]]; then
 	
-	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]
+	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:$TRAVIS_TAG"
 	else
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-$TRAVIS_TAG"
