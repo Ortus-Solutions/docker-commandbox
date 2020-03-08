@@ -33,6 +33,12 @@ script:
   - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
 deploy:
+  - provider : script
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: "$TRAVIS_BRANCH = $TRAVIS_TAG"
+    script: ./resources/publish.sh
   - provider: script
     skip_cleanup: true
     on:
@@ -40,9 +46,4 @@ deploy:
       branch: 
         - master
         - development
-    script: ./resources/publish.sh
-  - provider : script
-    skip_cleanup: true
-    on:
-      condition: "$TRAVIS_BRANCH = $TRAVIS_TAG"
     script: ./resources/publish.sh
