@@ -2,14 +2,16 @@ language: python
 
 env:
   global:
-    - IMAGE_VERSION=2.8.0
+    - IMAGE_VERSION=2.8.1
     - COMMANDBOX_VERSION=5.0.0
   matrix:
     # Debian Builds
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk11
     - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5_2_9.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5.2.9
     - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018
@@ -17,7 +19,9 @@ env:
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk11-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5_2_9.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5.2.9-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine
