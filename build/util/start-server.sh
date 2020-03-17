@@ -91,9 +91,6 @@ fi
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
 if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
-    # use exec so Java gets to be PID 1 - will be resolved in CommandBox 5.1
-    sed -i 's/\/opt\/java/exec \/opt\/java/' ./server-start.sh
-
     if [[ ! $FINALIZE_STARTUP ]]; then
         
         echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"

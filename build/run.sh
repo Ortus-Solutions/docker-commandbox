@@ -82,11 +82,6 @@ else
 				CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 			fi
 
-			# Removing support for this parsing temporarily due to environment variables not being able to parsed accurately
-			# if [[ ! $HEAP_SIZE ]]; then	
-			# 	HEAP_SIZE=$(cat server.json | jq -r '.jvm.heapSize')
-			# fi
-
 			# ensure our string nulls are true nulls
 			if [[ ! $SERVER_HOME_DIRECTORY ]] ||  [[ $SERVER_HOME_DIRECTORY = 'null' ]] ; then
 				SERVER_HOME_DIRECTORY=''
