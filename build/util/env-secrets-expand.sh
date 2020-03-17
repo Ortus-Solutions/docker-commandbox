@@ -20,12 +20,13 @@ env_secret_expand() {
     var="$1"
     eval val=\$$var
 
-    if [[${var:(-5)}='_FILE']] || [[secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$")]]; then
-        if ${var:(-5)}='_FILE'; then
-            secret=$val
-        else
-            secret="${ENV_SECRETS_DIR}/${secret_name}"
-        fi
+    if secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$"); then
+        secret="${ENV_SECRETS_DIR}/${secret_name}"
+    elif [[ ${var:(-5)} == '_FILE' ]]; then
+        secret=$val
+    fi
+
+    if [ $secret ]; then
         env_secret_debug "Secret file for $var: $secret"
         if [ -f "$secret" ]; then
             val=$(cat "${secret}")
