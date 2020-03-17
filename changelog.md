@@ -6,6 +6,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 - (OC-4) Add handling for a `$FINALIZE_STARTUP` environment variable which will generate the final startup script to a trusted location. Once generated, this script will be authoritative for future container restarts and additional evaluation will be bypassed 
 - (OC-5) Sets default CommandBox rewrite rules to deny "hidden" files ( e.g. `.env` ) and common config files ( `server.json` )
 - (OC-6) Refactor `$HEADLESS` implementation in to startup routine 
+- (OC-10|Issue #44) Adds supports for _FILE convention variables
 
 ## 5.0.0/2.8.1
 - Add additional custom builds for Lucee 5.2.9 and Lucee Light
