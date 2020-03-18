@@ -30,7 +30,7 @@ env_secret_expand() {
         env_secret_debug "Secret file for $var: $secret"
         if [ -f "$secret" ]; then
             val=$(cat "${secret}")
-            if ${var:(-5)}='_FILE'; then
+            if [ ${var:(-5)} == '_FILE' ]; then
                 var=$(echo $var| cut -d'_' -f 1);
             fi
             export "$var"="$val"
