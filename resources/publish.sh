@@ -60,6 +60,6 @@ if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]
 	# Add commandbox version tag
     docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
 	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}"
-	docker push ${BUILD_IMAGE_TAG}:${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
+	docker push ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
 fi
 
