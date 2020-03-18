@@ -5,7 +5,15 @@ set -e
 if [[ -f $BIN_DIR/startup-final.sh ]]; then
 
 	. $BUILD_DIR/util/env-secrets-expand.sh
-	$BIN_DIR/startup-final.sh
+	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
+		if [[ -f /etc/alpine-release ]]; then
+			su -p -c $BIN_DIR/startup-final.sh $USER
+		else 
+			su --preserve-environment -c $BIN_DIR/startup-final.sh $USER
+		fi
+	else
+		$BIN_DIR/startup-final.sh
+	fi
 
 else
 	# Remove any previous generated startup scripts so that the config is re-read
