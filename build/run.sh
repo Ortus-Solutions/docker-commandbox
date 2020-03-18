@@ -4,6 +4,7 @@ set -e
 # If we have a finalized startup script bypass all further evaluation and use it authoritatively
 if [[ -f $BIN_DIR/startup-final.sh ]]; then
 
+	. $BUILD_DIR/util/env-secrets-expand.sh
 	$BIN_DIR/startup-final.sh
 
 else
