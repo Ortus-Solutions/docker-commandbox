@@ -11,18 +11,25 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version
-* `:4.0.0` - Stable image tagged with the version of CommandBox used to build the image ( `:4.0.0`, `:4.5.0`, `:4.6.0` )
+* `:commandbox-5.0.1` - Stable image tagged with the version of CommandBox used to build the image
+* `:3.0.0` - Tagged version of the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
+* `:jdk8` - Base image using OpenJDK8
+* `:jdk11` - Base image using OpenJDK11
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
-* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
+* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)), `:lucee5.2.9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5_2_9.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
-`:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
+`:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee5.2.9-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5_2_9.Dockerfile)), `:lucee-light-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
+
+_*Note*: The `:latest` tag currently uses OpenJDK8, for compatibility with all engines.  The pre-seeded engines built using JDK11 - both Debian and Alpine base - are `:lucee5`, `:lucee-light` and `adobe2018`_ 
 
 Description 
 =================
 
 CommandBox allows you to configure your entire CFML engine environment from a single file in the root of your project.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://ortus.gitbooks.io/commandbox-documentation/). 
+
+In addition the CommandBox modules of [`dotenv`](https://www.forgebox.io/view/commandbox-dotenv) and [`cfconfig`](https://cfconfig.ortusbooks.com/) are included in these pre-built images, which allow you to leverage runtime environmental and server configuration options.
 
 Current CFML engines supported are:
 
@@ -54,30 +61,6 @@ By default the process ports of the container are `8080` (insecure) and `8443` (
 docker run -p 8080:8080 -p 8443:8443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
 ```
 
-To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox) as a reference to begin your customizations.  You can extend any of the base images and add your own additional functionality or modules.  For example, to install the [Ortus Couchbase extension for Lucee](https://www.ortussolutions.com/products/couchbase-lucee):
-
-```
-FROM ortussolutions/commandbox:lucee5
-
-ARG COUCHBASE_EMAIL
-ARG COUCHBASE_LICENSE_KEY
-ARG COUCHBASE_ACTIVATION_CODE
-
-# Copy Couchbase Extension into place for install
-ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/deploy/couchbase-cache.lex
-
-# Seed Couchbase Extension License
-ENV COUCHBASE_LICENSE_FILE $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
-RUN touch "${CI_PROJECT_DIR}/build/license.properties" \
-  && printf "email=${COUCHBASE_EMAIL}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "licenseKey=${COUCHBASE_LICENSE_KEY}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "activationCode=${COUCHBASE_ACTIVATION_CODE}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "serverType=Production\n" >> ${COUCHBASE_LICENSE_FILE}
-
-# WARM UP THE SERVER WITH THE NEW EXTENSION
-RUN ${BUILD_DIR}/util/warmup-server.sh
-```
-
 Environment Variables
 =====================
 
@@ -88,6 +71,13 @@ The CommandBox Docker image supports the use of environmental variables for the 
 * `$PORT` - The port which your server should start on.  The default is `8080`.
 * `$SSL_PORT` - If applicable, the ssl port used by your server The default is `8443`.
 
+##### HTTP2 Support
+
+If enabling HTTP2 via the `runwar.args` option of `--http2-enable=true`, the SSL port in the current version of CommandBox/Runwar is overridden to `1444`. In order to access this port, you would need to: 
+
+* Set the `SSL_PORT` environment variable to `1444`
+* Provide a port mapping to the external host from the external SSL port to port `1444`
+
 
 ##### Server Configuration Variables
 
@@ -95,14 +85,14 @@ The following environment variables may be provided to modify your runtime serve
 
 * `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `/usr/local/var/serverHome` ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
 * `APP_DIR` - Application directory (web root). By default, this is `/app`.  If you are deploying an application with mappings outside of the root, you would want to provide this environment variable to point to the webroot ( e.g. `/app/wwwroot` )
-* `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
+* `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 * `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
 * `cfconfigfile` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically.  _Note: The value `CFCONFIG` is aliased to this parameter, but is deprecated._
+* `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
+* `FINALIZE_STARTUP` - When provided a final startup script will be generated, which will be considered authoritative the next time the container/image starts. The caveat to this, however, is that the finalized startup script will bypass the evaluation checks for all of the other environment variables in this list as those values will be explicitly exported in the startup file.
 * `HEADLESS`/`headless` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure deployment with no administrator access.
-* `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 * `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
 * `USER` - When provided the server process will run under the provided user account name
-* `javaVersion` - When provided the server will [start on a custom JRE](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/custom-java-version) specified by the environment variable.
 
 ##### Docker Runtime Variables
 
@@ -115,6 +105,10 @@ Docker Secrets
 
 * Secret values stored as files on the host (non-swarm mode).
 * `docker secret`-managed key/value pairs (swarm mode).
+
+Secret expansion can be accomplished by one of two mechanisms ( or both ):
+
+### `<<SECRET:*>>` Prefix
 
 To use secrets as variables in this image, a placeholder is specified (e.g., `<<SECRET:test_docker_secret>>`) as the variable's value. At run-time, the environment variable's value is replaced with the secret.
 
@@ -139,8 +133,45 @@ secrets:
     file: ./build/tests/secrets/test_docker_secret
 ```
 
-Deployment
-==========
+### `_FILE` Suffix conventions
+
+When any environment variable is suffixed with `_FILE`, the right-hand assignment will be loaded and expanded as the environment variable prior to the suffix.  The most common use-case for this is in sourcing Docker secrets, however it may also be used to source runtime-mounted files as variables.
+
+For example the variable `REINIT_PASSWORD_FILE=/run/secrets/reinit_password` would source the contents of the right-hand file path in as the `REINIT_PASSWORD` environment variable.
+
+
+Best Practices and Customization
+================================
+
+### Customizing Images
+
+To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox) as a reference to begin your customizations.  You can extend any of the base images and add your own additional functionality or modules.  For example, to install the [Ortus Couchbase extension for Lucee](https://www.ortussolutions.com/products/couchbase-lucee):
+
+```
+FROM ortussolutions/commandbox:lucee5
+
+ARG COUCHBASE_EMAIL
+ARG COUCHBASE_LICENSE_KEY
+ARG COUCHBASE_ACTIVATION_CODE
+
+# Copy Couchbase Extension into place for install
+ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/deploy/couchbase-cache.lex
+
+# Seed Couchbase Extension License
+ENV COUCHBASE_LICENSE_FILE $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
+RUN touch "${CI_PROJECT_DIR}/build/license.properties" \
+  && printf "email=${COUCHBASE_EMAIL}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "licenseKey=${COUCHBASE_LICENSE_KEY}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "activationCode=${COUCHBASE_ACTIVATION_CODE}\n" >> ${COUCHBASE_LICENSE_FILE} \
+  && printf "serverType=Production\n" >> ${COUCHBASE_LICENSE_FILE}
+
+# WARM UP THE SERVER WITH THE NEW EXTENSION
+RUN ${BUILD_DIR}/util/warmup-server.sh
+```
+
+We recommend using the pre-tagged images as your base, rather than starting from scratch.  
+
+### Optimizing Startup Times
 
 Because, with the exception of the CommandBox default engine of Lucee 5, the CFML server engines are downloaded and installed at container runtime. This can result in significant startup time increases ( even with Lucee 5 already downloaded in the base image, there is a time penalty for a "cold start" ). It is recommended that builds for production use employ an engine-specific variation for the build, which ensures the server is downloaded, in place, and warmed up on container start.   
 
@@ -182,6 +213,54 @@ ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/config/Routes.cfm"
 In the above case, the `setup-env.sh` file might perform an additional server warmup and validation, where in the former case, the server was previously warmed up when the image was built.
 
 Once your customized `Dockerfile` has has been built, you can run the generated image directly, or publish it to a [private registry](https://docs.docker.com/registry/) 
+
+#### Extension Installation
+
+
+
+#### Multi-Stage Builds
+
+As of v3.0.0 of the image you can create multi-stage builds which include only a shell script to start the server, the RunWar servlet container, and the application/engine. This build is finalized, however, so the startup script will bypass all environmental and server evaluation in favor of the variables provided in the generated shell script.
+
+A finalized image reduces container startup times by up to 80% and reduces the final image size by up to 50%.  Multi-stage builds are ideal for creating production images.  The environment variable `FINALIZE_STARTUP`, when provided, will only generate the startup script.  The script written is considered authoritative and will be used on the next container start.
+
+To leverage this with a multi-stage build:
+
+```
+FROM ortussolutions/commandbox:lucee5 as workbench
+
+# Generate the startup script only
+ENV FINALIZE_STARTUP true
+RUN $BUILD_DIR/run.sh
+
+# Debian Slim is the smallest OpenJDK image on that kernel. For most apps, this should work to run your applications
+FROM adoptopenjdk/openjdk11:debianslim-jre as app
+
+# COPY our generated files
+COPY --from=workbench /app /app
+COPY --from=workbench /usr/local/lib/serverHome /usr/local/lib/serverHome
+
+RUN mkdir -p /usr/local/lib/CommandBox/lib
+
+COPY --from=workbench /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar
+COPY --from=workbench /usr/local/bin/startup-final.sh /usr/local/bin/run.sh
+
+CMD /usr/local/bin/run.sh
+```
+
+#### Single-Stage With Script Finalization
+
+You may also create this finalized startup script in a single-stage build:
+
+```
+FROM ortussolutions/commandbox:lucee5
+
+# Generate the finalized startup script and exit
+RUN export FINALIZE_STARTUP=true;$BUILD_DIR/run.sh;unset FINALIZE_STARTUP
+```
+
+This created image will contain the authoritative script with its runtime benefits and caveats ( see above ).  Unlike the multi-stage build above, however , secret expansion will take place prior to image start, with the caveat that any environment variables explicitly declared when the finalized script was generated will be overridden by the export commands in the script.
+
 
 About CommandBox
 ================
