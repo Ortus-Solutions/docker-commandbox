@@ -22,7 +22,8 @@ env_secret_expand() {
 
     if secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$"); then
         secret="${ENV_SECRETS_DIR}/${secret_name}"
-    elif [[ ${var:(-5)} == '_FILE' ]]; then
+    elif [[ ${var:(-5)} = '_FILE' ]]; then
+        suffix=${var:(-5)}
         secret=$val
     fi
 
@@ -30,7 +31,8 @@ env_secret_expand() {
         env_secret_debug "Secret file for $var: $secret"
         if [ -f "$secret" ]; then
             val=$(cat "${secret}")
-            if [ ${var:(-5)} == '_FILE' ]; then
+            if [ $suffix ]; then
+                echo "Expanding from _FILE suffix"
                 var=$(echo $var| cut -d'_' -f 1);
             fi
             export "$var"="$val"
@@ -40,6 +42,13 @@ env_secret_expand() {
             env_secret_debug "Secret file does not exist! $secret"
         fi
     fi
+
+    # reset
+    unset secret;
+    unset secret_name;
+    unset var;
+    unset suffix;
+    unset val;
 }
 
 env_secrets_expand() {
