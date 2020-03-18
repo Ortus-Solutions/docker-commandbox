@@ -214,9 +214,6 @@ In the above case, the `setup-env.sh` file might perform an additional server wa
 
 Once your customized `Dockerfile` has has been built, you can run the generated image directly, or publish it to a [private registry](https://docs.docker.com/registry/) 
 
-#### Extension Installation
-
-
 
 #### Multi-Stage Builds
 
@@ -259,7 +256,7 @@ FROM ortussolutions/commandbox:lucee5
 RUN export FINALIZE_STARTUP=true;$BUILD_DIR/run.sh;unset FINALIZE_STARTUP
 ```
 
-This created image will contain the authoritative script with its runtime benefits and caveats ( see above ).  Unlike the multi-stage build above, however , secret expansion will take place prior to image start, with the caveat that any environment variables explicitly declared when the finalized script was generated will be overridden by the export commands in the script.
+This created image will contain the authoritative script with its runtime benefits and caveats ( see above ).  Unlike the multi-stage build above, however , secret expansion will take place prior to image start, with the caveat that any environment variables in existence when finalized script was generated will overwrite the runtime-provided variables or secrets.
 
 
 About CommandBox
