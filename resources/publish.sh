@@ -14,7 +14,7 @@ docker build --no-cache -t ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} -f $TRAVIS_BUILD_DI
 echo "INFO: Docker image successfully built"
 
 # Log in to Docker Hub
-docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+docker login -u $DOCKER_HUB_USERNAME -p "${DOCKER_HUB_PASSWORD}"
 echo "INFO: Successfully logged in to Docker Hub!"
 
 # Tag our image with the build reference
