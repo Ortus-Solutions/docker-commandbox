@@ -28,14 +28,19 @@ if [[ -f $APP_DIR/server.json ]]; then
     REWRITE_FLAG=$(cat server.json | jq -r '.web.rewrites.enable')
     REWRITE_CONFIG=$(cat server.json | jq -r '.web.rewrites.config')
     if [[ $REWRITE_FLAG ]] || [[ $REWRITE_FLAG != 'null' ]]; then
-        REWRITES_ENABLE=$REWRITE_FLAG 
+        REWRITES_ENABLE=$REWRITE_FLAG
+    fi
+
+    if [[ $REWRITE_CONFIG ]] || [[ $REWRITE_CONFIG != 'null' ]]; then
+        REWRITES_FILE=$REWRITE_CONFIG
+        echo "INFO: Existing rewrite configuration detected."
     fi
 fi
 
 if [[ $HEADLESS ]] || [[ $headless ]]; then
     echo "****************************************************************"
     echo "INFO: Headless startup flag detected, disabling admin web interfaces..."
-    
+
     #ACF Lockdown
     export cfconfig_adminAllowedIPList=127.0.0.1
     export cfconfig_debuggingIPList=127.0.0.1
@@ -92,7 +97,7 @@ fi
 if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
     if [[ ! $FINALIZE_STARTUP ]]; then
-        
+
         echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"
 
         mv ./server-start.sh $BIN_DIR/startup.sh
