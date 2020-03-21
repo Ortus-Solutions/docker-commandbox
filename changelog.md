@@ -2,6 +2,10 @@ CHANGELOG
 =========
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+
+## 5.0.1/3.0.2
+- ( Snapshot updates here )
+
 ## 5.0.1/3.0.1
 - Fixes a regression where custom rewrite files were being ignored unless `HEADLESS` was present in the environment
 
