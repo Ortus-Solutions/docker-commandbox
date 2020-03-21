@@ -3,7 +3,7 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 ## 5.0.1/3.0.1
-- ( Snapshot updates )
+- Fixes a regression where custom rewrite files were being ignored unless `HEADLESS` was present in the environment
 
 ## 5.0.1/3.0.0
 - (OC-4) Add handling for a `$FINALIZE_STARTUP` environment variable which will generate the final startup script to a trusted location. Once generated, this script will be authoritative for future container restarts and additional evaluation will be bypassed 
