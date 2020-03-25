@@ -27,13 +27,15 @@ fi
 if [[ -f $APP_DIR/server.json ]]; then
     REWRITE_FLAG=$(cat server.json | jq -r '.web.rewrites.enable')
     REWRITE_CONFIG=$(cat server.json | jq -r '.web.rewrites.config')
-    if [[ $REWRITE_FLAG ]] || [[ $REWRITE_FLAG != 'null' ]]; then
+
+    if [[ $REWRITE_FLAG ]] && [[ $REWRITE_FLAG != 'null' ]]; then
         REWRITES_ENABLE=$REWRITE_FLAG
+        echo "INFO: Existing rewrite flag detected: ${REWRITE_FLAG}"
     fi
 
-    if [[ $REWRITE_CONFIG ]] || [[ $REWRITE_CONFIG != 'null' ]]; then
+    if [[ $REWRITE_CONFIG ]] && [[ $REWRITE_CONFIG != 'null' ]]; then
         REWRITES_FILE=$REWRITE_CONFIG
-        echo "INFO: Existing rewrite configuration detected."
+        echo "INFO: Existing rewrite configuration detected: ${REWRITE_CONFIG}"
     fi
 fi
 
@@ -54,7 +56,7 @@ if [[ $HEADLESS ]] || [[ $headless ]]; then
         echo "INFO: Server admininistrative web interfaces are now disallowed"
     else
         REWRITES_FILE=$REWRITE_CONFIG
-        echo "WARN: Existing rewrite configuration detected.  Could not apply headless configuration."
+        echo "WARN: Existing rewrite configuration detected: ${REWRITE_CONFIG} .  Could not apply headless configuration."
     fi
 
     echo "****************************************************************"

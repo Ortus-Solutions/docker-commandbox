@@ -88,6 +88,14 @@ echo "CFConfig file tests completed successfully"
 
 printf "\n\n*******************\n\n"
 
+
+# CFConfig Variables
+echo "Tests the ability to run the environment in headless mode"
+
+./tests/test.headless.sh
+
+echo "HEADLESS environment variable tests completed successfully"
+
 # Rewrites Environment variables
 echo "Testing the ability to specify to turn rewrites off via an environment variable"
 
@@ -110,6 +118,14 @@ cd $APP_DIR
 box server stop
 
 echo "Rewrite environment tests completed successfully"
+
+
+# CFConfig Variables
+echo "Tests the ability to use standard rewrite configuration settings"
+
+./tests/test.rewrites.sh
+
+echo "Commandbox rewrite convention tests completed successfully"
 
 
 printf "\n\n*******************\n\n"
