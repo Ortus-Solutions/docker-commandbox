@@ -119,6 +119,7 @@ box server stop
 
 echo "Rewrite environment tests completed successfully"
 
+cd $BUILD_DIR
 
 # CFConfig Variables
 echo "Tests the ability to use standard rewrite configuration settings"
