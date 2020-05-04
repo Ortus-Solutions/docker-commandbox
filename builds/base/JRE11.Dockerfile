@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:slim
+FROM adoptopenjdk/openjdk11:jdk-11.0.6_10-slim
 
 LABEL version "@version@"
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
