@@ -3,7 +3,7 @@ language: python
 env:
   global:
     - IMAGE_VERSION=3.0.2
-    - COMMANDBOX_VERSION=5.0.1
+    - COMMANDBOX_VERSION=5.1.0
   matrix:
     # Debian Builds
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox

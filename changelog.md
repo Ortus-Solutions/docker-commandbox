@@ -3,6 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 5.1.0/3.1.0
+- Updates CommandBox binary to v5.1.0
+
 ## 5.0.1/3.0.2
 - Fixes a regression from 3.0.1 caused by an incorrect conditional on checking for the presence of a rewrite configuration file
 
