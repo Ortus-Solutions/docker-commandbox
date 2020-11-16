@@ -3,6 +3,12 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 5.2.0/3.1.1
+- Updates CommandBox binary to v5.2.0
+- `:adobe2018` to `v2018.0.10+320417`
+- `:adobe2016` to `v2016.0.16+320445`
+- `:lucee5` to `v5.3.7+47`
+
 ## 5.1.0/3.1.0
 - Updates CommandBox binary to v5.1.0
 
