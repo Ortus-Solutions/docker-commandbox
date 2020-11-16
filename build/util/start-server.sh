@@ -53,7 +53,7 @@ if [[ $HEADLESS ]] || [[ $headless ]]; then
         echo "INFO: Applying headless configuration via rewrite rules"
         REWRITES_ENABLE=true
         REWRITES_FILE=${BUILD_DIR}/resources/urlrewrite-headless.xml
-        echo "INFO: Server admininistrative web interfaces are now disallowed"
+        echo "INFO: Server administrative web interfaces are now disallowed"
     else
         REWRITES_FILE=$REWRITE_CONFIG
         echo "WARN: Existing rewrite configuration detected: ${REWRITE_CONFIG} .  Could not apply headless configuration."
