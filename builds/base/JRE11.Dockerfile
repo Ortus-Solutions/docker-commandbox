@@ -44,7 +44,7 @@ COPY ./build/ ${BUILD_DIR}/
 RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all runwar users have permission on the build scripts
-RUN chown -R $(whomami):${WORKGROUP} $BUILD_DIR
+RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Set up our environment to allow CommandBox to run on JRE11
 ENV BOX_JAVA_ARGS="-Djdk.attach.allowAttachSelf=true"
