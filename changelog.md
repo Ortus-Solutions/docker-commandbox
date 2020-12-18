@@ -3,8 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
-## 5.2.0/3.1.2
-- [ snapshot updates ]
+## 5.2.1/3.2.0
+- Updates CommandBox binary to v5.2.1
+- Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images 
 
 ## 5.2.0/3.1.1
 - Updates CommandBox binary to v5.2.0

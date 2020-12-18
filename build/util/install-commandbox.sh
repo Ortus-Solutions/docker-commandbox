@@ -16,6 +16,9 @@ echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
 
 echo "$(box version) successfully installed"
 
+# Set container in to single server mode
+box config set server.singleServerMode=true
+
 # Cleanup CommandBox modules which would not be necessary in a Container environment
 SYSTEM_EXCLUDES=( "coldbox" "contentbox" "cachebox" "logbox" "games" "wirebox" )
 MODULE_EXCLUDES=( "cfscriptme-command" "cb-module-template" )
