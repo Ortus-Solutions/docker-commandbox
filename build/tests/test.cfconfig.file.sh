@@ -1,5 +1,8 @@
 cd $APP_DIR
 
+# The file needs to exist already when single server mode is on
+echo "{}" > $APP_DIR/cfconfig.json
+
 box cfconfig set adminPassword=testing to=$APP_DIR/cfconfig.json
 
 if [[ ! -f ${APP_DIR}/cfconfig.json ]]; then
