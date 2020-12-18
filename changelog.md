@@ -5,7 +5,7 @@ The versioning notation below denotes the following:  `[CommandBox Version]/[Ima
 
 ## 5.2.1/3.2.0
 - Updates CommandBox binary to v5.2.1
-- Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images 
+- Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images  (_Note: When single server mode is enabled, the `cfconfig set` commands with a `to` argument - e.g `cfconfig set adminPassword=foo to=cfconfig.json` will only write to files if they are already in existence_)
 
 ## 5.2.0/3.1.1
 - Updates CommandBox binary to v5.2.0
