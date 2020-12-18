@@ -13,8 +13,8 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version
-* `:commandbox-5.0.1` - Stable image tagged with the version of CommandBox used to build the image
-* `:3.0.0` - Tagged version of the image
+* `:commandbox-5.2.1` - Stable image tagged with the version of CommandBox used to build the image
+* `:3.2.0` - Tagged version of the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
@@ -24,7 +24,7 @@ Tags
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
 `:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee5.2.9-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5_2_9.Dockerfile)), `:lucee-light-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
 
-_*Note*: The `:latest` tag currently uses OpenJDK8, for compatibility with all engines.  The pre-seeded engines built using JDK11 - both Debian and Alpine base - are `:lucee5`, `:lucee-light` and `adobe2018`_ 
+_*Note*: The `:latest` tag currently uses OpenJDK8, for compatibility with all engines.  The pre-seeded engines built using JDK11 - both Debian and Alpine base - are `:lucee5`, `:lucee-light`, `:adobe2018` and `:adobe2021`_ 
 
 Description 
 =================
