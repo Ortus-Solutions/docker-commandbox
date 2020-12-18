@@ -15,6 +15,7 @@ env:
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021
     # Alpine builds
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk11-alpine
@@ -25,6 +26,7 @@ env:
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine
 
 services:
   - docker
