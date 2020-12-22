@@ -77,7 +77,8 @@ if [[ $CFENGINE ]]; then
         debug=${DEBUG_FLAG} \
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
-        startScript=${SCRIPT_TYPE}
+        startScript=${SCRIPT_TYPE} \
+        verbose=true
 else
     box server start \
         serverHomeDirectory=${SERVER_HOME_DIRECTORY} \
@@ -92,7 +93,8 @@ else
         debug=${DEBUG_FLAG} \
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
-        startScript=${SCRIPT_TYPE}
+        startScript=${SCRIPT_TYPE} \
+        verbose=true
 fi
 
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
