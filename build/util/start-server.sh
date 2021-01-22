@@ -104,7 +104,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
         echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"
 
-        mv ./server-start.sh $BIN_DIR/startup.sh
+        mv $APP_DIR/server-start.sh $BIN_DIR/startup.sh
 
         chmod +x $BIN_DIR/startup.sh
 
@@ -115,7 +115,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
         echo "INFO: Seeding finalized server startup script to ${BIN_DIR}/startup-final.sh"
 
         # If our image is being finalized, then we move the script to the terminal script location, which bypasses re-evaluation
-        mv ./server-start.sh $BIN_DIR/startup-final.sh
+        mv $APP_DIR/server-start.sh $BIN_DIR/startup-final.sh
 
         chmod +x $BIN_DIR/startup-final.sh
 
