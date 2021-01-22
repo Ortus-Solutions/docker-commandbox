@@ -102,7 +102,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
     if [[ ! $FINALIZE_STARTUP ]]; then
 
-        echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"
+        echo "INFO: Starting server using generated script: ${BIN_DIR}/startup.sh"
 
         mv $APP_DIR/server-start.sh $BIN_DIR/startup.sh
 

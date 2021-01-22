@@ -4,7 +4,9 @@ CHANGELOG
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
 ## 5.2.1/3.2.1
+- Ensures verbose output is always on when starting the server
 - Resolves issue #55 - Fixes a pathing problem with the generated startup script when `$APP_DIR` is not the default and single server mode is on
+- Fixes for several typos in comments and scripts
 
 ## 5.2.1/3.2.0
 - Updates CommandBox binary to v5.2.1
