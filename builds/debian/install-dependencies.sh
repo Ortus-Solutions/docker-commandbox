@@ -18,11 +18,11 @@ apt-get update && apt-get \install --assume-yes \
 	} > /usr/local/bin/docker-java-home
 
 # Ensure all runwar users have permission on the java home
-chown -R $(whomami):${WORKGROUP} /usr/local/bin/docker-java-home
+chown -R $(whoami):${WORKGROUP} /usr/local/bin/docker-java-home
 chmod g+x /usr/local/bin/docker-java-home
 
 # Ensure all runwar users have permission on the build scripts
-chown -R $(whomami):${WORKGROUP} $BUILD_DIR
+chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Cleanup before the layer is committed
 apt-get clean autoclean

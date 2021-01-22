@@ -77,7 +77,8 @@ if [[ $CFENGINE ]]; then
         debug=${DEBUG_FLAG} \
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
-        startScript=${SCRIPT_TYPE}
+        startScript=${SCRIPT_TYPE} \
+        verbose=true
 else
     box server start \
         serverHomeDirectory=${SERVER_HOME_DIRECTORY} \
@@ -92,7 +93,8 @@ else
         debug=${DEBUG_FLAG} \
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
-        startScript=${SCRIPT_TYPE}
+        startScript=${SCRIPT_TYPE} \
+        verbose=true
 fi
 
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
@@ -102,7 +104,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
         echo "INFO: Starting server using genrated script: ${BIN_DIR}/startup.sh"
 
-        mv ./server-start.sh $BIN_DIR/startup.sh
+        mv $APP_DIR/server-start.sh $BIN_DIR/startup.sh
 
         chmod +x $BIN_DIR/startup.sh
 
@@ -113,7 +115,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
         echo "INFO: Seeding finalized server startup script to ${BIN_DIR}/startup-final.sh"
 
         # If our image is being finalized, then we move the script to the terminal script location, which bypasses re-evaluation
-        mv ./server-start.sh $BIN_DIR/startup-final.sh
+        mv $APP_DIR/server-start.sh $BIN_DIR/startup-final.sh
 
         chmod +x $BIN_DIR/startup-final.sh
 

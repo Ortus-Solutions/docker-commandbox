@@ -3,6 +3,9 @@ CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
+## 5.2.1/3.2.1
+- Resolves issue #55 - Fixes a pathing problem with the generated startup script when `$APP_DIR` is not the default and single server mode is on
+
 ## 5.2.1/3.2.0
 - Updates CommandBox binary to v5.2.1
 - Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images  (_Note: When single server mode is enabled, the `cfconfig set` commands with a `to` argument - e.g `cfconfig set adminPassword=foo to=cfconfig.json` will only write to files if they are already in existence_)

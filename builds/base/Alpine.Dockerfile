@@ -81,4 +81,6 @@ HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCH
 
 EXPOSE ${PORT} ${SSL_PORT}
 
+WORKDIR $APP_DIR
+
 CMD $BUILD_DIR/run.sh
