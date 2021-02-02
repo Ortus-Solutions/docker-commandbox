@@ -1,146 +1,261 @@
-CHANGELOG
-=========
+# CHANGELOG
 
 The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
 
-## 5.2.1/3.2.1
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+----
+
+## [5.2.1/3.2.1] - 2021-01-22
+
+### Added
+
 - Ensures verbose output is always on when starting the server
+
+### Fixed
+
 - Resolves issue #55 - Fixes a pathing problem with the generated startup script when `$APP_DIR` is not the default and single server mode is on
 - Fixes for several typos in comments and scripts
 
-## 5.2.1/3.2.0
+## [5.2.1/3.2.0] - 2020-12-18
+
+### Changed
+
 - Updates CommandBox binary to v5.2.1
+
+### Added
+
 - Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images  (_Note: When single server mode is enabled, the `cfconfig set` commands with a `to` argument - e.g `cfconfig set adminPassword=foo to=cfconfig.json` will only write to files if they are already in existence_)
 
-## 5.2.0/3.1.1
+## [5.2.0/3.1.1] - 2020-11-16
+
+### Changed
+
 - Updates CommandBox binary to v5.2.0
 - `:adobe2018` to `v2018.0.10+320417`
 - `:adobe2016` to `v2016.0.16+320445`
 - `:lucee5` to `v5.3.7+47`
 
-## 5.1.0/3.1.0
+## [5.1.0/3.1.0] - 2020-07-14
+
+### Changed
+
 - Updates CommandBox binary to v5.1.0
 
-## 5.0.1/3.0.2
+## 5.0.1/3.0.2 - 2020-03-26
+
+### Fixed
+
 - Fixes a regression from 3.0.1 caused by an incorrect conditional on checking for the presence of a rewrite configuration file
 
-## 5.0.1/3.0.1
+## [5.0.1/3.0.1] - 2020-03-21
+
+### Fixed
+
 - Fixes a regression where custom rewrite files were being ignored unless `HEADLESS` was present in the environment
 
-## 5.0.1/3.0.0
+## [5.0.1/3.0.0] - 2020-03-18
+
+### Added
+
 - (OC-4) Add handling for a `$FINALIZE_STARTUP` environment variable which will generate the final startup script to a trusted location. Once generated, this script will be authoritative for future container restarts and additional evaluation will be bypassed 
 - (OC-5) Sets default CommandBox rewrite rules to deny "hidden" files ( e.g. `.env` ) and common config files ( `server.json` )
 - (OC-6) Refactor `$HEADLESS` implementation in to startup routine 
 - (OC-10|Issue #44) Adds supports for _FILE convention variables
 
-## 5.0.0/2.8.1
+## [5.0.0/2.8.1] - 2020-03-11
+
+### Added
+
 - Add additional custom builds for Lucee 5.2.9 and Lucee Light
 - (OC-5) Sets default CommandBox rewrite rules to deny "hidden" files ( e.g. `.env` ) and common config files ( `server.json` )
 
 
-## 5.0.0/2.8.0
+## [5.0.0/2.8.0] - 2020-03-08
+
+### Changed
+
 - Updates CommandBox binary to 5.0.0
+
+### Added
+
 - Changes startup mechanism to use CommandBox generated bash script ( removes need for `box` process wrapper )
 
-## 4.8.0/2.7.3
+## [4.8.0/2.7.3] - 2019-09-26
+
+### Fixed
+
 - Fixes an issue where log output would stop because of rotation
 
-## 4.8.0/2.7.2
+## [4.8.0/2.7.2] - 2019-09-05
+
+### Changed
+
 - Updates CommandBox binary to 4.8.0
 - Updates all ACF engines to latest hotfix
 
-## 4.7.0/2.7.1
+## [4.7.0/2.7.1] - 2019-03-07
+
+### Changed
+
 - Updates Commandbox binary to 4.7.0
 
-## 4.6.0/2.7.0
+## [4.6.0/2.7.0] - 2019-03-05
+
+### Added
+
 - Implements the ability to specify a non-root user to run server ( via `USER` environment variable )
 - Updates all ACF engines to latest hotfix
 - Omits forgebox from module cleanup
 - Additional error handling and utilities for manual install
 - Adds `fontconfig` for Debian and Alpine to fix PDF generation errors on AdoptOpenJDK base
 
-## 4.6.0/2.6.1
+## [4.6.0/2.6.1] - 2019-03-02
+
+### Changed
+
 - Updates all ACF engines to latest hotfix
 - Updates CommandBox binary to v4.6.0
 
-## 4.5.0/2.6.0
-- Updates all java versions to use AdoptOpenJDK builds
+## [4.5.0/2.6.0] - 2019-03-01
+
+### Added
+
 - Adds a `javaVersion` environment variable which can be used to customize the startup JRE of the server
+
+### Changed
+
+- Updates all java versions to use AdoptOpenJDK builds
 - Changes the JRE used for Adobe Coldfusion 2018 images to JRE11
 
-## 4.5.0/2.5.0
+## [4.5.0/2.5.0] - 2019-02-23
+
+### Changed
+
 - Updates CommandBox binary to v4.5.0
 
-## 4.4.0/2.4.0
+## [4.4.0/2.4.0] - 2018-11-18
+
+### Changed
+
 - Updates CommandBox binary to v4.4.0
+
+### Added
+
 - Adds the `commandbox-dotenv` module in to all base images
 
-## 4.2.0/2.3.0
+## [4.2.0/2.3.0] - 2018-08-18
+
+### Changed
+
 - Remove no longer needed engine detection from run scripts
+
+### Added
+
 - Optimization and reductions to Debian-based image sizes
 - Adds additional APK binaries to Alpine images to support PDF/CFDocument rendering
 
-## 4.2.0/2.2.6
+## [4.2.0/2.2.6] - 2018-08-5
+
+### Changed
+
 - Updates CommandBox binary to v4.2.0
 
-## 4.1.0/2.2.5
+## [4.1.0/2.2.5] - 2018-06-27
+
+### Changed
+
 - Updates CommandBox binary to v4.1.0
 
+## [4.0.0/2.2.4] - 2018-06-16
 
-## 4.0.0/2.2.4
+### Changed
 
 - Revises Travis build structure to better support concurrent image builds
+
+### Added
+
 - Adds warmed-up engine builds for Alpine images
 - Additional optimizations to reduce image size
 
-## 4.0.0/2.2.3
+## [4.0.0/2.2.3] - 2018-06-15
+
+### Changed
 
 - Temporarily removes support for `HEAP_SIZE` environment variable due to parse failures with env variables in `server.json`
 
-## 4.0.0/2.2.2
+## [4.0.0/2.2.2] - 2018-06-13
+
+### Changed
 
 - Changes alpine image to use `openjdk:8-alpine`
 - Changes image tag in Dockerfile for base Debian image to match official tags on Docker Hub
 
-## 4.0.0/2.2.1
+## [4.0.0/2.2.1] - 2018-06-12
+
+### Added
 
 - Adds ability to specify `HEAP_SIZE` environment variable
+
+### Fixed
+
 - Fixes an issue with `cfconfig_` prefixed environment variables failing
 
-## 4.0.0/2.2.0
+## [4.0.0/2.2.0] - 2018-06-04
+
+### Changed
 
 - Ubuntu base version to use OpenJDK Slim
 - Updates to CommandBox v4.0.0
 - Changes default CommandBox server engine to Lucee 5
 
-## 3.9.2/2.1.4
+## [3.9.2/2.1.4] - 2018-01-23
+
+### Changed
 
 - Updates to Commandbox v3.9.2
 - Changes Docker secrets placeholder for bash compatibility
 
-## 3.9.1/2.1.3
+## [3.9.1/2.1.3] - 2017-11-28
+
+### Fixed
 
 - Fixes a regression where `SSL_PORT` environment variables were being ignored
 
 
-## 3.9.0/2.1.2
+## [3.9.0/2.1.2] - 2017-11-17
+
+### Changed
 
 - Updates to CommandBox v3.9.0
+
+### Fixed
+
 - Fixes server setting argument name
 
-## 3.8.0/2.1.1
+## [3.8.0/2.1.1] - 2017-11-02
+
+### Changed
 
 - Updates CMD to not persist container runtime settings to server.json
 
-## 3.8.0/2.1.0
+## [3.8.0/2.1.0] - 2017-10-31
 
-- Updates to CommandBox v3.8+
+### Added
+
 - Adds support for Docker secrets
 - Adds casing aliases for environment variables
+
+### Changed
+
+- Updates to CommandBox v3.8+
 - Updates runtime output to avoid confusion
 - Changes image for alpine build to prevent CommandBox errors when installing dependencies
 
-## 3.7.0/2.0.3
+## [3.7.0/2.0.3] - 2017-06-30
+
+### Changed
 
 - Updates to CommandBox v3.7+
 - Delegates cfconfig environment variables to Commandbox v3.7
