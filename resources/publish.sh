@@ -61,5 +61,14 @@ if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]
     docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
 	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}"
 	docker push ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
+
+	# Create our manifest file for multi-arch
+	docker manifest create \
+		${BUILD_IMAGE_TAG}:latest \
+		--amend ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION} \
+		--amend ortussolutions/commandbox:arm64
+
+	docker manifest push ${BUILD_IMAGE_TAG}:latest
 fi
+
 

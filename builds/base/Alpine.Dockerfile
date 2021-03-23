@@ -43,7 +43,7 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
-RUN chmod +x $BUILD_DIR/*.sh
+RUN chmod -R +x $BUILD_DIR
 
 # Ensure all workgroup users have permission on the build scripts
 RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
