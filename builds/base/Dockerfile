@@ -1,10 +1,13 @@
-FROM adoptopenjdk/openjdk8:slim
+ARG VERSION
+ARG COMMANDBOX_VERSION
+ARG ARCH
 
-LABEL version "@version@"
+FROM adoptopenjdk/openjdk11:${ARCH}-debianslim-jdk-11.0.10_9-slim
+LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ARG COMMANDBOX_VERSION
+
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 

@@ -1,29 +1,32 @@
-FROM adoptopenjdk/openjdk8:alpine-slim
+ARG VERSION
+ARG COMMANDBOX_VERSION
+ARG ARCH
 
-LABEL version "@version@"
+FROM adoptopenjdk/openjdk11:${ARCH}-alpine-jdk-11.0.10_9-slim
+
+LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ARG COMMANDBOX_VERSION
+# Default to UTF-8 file.encoding
+ENV LANG C.UTF-8
 
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-# Alpine workgroup is the same
+# Alpine workgroup is root group
 ENV WORKGROUP root
 
-# Flag as an alpine build
+# Flag as an alpine release
 RUN touch /etc/alpine-release
 
 ### Directory Mappings ###
+
 # BIN_DIR = Where the box binary goes
 ENV BIN_DIR /usr/bin
 # LIB_DIR = Where the build files go
 ENV LIB_DIR /usr/lib
 WORKDIR $BIN_DIR
-
-# COMMANDBOX_HOME = Where CommmandBox Lives
-ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 
 # APP_DIR = the directory where the application runs
 ENV APP_DIR /app
@@ -32,6 +35,9 @@ WORKDIR $APP_DIR
 # BUILD_DIR = WHERE runtime scripts go
 ENV BUILD_DIR $LIB_DIR/build
 WORKDIR $BUILD_DIR
+
+# COMMANDBOX_HOME = Where CommmandBox Lives
+ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 
 # Copy file system
 COPY ./test/ ${APP_DIR}/

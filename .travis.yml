@@ -6,35 +6,75 @@ env:
     - COMMANDBOX_VERSION=5.2.1
   matrix:
     # Debian Builds
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk11
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5_2_9.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5.2.9
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5
-    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64 ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk8 ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Dockerfile BASE_BUILD_FILE=builds/base/JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-jdk8 ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5 ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-lucee5 ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-lucee-light ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016 ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-adobe2016 ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018 ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-adobe2018 ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021 ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-adobe2021 ARCH=aarch64
     # Alpine builds
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk11-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee4.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee45-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5_2_9.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5.2.9-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe11.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe11-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine
-    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE11.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk8-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:jdk8-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Lucee5.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee5-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/LuceeLight.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:lucee-light-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2016.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.JRE8.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2016-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2018.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2018-alpine ARCH=aarch64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine ARCH=x86_64
+    - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine ARCH=aarch64
 
+    
+arch:
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  - amd64
+  - arm64
+  
+    
 services:
   - docker
 
 script:
   # update our version numbers before building
   - find ./builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \;
-  - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
+  - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION --build-arg VERSION=$IMAGE_VERSION --build-arg ARCH=$ARCH -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
   - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
   - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
