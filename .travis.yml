@@ -1,9 +1,8 @@
 language: python
 
 env:
-  global:
-    - IMAGE_VERSION=3.2.1
-    - COMMANDBOX_VERSION=5.2.1
+  - IMAGE_VERSION=3.2.1
+  - COMMANDBOX_VERSION=5.2.1
 
 jobs:
   include:
@@ -49,7 +48,7 @@ jobs:
       arch: amd64
     - env: BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:arm64-adobe2021 ARCH=aarch64
       os: linux
-      arch: arm
+      arch: arm64
 
     # Alpine builds
     - env: BUILD_IMAGE_DOCKERFILE=builds/Base.Alpine.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:alpine ARCH=x86_64
@@ -103,7 +102,12 @@ services:
 script:
   # update our version numbers before building
   - find ./builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \;
-  - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION --build-arg VERSION=$IMAGE_VERSION --build-arg ARCH=$ARCH -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
+  - docker build --no-cache \
+      --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION \
+      --build-arg VERSION=$IMAGE_VERSION \
+      --build-arg ARCH=$ARCH \
+      -t commandbox-base \
+      -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
   - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
   - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
