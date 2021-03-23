@@ -41,6 +41,9 @@ RUN chmod +x $BUILD_DIR/*.sh
 # Ensure all workgroup users have permission on the build scripts
 RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
 
+# Switch out our java.security file to disable TLS and increase key size
+RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resources/java.security /opt/java/openjdk/conf/security/java.security
+
 # Basic Dependencies including binaries for PDF rendering
 RUN rm -rf $BUILD_DIR/util/debian
 RUN $BUILD_DIR/util/alpine/install-dependencies.sh

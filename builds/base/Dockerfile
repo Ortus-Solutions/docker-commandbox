@@ -41,6 +41,9 @@ RUN chmod +x $BUILD_DIR/*.sh
 # Ensure all runwar users have permission on the build scripts
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
+# Switch out our java.security file to disable TLS and increase key size
+RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resources/java.security /opt/java/openjdk/conf/security/java.security
+
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
