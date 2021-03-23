@@ -36,36 +36,38 @@ env:
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine ARCH=x86_64
     - BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine ARCH=aarch64
 
+os: linux
     
 arch:
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
-  - amd64
-  - arm64
+  matrix:
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
+    - amd64
+    - arm64
   
     
 services:
