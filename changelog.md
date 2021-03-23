@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
+## [5.2.1/3.2.2] - 2021-03-23
+
+### Changed
+- `:adobe2016` images to version `2016.0.17+325979`
+- `:adobe2018` images to version `2018.0.11+326016`
+- `:adobe2021` images to version `2021.0.1+325996`
+- `:lucee5` images to version `5.3.7+48`
+
+
 ## [5.2.1/3.2.1] - 2021-01-22
 
 ### Added
