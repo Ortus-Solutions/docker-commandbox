@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
 # Make sure errors (like curl failing, or unzip failing, or anything failing) fails the build
 set -ex
 
-if [ -z "$COMMANDBOX_VERSION" ]; then
-  echo "CommandBox Version not supplied via variable COMMANDBOX_VERSION"
-  exit 1
-fi
+echo "Commandbox version set to $COMMANDBOX_VERSION"
+
+# if [ -z "$COMMANDBOX_VERSION" ]; then
+#   echo "CommandBox Version not supplied via variable COMMANDBOX_VERSION"
+#   exit 1
+# fi
 
 # Installs the latest CommandBox Binary
 mkdir -p /tmp
