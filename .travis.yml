@@ -1,8 +1,9 @@
 language: python
 
 env:
-  - IMAGE_VERSION=3.2.1
-  - COMMANDBOX_VERSION=5.2.1
+  global:
+    - IMAGE_VERSION=3.2.1
+    - COMMANDBOX_VERSION=5.2.1
 
 jobs:
   include:
