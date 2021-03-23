@@ -52,7 +52,7 @@ RUN rm -rf $BUILD_DIR/util/alpine
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
-RUN $BUILD_DIR/util/install-commandbox.sh
+RUN  export COMMANDBOX_VERSION=${COMMANDBOX_VERSION} && $BUILD_DIR/util/install-commandbox.sh
 
 # CFConfig Installation
 RUN $BUILD_DIR/util/install-cfconfig.sh
