@@ -8,9 +8,6 @@ LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-
-ENV COMMANDBOX_VERSION=${COMMANDBOX_VERSION}
-
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
@@ -52,7 +49,7 @@ RUN rm -rf $BUILD_DIR/util/alpine
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
-RUN  export COMMANDBOX_VERSION=${COMMANDBOX_VERSION} && $BUILD_DIR/util/install-commandbox.sh
+RUN $BUILD_DIR/util/install-commandbox.sh
 
 # CFConfig Installation
 RUN $BUILD_DIR/util/install-cfconfig.sh
