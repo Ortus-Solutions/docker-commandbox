@@ -33,9 +33,8 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-COPY ./builds/debian ${BUILD_DIR}/debian  
-
 # Basic Dependencies
+RUN rm -rf $BUILD_DIR/util/alpine
 RUN ${BUILD_DIR}/debian/install-dependencies.sh
 
 # Copy file system

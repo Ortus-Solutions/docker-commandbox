@@ -16,19 +16,8 @@ ENV WORKGROUP root
 RUN touch /etc/alpine-release
 
 # Basic Dependencies including binaries for PDF rendering
-RUN apk update && apk add curl \
-                        jq \
-                        bash \
-                        openssl \
-                        libgcc \
-                        libstdc++ \
-                        libx11 \
-                        glib \
-                        libxrender \
-                        libxext \
-                        libintl \
-                        fontconfig \
-                        && rm -f /var/cache/apk/*
+RUN rm -rf $BUILD_DIR/util/debian
+RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 ### Directory Mappings ###
 
@@ -56,9 +45,6 @@ RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all workgroup users have permission on the build scripts
 RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
-
-# Set up our environment to allow CommandBox to run on JRE11
-ENV BOX_JAVA_ARGS="-Djdk.attach.allowAttachSelf=true"
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh

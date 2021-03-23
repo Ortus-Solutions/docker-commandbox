@@ -16,20 +16,8 @@ ENV WORKGROUP root
 RUN touch /etc/alpine-release
 
 # Basic Dependencies including binaries for PDF rendering
-RUN apk update && apk add curl \
-                        jq \
-                        bash \
-                        openssl \
-                        libgcc \
-                        libstdc++ \
-                        libx11 \
-                        glib \
-                        libxrender \
-                        libxext \
-                        libintl \
-                        shadow \
-                        fontconfig \
-                        && rm -f /var/cache/apk/*
+RUN rm -rf $BUILD_DIR/util/debian
+RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 ### Directory Mappings ###
 # BIN_DIR = Where the box binary goes

@@ -33,9 +33,8 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-COPY ./builds/debian ${BUILD_DIR}/debian  
-
 # Basic Dependencies
+RUN rm -rf $BUILD_DIR/util/debian
 RUN ${BUILD_DIR}/debian/install-dependencies.sh
 
 # Copy file system
@@ -45,9 +44,6 @@ RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all runwar users have permission on the build scripts
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
-
-# Set up our environment to allow CommandBox to run on JRE11
-ENV BOX_JAVA_ARGS="-Djdk.attach.allowAttachSelf=true"
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
