@@ -33,10 +33,6 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-# Basic Dependencies
-RUN rm -rf $BUILD_DIR/util/alpine
-RUN ${BUILD_DIR}/debian/install-dependencies.sh
-
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
@@ -44,6 +40,10 @@ RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all runwar users have permission on the build scripts
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
+
+# Basic Dependencies
+RUN rm -rf $BUILD_DIR/util/alpine
+RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh

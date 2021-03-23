@@ -15,10 +15,6 @@ ENV WORKGROUP root
 # Flag as an alpine release
 RUN touch /etc/alpine-release
 
-# Basic Dependencies including binaries for PDF rendering
-RUN rm -rf $BUILD_DIR/util/debian
-RUN $BUILD_DIR/util/alpine/install-dependencies.sh
-
 ### Directory Mappings ###
 
 # BIN_DIR = Where the box binary goes
@@ -45,6 +41,10 @@ RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all workgroup users have permission on the build scripts
 RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
+
+# Basic Dependencies including binaries for PDF rendering
+RUN rm -rf $BUILD_DIR/util/debian
+RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
