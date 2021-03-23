@@ -9,6 +9,8 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 ENV COMMANDBOX_VERSION=${COMMANDBOX_VERSION}
 
+RUN echo COMMANDBOX_VERSION
+
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
