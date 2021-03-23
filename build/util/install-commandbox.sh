@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Make sure errors (like curl failing, or unzip failing, or anything failing) fails the build
 set -ex
