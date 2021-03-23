@@ -114,8 +114,9 @@ else
 		# Default values for engine and home directory - so we can use cfconfig 
 		export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${LIB_DIR}/serverHome}"
 
-		if [[ $CFENGINE ]]; then
-			echo "INFO: CF Engine set to ${CFENGINE}"	
+		if  [[ !$cfconfigfile ]] && [[ -f .cfconfig.json ]]; then
+			export cfconfigfile=$APP_DIR/.cfconfig.json
+			echo "INFO: Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
 		fi
 
 		echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"		
