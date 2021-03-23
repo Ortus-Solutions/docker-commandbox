@@ -1,8 +1,9 @@
-ARG COMMANDBOX_VERSION
-ARG VERSION
 ARG ARCH
 
 FROM adoptopenjdk/openjdk8:${ARCH}-debianslim-jdk8u282-b08-slim
+
+ARG COMMANDBOX_VERSION
+ARG VERSION
 
 LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"

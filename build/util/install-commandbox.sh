@@ -1,5 +1,7 @@
+#!/bin/sh
+
 # Make sure errors (like curl failing, or unzip failing, or anything failing) fails the build
-set -e
+set -ex
 
 if [ -z "$COMMANDBOX_VERSION" ]; then
   echo "CommandBox Version not supplied via variable COMMANDBOX_VERSION"
