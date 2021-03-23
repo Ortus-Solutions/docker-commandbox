@@ -13,11 +13,6 @@ apt-get update && apt-get install --assume-yes \
                                 libreadline-dev \
                                 fontconfig
 
-# Install Filebeat
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
-apt-get update && apt-get install -y apt-transport-https filebeat
-
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
 # based on whether the JDK or only the JRE is installed
 { \
