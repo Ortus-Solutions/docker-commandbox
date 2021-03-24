@@ -44,7 +44,7 @@ docker push ${BUILD_IMAGE_TAG}
 echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 
 # Multi-arch build manifests
-if  [[ ${ARCH} == "x86_64"]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
+if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
 	if  [[ $TRAVIS_BRANCH == 'master' ]] && [[ ${BUILD_IMAGE_TAG} == "ortussolutions/commandbox:amd64"  ]]; then
 		PRIMARY_NAME = "ortussolutions/commandbox:latest"
 	else
@@ -66,7 +66,7 @@ if  [[ ${ARCH} == "x86_64"]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
 			$SUPPLEMENTAL_NAME \
 			--amend ${BUILD_IMAGE_TAG} \
 			--amend ${BUILD_IMAGE_TAG/amd64/arm64}
-			
+
 		echo "INFO: Pushing supplemental manfiest to registry ${SUPPLEMENTAL_NAME}"
 		docker manifest push $SUPPLEMENTAL_NAME
 	fi
