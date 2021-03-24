@@ -8,6 +8,8 @@ if [[ $CFPM_INSTALL ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_INSTALL environment variable may only be used on warmed-up servers"
         exit 1
     fi
+
+    IFS=","
     
     for package in $CFPM_INSTALL
     do
@@ -22,6 +24,8 @@ if [[ $CFPM_UNINSTALL ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_UNINSTALL environment variable may only be used on warmed-up servers"
         exit 1
     fi
+
+    IFS=","
     
     for package in $CFPM_UNINSTALL
     do
