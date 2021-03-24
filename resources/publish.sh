@@ -66,6 +66,7 @@ if  [[ ${ARCH} == "x86_64"]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
 			$SUPPLEMENTAL_NAME \
 			--amend ${BUILD_IMAGE_TAG} \
 			--amend ${BUILD_IMAGE_TAG/amd64/arm64}
+			
 		echo "INFO: Pushing supplemental manfiest to registry ${SUPPLEMENTAL_NAME}"
 		docker manifest push $SUPPLEMENTAL_NAME
 	fi
