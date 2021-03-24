@@ -39,27 +39,19 @@ if [[ -f $APP_DIR/server.json ]]; then
     fi
 fi
 
+# Default to production mode
+if [[ ! $SERVER_PROFILE ]]; then
+    $SERVER_PROFILE=production
+fi
+
+if [[ $ENVIRONMENT == 'production' ]] || [[ $ENVIRONMENT == 'development' ]]; then
+    $SERVER_PROFILE=$ENVIRONMENT
+fi
+
 if [[ $HEADLESS ]] || [[ $headless ]]; then
     echo "****************************************************************"
-    echo "INFO: Headless startup flag detected, disabling admin web interfaces..."
-
-    #ACF Lockdown
-    export cfconfig_adminAllowedIPList=127.0.0.1
-    export cfconfig_debuggingIPList=127.0.0.1
-
-    echo "INFO: ACF administrative access restricted to ${cfconfig_adminAllowedIPList}"
-
-    if [[ ! $REWRITE_CONFIG ]] || [[ $REWRITE_CONFIG = 'null' ]]; then
-        echo "INFO: Applying headless configuration via rewrite rules"
-        REWRITES_ENABLE=true
-        REWRITES_FILE=${BUILD_DIR}/resources/urlrewrite-headless.xml
-        echo "INFO: Server administrative web interfaces are now disallowed"
-    else
-        REWRITES_FILE=$REWRITE_CONFIG
-        echo "WARN: Existing rewrite configuration detected: ${REWRITE_CONFIG} .  Could not apply headless configuration."
-    fi
-
-    echo "****************************************************************"
+    echo "INFO: Headless startup flag detected, setting server profile to production mode"
+    $SERVER_PROFILE=production
 fi
 
 if [[ $CFENGINE ]]; then
@@ -78,6 +70,7 @@ if [[ $CFENGINE ]]; then
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
         startScript=${SCRIPT_TYPE} \
+        profile=${SERVER_PROFILE} \
         verbose=true
 else
     box server start \
@@ -94,6 +87,7 @@ else
         dryRun=${DRY_RUN_FLAG} \
         console=${DRY_RUN_FLAG} \
         startScript=${SCRIPT_TYPE} \
+        profile=${SERVER_PROFILE} \
         verbose=true
 fi
 
