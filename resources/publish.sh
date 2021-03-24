@@ -22,12 +22,7 @@ echo "INFO: Successfully logged in to Docker Hub!"
 # Tag Builds
 if [[ $TRAVIS_TAG ]]; then
 	
-	# Strip the `v` from the start of the tag
-	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:arm64' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:${TRAVIS_TAG#v}"
-	else
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
-	fi
+	BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
 
 elif [[ $TRAVIS_BRANCH == 'development' ]]; then
 	# Snapshot builds
