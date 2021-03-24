@@ -12,19 +12,18 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
-* `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version
+* `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version 
 * `:commandbox-5.2.1` - Stable image tagged with the version of CommandBox used to build the image
 * `:3.2.0` - Tagged version of the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
-* `:jdk11` - Base image using OpenJDK11
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
-* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee45`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)), `:lucee5.2.9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5_2_9.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe11`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
+* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
-`:lucee45-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee4.Dockerfile)), `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee5.2.9-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5_2_9.Dockerfile)), `:lucee-light-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe11-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe11.Dockerfile)) ,`:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
+`:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee-light-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe2016-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
 
-_*Note*: The `:latest` tag currently uses OpenJDK8, for compatibility with all engines.  The pre-seeded engines built using JDK11 - both Debian and Alpine base - are `:lucee5`, `:lucee-light`, `:adobe2018` and `:adobe2021`_ 
+_*Note*: The `:latest` tag currently uses OpenJDK11. and only the `:adobe2016` tag is built using JDK8.  If you required JDK 8 support in your app or engine, use the `:jdk8` tag._ 
 
 Description 
 =================
@@ -35,8 +34,8 @@ In addition the CommandBox modules of [`dotenv`](https://www.forgebox.io/view/co
 
 Current CFML engines supported are:
 
-- Lucee:  4+ & 5+
-- Adobe ColdFusion 11+
+- Lucee:  5+
+- Adobe ColdFusion 2016+
 
 You may also specify a custom WAR for deployment, using the `server.json` configuration.
 
@@ -60,7 +59,7 @@ docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/app" ortussolutions/
 By default the process ports of the container are `8080` (insecure) and `8443` (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
 
 ```
-docker run -p 8080:8080 -p 8443:8443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
+docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
 ```
 
 Environment Variables
@@ -75,10 +74,7 @@ The CommandBox Docker image supports the use of environmental variables for the 
 
 ##### HTTP2 Support
 
-If enabling HTTP2 via the `runwar.args` option of `--http2-enable=true`, the SSL port in the current version of CommandBox/Runwar is overridden to `1444`. In order to access this port, you would need to: 
-
-* Set the `SSL_PORT` environment variable to `1444`
-* Provide a port mapping to the external host from the external SSL port to port `1444`
+You may enable HTTP2 support via the `runwar.args` option of `--http2-enable=true`.  Once enabled, the Undertow server will serve both HTTPS and HTTP traffic with HTTP2 support
 
 
 ##### Server Configuration Variables
@@ -92,10 +88,15 @@ The following environment variables may be provided to modify your runtime serve
 * `cfconfigfile` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically.  _Note: The value `CFCONFIG` is aliased to this parameter, but is deprecated._
 * `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
 * `FINALIZE_STARTUP` - When provided a final startup script will be generated, which will be considered authoritative the next time the container/image starts. The caveat to this, however, is that the finalized startup script will bypass the evaluation checks for all of the other environment variables in this list as those values will be explicitly exported in the startup file.
-* `HEADLESS`/`headless` - When set to true, a rewrite configuration will be applied which disallows access to the Lucee Admin or Coldfusion Administrator web interfaces for a secure deployment with no administrator access.
+* `HEADLESS`/`headless` - When set to true, the [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles) will be set to `production`, which disallows access to the administrator and protects sensitive files.
+* `SERVER_PROFILE` - When set, this will be applied as the runtime CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles).  If a `HEADLESS` environment variable exists, it will overwrite this environment variable to `production`
 * `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
 * `USER` - When provided the server process will run under the provided user account name
+* `CFPM_INSTALL` and `CFPM_UNINSTALL`  - Supported for Adobe Coldfusion 2021 engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed ( or uninstalled, respectively ), prior to the server start.  A warmed-up server is required to use these variables.
 
+##### Processor and Operating System Architecture Support
+
+All Debian-based images currently support linux/amd64 or linxux/arm64 architecture. Alpine builds are currently only supported on linux/amd64
 ##### Docker Runtime Variables
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
