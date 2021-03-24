@@ -46,9 +46,9 @@ echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 # Multi-arch build manifests
 if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
 	if  [[ $TRAVIS_BRANCH == 'master' ]] && [[ ${BUILD_IMAGE_TAG} == "ortussolutions/commandbox:amd64"  ]]; then
-		PRIMARY_NAME = "ortussolutions/commandbox:latest"
+		PRIMARY_NAME="ortussolutions/commandbox:latest"
 	else
-		PRIMARY_NAME = ${BUILD_IMAGE_TAG/amd64-/''}
+		PRIMARY_NAME=${BUILD_IMAGE_TAG/amd64-/''}
 	fi
 	docker manifest create \
 		$PRIMARY_NAME \
@@ -60,7 +60,7 @@ if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
 
 	# Now create any suppplimentary manifests
 	if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:amd64' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-		SUPPLEMENTAL_NAME = ${BUILD_IMAGE_TAG/amd64/''}commandbox-${COMMANDBOX_VERSION}
+		SUPPLEMENTAL_NAME=${BUILD_IMAGE_TAG/amd64/''}commandbox-${COMMANDBOX_VERSION}
 
 		docker manifest create \
 			$SUPPLEMENTAL_NAME \
