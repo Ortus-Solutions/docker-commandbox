@@ -1,10 +1,14 @@
-FROM adoptopenjdk/openjdk8:slim
+ARG ARCH
 
-LABEL version "@version@"
+FROM adoptopenjdk/openjdk11:${ARCH}-debianslim-jdk-11.0.10_9-slim
+
+ARG VERSION
+ARG COMMANDBOX_VERSION
+
+LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ARG COMMANDBOX_VERSION
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
@@ -33,11 +37,6 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-COPY ./builds/debian ${BUILD_DIR}/debian  
-
-# Basic Dependencies
-RUN ${BUILD_DIR}/debian/install-dependencies.sh
-
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
@@ -45,6 +44,13 @@ RUN chmod +x $BUILD_DIR/*.sh
 
 # Ensure all runwar users have permission on the build scripts
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
+
+# Switch out our java.security file to disable TLS and increase key size
+RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resources/java.security /opt/java/openjdk/conf/security/java.security
+
+# Basic Dependencies
+RUN rm -rf $BUILD_DIR/util/alpine
+RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh

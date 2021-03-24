@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.2.1/3.3.0] - Unreleased
+
+### Changed
+
+- JDK11 is now the default Java version for the primary tag `ortussolutions/commandbox:latest`. ( Only the `:adobe2016` engine/tag is currently built with JDK8 )
+- JDK8-based default images are now tagged as `:jdk8`
+- Removed builds for the following tags and variations as the engines will no longer be updated: `:adobe11`, `lucee45`, `lucee5.2.9`. Older versions of those tags will continue to be available for those who use them, as long as there is demand.
+- `HEADLESS` environment flag now assigns a [CommandBox secure profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles) of `production`, rather than using a custom rewrite file.
+
+### Added
+
+- Added multi-architecture builds to support both x86_64 and ARM architectures
+- Disable TLSv1 by default on JRE11 images
+- (Issue #56) Added `CFPM_INSTALL` and `CFPM_UNINSTALL` environment variables for Adobe 2021 engines
+- Added support for `SERVER_PROFILE` environment variable to utilize [CommandBox secure profiles](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles)
+- `ENVIRONMENT` variable now auto-assigns server profile, when set to `production` or `development`
+
+### Fixed
+
+- (Issue #60) Fixed an issue where the convention route `.cfconfig.json` was not being parsed to determine if an engine admin password had been set
+
 
 ## [5.2.1/3.2.2] - 2021-03-23
 

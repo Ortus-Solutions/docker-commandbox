@@ -1,11 +1,16 @@
-#!/bin/bash
-apt-get update && apt-get \install --assume-yes \
+#!/bin/sh
+set -e
+
+apt-get update && apt-get install --assume-yes \
                                 apt-utils \
                                 ca-certificates \
                                 curl \
                                 jq \
                                 bzip2 \
                                 unzip \
+                                wget \
+                                gnupg \
+                                libreadline-dev \
                                 fontconfig
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value

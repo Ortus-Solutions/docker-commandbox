@@ -23,27 +23,19 @@ echo "INFO: Successfully logged in to Docker Hub!"
 if [[ $TRAVIS_TAG ]]; then
 	
 	# Strip the `v` from the start of the tag
-	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]]; then
+	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:amd64' ]]; then
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:${TRAVIS_TAG#v}"
 	else
 		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
 	fi
-	
-	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
 
-elif [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-	# Master Builds
-    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
-else
-	# Snapshot tagging
-	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'development' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:snapshot"
-	elif [[ $TRAVIS_BRANCH == 'development' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
-	fi
-
-	docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
+elif [[ $TRAVIS_BRANCH == 'development' ]]; then
+	# Snapshot builds
+	BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
 fi
+
+	
+docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}
 
 # Push our new image and tags to the registry
 echo "INFO: Pushing new image to registry ${BUILD_IMAGE_TAG}"
@@ -51,15 +43,32 @@ docker push ${BUILD_IMAGE_TAG}
 
 echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 
-# Now create any suppplimentary tags
-if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-	# Add :latest tag, if applicable
-    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:latest
-	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:latest"
-	docker push ${BUILD_IMAGE_TAG}:latest
-	# Add commandbox version tag
-    docker tag ${TRAVIS_COMMIT}:${TRAVIS_JOB_ID} ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
-	echo "INFO: Pushing supplemental tag to registry ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}"
-	docker push ${BUILD_IMAGE_TAG}:commandbox-${COMMANDBOX_VERSION}
-fi
+# Multi-arch build manifests
+if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
+    export DOCKER_CLI_EXPERIMENTAL=enabled
+	if  [[ $TRAVIS_BRANCH == 'master' ]] && [[ ${BUILD_IMAGE_TAG} == "ortussolutions/commandbox:amd64"  ]]; then
+		PRIMARY_NAME="ortussolutions/commandbox:latest"
+	else
+		PRIMARY_NAME=${BUILD_IMAGE_TAG/amd64-/''}
+	fi
+	docker manifest create \
+		$PRIMARY_NAME \
+		--amend ${BUILD_IMAGE_TAG} \
+		--amend ${BUILD_IMAGE_TAG/amd64/arm64}
 
+	echo "INFO: Pushing primary manfiest to registry for ${PRIMARY_NAME}"
+	docker manifest push $PRIMARY_NAME
+
+	# Now create any suppplimentary manifests
+	if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:amd64' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+		SUPPLEMENTAL_NAME=${BUILD_IMAGE_TAG/amd64/''}commandbox-${COMMANDBOX_VERSION}
+
+		docker manifest create \
+			$SUPPLEMENTAL_NAME \
+			--amend ${BUILD_IMAGE_TAG} \
+			--amend ${BUILD_IMAGE_TAG/amd64/arm64}
+
+		echo "INFO: Pushing supplemental manfiest to registry ${SUPPLEMENTAL_NAME}"
+		docker manifest push $SUPPLEMENTAL_NAME
+	fi
+fi

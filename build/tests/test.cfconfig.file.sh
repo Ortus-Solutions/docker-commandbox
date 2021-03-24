@@ -31,7 +31,22 @@ if [[ $ENGINE_VENDOR == 'lucee' ]] && [[ ${runOutput} != *"[adminPassword] set"*
 	exit 1
 fi
 
-
 # cleanup
 unset CFCONFIG
 box server stop
+
+echo '{"adminPassword":"testing"}' > $APP_DIR/.cfconfig.json
+
+echo "Starting server with convention route .cfconfig.json file in place"
+
+runOutput="$( ${BUILD_DIR}/run.sh )"
+
+printf "${runOutput}\n"
+
+$BUILD_DIR/tests/test.up.sh
+
+if [[ ${runOutput} != *"Engine configuration file detected"* ]];then
+	echo ".cfconfig.json file not detected or as the admin password source"
+	exit 1
+fi
+
