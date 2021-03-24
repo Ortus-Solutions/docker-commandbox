@@ -62,6 +62,11 @@ By default the process ports of the container are `8080` (insecure) and `8443` (
 docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
 ```
 
+Supported Architectures and Operating Systems
+=============================================
+
+All Debian-based images currently support `linux/amd64` or `linux/arm64` architecture. Alpine builds are currently only supported on linux/amd64
+
 Environment Variables
 =====================
 
@@ -94,9 +99,6 @@ The following environment variables may be provided to modify your runtime serve
 * `USER` - When provided the server process will run under the provided user account name
 * `CFPM_INSTALL` and `CFPM_UNINSTALL`  - Supported for Adobe Coldfusion 2021 engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed ( or uninstalled, respectively ), prior to the server start.  A warmed-up server is required to use these variables.
 
-##### Processor and Operating System Architecture Support
-
-All Debian-based images currently support linux/amd64 or linxux/arm64 architecture. Alpine builds are currently only supported on linux/amd64
 ##### Docker Runtime Variables
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
