@@ -13,7 +13,7 @@ if [[ $CFPM_INSTALL ]]; then
     
     for package in $CFPM_INSTALL
     do
-        $SERVER_HOME_DIRECTORY/WEB_INF/cfusion/bin/cfpm.sh install $package
+        $SERVER_HOME_DIRECTORY/WEB-INF/cfusion/bin/cfpm.sh install $package
     done
 
 fi
