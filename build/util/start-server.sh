@@ -41,17 +41,17 @@ fi
 
 # Default to production mode
 if [[ ! $SERVER_PROFILE ]]; then
-    $SERVER_PROFILE=production
+    SERVER_PROFILE=production
 fi
 
 if [[ $ENVIRONMENT == 'production' ]] || [[ $ENVIRONMENT == 'development' ]]; then
-    $SERVER_PROFILE=$ENVIRONMENT
+    SERVER_PROFILE=$ENVIRONMENT
 fi
 
 if [[ $HEADLESS ]] || [[ $headless ]]; then
     echo "****************************************************************"
     echo "INFO: Headless startup flag detected, setting server profile to production mode"
-    $SERVER_PROFILE=production
+    SERVER_PROFILE=production
 fi
 
 if [[ $CFENGINE ]]; then
