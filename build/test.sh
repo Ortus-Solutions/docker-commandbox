@@ -51,30 +51,11 @@ printf "${runOutput}"
 
 ./tests/test.up.sh
 
-# Test our opinionated password setting when the default is not changed
-if [[ ${runOutput} != *"Configuration did not detect any known mechanisms for changing the default password"* ]];then
-	echo "The default password was not changed when no password was specified"
-	exit 1
-fi
-
-# cleanup
-cd $APP_DIR
-box server stop
-rm -f $APP_DIR/server.json
-
 echo "Generic server tests completed"
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR
 
-# CFConfig Variables
-echo "Testing the ability to specify a cfconfig variable"
-
-export cfconfig_adminPassword="testing"
-
-./tests/test.cfconfig.env.sh
-
-unset cfconfig_adminPassword
 
 echo "CFConfig environment variable tests completed successfully"
 
@@ -107,7 +88,7 @@ printf "${runOutput}"
 
 ./tests/test.up.sh
 
-if [[ ${runOutput} != *"URL Rewrite variable detected"* ]];then
+if [[ !$BOX_SERVER_WEB_REWRITES_ENABLE} ]];then
 	echo "Rewrites were not enabled from the environment variable!"
 	exit 1
 fi
@@ -120,11 +101,6 @@ box server stop
 echo "Rewrite environment tests completed successfully"
 
 cd $BUILD_DIR
-
-# CFConfig Variables
-echo "Tests the ability to use standard rewrite configuration settings"
-
-./tests/test.rewrites.sh
 
 echo "Commandbox rewrite convention tests completed successfully"
 

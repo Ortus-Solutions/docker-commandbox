@@ -19,8 +19,8 @@ printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${runOutput} != *"Headless startup flag detected"* ]];then
-	echo "Headless environment variable was not detected or set"
+if [[ ${BOX_SERVER_PROFILE} != 'production' ]];then
+	echo "Headless environment did not set the mode to production"
 	exit 1
 fi
 
