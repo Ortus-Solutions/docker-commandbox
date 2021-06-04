@@ -20,14 +20,8 @@ printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${runOutput} != *"Engine configuration file detected"* ]];then
+if [[ ${BOX_SERVER_CFCONFIGFILE} != $CFCONFIG ]];then
 	echo "CFCONFIG file variable was not detected or set"
-	exit 1
-fi
-
-# If we have a Lucee server, check that the web and server passwords were set to the same
-if [[ $ENGINE_VENDOR == 'lucee' ]] && [[ ${runOutput} != *"[adminPassword] set"* ]];then
-	echo "Default Lucee administrator password not set to web admin password"
 	exit 1
 fi
 
@@ -45,8 +39,8 @@ printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${runOutput} != *"Engine configuration file detected"* ]];then
-	echo ".cfconfig.json file not detected or as the admin password source"
+if [[ ${runOutput} != *"Convention .cfconfig.json found"* ]];then
+	echo ".cfconfig.json file not detected"
 	exit 1
 fi
 
