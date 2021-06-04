@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+## Handle deprecated/changed environment variables
+. $BUILD_DIR/util/compat-env.sh
+
 # If we have a finalized startup script bypass all further evaluation and use it authoritatively
 if [[ -f $BIN_DIR/startup-final.sh ]]; then
 
@@ -54,8 +57,8 @@ else
 		chown -R $USER:$WORKGROUP ${LIB_DIR}/serverHome
 		
 
-		if [ $SERVER_HOME_DIRECTORY ]; then
-			chown -R $USER $SERVER_HOME_DIRECTORY
+		if [ $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]; then
+			chown -R $USER $BOX_SERVER_APP_SERVERHOMEDIRECTORY
 		fi
 
 		cd $APP_DIR
@@ -83,101 +86,42 @@ else
 		# Check for a defined server home directory in box.json
 		if [[ -f server.json ]]; then
 
-			if [[ ! $SERVER_HOME_DIRECTORY ]]; then	
-				SERVER_HOME_DIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
+			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]; then	
+				BOX_SERVER_APP_SERVERHOMEDIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
 			fi
 
-			if [[ ! $CFENGINE ]]; then	
-				CFENGINE=$(cat server.json | jq -r '.app.cfengine')
+			if [[ ! $BOX_SERVER_APP_CFENGINE ]]; then	
+				BOX_SERVER_APP_CFENGINE=$(cat server.json | jq -r '.app.cfengine')
 			fi
 
-			# ensure our string nulls are true nulls
-			if [[ ! $SERVER_HOME_DIRECTORY ]] ||  [[ $SERVER_HOME_DIRECTORY = 'null' ]] ; then
-				SERVER_HOME_DIRECTORY=''
+			# ensure our string nulls eliminate the variable
+			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]] ||  [[ $BOX_SERVER_APP_SERVERHOMEDIRECTORY = 'null' ]] ; then
+				unset BOX_SERVER_APP_SERVERHOMEDIRECTORY
 			else
-				echo "INFO: Server Home Directory defined in server.json as: ${SERVER_HOME_DIRECTORY}"
+				echo "INFO: Server Home Directory defined in server.json as: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 				#Assume our admin password has been set if we are including a custom server home
-				if [[ ${SERVER_HOME_DIRECTORY} != "${LIB_DIR}/serverHome" ]]; then
+				if [[ ${BOX_SERVER_APP_SERVERHOMEDIRECTORY} != "${LIB_DIR}/serverHome" ]]; then
 					ADMIN_PASSWORD_SET=true
 				fi
 			fi
 
 			# Nullify if we have a string null returned by jq
-			if [[ $CFENGINE = 'null' ]]; then
-				unset CFENGINE
+			if [[ $BOX_SERVER_APP_CFENGINE = 'null' ]]; then
+				unset BOX_SERVER_APP_CFENGINE
 			else
-				echo "INFO: CF Engine defined as ${CFENGINE}"
+				echo "INFO: CF Engine defined as ${BOX_SERVER_APP_CFENGINE}"
 			fi
 
 		fi
 
 		# Default values for engine and home directory - so we can use cfconfig 
-		export SERVER_HOME_DIRECTORY="${SERVER_HOME_DIRECTORY:=${LIB_DIR}/serverHome}"
+		export BOX_SERVER_APP_SERVERHOMEDIRECTORY="${BOX_SERVER_APP_SERVERHOMEDIRECTORY:=${LIB_DIR}/serverHome}"
 
-		if  [[ !$cfconfigfile ]] && [[ -f .cfconfig.json ]]; then
-			export cfconfigfile=$APP_DIR/.cfconfig.json
+		if  [[ !BOX_SERVER_CFCONFIGFILE ]] && [[ -f .cfconfig.json ]]; then
 			echo "INFO: Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
 		fi
 
-		echo "INFO: Server Home Directory set to: ${SERVER_HOME_DIRECTORY}"		
-
-		#Check for cfconfig specific environment variables - the CommandBox binary will handle these on start
-		while IFS='=' read -r name value ; do
-			if [[ $name == *'cfconfig_'* ]]; then
-				settingName=${name//cfconfig_}
-				#if our setting is for the admin password, flag it as set
-				if [[ " ${CFCONFIG_PASSWORD_KEYS[@]} " =~ " ${settingName} " ]]; then
-					ADMIN_PASSWORD_SET=true
-				fi
-			fi
-		done < <(env)
-
-		if [[ $CFCONFIG ]] && [[ -f $CFCONFIG ]]; then
-			export cfconfigfile=$CFCONFIG
-		fi
-
-		# Convention environment variable for CFConfig file
-		if [[ $cfconfigfile ]] && [[ -f $cfconfigfile ]]; then
-			echo "INFO: Engine configuration file detected at ${cfconfigfile}"
-
-			#if our admin password is provided, flag it as set
-			for pwKey in "${CFCONFIG_PASSWORD_KEYS[@]}"
-			do
-				if [[ $( key=".${pwKey}"; cat ${cfconfigfile} | jq -r "${key}") != 'null' ]]; then
-					ADMIN_PASSWORD_SET=true
-					break
-				fi
-			done
-
-		fi
-
-		#Check for a previously set password
-		if [[ -f ${HOME}/.enginePwd ]]; then
-			echo "INFO: A previous random password was generated for the server administration. Marking as set."
-			ADMIN_PASSWORD_SET=true
-		fi
-
-
-		if [[ $ADMIN_PASSWORD_SET != true ]]; then
-			if [[ ${SERVER_HOME_DIRECTORY} == "${LIB_DIR}/serverHome" ]]; then
-				#Generate a random password
-				openssl rand -base64 64 | tr -d '\n\/\+=' > ${HOME}/.enginePwd
-				export cfconfig_adminPassword=`cat ${HOME}/.enginePwd`
-				export cfconfig_adminPasswordDefault=`cat ${HOME}/.enginePwd`
-				export cfconfig_adminRDSPassword=`cat ${HOME}/.enginePwd`
-				export cfconfig_ACF11RDSPassword=`cat ${HOME}/.enginePwd`
-				echo "WARN: Configuration did not detect any known mechanisms for changing the default password.  Your CF engine administrative password has been set to:"
-				echo `cat ${HOME}/.enginePwd`
-				# Keep this file so that restarts can test for its existence - unless we are testing or building 
-				if $IMAGE_TESTING_IN_PROGRESS; then
-					rm -f ${HOME}/.enginePwd
-				fi
-			else
-				# If we still don't have an admin password flag up, send a warning. 
-				# We can't set it, because a custom server home may be provided
-				echo "WARN: No admin password was provided in the environment variables or you have specified a custom server home directory.  If you have not explicitly set the password, your server is insecure!"
-			fi
-		fi
+		echo "INFO: Server Home Directory set to: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"	
 
 		# If box install flag is up, do installation
 		if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then

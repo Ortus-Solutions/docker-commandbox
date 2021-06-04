@@ -22,12 +22,7 @@ echo "INFO: Successfully logged in to Docker Hub!"
 # Tag Builds
 if [[ $TRAVIS_TAG ]]; then
 	
-	# Strip the `v` from the start of the tag
-	if [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:amd64' ]]; then
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}:${TRAVIS_TAG#v}"
-	else
-		BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
-	fi
+	BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${TRAVIS_TAG#v}"
 
 elif [[ $TRAVIS_BRANCH == 'development' ]]; then
 	# Snapshot builds
@@ -44,29 +39,29 @@ docker push ${BUILD_IMAGE_TAG}
 echo "INFO: Image ${BUILD_IMAGE_TAG} successfully published"
 
 # Multi-arch build manifests
-if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"amd64".*  ]]; then
+if [[ ${ARCH} == "x86_64" ]] && [[ "${BUILD_IMAGE_TAG}" =~ .*"arm64".*  ]]; then
     export DOCKER_CLI_EXPERIMENTAL=enabled
-	if  [[ $TRAVIS_BRANCH == 'master' ]] && [[ ${BUILD_IMAGE_TAG} == "ortussolutions/commandbox:amd64"  ]]; then
+	if  [[ $TRAVIS_BRANCH == 'master' ]] && [[ ${BUILD_IMAGE_TAG} == "ortussolutions/commandbox:arm64"  ]]; then
 		PRIMARY_NAME="ortussolutions/commandbox:latest"
 	else
-		PRIMARY_NAME=${BUILD_IMAGE_TAG/amd64-/''}
+		PRIMARY_NAME=${BUILD_IMAGE_TAG/arm64-/''}
 	fi
 	docker manifest create \
 		$PRIMARY_NAME \
 		--amend ${BUILD_IMAGE_TAG} \
-		--amend ${BUILD_IMAGE_TAG/amd64/arm64}
+		--amend ${BUILD_IMAGE_TAG/arm64/amd64}
 
 	echo "INFO: Pushing primary manfiest to registry for ${PRIMARY_NAME}"
 	docker manifest push $PRIMARY_NAME
 
 	# Now create any suppplimentary manifests
-	if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:amd64' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
-		SUPPLEMENTAL_NAME=${BUILD_IMAGE_TAG/amd64/''}commandbox-${COMMANDBOX_VERSION}
+	if [[ ! $TRAVIS_TAG ]] && [[ ${BUILD_IMAGE_TAG} == 'ortussolutions/commandbox:arm64' ]] && [[ $TRAVIS_BRANCH == 'master' ]]; then
+		SUPPLEMENTAL_NAME=${BUILD_IMAGE_TAG/arm64/''}commandbox-${COMMANDBOX_VERSION}
 
 		docker manifest create \
 			$SUPPLEMENTAL_NAME \
 			--amend ${BUILD_IMAGE_TAG} \
-			--amend ${BUILD_IMAGE_TAG/amd64/arm64}
+			--amend ${BUILD_IMAGE_TAG/arm64/amd64}
 
 		echo "INFO: Pushing supplemental manfiest to registry ${SUPPLEMENTAL_NAME}"
 		docker manifest push $SUPPLEMENTAL_NAME

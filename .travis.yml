@@ -5,8 +5,33 @@ services:
 
 env:
   global:
-    - IMAGE_VERSION=3.3.0
-    - COMMANDBOX_VERSION=5.2.1
+    - IMAGE_VERSION=3.4.0
+    - COMMANDBOX_VERSION=5.3.1
+
+# This is the script for all builds
+script:
+  # update our version numbers before building
+  - find ./builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \;
+  - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION --build-arg VERSION=$IMAGE_VERSION --build-arg ARCH=$ARCH -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
+  - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
+  - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
+
+# This is the deploy publishing for all builds
+deploy:
+  - provider : script
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: "$TRAVIS_BRANCH = $TRAVIS_TAG"
+    script: ./resources/publish.sh
+  - provider: script
+    skip_cleanup: true
+    on:
+      tags : false
+      branch: 
+        - master
+        - development
+    script: ./resources/publish.sh
 
 jobs:
   include:
@@ -77,26 +102,3 @@ jobs:
     - env: BUILD_IMAGE_DOCKERFILE=builds/Adobe2021.Dockerfile BASE_BUILD_FILE=builds/base/Alpine.Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox:adobe2021-alpine ARCH=x86_64
       os: linux
       arch: amd64
-        
-script:
-  # update our version numbers before building
-  - find ./builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \;
-  - docker build --no-cache --build-arg COMMANDBOX_VERSION=$COMMANDBOX_VERSION --build-arg VERSION=$IMAGE_VERSION --build-arg ARCH=$ARCH -t commandbox-base -f ./$BASE_BUILD_FILE $TRAVIS_BUILD_DIR/
-  - docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
-  - docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
-
-deploy:
-  - provider : script
-    skip_cleanup: true
-    on:
-      all_branches: true
-      condition: "$TRAVIS_BRANCH = $TRAVIS_TAG"
-    script: ./resources/publish.sh
-  - provider: script
-    skip_cleanup: true
-    on:
-      tags : false
-      branch: 
-        - master
-        - development
-    script: ./resources/publish.sh
