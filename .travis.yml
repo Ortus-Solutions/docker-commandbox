@@ -5,8 +5,8 @@ services:
 
 env:
   global:
-    - IMAGE_VERSION=3.3.0
-    - COMMANDBOX_VERSION=5.2.1
+    - IMAGE_VERSION=3.4.0
+    - COMMANDBOX_VERSION=5.3.1
 
 # This is the script for all builds
 script:
