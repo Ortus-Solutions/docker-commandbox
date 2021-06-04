@@ -54,10 +54,12 @@ printf "${runOutput}"
 echo "Generic server tests completed"
 
 printf "\n\n*******************\n\n"
+
+cd $APP_DIR
+box server stop
 cd $BUILD_DIR
 
 
-echo "CFConfig environment variable tests completed successfully"
 
 # CFConfig Variables
 echo "Tests the ability to specify a cfconfig file"
