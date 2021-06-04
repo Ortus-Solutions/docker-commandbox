@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.3.1/3.4.0] - 2021-06-04
+
+### Changed
+
+- Updates CommandBox binary to v5.3.1
+- Marked support for the following environment variables as deprecated, in favor of native CommandBox environment variables. Support for these variables will end in v4.0.0 of the image  
+-- `SERVER_HOME_DIRECTORY` ( `BOX_SERVER_APP_SERVERHOMEDIRECTORY` )
+-- `cfconfigfile` ( `BOX_SERVER_CFCONFIGFILE` )
+-- `CFENGINE` ( `BOX_SERVER_APP_CFENGINE` )
+-- `HEADLESS` ( `BOX_SERVER_PROFILE` or `ENVIRONMENT` )
+-- `SERVER_PROFILE` ( `BOX_SERVER_PROFILE` )
+-- `URL_REWRITES` ( `BOX_SERVER_WEB_REWRITES_ENABLE` )
+-- `DEBUG` ( `BOX_SERVER_DEBUG` )
+- Eliminated random password generation on server startup, if a convention mechanism for changing was not detected.  Since the server profile defaults to `production`, which disables the admin interface, this is no longer necessary
+
+### Fixed
+- Documentation updates and corrections
+
 ## [5.2.1/3.3.0] - 2021-03-24
 
 ### Changed
