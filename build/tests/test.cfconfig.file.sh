@@ -20,7 +20,7 @@ printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${BOX_SERVER_CFCONFIGFILE} != $CFCONFIG ]];then
+if [[ ${runOutput} != *"The environment variable CFCONFIG has been deprecated"* ]];then
 	echo "CFCONFIG file variable was not detected or set"
 	exit 1
 fi
@@ -43,4 +43,6 @@ if [[ ${runOutput} != *"Convention .cfconfig.json found"* ]];then
 	echo ".cfconfig.json file not detected"
 	exit 1
 fi
+rm -f $APP_DIR/.cfconfig.json
+box server stop
 

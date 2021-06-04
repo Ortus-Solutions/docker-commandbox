@@ -117,7 +117,7 @@ else
 		# Default values for engine and home directory - so we can use cfconfig 
 		export BOX_SERVER_APP_SERVERHOMEDIRECTORY="${BOX_SERVER_APP_SERVERHOMEDIRECTORY:=${LIB_DIR}/serverHome}"
 
-		if  [[ !BOX_SERVER_CFCONFIGFILE ]] && [[ -f .cfconfig.json ]]; then
+		if [[ !BOX_SERVER_CFCONFIGFILE ]] && [[ -f .cfconfig.json ]]; then
 			echo "INFO: Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
 		fi
 
