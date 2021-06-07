@@ -19,7 +19,7 @@ printf "${runOutput}\n"
 
 $BUILD_DIR/tests/test.up.sh
 
-if [[ ${BOX_SERVER_PROFILE} != 'production' ]];then
+if [[ ${runOutput} != *"The environment variable HEADLESS has been deprecated"* ]];then
 	echo "Headless environment did not set the mode to production"
 	exit 1
 fi
