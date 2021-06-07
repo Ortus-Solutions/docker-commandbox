@@ -28,16 +28,16 @@ _*Note*: The `:latest` tag currently uses OpenJDK11. and only the `:adobe2016` t
 Description 
 =================
 
-CommandBox allows you to configure your entire CFML engine environment from a single file in the root of your project.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://ortus.gitbooks.io/commandbox-documentation/). 
+CommandBox allows you to configure your entire CFML engine environment at runtime using file or environment-based conventions.  For more information on how to leverage CommandBox in developing and deploying your applications, see the [official documentation](https://commandbox.ortusbooks.com/). 
 
-In addition the CommandBox modules of [`dotenv`](https://www.forgebox.io/view/commandbox-dotenv) and [`cfconfig`](https://cfconfig.ortusbooks.com/) are included in these pre-built images, which allow you to leverage runtime environmental and server configuration options.
+In addition the CommandBox modules of [`dotenv`](https://www.forgebox.io/view/commandbox-dotenv) and [`cfconfig`](https://cfconfig.ortusbooks.com/) are included in these pre-built images, which allow you to leverage additional runtime environmental and server configuration options.
 
 Current CFML engines supported are:
 
 - Lucee:  5+
 - Adobe ColdFusion 2016+
 
-You may also specify a custom WAR for deployment, using the `server.json` configuration.
+You may also [specify a custom WAR for deployment](https://commandbox.ortusbooks.com/embedded-server/multi-engine-support#war-support), using the `server.json` configuration.
 
 Usage
 ================
