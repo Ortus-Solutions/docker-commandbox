@@ -90,7 +90,7 @@ printf "${runOutput}"
 
 ./tests/test.up.sh
 
-if [[ !$BOX_SERVER_WEB_REWRITES_ENABLE} ]];then
+if [[ ${runOutput} != *"The environment variable URL_REWRITES has been deprecated"* ]];then
 	echo "Rewrites were not enabled from the environment variable!"
 	exit 1
 fi
