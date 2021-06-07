@@ -13,8 +13,8 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version 
-* `:commandbox-5.2.1` - Stable image tagged with the version of CommandBox used to build the image
-* `:3.2.0` - Tagged version of the image
+* `:commandbox-5.3.1` - Stable image tagged with the version of CommandBox used to build the image
+* `:3.4.0` - Tagged version of the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
@@ -77,31 +77,40 @@ The CommandBox Docker image supports the use of environmental variables for the 
 * `$PORT` - The port which your server should start on.  The default is `8080`.
 * `$SSL_PORT` - If applicable, the ssl port used by your server The default is `8443`.
 
-##### HTTP2 Support
+##### HTTP/2 Support
 
-You may enable HTTP2 support via the `runwar.args` option of `--http2-enable=true`.  Once enabled, the Undertow server will serve both HTTPS and HTTP traffic with HTTP2 support
-
+As of Commandbox `v5.3.0`, all CommandBox servers have HTTP/2 enabled by default. For browser support of this protocol, you will need to enable SSL and provide a certificate.
 
 ##### Server Configuration Variables
 
 The following environment variables may be provided to modify your runtime server configuration.  Please note that environment variables are case sensitive and, while some lower/upper case aliases are accounted for, you should use consistent casing in order for these variables to take effect.
 
-* `SERVER_HOME_DIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `${LIB_DIR}/serverHome`, which resolves to `/usr/local/lib/serverHome` in most builds. The Alpine-based builds will default to `/usr/lib/serverHome`. ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
+* `BOX_SERVER_APP_SERVERHOMEDIRECTORY` - When provided, a custom path to your server home directory will be assigned.  By default, this path is set as `${LIB_DIR}/serverHome`, which resolves to `/usr/local/lib/serverHome` in most builds. The Alpine-based builds will default to `/usr/lib/serverHome`. ( _Note: You may also provide this variable in your app's customized `server.json` file_ )
 * `APP_DIR` - Application directory (web root). By default, this is `/app`.  If you are deploying an application with mappings outside of the root, you would want to provide this environment variable to point to the webroot ( e.g. `/app/wwwroot` )
-* `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
-* `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  The command `cfconfig set ${settingName}=${value}` will be run to populate your setting in to the `$SERVER_HOME_DIRECTORY`.
-* `cfconfigfile` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically.  _Note: The value `CFCONFIG` is aliased to this parameter, but is deprecated._
-* `CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
-* `FINALIZE_STARTUP` - When provided a final startup script will be generated, which will be considered authoritative the next time the container/image starts. The caveat to this, however, is that the finalized startup script will bypass the evaluation checks for all of the other environment variables in this list as those values will be explicitly exported in the startup file.
-* `HEADLESS`/`headless` - When set to true, the [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles) will be set to `production`, which disallows access to the administrator and protects sensitive files.
-* `SERVER_PROFILE` - When set, this will be applied as the runtime [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles).  If a `HEADLESS` environment variable exists, it will overwrite this environment variable to `production`
-* `URL_REWRITES`/`url_rewrites` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
 * `USER` - When provided the server process will run under the provided user account name
+* `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.  
+* `BOX_SERVER_CFCONFIGFILE` - A `cfconfig`-compatible JSON file may be provided with this environment variable.  The file will be loaded and applied to your server.  If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically. 
+* `BOX_SERVER_APP_CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container ( e.g. `lucee@5` ). Defaults to the CommandBox default ( currently `lucee@4.5`) 
+* `FINALIZE_STARTUP` - When provided a final startup script will be generated, which will be considered authoritative the next time the container/image starts. The caveat to this, however, is that the finalized startup script will bypass the evaluation checks for all of the other environment variables in this list as those values will be explicitly exported in the startup file.
+* `BOX_SERVER_PROFILE` - When set, this will be applied as the runtime [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles).  By default, CommandBox will set this value to the `production` mode, since the container server binds to all interfaces on `0.0.0.0`. If you wish a lower level of security, you will need to provide this variable or set it in your `server.json` file.
+* `BOX_SERVER_WEB_REWRITES_ENABLE` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Rewrite configurations provided within the app's `server.json` file will supersede this argument.
 * `CFPM_INSTALL` and `CFPM_UNINSTALL`  - Supported for Adobe Coldfusion 2021 engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed ( or uninstalled, respectively ), prior to the server start.  A warmed-up server is required to use these variables.
+* `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 
 ##### Docker Runtime Variables
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
+
+##### Deprecated Environment Variables
+
+The following variables are still supported, however they are deprecated and support will be removed in the next major release version of the image:
+
+* `SERVER_HOME_DIRECTORY` - Use `BOX_SERVER_APP_SERVERHOMEDIRECTORY` instead
+* `CFCONFIG` and `cfconfigfile` - Use `BOX_SERVER_CFCONFIGFILE` instead
+* `CFENGINE` - Use `BOX_SERVER_APP_CFENGINE` instead
+* `HEADLESS=true` - Use `BOX_SERVER_PROFILE=production` instead
+* `SERVER_PROFILE` - Use `BOX_SERVER_PROFILE` instead
+* `URL_REWRITES`/`url_rewrites` - Use `BOX_SERVER_WEB_REWRITES_ENABLE` instead
 
 Docker Secrets
 ==============
