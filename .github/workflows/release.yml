@@ -130,6 +130,7 @@ jobs:
 
       - name: Test
         env:
+          COMMANDBOX_VERSION: ${{ steps.setup.outputs.commandbox_version }}
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
