@@ -123,7 +123,8 @@ jobs:
           file: ${{ matrix.BASE_BUILD_FILE }} 
           platforms: linux/amd64,linux/arm64
           push: false
-          build-args: VERSION=${{ steps.buildx.outputs.image_version }},COMMANDBOX_VERSION=${{ steps.buildx.outputs.commandbox_version }}
+          load: true
+          build-args: VERSION=${{ steps.setup.outputs.image_version }},COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
           tags: commandbox-base    
 
       - name: Test
