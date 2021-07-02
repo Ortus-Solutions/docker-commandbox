@@ -141,5 +141,5 @@ jobs:
           file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.setup.outputs.tags }    
+          tags: ${{ steps.setup.outputs.tags }}    
 
