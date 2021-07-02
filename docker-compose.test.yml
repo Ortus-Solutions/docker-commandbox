@@ -1,13 +1,20 @@
-sut:
-  environment:
-    IMAGE_TESTING_IN_PROGRESS: "true"
-  build: 
-    context: .
-    dockerfile: "./${BUILD_IMAGE_DOCKERFILE}"
-    args :
-      - COMMANDBOX_VERSION
-  command: /root/build/test.sh
-  #Mount our test directory ( and our build directory to make local testing easier )
-  volumes: 
-    - ./test:/app
-    - ./build:/root/build
+version: '3.1'
+
+# This tests the CommandBox Docker Secrets implementation
+# To test:
+# BUILD_IMAGE_DOCKERFILE=Dockerfile BUILD_IMAGE_TAG=ortussolutions/commandbox docker-compose -f docker-compose.secret-test.yml up --build
+
+services:
+  sut:
+    environment:
+      IMAGE_TESTING_IN_PROGRESS: "true"
+    build: 
+      context: .
+      dockerfile: "./${BUILD_IMAGE_DOCKERFILE}"
+      args :
+        - COMMANDBOX_VERSION
+    command: /root/build/test.sh
+    #Mount our test directory ( and our build directory to make local testing easier )
+    volumes: 
+      - ./test:/app
+      - ./build:/root/build
