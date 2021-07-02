@@ -40,27 +40,27 @@ jobs:
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
-          - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-            BUILD_IMAGE_TAG: alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
-            BUILD_IMAGE_TAG: jdk8-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-            BUILD_IMAGE_TAG: lucee5-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-            BUILD_IMAGE_TAG: lucee-light-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2016-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2018-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2021-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
+          #   BUILD_IMAGE_TAG: alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
+          #   BUILD_IMAGE_TAG: jdk8-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
+          #   BUILD_IMAGE_TAG: lucee5-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
+          #   BUILD_IMAGE_TAG: lucee-light-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2016-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2018-alpine
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2021-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v2
