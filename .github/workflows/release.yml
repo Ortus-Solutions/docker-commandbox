@@ -127,7 +127,7 @@ jobs:
           tags: commandbox-base    
 
       - name: Test
-        with:
+        env:
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
         run: |
           docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
