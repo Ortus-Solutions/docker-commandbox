@@ -62,16 +62,6 @@ jobs:
           #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
           #   BUILD_IMAGE_TAG: adobe2021-alpine
     steps:
-      - name: Check Docker Version
-        run: docker --version
-      - name: Install Latest Docker
-        run: |
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
-          sudo apt-get update
-          sudo apt-get install docker-ce
-      - name: Check Docker Version
-        run: docker --version
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -128,6 +118,7 @@ jobs:
       # - name: Build Base
       #   uses: docker/build-push-action@v2
       #   with:
+      #     DOCKER_BUILDKIT: 1
       #     builder: ${{ steps.buildx.outputs.name }}
       #     context: .
       #     file: ${{ matrix.BASE_BUILD_FILE }} 
@@ -139,6 +130,8 @@ jobs:
 
       - name: Test
         env:
+          DOCKER_BUILDKIT: 1
+          COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
         run: |
           docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
@@ -147,6 +140,7 @@ jobs:
       - name: Build Final
         uses: docker/build-push-action@v2
         with:
+          DOCKER_BUILDKIT: 1
           builder: ${{ steps.buildx.outputs.name }}
           context: .
           file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
