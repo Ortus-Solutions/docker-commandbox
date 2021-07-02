@@ -76,7 +76,7 @@ jobs:
 
       - name: Setup Builds
         id: setup
-        with:
+        env:
           DOCKER_IMAGE : ortussolutions/commandbox
           BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }} 
           COMMANDBOX_VERSION: 5.3.1
