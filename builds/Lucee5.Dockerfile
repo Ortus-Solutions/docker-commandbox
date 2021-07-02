@@ -3,7 +3,7 @@ FROM commandbox-base
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ENV BOX_SERVER_APP_CFENGINE lucee@5.3.7+48
+ENV BOX_SERVER_APP_CFENGINE lucee@5.3.8+189
 
 # WARM UP THE SERVER - we skip the declaration so that the default installed Lucee server will be used
 RUN ${BUILD_DIR}/util/warmup-server.sh

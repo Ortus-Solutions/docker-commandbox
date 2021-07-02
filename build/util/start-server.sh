@@ -19,7 +19,7 @@ box server start \
     saveSettings=false  \
     dryRun=${DRY_RUN_FLAG} \
     console=${DRY_RUN_FLAG} \
-    startScript=${SCRIPT_TYPE}
+    startScript=${SCRIPT_TYPE} \
     verbose=true
 
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
