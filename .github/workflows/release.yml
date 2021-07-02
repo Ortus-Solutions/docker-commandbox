@@ -62,6 +62,16 @@ jobs:
           #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
           #   BUILD_IMAGE_TAG: adobe2021-alpine
     steps:
+      - name: Check Docker Version
+        run: docker --version
+      - name: Install Latest Docker
+        run: |
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+          sudo apt-get update
+          sudo apt-get install docker-ce
+      - name: Check Docker Version
+        run: docker --version
       - name: Checkout
         uses: actions/checkout@v2
 
