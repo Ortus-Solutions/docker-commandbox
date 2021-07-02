@@ -124,7 +124,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: false
           load: true
-          build-args: "VERSION=${{ steps.setup.outputs.image_version }},COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}"
+          build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
           tags: commandbox-base    
 
       - name: Test

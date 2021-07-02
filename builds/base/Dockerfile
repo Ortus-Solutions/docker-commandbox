@@ -1,9 +1,6 @@
 FROM adoptopenjdk/openjdk11:jre-11.0.11_9-debianslim
-
-ARG VERSION
 ARG COMMANDBOX_VERSION
 
-LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 

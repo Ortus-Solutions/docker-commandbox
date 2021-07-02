@@ -1,9 +1,7 @@
 FROM adoptopenjdk/openjdk8:jdk8u292-b10-debianslim-slim
 
 ARG COMMANDBOX_VERSION
-ARG VERSION
 
-LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
