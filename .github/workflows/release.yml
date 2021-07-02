@@ -16,51 +16,41 @@ jobs:
     strategy:
       matrix:
         include:
-          - BUILD_IMAGE_DOCKERFILE : builds/Base.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Dockerfile 
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
             BUILD_IMAGE_TAG: latest
-          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
-          #   BUILD_IMAGE_TAG: jdk8
-          # - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Dockerfile 
-          #   BUILD_IMAGE_TAG: lucee5
-          # - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Dockerfile 
-          #   BUILD_IMAGE_TAG: lucee-light
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2016
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2018
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2021
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
+            BUILD_IMAGE_TAG: jdk11
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.JRE8.Dockerfile
+            BUILD_IMAGE_TAG: jdk8
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2016.Dockerfile
+            BUILD_IMAGE_TAG: adobe2016
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2018.Dockerfile
+            BUILD_IMAGE_TAG: adobe2018
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAG: adobe2021
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
-          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-          #   BUILD_IMAGE_TAG: alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Alpine.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
-          #   BUILD_IMAGE_TAG: jdk8-alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-          #   BUILD_IMAGE_TAG: lucee5-alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-          #   BUILD_IMAGE_TAG: lucee-light-alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.JRE8.Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2016-alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2018-alpine
-          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
-          #   BASE_BUILD_FILE: builds/base/Alpine.Dockerfile 
-          #   BUILD_IMAGE_TAG: adobe2021-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
+            BUILD_IMAGE_TAG: alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
+            BUILD_IMAGE_TAG: jdk11-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.JRE8.Dockerfile 
+            BUILD_IMAGE_TAG: jdk8-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Lucee5.Dockerfile 
+            BUILD_IMAGE_TAG: lucee5-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/LuceeLight.Dockerfile 
+            BUILD_IMAGE_TAG: lucee-light-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2016.Dockerfile 
+            BUILD_IMAGE_TAG: adobe2016-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2018.Dockerfile 
+            BUILD_IMAGE_TAG: adobe2018-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2021.Dockerfile 
+            BUILD_IMAGE_TAG: adobe2021-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -102,8 +92,15 @@ jobs:
 
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
+          if [[ $BUILD_IMAGE_TAG == *"alpine"* ]]; then
+            ARCH_PLATFORMS=linux/amd64
+          else
+            ARCH_PLATFORMS=linux/amd64,linux/arm64
+          fi
+
           
           # Set output parameters.
+          echo ::set-output name=arch_platforms::${ARCH_PLATFORMS}
           echo ::set-output name=image_version::${IMAGE_VERSION}
           echo ::set-output name=commandbox_version::${COMMANDBOX_VERSION}
           echo ::set-output name=tags::${TAGS}  
@@ -134,7 +131,7 @@ jobs:
           context: .
           file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ steps.buildx.outputs.arch_platforms }}
           push: true
           tags: ${{ steps.setup.outputs.tags }}    
 
