@@ -19,24 +19,24 @@ jobs:
           - BUILD_IMAGE_DOCKERFILE : builds/Base.Dockerfile 
             BASE_BUILD_FILE: builds/base/Dockerfile 
             BUILD_IMAGE_TAG: latest
-          - BUILD_IMAGE_DOCKERFILE : builds/Base.Dockerfile 
-            BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
-            BUILD_IMAGE_TAG: jdk8
-          - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Dockerfile 
-            BUILD_IMAGE_TAG: lucee5
-          - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Dockerfile 
-            BUILD_IMAGE_TAG: lucee-light
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
-            BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2016
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Dockerfile 
-            BUILD_IMAGE_TAG: adobe2018
-          - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
-            BASE_BUILD_FILE: builds/base/Dockerfile 
-            BUILD_IMAGE_TAG: adobe2021
+          # - BUILD_IMAGE_DOCKERFILE : builds/Base.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
+          #   BUILD_IMAGE_TAG: jdk8
+          # - BUILD_IMAGE_DOCKERFILE : builds/Lucee5.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Dockerfile 
+          #   BUILD_IMAGE_TAG: lucee5
+          # - BUILD_IMAGE_DOCKERFILE : builds/LuceeLight.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Dockerfile 
+          #   BUILD_IMAGE_TAG: lucee-light
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2016.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/JRE8.Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2016
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2018.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2018
+          # - BUILD_IMAGE_DOCKERFILE : builds/Adobe2021.Dockerfile 
+          #   BASE_BUILD_FILE: builds/base/Dockerfile 
+          #   BUILD_IMAGE_TAG: adobe2021
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
@@ -115,17 +115,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Base
-        uses: docker/build-push-action@v2
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          context: .
-          file: ${{ matrix.BASE_BUILD_FILE }} 
-          platforms: linux/amd64,linux/arm64
-          push: false
-          load: true
-          build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
-          tags: commandbox-base    
+      # - name: Build Base
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     context: .
+      #     file: ${{ matrix.BASE_BUILD_FILE }} 
+      #     platforms: linux/amd64,linux/arm64
+      #     push: false
+      #     load: true
+      #     build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
+      #     tags: commandbox-base    
 
       - name: Test
         env:
