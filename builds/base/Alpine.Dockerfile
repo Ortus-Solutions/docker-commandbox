@@ -1,6 +1,4 @@
-ARG ARCH
-
-FROM adoptopenjdk/openjdk11:${ARCH}-alpine-jdk-11.0.10_9-slim
+FROM adoptopenjdk/openjdk11:jdk-11.0.11_9-alpine-slim
 
 ARG VERSION
 ARG COMMANDBOX_VERSION

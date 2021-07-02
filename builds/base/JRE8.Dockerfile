@@ -1,6 +1,4 @@
-ARG ARCH
-
-FROM adoptopenjdk/openjdk8:${ARCH}-debianslim-jdk8u282-b08-slim
+FROM adoptopenjdk/openjdk8:jdk8u292-b10-debianslim-slim
 
 ARG COMMANDBOX_VERSION
 ARG VERSION
