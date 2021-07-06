@@ -1,8 +1,6 @@
 name: Release
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - master
@@ -72,8 +70,6 @@ jobs:
           COMMANDBOX_VERSION: 5.3.1
           IMAGE_VERSION: 3.4.2
         run: | 
-          find ${GITHUB_WORKSPACE}/builds/base -type f -exec sed -i '' -e "s/@version@/${IMAGE_VERSION}/g" {} \; 
-          
           # Tag Builds
           if [[ $GITHUB_REF == refs/tags/* ]]; then
 
@@ -92,7 +88,7 @@ jobs:
 
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
-          if [[ $BUILD_IMAGE_TAG == *"alpine"* ]]; then
+          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
             ARCH_PLATFORMS=linux/amd64
           else
             ARCH_PLATFORMS=linux/amd64,linux/arm64
