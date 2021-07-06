@@ -127,7 +127,7 @@ jobs:
           context: .
           file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
-          platforms: ${{ steps.buildx.outputs.arch_platforms }}
+          platforms: ${{ steps.setup.outputs.arch_platforms }}
           push: true
           tags: ${{ steps.setup.outputs.tags }}    
 
