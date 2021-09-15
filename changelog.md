@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.3.1/3.4.2] - 2021-09-15
+
+### Changed
+- Bumped `:adobe2021` version to `2021.0.2+328618`
+- Bumped `:adobe2018` version to `2018.0.12+328566`
+- Updates CommandBox binary to v5.4.0
 ## [5.3.1/3.4.1] - 2021-06-04
 
 ### Changed
