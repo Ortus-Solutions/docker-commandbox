@@ -128,9 +128,6 @@ else
 			box install
 		fi
 
-		# Adobe 2021 package manager installs
-		$BUILD_DIR/util/adobe-cfpm.sh
-
 		# Server startup
 		$BUILD_DIR/util/start-server.sh
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 DEBUG_FLAG=false
 DRY_RUN_FLAG=true
 SCRIPT_TYPE=bash
@@ -21,6 +23,11 @@ box server start \
     console=${DRY_RUN_FLAG} \
     startScript=${SCRIPT_TYPE} \
     verbose=true
+
+# Adobe 2021 package manager installs after the server files are in place
+if[[ $DRY_RUN_FLAG ]]; then
+    $BUILD_DIR/util/adobe-cfpm.sh
+fi
 
 # If not testing then the script was generated and we run it directly, bypassing the CommandBox wrapper
 if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then

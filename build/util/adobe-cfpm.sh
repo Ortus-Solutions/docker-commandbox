@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -ex
 
 if [[ $CFPM_INSTALL ]]; then
@@ -9,12 +8,7 @@ if [[ $CFPM_INSTALL ]]; then
         exit 1
     fi
 
-    IFS=","
-    
-    for package in $CFPM_INSTALL
-    do
-        $BOX_SERVER_APP_SERVERHOMEDIRECTORY/WEB-INF/cfusion/bin/cfpm.sh install $package
-    done
+    $BOX_SERVER_APP_SERVERHOMEDIRECTORY/WEB-INF/cfusion/bin/cfpm.sh install $CFPM_INSTALL
 
 fi
 
