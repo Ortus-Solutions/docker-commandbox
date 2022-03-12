@@ -12,6 +12,11 @@ else
     echo "INFO: Generating server startup script"
 fi
 
+# Attempt to run CFPM before the server start if warming up or testing
+if [[ !$DRY_RUN_FLAG ]]; then
+    $BUILD_DIR/util/adobe-cfpm.sh
+fi
+
 box server start \
     trayEnable=false \
     host=0.0.0.0 \
@@ -25,7 +30,7 @@ box server start \
     verbose=true
 
 # Adobe 2021 package manager installs after the server files are in place
-if[[ $DRY_RUN_FLAG ]]; then
+if [[ $DRY_RUN_FLAG ]]; then
     $BUILD_DIR/util/adobe-cfpm.sh
 fi
 
