@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.4.2/3.4.5] - Unreleased
+## [5.4.2/3.4.5] - 2022-03-12
+
+### Changed
+- Moved CFPM commands to after server has been fully seeded
+- JREs updated to `jre-11.0.14`
 
 ## [5.4.2/3.4.4] - 2021-10-05
 ### Changed
