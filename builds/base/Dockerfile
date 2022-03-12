@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.11_9-debianslim
+FROM adoptopenjdk/openjdk11:jre-11.0.14_9-debianslim
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"

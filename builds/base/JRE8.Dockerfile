@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:jdk8u292-b10-debianslim-slim
+FROM adoptopenjdk/openjdk8:debianslim-slim
 
 ARG COMMANDBOX_VERSION
 

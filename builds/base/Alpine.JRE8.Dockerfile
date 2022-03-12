@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:jdk8u292-b10-alpine-slim
+FROM adoptopenjdk/openjdk8:alpine-slim
 
 ARG COMMANDBOX_VERSION
 ARG VERSION
