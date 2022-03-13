@@ -1,7 +1,7 @@
 #!/bin/bash
-set -ex
+set -e
 
-if [[ $CFPM_INSTALL ]]; then
+if [[ -v $CFPM_INSTALL ]]; then
 
     if [[ ! -f $BOX_SERVER_APP_SERVERHOMEDIRECTORY/.engineInstall ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_INSTALL environment variable may only be used on warmed-up servers"
@@ -12,7 +12,7 @@ if [[ $CFPM_INSTALL ]]; then
 
 fi
 
-if [[ $CFPM_UNINSTALL ]]; then
+if [[ -v $CFPM_UNINSTALL ]]; then
 
     if [[ ! -f $BOX_SERVER_APP_SERVERHOMEDIRECTORY/.engineInstall ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_UNINSTALL environment variable may only be used on warmed-up servers"

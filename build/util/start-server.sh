@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 DEBUG_FLAG=false
 DRY_RUN_FLAG=true
