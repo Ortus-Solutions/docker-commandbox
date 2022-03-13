@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 # Install the CFConfig Module
 box install commandbox-cfconfig --production
