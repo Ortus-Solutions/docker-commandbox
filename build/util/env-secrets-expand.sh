@@ -33,7 +33,7 @@ env_secret_expand() {
             val=$(cat "${secret}")
             if [ $suffix ]; then
                 echo "Expanding from _FILE suffix"
-                var=$(echo $var| cut -d'_' -f 1);
+                var=$(echo $var | rev | cut -d '_' -f 2- | rev);
             fi
             export "$var"="$val"
             env_secret_debug "Expanded variable: $var=$val"
