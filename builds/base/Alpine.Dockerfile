@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-alpine
+FROM eclipse-temurin:11-jdk-alpine
 
 ARG VERSION
 ARG COMMANDBOX_VERSION
