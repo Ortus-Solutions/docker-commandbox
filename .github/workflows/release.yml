@@ -67,7 +67,7 @@ jobs:
         env:
           DOCKER_IMAGE : ortussolutions/commandbox
           BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }} 
-          COMMANDBOX_VERSION: 5.4.2
+          COMMANDBOX_VERSION: 5.5.0
           IMAGE_VERSION: 3.4.6
         run: | 
           # Tag Builds
@@ -91,7 +91,7 @@ jobs:
           if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
             ARCH_PLATFORMS=linux/amd64
           else
-            ARCH_PLATFORMS=linux/amd64,linux/arm64
+            ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7
           fi
 
           
