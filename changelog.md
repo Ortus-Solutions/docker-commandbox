@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 ## [5.4.2/3.4.6] - Unreleased
 
+### Changed
+- JREs updated to `jre-11.0.15`
+
 ## [5.4.2/3.4.5] - 2022-03-12
 
 ### Changed
