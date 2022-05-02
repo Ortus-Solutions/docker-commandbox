@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.14_9-debianslim
+FROM eclipse-temurin:11-jre-focal
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
