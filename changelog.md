@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.5.1/3.5.0] - Unreleased
+## [5.5.1/3.5.0] - 2022-05-03
 
 ### Changed
 - Change base images to use the [`eclipse-temurin` base images](https://hub.docker.com/_/eclipse-temurin)
@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CommandBox binary updated to `5.5.1`
 
 ### Added
-- Added `linux/arm/v7` to build arches
+- Added `linux/arm/v7` to supported architectures for Debian-based images
 
 ## [5.4.2/3.4.5] - 2022-03-12
 
