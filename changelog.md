@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.5.1/3.5.0] - Unreleased
 
 ### Changed
+- Change base images to use the [`eclipse-temurin` base images](https://hub.docker.com/_/eclipse-temurin)
+- Change Ubuntu version to 20.0.0 (focal)
 - JREs updated to `jre-11.0.15`
 - CommandBox binary updated to `5.5.1`
 
