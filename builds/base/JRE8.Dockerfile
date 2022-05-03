@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:debianslim-slim
+FROM eclipse-temurin:8-jre-focal
 
 ARG COMMANDBOX_VERSION
 

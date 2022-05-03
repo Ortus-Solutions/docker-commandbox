@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:alpine-slim
+FROM eclipse-temurin:8-jre-alpine
 
 ARG COMMANDBOX_VERSION
 ARG VERSION
