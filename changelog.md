@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.5.1/3.5.1] - 2022-05-03
+### Changed
+- Updates `:adobe2021` tag to version `2021.0.04+330004`
+- Updates `:adobe2018` tag to version `2018.0.14+330003`
+
 ## [5.5.1/3.5.0] - 2022-05-03
 
 ### Changed
