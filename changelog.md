@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.5.2/3.5.3] - Unreleased
+## [5.5.2/3.5.4] - Unreleased
 
+## [5.5.2/3.5.3] - 2022-05-03
+### Added
+- Added default `BOX_SERVER_RUNWAR_ARGS` environment variable to disable the Undertow system file watcher.  On large applications, or applications with many static assets, this can speed up start times by 20-30s
 ## [5.5.2/3.5.2] - 2022-05-03
 ### Changed
 - CommandBox binary updated to `5.5.2`
