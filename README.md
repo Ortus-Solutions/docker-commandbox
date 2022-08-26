@@ -3,7 +3,8 @@ Official CommandBox Dockerfiles [![Build Status](https://travis-ci.org/Ortus-Sol
 
 This is the repository for official Dockerfiles for Commandbox images
 
-[![DockerHub Badge](http://dockeri.co/image/ortussolutions/commandbox)](https://hub.docker.com/r/ortussolutions/commandbox/)
+
+[![Docker Image Pulls Badge](https://badgen.net/docker/pulls/ortussolutions/commandbox)](https://hub.docker.com/r/ortussolutions/commandbox/)
 
 ## How it works
 
