@@ -15,8 +15,8 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version 
-* `:commandbox-5.3.1` - Stable image tagged with the version of CommandBox used to build the image
-* `:3.4.0` - Tagged version of the image
+* `:commandbox-5.5.2` - Stable image tagged with the version of CommandBox used to build the image
+* `:3.5.5` - Tagged version of the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
@@ -246,8 +246,9 @@ FROM ortussolutions/commandbox:lucee5 as workbench
 ENV FINALIZE_STARTUP true
 RUN $BUILD_DIR/run.sh
 
-# Debian Slim is the smallest OpenJDK image on that kernel. For most apps, this should work to run your applications
-FROM adoptopenjdk/openjdk11:debianslim-jre as app
+# Eclipse Temurin Focal image is the smallest OpenJDK image on that the same kernel used in the base image. 
+# For most apps, this should work to run your applications
+FROM eclipse-temurin:11-jre-focal as app
 
 # COPY our generated files
 COPY --from=workbench /app /app
