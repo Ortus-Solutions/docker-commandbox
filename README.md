@@ -1,9 +1,11 @@
-Official CommandBox Dockerfiles [![Build Status](https://travis-ci.org/Ortus-Solutions/docker-commandbox.svg)](https://travis-ci.org/Ortus-Solutions/docker-commandbox)
+Official CommandBox Dockerfiles 
 =========================
+
+[![Build Status](https://travis-ci.org/Ortus-Solutions/docker-commandbox.svg)](https://travis-ci.org/Ortus-Solutions/docker-commandbox) [![Docker Image Pulls Badge](https://badgen.net/docker/pulls/ortussolutions/commandbox)](https://hub.docker.com/r/ortussolutions/commandbox/)
 
 This is the repository for official Dockerfiles for Commandbox images
 
-[![DockerHub Badge](http://dockeri.co/image/ortussolutions/commandbox)](https://hub.docker.com/r/ortussolutions/commandbox/)
+
 
 ## How it works
 
@@ -255,6 +257,14 @@ RUN mkdir -p /usr/local/lib/CommandBox/lib
 
 COPY --from=workbench /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar
 COPY --from=workbench /usr/local/bin/startup-final.sh /usr/local/bin/run.sh
+
+# Restore working directory environment
+ENV APP_DIR /app
+WORKDIR $APP_DIR
+
+# Restore the healthcheck, since that doesn't transfer from the first stage
+ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
+HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
 
 CMD /usr/local/bin/run.sh
 ```
