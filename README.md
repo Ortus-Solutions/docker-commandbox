@@ -67,7 +67,7 @@ docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/
 Supported Architectures and Operating Systems
 =============================================
 
-All Debian-based images currently support `linux/amd64` or `linux/arm64` architecture. Alpine builds are currently only supported on linux/amd64
+All Debian-based images currently support `linux/amd64`, `linux/arm64` and `linux/arm/v7` architecture. Alpine builds are currently only supported on `linux/amd64`
 
 Environment Variables
 =====================
