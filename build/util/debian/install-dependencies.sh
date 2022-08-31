@@ -11,7 +11,8 @@ apt-get update && apt-get install --assume-yes \
                                 wget \
                                 gnupg \
                                 libreadline-dev \
-                                fontconfig
+                                fontconfig \
+                                procps
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
 # based on whether the JDK or only the JRE is installed
