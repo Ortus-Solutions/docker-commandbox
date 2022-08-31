@@ -14,5 +14,4 @@ apk update && apk add curl \
                         libintl \
                         shadow \
                         fontconfig \
-                        procps \
                         && rm -f /var/cache/apk/*
