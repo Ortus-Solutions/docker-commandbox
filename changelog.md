@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.5.2/3.5.5] - Unreleased
+## [5.6.1/3.6.0] - 2022-09-05
+### Changed
+- Updates CommandBox Binary to v5.6.1
 
 ## [5.5.2/3.5.4] - 2022-07-29
 ### Changed
-Update JRE base images to 11.0.16
+- Update JRE base images to 11.0.16
 
 
 
