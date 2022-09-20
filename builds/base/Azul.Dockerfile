@@ -41,7 +41,7 @@ RUN chmod +x $BUILD_DIR/*.sh
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Switch out our java.security file to disable TLS and increase key size
-RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resources/java.security /opt/java/openjdk/conf/security/java.security
+RUN rm -rf /usr/lib/jvm/zulu11/conf/security/java.security && mv $BUILD_DIR/resources/java.security /usr/lib/jvm/zulu11/conf/security/java.security
 
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
