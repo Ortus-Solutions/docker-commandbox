@@ -46,6 +46,8 @@ RUN rm -rf /usr/lib/jvm/zulu11/conf/security/java.security && mv $BUILD_DIR/reso
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
+# We need to install procps for CommandBox
+RUN apt-get update && apt-get install --assume-yes procps && apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* 
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
