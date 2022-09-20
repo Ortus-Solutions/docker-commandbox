@@ -83,7 +83,7 @@ else
 		CFCONFIG_PASSWORD_KEYS=( "adminPassword" "adminPasswordDefault" "hspw" "pw" "defaultHspw" "defaultPw" "ACF11Password" )
 		ADMIN_PASSWORD_SET=false
 
-		# Check for a defined server home directory in box.json
+		# Check for a defined server home directory in server.json
 		if [[ -f server.json ]]; then
 
 			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]; then	
