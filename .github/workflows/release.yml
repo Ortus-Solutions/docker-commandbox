@@ -49,6 +49,20 @@ jobs:
             BUILD_IMAGE_TAG: adobe2018-alpine
           - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2021.Dockerfile 
             BUILD_IMAGE_TAG: adobe2021-alpine
+
+          # Azul JRE Builds
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/Base.Dockerfile
+            BUILD_IMAGE_TAG: azul
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/Base.Dockerfile
+            BUILD_IMAGE_TAG: jdk11-azul
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5-azul
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light-azul
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/Adobe2018.Dockerfile
+            BUILD_IMAGE_TAG: adobe2018-azul
+          - BUILD_IMAGE_DOCKERFILE : builds/azul/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAG: adobe2021-azul
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -90,6 +104,9 @@ jobs:
 
           if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
             ARCH_PLATFORMS=linux/amd64
+
+          elif [[ ${BUILD_IMAGE_TAG} == *"azul"* ]]; then
+            ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
           else
             ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7
           fi
