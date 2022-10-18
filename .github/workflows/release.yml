@@ -97,10 +97,10 @@ jobs:
 
           
           # Set output parameters.
-          echo ::set-output name=arch_platforms::${ARCH_PLATFORMS}
-          echo ::set-output name=image_version::${IMAGE_VERSION}
-          echo ::set-output name=commandbox_version::${COMMANDBOX_VERSION}
-          echo ::set-output name=tags::${TAGS}  
+          echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
+          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
+          echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "tags=${TAGS}" >> $GITHUB_ENV
 
       - name: DockerHub Login
         if: github.event_name != 'pull_request'

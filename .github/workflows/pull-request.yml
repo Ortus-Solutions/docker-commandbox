@@ -70,10 +70,10 @@ jobs:
         run: | 
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
-          # Set output parameters.
-          echo ::set-output name=image_version::${IMAGE_VERSION}
-          echo ::set-output name=commandbox_version::${COMMANDBOX_VERSION}
-          echo ::set-output name=tags::${TAGS}  
+          # Set output parameters for subsequent steps
+          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
+          echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "tags=${TAGS}" >> $GITHUB_ENV  
       - name: Test
         env:
           COMMANDBOX_VERSION: ${{ steps.setup.outputs.commandbox_version }}
