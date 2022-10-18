@@ -79,6 +79,8 @@ echo "Tests the ability to run the environment in headless mode"
 
 echo "HEADLESS environment variable tests completed successfully"
 
+printf "\n\n*******************\n\n"
+
 # Rewrites Environment variables
 echo "Testing the ability to specify to turn rewrites off via an environment variable"
 
@@ -106,6 +108,8 @@ cd $BUILD_DIR
 
 echo "Commandbox rewrite convention tests completed successfully"
 
+printf "\n\n*******************\n\n"
+
 # CFPM_INSTALL Variable
 if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
 	echo "Tests the ability to specify Coldfusion Package Management installations"
@@ -113,6 +117,7 @@ if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
 	./tests/test.cfpm.sh
 
 	echo "CFPM_INSTALL environment variable tests completed successfully"
+	printf "\n\n*******************\n\n"
 fi
 
 # USER Variable
