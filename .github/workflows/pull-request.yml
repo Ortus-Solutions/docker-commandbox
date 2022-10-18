@@ -75,12 +75,10 @@ jobs:
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
           # Set output parameters for subsequent steps
-          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "tags=${TAGS}" >> $GITHUB_ENV  
       - name: Test
         env:
-          COMMANDBOX_VERSION: ${{ steps.setup.outputs.commandbox_version }}
+          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}

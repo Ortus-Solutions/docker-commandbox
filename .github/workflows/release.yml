@@ -115,7 +115,7 @@ jobs:
 
       - name: Test
         env:
-          COMMANDBOX_VERSION: ${{ steps.setup.outputs.commandbox_version }}
+          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
@@ -131,8 +131,8 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
           file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          build-args: COMMANDBOX_VERSION=${{ steps.setup.outputs.commandbox_version }}
-          platforms: ${{ steps.setup.outputs.arch_platforms }}
+          build-args: COMMANDBOX_VERSION=${{ env.commandbox_version }}
+          platforms: ${{ env.arch_platforms }}
           push: true
-          tags: ${{ steps.setup.outputs.tags }}    
+          tags: ${{ env.tags }}    
 
