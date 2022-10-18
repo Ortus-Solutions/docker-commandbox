@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+
+## [5.6.1/3.6.2] - Unreleased
+
 ## [5.6.1/3.6.1] - 2022-10-18
 
 ### Fixed
@@ -13,8 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Resolves [Issue #64](https://github.com/Ortus-Solutions/docker-commandbox/issues/64) Added support for specifying a user identifier ( `USER_ID` ) at runtime and default UID to `1001` to ease ownership/permissions of mounts.
-
-## [5.6.1/3.6.1] - 2022-10-12
 ### Changed
 - Updates `:adobe2021` tag to version `2021.0.05+330109`
 - Updates `:adobe2018` tag to version `2018.0.15+330106`
