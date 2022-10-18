@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 
 ## [5.6.1/3.6.2] - Unreleased
+### Changed
+- Resolves [Issue #63](https://github.com/Ortus-Solutions/docker-commandbox/issues/63) - Changed all Adobe images over to use JDK as base instead of JRE due to webservices compilation errors. Size increased by 141MB. [Adobe Bug Report](https://tracker.adobe.com/#/view/CF-4215554)
 
 ## [5.6.1/3.6.1] - 2022-10-18
 

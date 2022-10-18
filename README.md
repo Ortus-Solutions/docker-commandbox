@@ -20,6 +20,8 @@ Tags
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2016-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
+* `:jre11` - Base image using OpenJDK11 JRE
+* `:jdk11` - Base image using OpenJDK11 full JDK
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
 * `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Lucee5.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/LuceeLight.Dockerfile)), `:adobe2016`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2016.Dockerfile)),`:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/Adobe2018.Dockerfile))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:

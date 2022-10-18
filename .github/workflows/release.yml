@@ -17,8 +17,10 @@ jobs:
           - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
             BUILD_IMAGE_TAG: latest
           - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
+            BUILD_IMAGE_TAG: jre11
+          - BUILD_IMAGE_DOCKERFILE : builds/base/JDK11.Dockerfile
             BUILD_IMAGE_TAG: jdk11
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.JRE8.Dockerfile
+          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.JDK8.Dockerfile
             BUILD_IMAGE_TAG: jdk8
           - BUILD_IMAGE_DOCKERFILE : builds/debian/Lucee5.Dockerfile
             BUILD_IMAGE_TAG: lucee5
@@ -36,8 +38,10 @@ jobs:
           - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
             BUILD_IMAGE_TAG: alpine
           - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
+            BUILD_IMAGE_TAG: jre11-alpine
+          - BUILD_IMAGE_DOCKERFILE : builds/base/Alpine.JDK11.Dockerfile 
             BUILD_IMAGE_TAG: jdk11-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.JRE8.Dockerfile 
+          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.JDK8.Dockerfile 
             BUILD_IMAGE_TAG: jdk8-alpine
           - BUILD_IMAGE_DOCKERFILE : builds/alpine/Lucee5.Dockerfile 
             BUILD_IMAGE_TAG: lucee5-alpine
