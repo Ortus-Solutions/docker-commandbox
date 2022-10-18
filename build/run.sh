@@ -27,8 +27,8 @@ else
 	# If a custom user is requested set it before we begin
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 		echo "INFO: Configuration set to non-root user: ${USER}"
-		if [[ !$USER_ID ]]; then
-			$USER_ID=1001
+		if [[ ! $USER_ID ]]; then
+			export USER_ID=1001
 		fi
 		export HOME=/home/$USER
 			
