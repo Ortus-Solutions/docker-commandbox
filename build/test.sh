@@ -107,12 +107,13 @@ cd $BUILD_DIR
 echo "Commandbox rewrite convention tests completed successfully"
 
 # CFPM_INSTALL Variable
-echo "Tests the ability to specify Coldfusion Package Management"
+if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
+	echo "Tests the ability to specify Coldfusion Package Management"
 
-./tests/test.cfpm.sh
+	./tests/test.cfpm.sh
 
-echo "CFPM_INSTALL environment variable tests completed successfully"
-
+	echo "CFPM_INSTALL environment variable tests completed successfully"
+fi
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR
