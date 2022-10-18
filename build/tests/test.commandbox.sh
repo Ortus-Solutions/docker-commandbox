@@ -1,3 +1,5 @@
+# Set any error to exit non-zero
+set -e
 cd $APP_DIR
 
 # Test the ability to install an application module

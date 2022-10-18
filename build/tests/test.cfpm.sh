@@ -1,4 +1,6 @@
 #!/bin/bash
+# Set any error to exit non-zero
+set -e
 
 # Clear out any previous runtime JSON files
 rm -f $APP_DIR/*.json

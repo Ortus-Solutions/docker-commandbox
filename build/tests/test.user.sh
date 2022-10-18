@@ -1,4 +1,6 @@
 #!/bin/bash
+# Set any error to exit non-zero
+set -e
 # Perform reset operations now, before we start issuing exit codes
 
 # Clear out any previous runtime JSON files

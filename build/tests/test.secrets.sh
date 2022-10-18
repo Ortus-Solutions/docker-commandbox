@@ -1,4 +1,6 @@
 #!/bin/bash
+# Set any error to exit non-zero
+set -e
 
 echo "Testing the docker secret expansion"
 

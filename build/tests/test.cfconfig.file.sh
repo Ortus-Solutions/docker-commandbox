@@ -1,3 +1,6 @@
+# Set any error to exit non-zero
+set -e
+
 cd $APP_DIR
 
 # The file needs to exist already when single server mode is on
