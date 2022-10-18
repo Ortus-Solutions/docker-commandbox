@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-if [[ -v $CFPM_INSTALL ]]; then
+if [[ $CFPM_INSTALL ]]; then
+    echo "INFO: Coldfusion Package Manager Installation initiated to server directory: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 
     if [[ ! -f $BOX_SERVER_APP_SERVERHOMEDIRECTORY/.engineInstall ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_INSTALL environment variable may only be used on warmed-up servers"
@@ -12,7 +13,8 @@ if [[ -v $CFPM_INSTALL ]]; then
 
 fi
 
-if [[ -v $CFPM_UNINSTALL ]]; then
+if [[ $CFPM_UNINSTALL ]]; then
+    echo "INFO: Coldfusion Package Manager Uninstallation specified for server directory: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 
     if [[ ! -f $BOX_SERVER_APP_SERVERHOMEDIRECTORY/.engineInstall ]]; then
         echo "The Adobe engine has not yet been installed on this server. The CFPM_UNINSTALL environment variable may only be used on warmed-up servers"

@@ -106,6 +106,13 @@ cd $BUILD_DIR
 
 echo "Commandbox rewrite convention tests completed successfully"
 
+# CFPM_INSTALL Variable
+echo "Tests the ability to specify Coldfusion Package Management"
+
+./tests/test.cfpm.sh
+
+echo "CFPM_INSTALL environment variable tests completed successfully"
+
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR
