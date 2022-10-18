@@ -108,12 +108,19 @@ echo "Commandbox rewrite convention tests completed successfully"
 
 # CFPM_INSTALL Variable
 if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
-	echo "Tests the ability to specify Coldfusion Package Management"
+	echo "Tests the ability to specify Coldfusion Package Management installations"
 
 	./tests/test.cfpm.sh
 
 	echo "CFPM_INSTALL environment variable tests completed successfully"
 fi
+
+# USER Variable
+echo "Tests the ability to specify a custom runtime user and identifier"
+
+./tests/test.user.sh
+
+echo "USER environment variable tests completed successfully"
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR

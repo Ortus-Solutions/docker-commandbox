@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Resolves [Issue #70](https://github.com/Ortus-Solutions/docker-commandbox/issues/70) - `CFPM_INSTALL` environment variables were not being applied/evaluated correctly
 
+### Added
+- Resolves [Issue #64](https://github.com/Ortus-Solutions/docker-commandbox/issues/64) Added support for specifying a user identifier ( `USER_ID` ) at runtime and default UID to `1001` to ease ownership of mounts.
+
 ## [5.6.1/3.6.1] - 2022-10-12
 ### Changed
 - Updates `:adobe2021` tag to version `2021.0.05+330109`

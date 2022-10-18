@@ -27,18 +27,21 @@ else
 	# If a custom user is requested set it before we begin
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 		echo "INFO: Configuration set to non-root user: ${USER}"
+		if [[ !$USER_ID ]]; then
+			$USER_ID=1001
+		fi
 		export HOME=/home/$USER
 			
 		if [[ -f /etc/alpine-release ]]; then
 			# If the user exists then we skip the directory migrations as the container is in restart
 			if ! id -u $USER > /dev/null 2>&1; then
-				adduser $USER --home $HOME --disabled-password --ingroup $WORKGROUP
+				adduser $USER --uid $USER_ID --home $HOME --disabled-password --ingroup $WORKGROUP
 			fi
 
 		else
 			# If the user exists then we skip the directory migrations as the container is in restart
 			if ! id -u $USER > /dev/null 2>&1; then
-				useradd $USER 
+				useradd -u $USER_ID $USER 
 				usermod -a -G $WORKGROUP $USER
 				# Ensure our user home directory exists - we need to create it manually for Alpine builds
 				mkdir -p $HOME
