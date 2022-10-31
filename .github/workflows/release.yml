@@ -1,138 +1,137 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - master
-      - development
-    tags:
-      - v*
+    push:
+        branches:
+            - master
+            - development
+        tags:
+            - v*
 
 jobs:
-  publish:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
-            BUILD_IMAGE_TAG: latest
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.Dockerfile
-            BUILD_IMAGE_TAG: jre11
-          - BUILD_IMAGE_DOCKERFILE : builds/base/JDK11.Dockerfile
-            BUILD_IMAGE_TAG: jdk11
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Base.JDK8.Dockerfile
-            BUILD_IMAGE_TAG: jdk8
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Lucee5.Dockerfile
-            BUILD_IMAGE_TAG: lucee5
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAG: lucee-light
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2016.Dockerfile
-            BUILD_IMAGE_TAG: adobe2016
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2018.Dockerfile
-            BUILD_IMAGE_TAG: adobe2018
-          - BUILD_IMAGE_DOCKERFILE : builds/debian/Adobe2021.Dockerfile
-            BUILD_IMAGE_TAG: adobe2021
+    publish:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include:
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+                      BUILD_IMAGE_TAG: latest
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+                      BUILD_IMAGE_TAG: jre11
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
+                      BUILD_IMAGE_TAG: jdk11
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
+                      BUILD_IMAGE_TAG: jdk8
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
+                      BUILD_IMAGE_TAG: lucee5
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
+                      BUILD_IMAGE_TAG: lucee-light
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2016.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2016
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2018
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2021
 
-          # Alpine builds
-          # Note: No JDK builders currently support alpine with ARM
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
-            BUILD_IMAGE_TAG: alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.Dockerfile 
-            BUILD_IMAGE_TAG: jre11-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/base/Alpine.JDK11.Dockerfile 
-            BUILD_IMAGE_TAG: jdk11-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Base.JDK8.Dockerfile 
-            BUILD_IMAGE_TAG: jdk8-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Lucee5.Dockerfile 
-            BUILD_IMAGE_TAG: lucee5-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/LuceeLight.Dockerfile 
-            BUILD_IMAGE_TAG: lucee-light-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2016.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2016-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2018.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2018-alpine
-          - BUILD_IMAGE_DOCKERFILE : builds/alpine/Adobe2021.Dockerfile 
-            BUILD_IMAGE_TAG: adobe2021-alpine
-            
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+                    # Alpine builds
+                    # Note: No JDK builders currently support alpine with ARM
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
+                      BUILD_IMAGE_TAG: alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
+                      BUILD_IMAGE_TAG: jre11-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
+                      BUILD_IMAGE_TAG: jdk11-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
+                      BUILD_IMAGE_TAG: jdk8-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
+                      BUILD_IMAGE_TAG: lucee5-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
+                      BUILD_IMAGE_TAG: lucee-light-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2016.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2016-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2018-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2021-alpine
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@master
-        with:
-          platforms: all
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@master
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@master
+              with:
+                  platforms: all
 
-      - name: Setup Builds
-        id: setup
-        env:
-          DOCKER_IMAGE : ortussolutions/commandbox
-          BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }} 
-          COMMANDBOX_VERSION: 5.6.1
-          IMAGE_VERSION: 3.6.2
-        run: | 
-          # Tag Builds
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            - name: Set up Docker Buildx
+              id: buildx
+              uses: docker/setup-buildx-action@master
 
-            if [[ $BUILD_IMAGE_TAG == latest ]]; then
-              BUILD_IMAGE_TAG="${GITHUB_REF#refs/tags/v}"
-            else
-              BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${GITHUB_REF#refs/tags/v}"
-            fi
+            - name: Setup Builds
+              id: setup
+              env:
+                  DOCKER_IMAGE: ortussolutions/commandbox
+                  BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
+                  COMMANDBOX_VERSION: 5.6.1
+                  IMAGE_VERSION: 3.6.3
+              run: |
+                  # Tag Builds
+                  if [[ $GITHUB_REF == refs/tags/* ]]; then
 
-          elif [[ $GITHUB_REF == 'refs/heads/development' ]]; then
+                    if [[ $BUILD_IMAGE_TAG == latest ]]; then
+                      BUILD_IMAGE_TAG="${GITHUB_REF#refs/tags/v}"
+                    else
+                      BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${GITHUB_REF#refs/tags/v}"
+                    fi
 
-            # Snapshot builds
-            BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
-          
-          fi
+                  elif [[ $GITHUB_REF == 'refs/heads/development' ]]; then
 
-          TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
+                    # Snapshot builds
+                    BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
 
-          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
-            ARCH_PLATFORMS=linux/amd64
-          else
-            ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7
-          fi
+                  fi
 
-          
-          # Set output parameters.
-          echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
-          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
-          echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "tags=${TAGS}" >> $GITHUB_ENV
+                  TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
-      - name: DockerHub Login
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }} 
+                  if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
+                    ARCH_PLATFORMS=linux/amd64
+                  else
+                    ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7
+                  fi
 
-      - name: Test
-        env:
-          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
-          DOCKER_BUILDKIT: 1
-          COMPOSE_DOCKER_CLI_BUILD: 1
-          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-        run: |
-          docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
-          docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
-      - name: Build Final
-        uses: docker/build-push-action@v2
-        env:
-          DOCKER_BUILDKIT: 1
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          context: .
-          file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          build-args: COMMANDBOX_VERSION=${{ env.commandbox_version }}
-          platforms: ${{ env.arch_platforms }}
-          push: true
-          tags: ${{ env.tags }}    
+                  # Set output parameters.
+                  echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
+                  echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
+                  echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+                  echo "tags=${TAGS}" >> $GITHUB_ENV
 
+            - name: DockerHub Login
+              if: github.event_name != 'pull_request'
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Test
+              env:
+                  COMMANDBOX_VERSION: ${{ env.commandbox_version }}
+                  DOCKER_BUILDKIT: 1
+                  COMPOSE_DOCKER_CLI_BUILD: 1
+                  BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+              run: |
+                  docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
+                  docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
+
+            - name: Build Final
+              uses: docker/build-push-action@v2
+              env:
+                  DOCKER_BUILDKIT: 1
+              with:
+                  builder: ${{ steps.buildx.outputs.name }}
+                  context: .
+                  file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+                  build-args: COMMANDBOX_VERSION=${{ env.commandbox_version }}
+                  platforms: ${{ env.arch_platforms }}
+                  push: true
+                  tags: ${{ env.tags }}
