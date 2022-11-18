@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-focal
+FROM eclipse-temurin:11-jre-centos7
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -45,8 +45,9 @@ RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resour
 
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
-RUN rm -rf $BUILD_DIR/util/centos
-RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
+RUN rm -rf $BUILD_DIR/util/debian
+
+RUN ${BUILD_DIR}/util/centos/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh

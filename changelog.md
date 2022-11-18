@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.6.1/3.6.3] - Unreleased
 
+### Added
+- Added CentoS Builds with tags: `centos`, `jre-11-centos`, `jdk-11-centos`, `lucee5-centos`, `adobe2018-centos`, and `adobe2021-centos`
+
 ## [5.6.1/3.6.2] - 2022-10-31
 ### Changed
 - `:lucee5` image bumped to use v5.3.9+160

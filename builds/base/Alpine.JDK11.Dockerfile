@@ -50,6 +50,7 @@ RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resour
 
 # Basic Dependencies including binaries for PDF rendering
 RUN rm -rf $BUILD_DIR/util/debian
+RUN rm -rf $BUILD_DIR/util/centos
 RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 # Commandbox Installation

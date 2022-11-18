@@ -30,6 +30,22 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021
+                      
+                    # CentOS Builds
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Base.Dockerfile
+                      BUILD_IMAGE_TAG: centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Base.Dockerfile
+                      BUILD_IMAGE_TAG: jre11-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/CentOS.JDK11.Dockerfile
+                      BUILD_IMAGE_TAG: jdk11-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Lucee5.Dockerfile
+                      BUILD_IMAGE_TAG: lucee5-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/LuceeLight.Dockerfile
+                      BUILD_IMAGE_TAG: lucee-light-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Adobe2018.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2018-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Adobe2021.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2021-centos
 
                     # Alpine builds
                     # Note: No JDK builders currently support alpine with ARM
