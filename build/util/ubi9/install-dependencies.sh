@@ -3,7 +3,9 @@ set -e
 
 microdnf install -y \
                 jq \
+                procps \
                 which \
+                wget \
                 bzip2 \
                 zip \
                 unzip \

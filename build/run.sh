@@ -22,7 +22,7 @@ else
 	# Remove any previous generated startup scripts so that the config is re-read
 	rm -f $BIN_DIR/startup.sh
 
-	box config set verboseErrors=true
+    export box_config_verboseErrors=true
 
 	# If a custom user is requested set it before we begin
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
