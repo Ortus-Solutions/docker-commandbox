@@ -10,10 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.7.0/3.6.3] - Unreleased
 
 ### Added
-- Added CentoS Builds with tags: `centos`, `jre-11-centos`, `jdk-11-centos`, `lucee5-centos`, `adobe2018-centos`, and `adobe2021-centos`
+- Added [RHEL ubi9](https://catalog.redhat.com/software/containers/ubi9/ubi/615bcf606feffc5384e8452e) Builds with tags: `ubi9`, `jre-11-ubi9`, `jdk-11-ubi9`, `lucee5-ubi9`, `adobe2018-ubi9`, and `adobe2021-ubi9`
 
 ### Changed
 - CommandBox version to 5.7.0
+- Removed `wget` binary from core installation as `curl` is available
 
 ## [5.6.1/3.6.2] - 2022-10-31
 ### Changed

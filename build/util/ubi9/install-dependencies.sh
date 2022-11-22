@@ -1,18 +1,15 @@
 #!/bin/sh
 set -e
 
-yum install epel-release -y
-
-yum update -y && yum install -y \
-                                jq \
-                                which \
-                                bzip2 \
-                                zip \
-                                unzip \
-                                wget \
-                                gnupg \
-                                readline-devel \
-                                fontconfig
+microdnf install -y \
+                jq \
+                which \
+                bzip2 \
+                zip \
+                unzip \
+                gnupg \
+                readline \
+                fontconfig
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
 # based on whether the JDK or only the JRE is installed
@@ -31,4 +28,4 @@ chmod g+x /usr/local/bin/docker-java-home
 chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Cleanup before the layer is committed
-yum clean all
+microdnf clean all

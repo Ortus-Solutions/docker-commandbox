@@ -34,20 +34,20 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2021
                       
                     # CentOS Builds
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Base.Dockerfile
-                      BUILD_IMAGE_TAG: centos
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Base.Dockerfile
-                      BUILD_IMAGE_TAG: jre11-centos
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
+                      BUILD_IMAGE_TAG: ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
+                      BUILD_IMAGE_TAG: jre11-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/base/CentOS.JDK11.Dockerfile
-                      BUILD_IMAGE_TAG: jdk11-centos
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Lucee5.Dockerfile
-                      BUILD_IMAGE_TAG: lucee5-centos
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/LuceeLight.Dockerfile
-                      BUILD_IMAGE_TAG: lucee-light-centos
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Adobe2018.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2018-centos
-                    - BUILD_IMAGE_DOCKERFILE: builds/centos/Adobe2021.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2021-centos
+                      BUILD_IMAGE_TAG: jdk11-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
+                      BUILD_IMAGE_TAG: lucee5-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
+                      BUILD_IMAGE_TAG: lucee-light-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2018.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2018-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2021-ubi9
 
                     # Alpine builds
                     # Note: No JDK builders currently support alpine with ARM
@@ -111,7 +111,7 @@ jobs:
 
                   if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
                     ARCH_PLATFORMS=linux/amd64
-                  elif [[ ${BUILD_IMAGE_TAG} == *"centos"* ]]; then
+                  elif [[ ${BUILD_IMAGE_TAG} == *"ubi9"* ]]; then
                     ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
                   else
                     ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7

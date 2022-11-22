@@ -45,7 +45,7 @@ RUN rm -rf /opt/java/openjdk/conf/security/java.security && mv $BUILD_DIR/resour
 
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
-RUN rm -rf $BUILD_DIR/util/centos
+RUN rm -rf $BUILD_DIR/util/ubi9
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation

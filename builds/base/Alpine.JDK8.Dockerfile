@@ -47,7 +47,7 @@ RUN chmod -R +x $BUILD_DIR
 
 # Basic Dependencies including binaries for PDF rendering
 RUN rm -rf $BUILD_DIR/util/debian
-RUN rm -rf $BUILD_DIR/util/centos
+RUN rm -rf $BUILD_DIR/util/ubi9
 RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 # Commandbox Installation

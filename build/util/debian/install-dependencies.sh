@@ -8,7 +8,6 @@ apt-get update && apt-get install --assume-yes \
                                 jq \
                                 bzip2 \
                                 unzip \
-                                wget \
                                 gnupg \
                                 libreadline-dev \
                                 fontconfig
