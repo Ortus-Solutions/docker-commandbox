@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [5.6.1/3.6.3] - Unreleased
+## [5.7.0/3.6.3] - Unreleased
 
 ### Added
 - Added CentoS Builds with tags: `centos`, `jre-11-centos`, `jdk-11-centos`, `lucee5-centos`, `adobe2018-centos`, and `adobe2021-centos`
+
+### Changed
+- CommandBox version to 5.7.0
 
 ## [5.6.1/3.6.2] - 2022-10-31
 ### Changed
