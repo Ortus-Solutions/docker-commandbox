@@ -123,6 +123,9 @@ fi
 # USER Variable
 echo "Tests the ability to specify a custom runtime user and identifier"
 
+# sleep for a second to ensure PIDs from the previous server start are cleared
+sleep 3
+
 ./tests/test.user.sh
 
 echo "USER environment variable tests completed successfully"
