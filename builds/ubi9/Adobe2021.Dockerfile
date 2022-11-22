@@ -1,5 +1,5 @@
 # syntax = edrevo/dockerfile-plus
-INCLUDE+ builds/base/CentOS.JDK11.Dockerfile
+INCLUDE+ builds/base/ubi9.JDK11.Dockerfile
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"

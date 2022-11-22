@@ -31,12 +31,12 @@ jobs:
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021
                       
-                    # CentOS Builds
+                    # ubi9 Builds
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
                       BUILD_IMAGE_TAG: ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
                       BUILD_IMAGE_TAG: jre11-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/base/CentOS.JDK11.Dockerfile
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK11.Dockerfile
                       BUILD_IMAGE_TAG: jdk11-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
                       BUILD_IMAGE_TAG: lucee5-ubi9
