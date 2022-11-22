@@ -7,6 +7,7 @@ yum update -y && yum install -y \
                                 jq \
                                 which \
                                 bzip2 \
+                                zip \
                                 unzip \
                                 wget \
                                 gnupg \
