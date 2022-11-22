@@ -24,8 +24,6 @@ jobs:
                       BUILD_IMAGE_TAG: lucee5
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
                       BUILD_IMAGE_TAG: lucee-light
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2016.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2016
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
                       BUILD_IMAGE_TAG: adobe2018
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
@@ -61,8 +59,6 @@ jobs:
                       BUILD_IMAGE_TAG: lucee5-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
                       BUILD_IMAGE_TAG: lucee-light-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2016.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2016-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
                       BUILD_IMAGE_TAG: adobe2018-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile

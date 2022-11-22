@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CommandBox version to 5.7.0
 - Removed `wget` binary from core installation as `curl` is available
 
+### Removed
+- Removed Adobe Coldfusion 2016 builds
+
 ## [5.6.1/3.6.2] - 2022-10-31
 ### Changed
 - `:lucee5` image bumped to use v5.3.9+160
