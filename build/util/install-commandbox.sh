@@ -19,18 +19,4 @@ echo "$(box version) successfully installed"
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
-# Cleanup CommandBox modules which would not be necessary in a Container environment
-SYSTEM_EXCLUDES=( "coldbox" "contentbox" "cachebox" "logbox" "games" "wirebox" )
-MODULE_EXCLUDES=( "cfscriptme-command" "cb-module-template" )
-
-for mod in "${SYSTEM_EXCLUDES[@]}"
-do
-	rm -rf ${COMMANDBOX_HOME}/cfml/system/modules_app/${mod}-commands
-done
-
-for mod in "${MODULE_EXCLUDES[@]}"
-do
-	rm -rf ${COMMANDBOX_HOME}/cfml/modules/${mod}
-done
-
 $BUILD_DIR/util/optimize.sh
