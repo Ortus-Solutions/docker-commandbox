@@ -30,7 +30,7 @@ Tags
 * `:[engine][version]-ubi9` - RHEL ubi9 versions of the image with warmed-up engines:
 `:lucee5-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Lucee5.Dockerfile)), `:lucee-light-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/LuceeLight.Dockerfile)), `:adobe2018-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Adobe2018.Dockerfile)), `:adobe2021-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Adobe2021.Dockerfile))
 
-_*Note*: The `:latest` tag currently uses OpenJDK11. and only the `:adobe2016` tag is built using JDK8.  If you required JDK 8 support in your app or engine, use the `:jdk8` tag._ 
+_*Note*: The `:latest` tag currently uses OpenJDK11, as do all other pre-built engine images.  If you required JDK 8 support in your app or engine, use the `:jdk8` tag._ 
 
 Description 
 =================
@@ -42,7 +42,7 @@ In addition the CommandBox modules of [`dotenv`](https://www.forgebox.io/view/co
 Current CFML engines supported are:
 
 - Lucee:  5+
-- Adobe ColdFusion 2016+
+- Adobe ColdFusion 2018+
 
 You may also [specify a custom WAR for deployment](https://commandbox.ortusbooks.com/embedded-server/multi-engine-support#war-support), using the `server.json` configuration.
 
