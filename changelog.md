@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [5.7.0/3.6.3] - Unreleased
+## [5.7.0/3.6.3] - 2022-12-07
 
 ### Added
 - Added [RHEL ubi9](https://catalog.redhat.com/software/containers/ubi9/ubi/615bcf606feffc5384e8452e) Builds with tags: `ubi9`, `jre-11-ubi9`, `jdk-11-ubi9`, `lucee5-ubi9`, `adobe2018-ubi9`, and `adobe2021-ubi9`
