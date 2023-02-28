@@ -148,18 +148,4 @@ jobs:
                   build-args: COMMANDBOX_VERSION=${{ env.commandbox_version }}
                   platforms: ${{ env.arch_platforms }}
                   push: true
-                  load: true
                   tags: ${{ env.IMAGE_TAG }}
-
-            - name: Scan image
-              uses: anchore/scan-action@v3
-              id: imagescan
-              with:
-                image: ${{ env.IMAGE_TAG }}
-                acs-report-enable: "true"
-                fail-build: false
-
-            - name: Upload Anchore Report
-              uses: github/codeql-action/upload-sarif@v1
-              with:
-                sarif_file: ${{ steps.imagescan.outputs.sarif }}
