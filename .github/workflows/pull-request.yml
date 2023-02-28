@@ -98,13 +98,6 @@ jobs:
               run: |
                   docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
                   docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
-                  
-            - name: build local container
-              uses: docker/build-push-action@v2
-              with:
-                tags: devops-counsel/anchore-demo:latest
-                push: false
-                load: true
 
             - name: Build local container
               uses: docker/build-push-action@v2
@@ -126,7 +119,7 @@ jobs:
                 acs-report-enable: "true"
                 fail-build: false
 
-            - name: upload Anchore Image scan SARIF report
+            - name: Upload Anchore Report
               uses: github/codeql-action/upload-sarif@v1
               with:
                 sarif_file: ${{ steps.imagescan.outputs.sarif }}
