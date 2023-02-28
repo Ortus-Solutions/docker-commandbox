@@ -1,4 +1,4 @@
-name: Release
+name: Pull Request
 
 on:
     pull_request:
@@ -7,8 +7,11 @@ on:
             - development
 
 jobs:
-    publish:
+    pr-tests:
         runs-on: ubuntu-latest
+        env:
+          DOCKER_IMAGE: ortussolutions/commandbox
+          COMMANDBOX_VERSION: 5.7.0
         strategy:
             matrix:
                 include:
@@ -76,21 +79,8 @@ jobs:
               id: buildx
               uses: docker/setup-buildx-action@master
 
-            - name: Setup Builds
-              id: setup
-              env:
-                  DOCKER_IMAGE: ortussolutions/commandbox
-                  BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
-                  COMMANDBOX_VERSION: 5.7.0
-                  IMAGE_VERSION: 3.6.5
-              run: |
-                  TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
-
-                  # Set output parameters for subsequent steps
-                  echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
             - name: Test
               env:
-                  COMMANDBOX_VERSION: ${{ env.commandbox_version }}
                   DOCKER_BUILDKIT: 1
                   COMPOSE_DOCKER_CLI_BUILD: 1
                   BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
