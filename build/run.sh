@@ -87,21 +87,21 @@ else
 		ADMIN_PASSWORD_SET=false
 
 		# Check for a defined server home directory in server.json
-		if [[ -f server.json ]]; then
+		if [[ -f ${BOX_SERVER_SERVERCONFIGFILE:=server.json} ]]; then
 
 			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]; then	
-				BOX_SERVER_APP_SERVERHOMEDIRECTORY=$(cat server.json | jq -r '.app.serverHomeDirectory')
+				BOX_SERVER_APP_SERVERHOMEDIRECTORY=`cat ${BOX_SERVER_SERVERCONFIGFILE:=server.json} | jq -r '.app.serverHomeDirectory'`
 			fi
 
 			if [[ ! $BOX_SERVER_APP_CFENGINE ]]; then	
-				BOX_SERVER_APP_CFENGINE=$(cat server.json | jq -r '.app.cfengine')
+				BOX_SERVER_APP_CFENGINE=`cat ${BOX_SERVER_SERVERCONFIGFILE:=server.json} | jq -r '.app.cfengine'`
 			fi
 
 			# ensure our string nulls eliminate the variable
 			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]] ||  [[ $BOX_SERVER_APP_SERVERHOMEDIRECTORY = 'null' ]] ; then
 				unset BOX_SERVER_APP_SERVERHOMEDIRECTORY
 			else
-				echo "INFO: Server Home Directory defined in server.json as: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
+				echo "INFO: Server Home Directory defined in ${BOX_SERVER_SERVERCONFIGFILE:=server.json} as: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 				#Assume our admin password has been set if we are including a custom server home
 				if [[ ${BOX_SERVER_APP_SERVERHOMEDIRECTORY} != "${LIB_DIR}/serverHome" ]]; then
 					ADMIN_PASSWORD_SET=true
