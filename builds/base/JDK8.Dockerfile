@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jdk-focal
+FROM eclipse-temurin:8-jdk-jammy
 
 ARG COMMANDBOX_VERSION
 

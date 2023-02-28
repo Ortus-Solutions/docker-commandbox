@@ -254,7 +254,7 @@ RUN $BUILD_DIR/run.sh
 
 # Eclipse Temurin Focal image is the smallest OpenJDK image on that the same kernel used in the base image. 
 # For most apps, this should work to run your applications
-FROM eclipse-temurin:11-jre-focal as app
+FROM eclipse-temurin:11-jre-jammy as app
 
 # COPY our generated files
 COPY --from=workbench /app /app
