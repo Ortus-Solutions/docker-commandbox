@@ -16,6 +16,8 @@ jobs:
         strategy:
             matrix:
               include:
+                - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+                  BUILD_IMAGE_TAG: CommandBox
                 - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
                   BUILD_IMAGE_TAG: lucee5.3.10.97
                 - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
