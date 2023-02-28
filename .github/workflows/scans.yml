@@ -8,7 +8,7 @@ on:
 
 permissions: write-all
 jobs:
-    publish:
+    scan:
         runs-on: ubuntu-latest
         env:
           DOCKER_IMAGE: ortussolutions/commandbox
