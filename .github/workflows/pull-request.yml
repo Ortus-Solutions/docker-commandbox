@@ -88,6 +88,7 @@ jobs:
 
                   # Set output parameters for subsequent steps
                   echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+
             - name: Test
               env:
                   COMMANDBOX_VERSION: ${{ env.commandbox_version }}
@@ -97,3 +98,35 @@ jobs:
               run: |
                   docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
                   docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
+                  
+            - name: build local container
+              uses: docker/build-push-action@v2
+              with:
+                tags: devops-counsel/anchore-demo:latest
+                push: false
+                load: true
+
+            - name: Build local container
+              uses: docker/build-push-action@v2
+              env:
+                  DOCKER_BUILDKIT: 0
+              with:
+                  context: .
+                  file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+                  build-args: COMMANDBOX_VERSION=${{ env.commandbox_version }}
+                  push: false
+                  load: true
+                  tags: ${{ env.DOCKER_IMAGE }}:${{ env.BUILD_IMAGE_TAG }}
+
+            - name: Scan image
+              uses: anchore/scan-action@v3
+              id: imagescan
+              with:
+                image: ${{ env.DOCKER_IMAGE }}:${{ env.BUILD_IMAGE_TAG }}
+                acs-report-enable: "true"
+                fail-build: false
+
+            - name: upload Anchore Image scan SARIF report
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                sarif_file: ${{ steps.imagescan.outputs.sarif }}
