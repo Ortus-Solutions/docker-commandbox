@@ -88,7 +88,7 @@ export URL_REWRITES=true
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}"
+printf '%s\n' "${runOutput}"
 
 ./tests/test.up.sh
 
