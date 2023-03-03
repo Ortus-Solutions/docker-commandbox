@@ -15,7 +15,7 @@ echo "Starting Adobe 2021 server with CFPM_INSTALL environment variable set"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}\n"
+printf '%s\n' "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 

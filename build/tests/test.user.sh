@@ -18,7 +18,7 @@ echo "Starting server with Runtime user set to ${USER}"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}\n"
+printf '%s\n' "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 

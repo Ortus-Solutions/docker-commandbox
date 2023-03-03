@@ -47,7 +47,7 @@ echo "Tests that a generic server is up and running"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}"
+printf %s ${runOutput}
 
 ./tests/test.up.sh
 

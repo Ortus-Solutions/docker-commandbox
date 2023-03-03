@@ -19,7 +19,7 @@ echo "Starting server with cfconfig file variable set"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}\n"
+printf '%s\n' "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 
@@ -38,7 +38,7 @@ echo "Starting server with convention route .cfconfig.json file in place"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}\n"
+printf '%s\n' "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 

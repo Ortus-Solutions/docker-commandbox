@@ -17,7 +17,7 @@ echo "Starting server with headless variable set"
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "${runOutput}\n"
+printf '%s\n' "${runOutput}"
 
 $BUILD_DIR/tests/test.up.sh
 
