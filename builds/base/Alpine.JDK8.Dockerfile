@@ -60,6 +60,9 @@ ENV SSL_PORT 8443
 # Turn off the Undertow directory watcher by default to speed startup times
 ENV BOX_SERVER_RUNWAR_ARGS="['--resource-manager-file-system-watcher=false']"
 
+#Default our console log output to use the JSON format - which makes it easier to ingest logs
+ENV BOX_SERVER_RUNWAR_CONSOLE_APPENDERLAYOUT=JSONTemplateLayout
+
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
 
