@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.7.0/3.6.5] - Unreleased
+## [5.8.0/3.6.5] - Unreleased
+## Changed
+- CommandBox version to 5.8.0
+- Lucee image versions bumped to `v5.3.10+120`
 ## [5.7.0/3.6.4] - 2022-12-15
 ### Changed
 - Lucee image versions bumped to `v5.3.10+97`

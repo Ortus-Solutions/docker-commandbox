@@ -53,15 +53,6 @@ RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
-# CFConfig Installation
-RUN $BUILD_DIR/util/install-cfconfig.sh
-
-# CommandBox-DotEnv Installation
-RUN $BUILD_DIR/util/install-dotenv.sh
-
-# Cleanup and Optimize our Installation
-RUN ${BUILD_DIR}/util/optimize.sh
-
 # Default Port Environment Variables
 ENV PORT 8080
 ENV SSL_PORT 8443

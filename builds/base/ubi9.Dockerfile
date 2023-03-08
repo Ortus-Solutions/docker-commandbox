@@ -51,11 +51,6 @@ RUN ${BUILD_DIR}/util/ubi9/install-dependencies.sh
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
-# CFConfig Installation
-RUN $BUILD_DIR/util/install-cfconfig.sh
-
-# CommandBox-DotEnv Installation
-RUN $BUILD_DIR/util/install-dotenv.sh
 
 # Default Port Environment Variables
 ENV PORT 8080
