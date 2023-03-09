@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # credit: https://medium.com/@basi/docker-environment-variables-expanded-from-secrets-8fa70617b3bc
 
@@ -7,7 +7,7 @@
 env_secret_debug()
 {
     if [ ! -z "$ENV_SECRETS_DEBUG" ]; then
-        echo -e "\033[1m$@\033[0m"
+        logMessage "DEBUG" "$1"
     fi
 }
 
@@ -17,17 +17,18 @@ env_secret_debug()
 #  name of the docker secret to use instead of the original value. For example:
 # XYZ_DB_PASSWORD=<<SECRET:my-db.secret>>
 env_secret_expand() {
-    var="$1"
-    eval val=\$$var
-
-    if secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$"); then
-        secret="${ENV_SECRETS_DIR}/${secret_name}"
+    local var="$1"
+    eval local val=\$$var
+    local secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$")
+    
+    if [[ $secret_name ]]; then
+        local secret="${ENV_SECRETS_DIR}/${secret_name}"
     elif [[ ${var:(-5)} = '_FILE' ]]; then
-        suffix=${var:(-5)}
-        secret=$val
+        local suffix=${var:(-5)}
+        local secret=$val
     fi
 
-    if [ $secret ]; then
+    if [[ $secret ]]; then
         env_secret_debug "Secret file for $var: $secret"
         if [ -f "$secret" ]; then
             val=$(cat "${secret}")
@@ -42,13 +43,6 @@ env_secret_expand() {
             env_secret_debug "Secret file does not exist! $secret"
         fi
     fi
-
-    # reset
-    unset secret;
-    unset secret_name;
-    unset var;
-    unset suffix;
-    unset val;
 }
 
 env_secrets_expand() {
@@ -58,7 +52,7 @@ env_secrets_expand() {
     done
 
     if [ ! -z "$ENV_SECRETS_DEBUG" ]; then
-        echo -e "\n\033[1mExpanded environment variables\033[0m"
+        logMessage "DEBUG" 'Expanded environment variables'
         printenv
     fi
 }

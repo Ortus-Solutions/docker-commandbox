@@ -15,3 +15,4 @@ apk update && apk add curl \
                         shadow \
                         fontconfig \
                         && rm -f /var/cache/apk/*
+                        

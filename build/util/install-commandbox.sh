@@ -16,6 +16,8 @@ echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
 
 echo "$(box version) successfully installed"
 
+box uninstall --system commandbox-update-check
+
 # Clear out the identifier files so that each instance doesn't have the same id
 rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/lucee-server/context/id
 rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/cfml-web/id

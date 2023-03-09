@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 - CommandBox version to 5.8.0
 - Lucee image versions bumped to `v5.3.10+120`
+- Container stdout log format changed to JSON layout, to ease ingest of container logs from cloud providers
+- Changed the default Runwar Log4J pattern layout to include timestamps `[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n`
+- Added support, in container log output, for [JSON log formatting](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/console-log-layout#customize-layout)
+
 ## [5.7.0/3.6.4] - 2022-12-15
 ### Changed
 - Lucee image versions bumped to `v5.3.10+97`

@@ -1,13 +1,18 @@
 #!/bin/bash
 set -e
 
+## Logger mixin
+. $BUILD_DIR/util/log.sh
+
 ## Handle deprecated/changed environment variables
 . $BUILD_DIR/util/compat-env.sh
+
+# Handle secret expansion before any other environmental variables are processed
+. $BUILD_DIR/util/env-secrets-expand.sh
 
 # If we have a finalized startup script bypass all further evaluation and use it authoritatively
 if [[ -f $BIN_DIR/startup-final.sh ]]; then
 
-	. $BUILD_DIR/util/env-secrets-expand.sh
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 		if [[ -f /etc/alpine-release ]]; then
 			su -p -c $BIN_DIR/startup-final.sh $USER
@@ -15,7 +20,7 @@ if [[ -f $BIN_DIR/startup-final.sh ]]; then
 			su --preserve-environment -c $BIN_DIR/startup-final.sh $USER
 		fi
 	else
-		$BIN_DIR/startup-final.sh
+		. $BIN_DIR/startup-final.sh
 	fi
 
 else
@@ -26,7 +31,7 @@ else
 
 	# If a custom user is requested set it before we begin
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
-		echo "INFO: Configuration set to non-root user: ${USER}"
+		logMessage 'INFO' "Configuration set to non-root user: ${USER}"
 		if [[ ! $USER_ID ]]; then
 			export USER_ID=1001
 		fi
@@ -79,9 +84,6 @@ else
 
 		SECONDS=0
 
-		# Handle secret expansion before any other environmental variables are processed
-		. $BUILD_DIR/util/env-secrets-expand.sh
-
 		# CFConfig Available Password Keys
 		CFCONFIG_PASSWORD_KEYS=( "adminPassword" "adminPasswordDefault" "hspw" "pw" "defaultHspw" "defaultPw" "ACF11Password" )
 		ADMIN_PASSWORD_SET=false
@@ -101,7 +103,7 @@ else
 			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]] ||  [[ $BOX_SERVER_APP_SERVERHOMEDIRECTORY = 'null' ]] ; then
 				unset BOX_SERVER_APP_SERVERHOMEDIRECTORY
 			else
-				echo "INFO: Server Home Directory defined in ${BOX_SERVER_SERVERCONFIGFILE:=server.json} as: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
+				logMessage "INFO" "Server Home Directory defined in ${BOX_SERVER_SERVERCONFIGFILE:=server.json} as: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 				#Assume our admin password has been set if we are including a custom server home
 				if [[ ${BOX_SERVER_APP_SERVERHOMEDIRECTORY} != "${LIB_DIR}/serverHome" ]]; then
 					ADMIN_PASSWORD_SET=true
@@ -112,7 +114,7 @@ else
 			if [[ $BOX_SERVER_APP_CFENGINE = 'null' ]]; then
 				unset BOX_SERVER_APP_CFENGINE
 			else
-				echo "INFO: CF Engine defined as ${BOX_SERVER_APP_CFENGINE}"
+				logMessage "INFO" "CF Engine defined as ${BOX_SERVER_APP_CFENGINE}"
 			fi
 
 		fi
@@ -121,10 +123,10 @@ else
 		export BOX_SERVER_APP_SERVERHOMEDIRECTORY="${BOX_SERVER_APP_SERVERHOMEDIRECTORY:=${LIB_DIR}/serverHome}"
 
 		if [[ !BOX_SERVER_CFCONFIGFILE ]] && [[ -f .cfconfig.json ]]; then
-			echo "INFO: Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
+			logMessage "INFO" "Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
 		fi
 
-		echo "INFO: Server Home Directory set to: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"	
+		logMessage "INFO" "Server Home Directory set to: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"	
 
 		# If box install flag is up, do installation
 		if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then
@@ -132,7 +134,7 @@ else
 		fi
 
 		# Server startup
-		$BUILD_DIR/util/start-server.sh
+		. $BUILD_DIR/util/start-server.sh
 
 	fi
 
