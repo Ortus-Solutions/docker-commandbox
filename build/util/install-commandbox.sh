@@ -28,4 +28,10 @@ curl https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/comman
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
+# Install GELF jar for Java.util JSON logging https://logging.paluch.biz/examples/jul-json.html
+mkdir -p $JAVA_HOME/classes
+curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar -o $JAVA_HOME/classes/logstash-gelf-1.15.0.jar
+curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar.md5 -o $JAVA_HOME/classes/logstash-gelf-1.15.0.jar.md5
+md5sum  $JAVA_HOME/classes/logstash-gelf-1.15.0.jar > $JAVA_HOME/classes/logstash-gelf-1.15.0.jar.md5
+
 $BUILD_DIR/util/optimize.sh

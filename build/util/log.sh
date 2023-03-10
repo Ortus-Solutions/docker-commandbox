@@ -6,6 +6,13 @@ if [[ $box_server_runwar_console_appenderLayout ]]; then
     logFormat=${box_server_runwar_console_appenderLayout}
 fi
 
+rm -f $JAVA_HOME/conf/logging.properties
+if [[ $logFormat = 'JSONTemplateLayout' ]]; then
+    export BOX_SERVER_JVM_ARGS="['-Djava.util.logging.config.file=$BUILD_DIR/resources/json.logging.properties']"
+else
+    export BOX_SERVER_JVM_ARGS="['-Djava.util.logging.config.file=$BUILD_DIR/resources/text.logging.properties']"
+fi
+
 # Global logger function
 logMessage () {
 	local level=$1

@@ -51,6 +51,9 @@ RUN ${BUILD_DIR}/util/ubi9/install-dependencies.sh
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
+# Add our custom classes added in the previous step to the java classpath
+ENV CLASSPATH="$JAVA_HOME/classes"
+
 
 # Default Port Environment Variables
 ENV PORT 8080
