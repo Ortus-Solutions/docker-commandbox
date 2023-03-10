@@ -16,7 +16,6 @@ component {
 		variables.baseUrl = "https://api.github.com/repos/#variables.repo#/code-scanning/alerts";
 
 		// Retreive the current alerts
-		var currentPage = 1;
 		var hasActiveAlerts = true;
 
 		while( hasActiveAlerts ){
@@ -29,7 +28,7 @@ component {
 									"sort" : "updated",
 									"direction" : "asc",
 									"per_page" : 100,
-									"page" : currentPage
+									"page" : 1
 								} )
 								.setThrowOnError( true )
 								.asJSON()
@@ -43,7 +42,6 @@ component {
 				} else {
 					print.greenLine( 'Retrieved #alerts.len()# alerts' );
 					alerts.each( dismissAlert );
-					currentPage++;
 				}
 			} else {
 				print.redLine( 'An . The message received was: #serializeJSON( response.json() )#' );

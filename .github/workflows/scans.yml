@@ -2,9 +2,7 @@ name: Anchore-Grype Security Scans
 
 on:
   push:
-    branches: [ "master", "development" ]
-  pull_request:
-    branches: [ "master", "development" ]
+    branches: [ "main" ]
   schedule:
     # Run this against the default branch every Monday at 5:30AM 
     - cron: '30 5 * * 2'
