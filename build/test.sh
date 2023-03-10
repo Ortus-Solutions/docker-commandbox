@@ -81,6 +81,15 @@ echo "HEADLESS environment variable tests completed successfully"
 
 printf "\n\n*******************\n\n"
 
+# Json Logging Variables
+echo "Tests the ability to change the log format to JSON"
+
+./tests/test.json.logging.sh
+
+echo "JSON Logging Tests Completed"
+
+printf "\n\n*******************\n\n"
+
 # Rewrites Environment variables
 echo "Testing the ability to specify to turn rewrites off via an environment variable"
 
