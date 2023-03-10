@@ -2,3 +2,4 @@ test/*.json
 /.project
 /*.log
 /.vscode
+/workbench/alerts/modules
