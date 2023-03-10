@@ -12,7 +12,7 @@ export FOO_FILE=/tmp/foo
 
 runOutput="$( ${BUILD_DIR}/run.sh )"
 
-printf "Server Output:\n\n ${runOutput}"
+printf "%s\n" "Server Output:\n\n ${runOutput}"
 
 ${BUILD_DIR}/tests/test.up.sh
 
