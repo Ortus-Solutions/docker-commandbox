@@ -130,6 +130,13 @@ if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
 fi
 
 # USER Variable
+echo "Tests the ability to specify a custom webroot"
+
+./tests/test.webroot.sh
+
+echo "Alternate webroot tests completed successfully"
+
+# USER Variable
 echo "Tests the ability to specify a custom runtime user and identifier"
 
 # sleep for a second to ensure PIDs from the previous server start are cleared
