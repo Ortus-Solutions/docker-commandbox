@@ -28,6 +28,7 @@ logMessage "INFO" "$( box server start \
     dryRun=${DRY_RUN_FLAG} \
     console=${DRY_RUN_FLAG} \
     startScript=${SCRIPT_TYPE} \
+    startScriptFile=${APP_DIR}/server-start.sh \
     verbose=true )"
 
 # Adobe 2021 package manager installs after the server files are in place
