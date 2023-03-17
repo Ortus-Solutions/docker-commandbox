@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.8.0/3.7.2 - Unreleased
+## [5.8.0/3.7.2] - 2023-03-17
+### Fixed
+- Fixes an issue where specifying an alternate webroot ( e.g. `BOX_SERVER_WEB_WEBROOT` ) fail to start the container
 ## [5.8.0/3.7.1] - 2023-03-15
 ### Changed
 - Updates `:adobe2021` tag to version `2021.0.06+330132`
