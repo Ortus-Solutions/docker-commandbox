@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.8.0/3.7.3] - Unrelesed
+## [5.8.0/3.7.3] - 2023-03-23
+### Fixed
+- Fixes an issue where CLI ID files were not being deleted after installing commandbox and warming up the server
 ## [5.8.0/3.7.2] - 2023-03-17
 ### Fixed
 - Fixes an issue where specifying an alternate webroot ( e.g. `BOX_SERVER_WEB_WEBROOT` ) fail to start the container
