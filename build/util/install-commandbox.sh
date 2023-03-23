@@ -18,10 +18,6 @@ echo "$(box version) successfully installed"
 
 box uninstall --system commandbox-update-check
 
-# Clear out the identifier files so that each instance doesn't have the same id
-rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/lucee-server/context/id
-rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/cfml-web/id
-
 # Swap out binary with thin client now that everything is expanded
 curl https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin -o ${BIN_DIR}/box
 

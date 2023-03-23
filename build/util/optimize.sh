@@ -14,6 +14,10 @@ rm -rfv $COMMANDBOX_HOME/cfml/system/config/server-icons/*.*
 # Remove the felix cache
 rm -rf $COMMANDBOX_HOME/engine/cfml/cli/lucee-server/felix-cache/*
 
+# Clear out the identifier files so that each instance doesn't have the same id
+rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/lucee-server/context/id
+rm -f ${COMMANDBOX_HOME}/engine/cfml/cli/cfml-web/id
+
 # Cleanup
 # More unecessary files
 rm -rf /var/lib/{cache,log}/
