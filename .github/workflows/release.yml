@@ -20,6 +20,8 @@ jobs:
                       BUILD_IMAGE_TAG: jre11
                     - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
                       BUILD_IMAGE_TAG: jdk11
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/JDK17.Dockerfile
+                      BUILD_IMAGE_TAG: jdk17
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
                       BUILD_IMAGE_TAG: jdk8
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
@@ -30,6 +32,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021
+                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2023
                       
                     # ubi9 Builds
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
@@ -38,6 +42,8 @@ jobs:
                       BUILD_IMAGE_TAG: jre11-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK11.Dockerfile
                       BUILD_IMAGE_TAG: jdk11-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK17.Dockerfile
+                      BUILD_IMAGE_TAG: jdk17-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
                       BUILD_IMAGE_TAG: lucee5-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
@@ -46,6 +52,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021-ubi9
+                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2023-ubi9
 
                     # Alpine builds
                     # Note: No JDK builders currently support alpine with ARM
@@ -55,6 +63,8 @@ jobs:
                       BUILD_IMAGE_TAG: jre11-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
                       BUILD_IMAGE_TAG: jdk11-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK17.Dockerfile
+                      BUILD_IMAGE_TAG: jdk17-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
                       BUILD_IMAGE_TAG: jdk8-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
@@ -65,6 +75,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021-alpine
+                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
+                      BUILD_IMAGE_TAG: adobe2023-alpine
 
         steps:
             - name: Checkout
@@ -84,7 +96,7 @@ jobs:
               env:
                   DOCKER_IMAGE: ortussolutions/commandbox
                   BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
-                  COMMANDBOX_VERSION: 5.8.0
+                  COMMANDBOX_VERSION: 6.0.0-alpha
                   IMAGE_VERSION: 3.7.4
               run: |
                   # Tag Builds
