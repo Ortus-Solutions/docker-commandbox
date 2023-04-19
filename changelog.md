@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 ## [5.8.0/3.7.4] - Unreleased
+### Changed
+- Removed arm/v7 ( 32 bit ) support due to JDK17 requirements
 ## [5.8.0/3.7.3] - 2023-03-23
 ### Fixed
 - Fixes an issue where CLI ID files were not being deleted after installing commandbox and warming up the server

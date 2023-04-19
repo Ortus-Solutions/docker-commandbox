@@ -122,7 +122,7 @@ jobs:
                   elif [[ ${BUILD_IMAGE_TAG} == *"ubi9"* ]]; then
                     ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
                   else
-                    ARCH_PLATFORMS=linux/amd64,linux/arm64/v8,linux/arm/v7
+                    ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
                   fi
 
 
