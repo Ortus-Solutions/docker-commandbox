@@ -6,9 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.8.0/3.7.4] - Unreleased
+## [5.8.0/3.7.4] - 2023-05-02
 ### Changed
 - Removed arm/v7 ( 32 bit ) support due to JDK17 requirements
+- CommandBox binary updated to `5.9.0`
 ## [5.8.0/3.7.3] - 2023-03-23
 ### Fixed
 - Fixes an issue where CLI ID files were not being deleted after installing commandbox and warming up the server

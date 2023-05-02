@@ -32,8 +32,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018
                     - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2023
+                    # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
+                    #   BUILD_IMAGE_TAG: adobe2023
                       
                     # ubi9 Builds
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
@@ -52,8 +52,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018-ubi9
                     - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2023-ubi9
+                    # - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
+                    #   BUILD_IMAGE_TAG: adobe2023-ubi9
 
                     # Alpine builds
                     # Note: No JDK builders currently support alpine with ARM
@@ -75,8 +75,8 @@ jobs:
                       BUILD_IMAGE_TAG: adobe2018-alpine
                     - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
                       BUILD_IMAGE_TAG: adobe2021-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2023-alpine
+                    # - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
+                    #   BUILD_IMAGE_TAG: adobe2023-alpine
 
         steps:
             - name: Checkout
@@ -96,7 +96,7 @@ jobs:
               env:
                   DOCKER_IMAGE: ortussolutions/commandbox
                   BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
-                  COMMANDBOX_VERSION: 6.0.0-alpha
+                  COMMANDBOX_VERSION: 5.9.0
                   IMAGE_VERSION: 3.7.4
               run: |
                   # Tag Builds
