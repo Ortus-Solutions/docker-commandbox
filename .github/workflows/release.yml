@@ -119,12 +119,9 @@ jobs:
 
                   if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
                     ARCH_PLATFORMS=linux/amd64
-                  elif [[ ${BUILD_IMAGE_TAG} == *"ubi9"* ]]; then
-                    ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
                   else
                     ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
                   fi
-
 
                   # Set output parameters.
                   echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
