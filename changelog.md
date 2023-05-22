@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 ## [Unreleased]
-## [5.8.0/3.7.4] - 2023-05-02
+## [5.9.0/3.7.4] - 2023-05-03
 ### Changed
 - Removed arm/v7 ( 32 bit ) support due to JDK17 requirements
 - CommandBox binary updated to `5.9.0`
