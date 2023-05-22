@@ -147,7 +147,7 @@ jobs:
                   docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
             - name: Build Final
-              uses: docker/build-push-action@v2
+              uses: docker/build-push-action@v4
               env:
                   DOCKER_BUILDKIT: 1
               with:
