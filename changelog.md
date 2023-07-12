@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [5.9.0/3.7.7] - 2023-05-23
+## [5.9.0/3.7.8] - 2023-07-12
+### Added
+* Add Java tool options for serialization for all Adobe containers, [per technotes](https://helpx.adobe.com/security/products/coldfusion/apsb23-40.html)
+## [5.9.0/3.7.7] - 2023-07-12
 ### Changed
 * Adobe 2023 image bumped to release version `2023.0.1+330480`
 * Adobe 2021 image bumped to release version `2021.0.7+330142`
