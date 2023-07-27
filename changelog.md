@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.9.0/3.7.11] - 2023-07-27
+### Changed
+* JRE 11 versions to `11.0.20_8`
+* JRE 17 versions to `17.0.8_7`
 ## [5.9.0/3.7.10] - 2023-07-12
 ### Changed
 * Adobe 2023 image bumped to release version `2023.0.3+330486`
