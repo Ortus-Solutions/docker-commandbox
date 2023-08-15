@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [5.9.0/3.7.12] - 2023-08-15
+### Changed
+- Lucee image versions bumped to `v5.3.12+1`
+
 ## [5.9.0/3.7.11] - 2023-07-27
 ### Changed
 * JRE 11 versions to `11.0.20_8`
