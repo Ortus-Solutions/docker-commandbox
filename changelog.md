@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 ## [Unreleased]
+### Changed
+* CommandBox Binary Updated to `v5.9.1` 
+* Lucee image versions updated to `v5.4.3+2`
+
+### Added
+* [Ortus Lucee ORM Extension](https://www.ortussolutions.com/products/orm-extension) now bundled with Lucee images, since Lucee 5.4+ no longer includes an ORM extension
+
 ## [5.9.0/3.7.12] - 2023-08-15
 ### Changed
-- Lucee image versions bumped to `v5.3.12+1`
+* Lucee image versions bumped to `v5.3.12+1`
 
 ## [5.9.0/3.7.11] - 2023-07-27
 ### Changed
