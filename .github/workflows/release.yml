@@ -96,7 +96,7 @@ jobs:
               env:
                   DOCKER_IMAGE: ortussolutions/commandbox
                   BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
-                  COMMANDBOX_VERSION: 5.9.0
+                  COMMANDBOX_VERSION: 5.9.1
                   IMAGE_VERSION: 3.7.13
               run: |
                   # Tag Builds
