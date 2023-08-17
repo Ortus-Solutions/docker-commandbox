@@ -14,7 +14,18 @@ runOutput="$( ${BUILD_DIR}/run.sh )"
 
 printf '%s\n' "${runOutput}"
 
-${BUILD_DIR}/tests/test.up.sh
+cd ${APP_DIR}
+
+SERVER_STATUS=$( box server status )
+
+echo $SERVER_STATUS
+
+if [[ ! $SERVER_STATUS ]] || [[ ${SERVER_STATUS} != *"running"* ]];then
+	echo "The CFML server returned a status of stopped."
+	echo "The log output of the server was:"
+	echo $( box server log )
+	exit 1
+fi
 
 if [[ ${runOutput} != *"Expanded variable"* ]];then
 	echo "Environmental secrets were not detected or expanded"
