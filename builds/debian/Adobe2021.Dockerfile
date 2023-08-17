@@ -5,9 +5,7 @@ LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 #Hard Code our engine environment
-ENV BOX_SERVER_APP_CFENGINE adobe@2021.0.9+330148
-
-ENV JAVA_TOOL_OPTIONS '-Djdk.serialFilter=!org.mozilla.**;!com.sun.syndication.**;!org.apache.commons.beanutils.**;!org.jgroups.**;!com.sun.rowset.**'
+ENV BOX_SERVER_APP_CFENGINE adobe@2021.0.10+330161
 
 # WARM UP THE SERVER
 RUN ${BUILD_DIR}/util/warmup-server.sh

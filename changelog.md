@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * CommandBox Binary Updated to `v5.9.1` 
 * Lucee image versions updated to `v5.4.3+2`
+* Adobe 2023 image bumped to release version `2023.0.04+330500`
+* Adobe 2021 image bumped to release version `2021.0.10+330161`
 
 ### Added
 * [Ortus Lucee ORM Extension](https://www.ortussolutions.com/products/orm-extension) now bundled with Lucee images, since Lucee 5.4+ no longer includes an ORM extension
