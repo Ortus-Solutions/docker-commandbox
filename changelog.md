@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.7.0/3.6.4] - 2022-12-15
 ### Changed
+- Ubuntu base version changed to v22 ( Jammy )
 - Lucee image versions bumped to `v5.3.10+97`
 ## [5.7.0/3.6.3] - 2022-12-07
 
