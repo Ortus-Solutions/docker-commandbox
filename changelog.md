@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 - CommandBox version to 5.8.0
 - Lucee image versions bumped to `v5.3.10+120`
+- Ubuntu base version changed to v22 ( Jammy )
 - Container stdout log format changed to JSON layout, to ease ingest of container logs from cloud providers
 - Changed the default Runwar Log4J pattern layout to include timestamps `[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n`.  Example message: `[INFO] 2023-03-09T22:39:37Z runwar.server - Server is up`
 - Added support, in container log output, for [JSON log formatting](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/console-log-layout#customize-layout)
