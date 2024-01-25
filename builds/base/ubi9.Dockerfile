@@ -11,7 +11,7 @@ ENV LANG C.UTF-8
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-RUN microdnf install -y shadow-utils
+RUN microdnf install -y shadow-utils util-linux
 
 # Add a working group which any dynamic users can be assigned
 ENV WORKGROUP runwar
