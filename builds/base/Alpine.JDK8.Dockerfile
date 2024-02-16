@@ -57,10 +57,6 @@ RUN $BUILD_DIR/util/install-commandbox.sh
 ENV PORT 8080
 ENV SSL_PORT 8443
 
-# Turn off the Undertow directory watcher by default to speed startup times and set a log pattern that includes timestamps
-ENV BOX_SERVER_RUNWAR_ARGS="['--resource-manager-file-system-watcher=false','--log-pattern=[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n']"
-
-
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
 
