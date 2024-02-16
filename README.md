@@ -83,16 +83,26 @@ Environment Variables
 
 The CommandBox Docker image supports the use of environmental variables for the configuration of your servers.  Specifically, the image includes the [`cfconfig` CommandBox module](https://www.forgebox.io/view/commandbox-cfconfig), which allows you to provide custom settings for your engine, including the admin password.
 
-##### Port Variables
+### Port Variables
 
 * `$PORT` - The port which your server should start on.  The default is `8080`.
 * `$SSL_PORT` - If applicable, the ssl port used by your server The default is `8443`.
 
-##### HTTP/2 Support
+### Load Balancer Configuration
+
+In order to use the [multi-site features](https://commandbox.ortusbooks.com/embedded-server/multi-site-support) of CommandBox v6 and above, if your multi-site setup is domain-aware, you will need to set [the environment variable](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/proxy-ip) `BOX_SERVER_WEB_useProxyForwardedIP=true`.  Note, though, that doing so will open your container up to threat vectors by providing visitors with the ability to circumvent:
+
+* Internal-only host matching
+* IP restrictions on admin blocking
+
+as well as potentially allowing the spoofing of client certs and/or SSL redirects/validation. Because of this, if you choose to enable this setting, you should take care to ensure that your containers are _only publicly accessible via the load balancer_ and exposed container ports on the Docker host are not publicly available.  Once this setting is enabled, however, headers such as `X-Forwarded-Host` sent by the upstream load balancer will be honored when service multi-site traffic.
+
+
+### HTTP/2 Support
 
 As of Commandbox `v5.3.0`, all CommandBox servers have HTTP/2 enabled by default. For browser support of this protocol, you will need to enable SSL and provide a certificate.
 
-##### Server Configuration Variables
+### Server Configuration Variables
 
 The following environment variables may be provided to modify your runtime server configuration.  Please note that environment variables are case sensitive and, while some lower/upper case aliases are accounted for, you should use consistent casing in order for these variables to take effect.
 
@@ -110,11 +120,11 @@ The following environment variables may be provided to modify your runtime serve
 * `CFPM_INSTALL` and `CFPM_UNINSTALL`  - Supported for Adobe Coldfusion 2021 engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed ( or uninstalled, respectively ), prior to the server start.  A warmed-up server is required to use these variables.
 * `BOX_INSTALL`/`box_install` - When set to true, the `box install` command will be run before the server is started to ensure any dependencies configured in your `box.json` file are installed
 
-##### Docker Runtime Variables
+### Docker Runtime Variables
 
 * `$HEALTHCHECK_URI` - Specifies the URI endpoint for container [health checks](https://docs.docker.com/engine/reference/builder/#healthcheck).  By default, this defaults to `http://127.0.0.1:${PORT}/` at 20 second intervals, a timeout of 30 seconds,  with 15 retries before the container is marked as failed.  _Note: Since the interval, timeout, and retry settings cannot be set dynamically, if you need to adjust these, you will need to build from a Dockerfile which provides a new [`HEALTHCHECK` command](https://docs.docker.com/engine/reference/builder/#healthcheck)
 
-##### Deprecated Environment Variables
+### Deprecated Environment Variables
 
 The following variables are still supported, however they are deprecated and support will be removed in the next major release version of the image:
 
