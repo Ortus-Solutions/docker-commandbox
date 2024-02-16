@@ -7,18 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 ## [Unreleased]
+### Changed
+* CommandBox Binary updated to v6.0.0
 
-## [5.9.1/3.8.5]
+## [5.9.1/3.8.5] - 2024-01-24
 ### Changed
 * JDK/JRE 11 images bumped to version `11.0.22_7`
 * JDK/JRE 17 images bumped to version `17.0.10_7`
 
-## [5.9.1/3.8.4]
+## [5.9.1/3.8.4] - 2023-11-14
 ### Changed
 * Adobe 2023 image bumped to release version `2023.0.06+330617`
 * Adobe 2021 image bumped to release version `2021.0.12+330257`
 
-## [5.9.1/3.8.3]
+## [5.9.1/3.8.3] - 2023-10-11
 ### Changed
 * Adobe 2023 image bumped to release version `2023.0.05+330608`
 * Adobe 2021 image bumped to release version `2021.0.11+330247`

@@ -2,65 +2,65 @@ name: Anchore-Grype Security Scans
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
-    # Run this against the default branch every Monday at 5:30AM 
-    - cron: '30 5 * * 2'
+    # Run this against the default branch every Monday at 5:30AM
+    - cron: "30 5 * * 2"
 
 permissions: write-all
 jobs:
-    scan:
-        runs-on: ubuntu-latest
+  scan:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: ortussolutions/commandbox
+      COMMANDBOX_VERSION: 6.0.0
+    strategy:
+      matrix:
+        include:
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+            BUILD_IMAGE_TAG: CommandBox
+          # - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
+          #   BUILD_IMAGE_TAG: lucee5.3.10.97
+          # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
+          #   BUILD_IMAGE_TAG: adobe2018.0.15.330106
+          # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
+          #   BUILD_IMAGE_TAG: adobe2021.0.05.330109
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: all
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+
+      - name: Build local container
+        uses: docker/build-push-action@v2
         env:
-          DOCKER_IMAGE: ortussolutions/commandbox
-          COMMANDBOX_VERSION: 5.9.1
-        strategy:
-            matrix:
-              include:
-                - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-                  BUILD_IMAGE_TAG: CommandBox
-                # - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
-                #   BUILD_IMAGE_TAG: lucee5.3.10.97
-                # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
-                #   BUILD_IMAGE_TAG: adobe2018.0.15.330106
-                # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
-                #   BUILD_IMAGE_TAG: adobe2021.0.05.330109
+          DOCKER_BUILDKIT: 1
+        with:
+          context: .
+          file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+          build-args: COMMANDBOX_VERSION=${{ env.COMMANDBOX_VERSION }}
+          push: false
+          load: true
+          tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+      - name: Scan image
+        uses: anchore/scan-action@v3
+        id: imagescan
+        with:
+          image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
+          acs-report-enable: "true"
+          fail-build: false
 
-            - name: Set up QEMU
-              uses: docker/setup-qemu-action@master
-              with:
-                  platforms: all
-
-            - name: Set up Docker Buildx
-              id: buildx
-              uses: docker/setup-buildx-action@master
-
-            - name: Build local container
-              uses: docker/build-push-action@v2
-              env:
-                  DOCKER_BUILDKIT: 1
-              with:
-                  context: .
-                  file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-                  build-args: COMMANDBOX_VERSION=${{ env.COMMANDBOX_VERSION }}
-                  push: false
-                  load: true
-                  tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
-
-            - name: Scan image
-              uses: anchore/scan-action@v3
-              id: imagescan
-              with:
-                image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
-                acs-report-enable: "true"
-                fail-build: false
-
-            - name: Upload Anchore Report
-              uses: github/codeql-action/upload-sarif@v2
-              with:
-                sarif_file: ${{ steps.imagescan.outputs.sarif }}
-                category: ${{ matrix.BUILD_IMAGE_TAG }}
+      - name: Upload Anchore Report
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.imagescan.outputs.sarif }}
+          category: ${{ matrix.BUILD_IMAGE_TAG }}
