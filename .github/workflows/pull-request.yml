@@ -1,89 +1,89 @@
 name: Pull Request
 
 on:
-    pull_request:
-        branches:
-            - main
-            - development
+  pull_request:
+    branches:
+      - main
+      - development
 
 jobs:
-    pr-tests:
-        runs-on: ubuntu-latest
+  pr-tests:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: ortussolutions/commandbox
+      COMMANDBOX_VERSION: 6.0.0
+    strategy:
+      matrix:
+        include:
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+            BUILD_IMAGE_TAG: latest
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
+            BUILD_IMAGE_TAG: jre11
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
+            BUILD_IMAGE_TAG: jdk11
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
+            BUILD_IMAGE_TAG: jdk8
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
+            BUILD_IMAGE_TAG: adobe2018
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAG: adobe2021
+
+          # ubi9 Builds
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
+            BUILD_IMAGE_TAG: ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
+            BUILD_IMAGE_TAG: jre11-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK11.Dockerfile
+            BUILD_IMAGE_TAG: jdk11-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2018.Dockerfile
+            BUILD_IMAGE_TAG: adobe2018-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAG: adobe2021-ubi9
+
+          # Alpine builds
+          # Note: No JDK builders currently support alpine with ARM
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
+            BUILD_IMAGE_TAG: alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
+            BUILD_IMAGE_TAG: jre11-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
+            BUILD_IMAGE_TAG: jdk11-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
+            BUILD_IMAGE_TAG: jdk8-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
+            BUILD_IMAGE_TAG: adobe2018-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAG: adobe2021-alpine
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: all
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+
+      - name: Test
         env:
-          DOCKER_IMAGE: ortussolutions/commandbox
-          COMMANDBOX_VERSION: 5.9.1
-        strategy:
-            matrix:
-                include:
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-                      BUILD_IMAGE_TAG: latest
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-                      BUILD_IMAGE_TAG: jre11
-                    - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
-                      BUILD_IMAGE_TAG: jdk11
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
-                      BUILD_IMAGE_TAG: jdk8
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
-                      BUILD_IMAGE_TAG: lucee5
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
-                      BUILD_IMAGE_TAG: lucee-light
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2018
-                    - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2021
-                      
-                    # ubi9 Builds
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
-                      BUILD_IMAGE_TAG: ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
-                      BUILD_IMAGE_TAG: jre11-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK11.Dockerfile
-                      BUILD_IMAGE_TAG: jdk11-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
-                      BUILD_IMAGE_TAG: lucee5-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
-                      BUILD_IMAGE_TAG: lucee-light-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2018.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2018-ubi9
-                    - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2021-ubi9
-
-                    # Alpine builds
-                    # Note: No JDK builders currently support alpine with ARM
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
-                      BUILD_IMAGE_TAG: alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
-                      BUILD_IMAGE_TAG: jre11-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
-                      BUILD_IMAGE_TAG: jdk11-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
-                      BUILD_IMAGE_TAG: jdk8-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
-                      BUILD_IMAGE_TAG: lucee5-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
-                      BUILD_IMAGE_TAG: lucee-light-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2018-alpine
-                    - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
-                      BUILD_IMAGE_TAG: adobe2021-alpine
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
-            - name: Set up QEMU
-              uses: docker/setup-qemu-action@master
-              with:
-                  platforms: all
-
-            - name: Set up Docker Buildx
-              id: buildx
-              uses: docker/setup-buildx-action@master
-
-            - name: Test
-              env:
-                  DOCKER_BUILDKIT: 1
-                  COMPOSE_DOCKER_CLI_BUILD: 1
-                  BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-              run: |
-                  docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
-                  docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
+          DOCKER_BUILDKIT: 1
+          COMPOSE_DOCKER_CLI_BUILD: 1
+          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+        run: |
+          docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
+          docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut

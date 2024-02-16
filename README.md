@@ -14,6 +14,8 @@ The Docker files in this repository can be used to create your own custom Docker
 Tags
 ======
 
+_Note: For references to the specific versions of CommandBox used within image versions, [please see the Changelog](https://github.com/Ortus-Solutions/docker-commandbox/blob/main/changelog.md)._
+
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version 
 * `:3.9.0` - Tagged version of the image - not to be confused with the version of CommandBox within the image
 * `:snapshot` - Development/BE version
@@ -33,7 +35,6 @@ Tags
 
 _*Note*: The `:latest` tag currently uses OpenJDK11, as do all other pre-built engine images.  If you required JDK 8 or JDK 17 support in your app or engine, use the `:jdk8` or `:jdk17` tags, respectively._ 
 
-For references to the CommandBox versions used in various image versions, [please see the Changelog](https://github.com/Ortus-Solutions/docker-commandbox/blob/development/changelog.md).
 
 Description 
 =================
