@@ -15,22 +15,25 @@ Tags
 ======
 
 * `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version 
-* `:commandbox-5.5.2` - Stable image tagged with the version of CommandBox used to build the image
-* `:3.5.5` - Tagged version of the image
+* `:3.9.0` - Tagged version of the image - not to be confused with the version of CommandBox within the image
 * `:snapshot` - Development/BE version
 * `:[tag]-snapshot` - Development/BE version of a tagged variations (e.g. - `:adobe2021-snapshot`)
 * `:jdk8` - Base image using OpenJDK8
 * `:jre11` - Base image using OpenJDK11 JRE
 * `:jdk11` - Base image using OpenJDK11 full JDK
+* `:jre17` - Base image using OpenJDK17 JRE
+* `:jdk17` - Base image using OpenJDK17 full JDK
 * `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - [Alpine Linux](https://alpinelinux.org/about/) version of the image - slight decrease in overall size and optimizations for containerized runtimes
 * `:ubi9` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/ubi9.Dockerfile)) - [RHEL Universal Base Image](https://catalog.redhat.com/software/containers/ubi9/ubi/615bcf606feffc5384e8452e) version of the image
-* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee5.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/LuceeLight.Dockerfile)), `:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2018.Dockerfile)), `:adobe2021`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2021.Dockerfile))
+* `:[engine][version]` - Containers with warmed-up engines - saves having to download the server WAR during container start: `:lucee5`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee5.Dockerfile)), `:lucee-light`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/LuceeLight.Dockerfile)), `:adobe2018`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2018.Dockerfile)), `:adobe2021`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2021.Dockerfile)), `:adobe2023`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2023.Dockerfile))
 * `:[engine][version]-alpine` - Alpine linux versions of the image with warmed-up engines:
 `:lucee5-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Lucee5.Dockerfile)), `:lucee-light-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/LuceeLight.Dockerfile)), `:adobe2018-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2018.Dockerfile)), `:adobe2021-alpine`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2021.Dockerfile))
 * `:[engine][version]-ubi9` - RHEL ubi9 versions of the image with warmed-up engines:
 `:lucee5-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Lucee5.Dockerfile)), `:lucee-light-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/LuceeLight.Dockerfile)), `:adobe2018-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Adobe2018.Dockerfile)), `:adobe2021-ubi9`([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/ubi9/Adobe2021.Dockerfile))
 
-_*Note*: The `:latest` tag currently uses OpenJDK11, as do all other pre-built engine images.  If you required JDK 8 support in your app or engine, use the `:jdk8` tag._ 
+_*Note*: The `:latest` tag currently uses OpenJDK11, as do all other pre-built engine images.  If you required JDK 8 or JDK 17 support in your app or engine, use the `:jdk8` or `:jdk17` tags, respectively._ 
+
+For references to the CommandBox versions used in various image versions, [please see the Changelog](https://github.com/Ortus-Solutions/docker-commandbox/blob/development/changelog.md).
 
 Description 
 =================
@@ -173,20 +176,19 @@ To create your own, customized Docker image, use [our Dockerfile repository](htt
 ```
 FROM ortussolutions/commandbox:lucee5
 
-ARG COUCHBASE_EMAIL
-ARG COUCHBASE_LICENSE_KEY
-ARG COUCHBASE_ACTIVATION_CODE
+ARG REDIS_EMAIL
+ARG REDIS_LICENSE_KEY
+ARG REDIS_ACTIVATION_CODE
 
-# Copy Couchbase Extension into place for install
-ADD http://lucee.ortussolutions.com/ext/couchbase-cache.lex $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/deploy/couchbase-cache.lex
 
-# Seed Couchbase Extension License
-ENV COUCHBASE_LICENSE_FILE $SERVER_HOME_DIRECTORY/WEB-INF/lucee-server/context/context/ortus/couchbase/license.properties
-RUN touch "${CI_PROJECT_DIR}/build/license.properties" \
-  && printf "email=${COUCHBASE_EMAIL}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "licenseKey=${COUCHBASE_LICENSE_KEY}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "activationCode=${COUCHBASE_ACTIVATION_CODE}\n" >> ${COUCHBASE_LICENSE_FILE} \
-  && printf "serverType=Production\n" >> ${COUCHBASE_LICENSE_FILE}
+# Install the Ortus Redis cache extension from Forgebox
+RUN box install 5C558CC6-1E67-4776-96A60F9726D580F1
+
+# Scope in our args for extension activation
+REDIS_EXTENSION_EMAIL=$REDIS_EMAIL
+REDIS_EXTENSION_LICENSE_KEY=$REDIS_LICENSE_KEY
+REDIS_EXTENSION_ACTIVATION_CODE=$REDIS_ACTIVATION_CODE
+REDIS_EXTENSION_SERVER_TYPE=Production
 
 # WARM UP THE SERVER WITH THE NEW EXTENSION
 RUN ${BUILD_DIR}/util/warmup-server.sh
@@ -240,7 +242,7 @@ Once your customized `Dockerfile` has has been built, you can run the generated 
 
 #### Multi-Stage Builds
 
-As of v3.0.0 of the image you can create multi-stage builds which include only a shell script to start the server, the RunWar servlet container, and the application/engine. This build is finalized, however, so the startup script will bypass all environmental and server evaluation in favor of the variables provided in the generated shell script.
+As of v3.0.0 of the image you can create multi-stage builds which include only a shell script to start the server, the RunWar servlet container, and the application/engine. _This build is finalized, however, so the startup script will bypass all environmental and server evaluation in favor of the variables provided in the generated shell script._  This means that you will need to provide all secrets and variables needed by your server and CFConfig files during the initial build phase, as the `.env` and `.cfconfig.json` files will not be in play during the server startup.
 
 A finalized image reduces container startup times by up to 80% and reduces the final image size by up to 50%.  Multi-stage builds are ideal for creating production images.  The environment variable `FINALIZE_STARTUP`, when provided, will only generate the startup script.  The script written is considered authoritative and will be used on the next container start.
 
@@ -288,7 +290,7 @@ FROM ortussolutions/commandbox:lucee5
 RUN export FINALIZE_STARTUP=true;$BUILD_DIR/run.sh;unset FINALIZE_STARTUP
 ```
 
-This created image will contain the authoritative script with its runtime benefits and caveats ( see above ).  Unlike the multi-stage build above, however , secret expansion will take place prior to image start, with the caveat that any environment variables in existence when finalized script was generated will overwrite the runtime-provided variables or secrets.
+This created image will contain the authoritative script with its runtime benefits and caveats ( see above ).  Unlike the multi-stage build above, however , secret expansion will take place prior to image start, with the caveat that _any environment variables in existence when the finalized script was generated will overwrite the runtime-provided variables or secrets_.
 
 
 About CommandBox

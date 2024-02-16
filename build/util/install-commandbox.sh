@@ -24,6 +24,9 @@ curl https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/comman
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
+# Set our log pattern to be ISO with timezone info, as containers might be running in different zones
+box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
+
 # Install GELF jar for Java.util JSON logging https://logging.paluch.biz/examples/jul-json.html
 mkdir -p $JAVA_HOME/classes
 curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar -o $JAVA_HOME/classes/logstash-gelf-1.15.0.jar

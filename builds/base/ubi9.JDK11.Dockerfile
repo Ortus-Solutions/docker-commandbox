@@ -60,9 +60,6 @@ ENV CLASSPATH="$JAVA_HOME/classes"
 ENV PORT 8080
 ENV SSL_PORT 8443
 
-# Turn off the Undertow directory watcher by default to speed startup times
-ENV BOX_SERVER_RUNWAR_ARGS="['--resource-manager-file-system-watcher=false','--log-pattern=[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n']"
-
 
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
