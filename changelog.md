@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [6.0.0/3.9.1] - 2024-03-28
+### Changed
+* Adobe 2023 image bumped to release version `2023.0.07+330663`
+* Adobe 2021 image bumped to release version `2021.0.13+330286`
+
+
 ## [6.0.0/3.9.0] - 2024-02-16
 ### Changed
 * CommandBox Binary updated to v6.0.0
