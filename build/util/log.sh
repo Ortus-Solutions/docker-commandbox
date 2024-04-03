@@ -8,9 +8,9 @@ fi
 
 rm -f $JAVA_HOME/conf/logging.properties
 if [[ $logFormat = 'JSONTemplateLayout' ]]; then
-    export BOX_SERVER_JVM_ARGS="['-Djava.util.logging.config.file=$BUILD_DIR/resources/json.logging.properties']"
+    export JAVA_TOOL_OPTIONS="-Djava.util.logging.config.file=$BUILD_DIR/resources/json.logging.properties $JAVA_TOOL_OPTIONS"
 else
-    export BOX_SERVER_JVM_ARGS="['-Djava.util.logging.config.file=$BUILD_DIR/resources/text.logging.properties']"
+    export JAVA_TOOL_OPTIONS="-Djava.util.logging.config.file=$BUILD_DIR/resources/text.logging.properties $JAVA_TOOL_OPTIONS"
 fi
 
 # Global logger function
