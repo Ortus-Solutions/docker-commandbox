@@ -143,8 +143,8 @@ jobs:
           COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
         run: |
-          docker-compose -f docker-compose.test.yml up --build --exit-code-from sut
-          docker-compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
+          docker compose -f docker-compose.test.yml up --build --exit-code-from sut
+          docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
       - name: Build Final
         uses: docker/build-push-action@v4
