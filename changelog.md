@@ -6,7 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [Unreleased]
+## [6.0.0/3.9.2] - 2024-03-28
+### Changed
+* `:lucee5` tags changed to match CommandBox 6 Lucee version of `5.4.4+38`
+* Ortus ORM Extension version in `:lucee5` images updated to `v6.5.2`
+
+### Added
+* `:lucee5-light` image added
+
+### Fixed
+* Changed JVM log util format to use `JAVA_TOOL_OPTIONS` env variable to prevent overwrite of custom `BOX_SERVER_JVM_ARGS` in environment and `server.json` files
 
 ## [6.0.0/3.9.1] - 2024-03-28
 ### Changed
