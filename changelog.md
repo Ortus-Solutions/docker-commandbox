@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 ## [Unreleased]
 
+## [6.0.0/3.9.4] - 2024-05-03
+### Changed
+* Adobe 2023 image bumped to release version `2023.0.08+330668`
+* Adobe 2021 image bumped to release version `2021.0.14+330296`
+
 ## [6.0.0/3.9.3] - 2024-05-03
 ### Changed
 * JDK/JRE 11 images bumped to version `11.0.23_9`
