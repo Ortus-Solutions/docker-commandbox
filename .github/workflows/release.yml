@@ -38,6 +38,8 @@ jobs:
             BUILD_IMAGE_TAG: adobe2021
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/BoxLang.Dockerfile
+            BUILD_IMAGE_TAG: boxlang
 
           # ubi9 Builds
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
@@ -62,6 +64,8 @@ jobs:
             BUILD_IMAGE_TAG: adobe2021-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/BoxLang.Dockerfile
+            BUILD_IMAGE_TAG: boxlang-ubi9
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
@@ -89,6 +93,8 @@ jobs:
             BUILD_IMAGE_TAG: adobe2021-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/BoxLang.Dockerfile
+            BUILD_IMAGE_TAG: boxlang-alpine
 
     steps:
       - name: Checkout
