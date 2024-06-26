@@ -141,7 +141,7 @@ jobs:
 
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
-          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAG} != @(jd21-alpine|boxlang-alpine) ]]; then
+          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAG} != @(jd21-alpine|boxlang-alpine-snapshot|boxlang-alpine|boxlang-alpine-snapshot) ]]; then
             ARCH_PLATFORMS=linux/amd64
           else
             ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
