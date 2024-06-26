@@ -22,6 +22,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk11
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK17.Dockerfile
             BUILD_IMAGE_TAG: jdk17
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
+            BUILD_IMAGE_TAG: jdk21
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
@@ -50,6 +52,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk11-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK17.Dockerfile
             BUILD_IMAGE_TAG: jdk17-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK21.Dockerfile
+            BUILD_IMAGE_TAG: jdk21-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
@@ -77,6 +81,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk11-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK17.Dockerfile
             BUILD_IMAGE_TAG: jdk17-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK21.Dockerfile
+            BUILD_IMAGE_TAG: jdk21-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
@@ -135,7 +141,7 @@ jobs:
 
           TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
 
-          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]]; then
+          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]] && ![[ ${BUILD_IMAGE_TAG} != @(jd21-alpine|boxlang-alpine) ]]; then
             ARCH_PLATFORMS=linux/amd64
           else
             ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
