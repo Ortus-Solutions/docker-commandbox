@@ -4,7 +4,7 @@ INCLUDE+ builds/base/ubi9.Dockerfile
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ENV BOX_SERVER_APP_CFENGINE lucee@5.4.4+38
+ENV BOX_SERVER_APP_CFENGINE lucee@5.4.6+9
 
 ENV LUCEE_EXTENSIONS D062D72F-F8A2-46F0-8CBC91325B2F067B;version=6.5.2
 
