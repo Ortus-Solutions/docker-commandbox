@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * CommandBox Binary to v6.1.0
 * Lucee Tagged images to v5.4.6+9
 
+## [6.0.0/3.9.8] - 2024-07-26
+### Changed
+* BoxLang Images to Beta 7
 
 ## [6.0.0/3.9.7] - 2024-07-24
 ### Changed
