@@ -95,7 +95,7 @@ jobs:
             BUILD_IMAGE_TAG: lucee5-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light-alpine
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
             BUILD_IMAGE_TAG: adobe2018-alpine
