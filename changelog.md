@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [6.0.0/3.9.9] - 2024-09-09
+### Changed
+* Adobe 2023 image bump to release version `2023.0.09+330677`
+* Adobe 2021 image bump to release version `2021.0.15+330303`
+
 ## [6.0.0/3.9.8] - 2024-07-26
 ### Changed
 * BoxLang Images to Beta 7
