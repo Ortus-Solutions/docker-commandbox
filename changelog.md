@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 ## [6.1.0/3.10.0] - Unreleased
+
 ### Changed
 * CommandBox Binary to v6.1.0
 * Lucee Tagged images to v5.4.6+9
+
+## [6.0.0/3.9.10] - 2024-09-10
+### Changed
+* Adobe 2023 image bump to release version `2023.0.10+330680`
+* Adobe 2021 image bump to release version `2021.0.16+330307`
 
 ## [6.0.0/3.9.9] - 2024-09-09
 ### Changed
