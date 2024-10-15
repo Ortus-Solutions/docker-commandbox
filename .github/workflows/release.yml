@@ -34,6 +34,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk8
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
             BUILD_IMAGE_TAG: lucee5
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6.Dockerfile
+            BUILD_IMAGE_TAG: lucee6
           - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
@@ -62,6 +64,8 @@ jobs:
             BUILD_IMAGE_TAG: jre17-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
             BUILD_IMAGE_TAG: lucee5-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee6.Dockerfile
+            BUILD_IMAGE_TAG: lucee6-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5Light.Dockerfile
@@ -93,6 +97,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk8-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
             BUILD_IMAGE_TAG: lucee5-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee6.Dockerfile
+            BUILD_IMAGE_TAG: lucee6-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
