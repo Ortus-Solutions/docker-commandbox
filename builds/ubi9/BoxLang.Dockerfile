@@ -6,6 +6,6 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 RUN box install commandbox-boxlang
 
-ENV BOX_SERVER_APP_CFENGINE boxlang@1.0.0-beta18+22
+ENV BOX_SERVER_APP_CFENGINE boxlang@1.0.0-beta19+23
 
 RUN ${BUILD_DIR}/util/warmup-server.sh
