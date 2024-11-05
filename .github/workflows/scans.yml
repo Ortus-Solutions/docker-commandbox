@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE: ortussolutions/commandbox
-      COMMANDBOX_VERSION: 6.1.0-rc
+      COMMANDBOX_VERSION: 6.1.0
     strategy:
       matrix:
         include:
