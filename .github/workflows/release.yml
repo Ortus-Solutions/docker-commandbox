@@ -131,7 +131,7 @@ jobs:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
           COMMANDBOX_VERSION: 6.1.0
-          IMAGE_VERSION: 3.10.0
+          IMAGE_VERSION: 3.10.1
         run: |
           # Tag Builds
           if [[ $GITHUB_REF == refs/tags/* ]]; then
