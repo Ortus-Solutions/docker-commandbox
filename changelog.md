@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [6.1.0/3.10.1] - Unreleased
+## [6.1.0/3.10.2] - Unreleased
+
+## [6.1.0/3.10.1] - 2024-12-25
+### Changed
+* Adobe 2023 image bump to release version `2023.0.12+330713`
+* Adobe 2021 image bump to release version `2021.0.18+330341`
 
 ## [6.1.0/3.10.0] - 2024-11-05
 
