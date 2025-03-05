@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [6.1.0/3.10.2] - Unreleased
+
+## [6.1.0/3.11.3] - 2025-03-05
+
+### Added
+
+* Jarkarta support for [BoxLang](https://boxlang.io/) and Adobe 2025
+* Boxlang version bumped to `1.0.0-rc.2`
 
 ## [6.1.0/3.10.2] - 2025-02-07
 

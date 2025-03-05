@@ -163,13 +163,6 @@ jobs:
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
           echo "IMAGE_TAG=${TAGS}" >> $GITHUB_ENV
 
-      - name: DockerHub Login
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Test
         env:
           COMMANDBOX_VERSION: ${{ env.commandbox_version }}
@@ -180,7 +173,15 @@ jobs:
           docker compose -f docker-compose.test.yml up --build --exit-code-from sut
           docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
+      - name: DockerHub Login
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build Final
+        if: github.event_name != 'pull_request'
         uses: docker/build-push-action@v4
         env:
           DOCKER_BUILDKIT: 1
