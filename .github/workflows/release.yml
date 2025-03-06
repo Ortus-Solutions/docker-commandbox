@@ -43,7 +43,7 @@ jobs:
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
             BUILD_IMAGE_TAG: adobe2021
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAG: 
+            BUILD_IMAGE_TAG: adobe2023
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
             BUILD_IMAGE_TAG: adobe2025
           - BUILD_IMAGE_DOCKERFILE: builds/debian/BoxLang.Dockerfile
