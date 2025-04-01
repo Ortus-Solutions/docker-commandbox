@@ -7,16 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [6.2.0/3.12.1] - Unreleased
-
-## Changed
-
-- Ubuntu base version changed to v24 ( Noble )
-
 ## [6.2.0/3.12.0] - 2025-04-01
 
 ### Changed
 
+* Ubuntu base version changed to v24 ( Noble )
 * CommandBox Binary to v6.2.0
 
 
