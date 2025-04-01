@@ -40,12 +40,12 @@ jobs:
             BUILD_IMAGE_TAG: lucee-light
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
-            BUILD_IMAGE_TAG: adobe2018
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
             BUILD_IMAGE_TAG: adobe2021
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
+            BUILD_IMAGE_TAG: adobe2025
           - BUILD_IMAGE_DOCKERFILE: builds/debian/BoxLang.Dockerfile
             BUILD_IMAGE_TAG: boxlang
 
@@ -70,12 +70,12 @@ jobs:
             BUILD_IMAGE_TAG: lucee-light-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2018.Dockerfile
-            BUILD_IMAGE_TAG: adobe2018-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
             BUILD_IMAGE_TAG: adobe2021-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2025.Dockerfile
+            BUILD_IMAGE_TAG: adobe2025-ubi9
           - BUILD_IMAGE_DOCKERFILE: builds/ubi9/BoxLang.Dockerfile
             BUILD_IMAGE_TAG: boxlang-ubi9
 
@@ -103,12 +103,12 @@ jobs:
             BUILD_IMAGE_TAG: lucee-light-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light-alpine
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2018.Dockerfile
-            BUILD_IMAGE_TAG: adobe2018-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
             BUILD_IMAGE_TAG: adobe2021-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2025.Dockerfile
+            BUILD_IMAGE_TAG: adobe2025-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/BoxLang.Dockerfile
             BUILD_IMAGE_TAG: boxlang-alpine
 
@@ -130,8 +130,8 @@ jobs:
         env:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
-          COMMANDBOX_VERSION: 6.1.0
-          IMAGE_VERSION: 3.10.2
+          COMMANDBOX_VERSION: 6.2.0
+          IMAGE_VERSION: 3.11.0
         run: |
           # Tag Builds
           if [[ $GITHUB_REF == refs/tags/* ]]; then

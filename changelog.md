@@ -7,12 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [6.1.0/3.11.0] - 2025-03-05
+## [6.1.0/3.11.0] - 2025-04-01
+
+### Changed
+
+* CommandBox Binary to v6.2.0
+
 
 ### Added
 
+* Add Adobe Coldfusion 2025 Engine ( version `2025.0.0+331385` )
 * Jarkarta support for [BoxLang](https://boxlang.io/) and Adobe 2025
-* Boxlang version bumped to `1.0.0-rc.2`
+
+### Removed
+
+* Removed Adobe Coldfusion 2018 Builds, as it is EOL
+
 
 ## [6.1.0/3.10.2] - 2025-02-07
 
