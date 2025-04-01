@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jdk-jammy
+FROM eclipse-temurin:8-jdk-noble
 
 ARG COMMANDBOX_VERSION
 
