@@ -28,6 +28,8 @@ jobs:
             BUILD_IMAGE_TAG: jdk17
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
             BUILD_IMAGE_TAG: jdk21
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK23.Dockerfile
+            BUILD_IMAGE_TAG: jdk23
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
