@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Adobe Coldfusion 2025 updated to `2025.0.01+331420`
+* Ubuntu base version changed to v24 ( Noble )
 
 ### Added
 
@@ -20,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Ubuntu base version changed to v24 ( Noble )
 * CommandBox Binary to v6.2.0
 
 
