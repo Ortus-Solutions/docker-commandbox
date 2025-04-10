@@ -3,6 +3,7 @@ name: Anchore-Grype Security Scans
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
   schedule:
     # Run this against the default branch every Monday at 5:30AM
     - cron: "30 5 * * 2"
@@ -51,16 +52,16 @@ jobs:
           load: true
           tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
 
-      - name: Scan image
-        uses: anchore/scan-action@v3
-        id: imagescan
+      - name: Scan generated packages
+        uses: anchore/scan-action@v6
+        id: securityscan
         with:
           image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
-          acs-report-enable: "true"
-          fail-build: false
+          severity-cutoff: "high"
+          by-cve: "true"
 
       - name: Upload Anchore Report
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: ${{ steps.imagescan.outputs.sarif }}
-          category: ${{ matrix.BUILD_IMAGE_TAG }}
+          sarif_file: ${{ steps.securityscan.outputs.sarif }}
+          category: "BoxLang-Runtime-${{ github.env.BRANCH }}"
