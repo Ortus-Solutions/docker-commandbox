@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [6.2.0/3.12.1] - 2025-04-10
+
+### Changed
+
+* Adobe Coldfusion 2025 updated to `2025.0.01+331420`
+
+### Added
+
+* Added `:jdk23` and `:jdk24` Build tags
 
 ## [6.2.0/3.12.0] - 2025-04-01
 
