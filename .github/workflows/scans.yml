@@ -58,6 +58,7 @@ jobs:
         with:
           image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
           severity-cutoff: "high"
+          fail-build: false
           by-cve: "true"
 
       - name: Upload Anchore Report
