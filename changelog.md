@@ -6,7 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [Unreleased]
+## [6.2.0/3.13.1] - 2025-04-25
+
+### Changed
+
+* JDK/JRE 11 images bumped to version `11.0.27_6`
+* JDK/JRE 17 images bumped to version `17.0.15_6`
+* JDK/JRE 21 images bumped to version `21.0.7_6`
+* JDK/JRE 23 images bumped to version `23.0.2_7`
+* JDK/JRE 24 images bumped to version `24.0.1_9`
+
 
 
 ## [6.2.0/3.13.0] - 2025-04-10

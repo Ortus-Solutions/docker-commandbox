@@ -9,7 +9,7 @@ This is the repository for official Dockerfiles for Commandbox images
 
 ## How it works
 
-The Docker files in this repository can be used to create your own custom Docker container for running ColdFusion CFML applications on CommandBox.   Leveraging CommandBox allows you to configure your entire ColdFusion CFML engine environment from a single `server.json` file in the root of your project.
+The Docker files are used to produce the `ortussolutions/commandbox` [base images on Docker Hub](https://hub.docker.com/r/ortussolutions/commandbox/tags).   Leveraging CommandBox allows you to configure your entire ColdFusion CFML engine environment from a single `server.json` file in the root of your project.
 
 Tags
 ======
