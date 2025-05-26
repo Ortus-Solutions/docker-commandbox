@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adobe Coldfusion 2021 updated to `2021.0.20+330407`
 * Adobe Coldfusion 2023 updated to `2023.0.14+330784`
 * Adobe Coldfusion 2025 updated to `2025.0.02+331451`
+* Lucee 6 updated to `6.2.1+122`
 
 ## [6.2.0/3.13.3] - 2025-04-29
 
