@@ -4,6 +4,8 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Ortus-Solutions/docker-commandbox/release.yml?branch=development)](https://github.com/Ortus-Solutions/docker-commandbox/actions)
 [![GitHub License](https://badgen.net/github/license/Ortus-Solutions/docker-commandbox)](https://github.com/Ortus-Solutions/docker-commandbox?tab=License-1-ov-file#readme)
 
+![CommandBox Docker](commandbox-docker.jpg)
+
 Welcome to the official Docker images for [CommandBox](https://www.ortussolutions.com/products/commandbox), the BoxLang and CFML development and deployment tool from [Ortus Solutions](https://www.ortussolutions.com/).  These images are designed to provide a lightweight, flexible, and powerful environment for running BoxLang and CFML applications using CommandBox as a powerful servlet container powered by [Undertow](https://undertow.io/).
 
 All images are published to [Docker Hub](https://hub.docker.com/r/ortussolutions/commandbox).
