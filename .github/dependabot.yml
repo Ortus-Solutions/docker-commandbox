@@ -1,0 +1,17 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # GitHub Actions - updates `uses:` in workflows
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows" # Location of .github/workflows
+    schedule:
+      interval: "weekly"
+
+  # Docker - updates Dockerfiles and image versions
+  - package-ecosystem: "docker"
+    directory: "/builds" # Adjust if your Dockerfile is in a subfolder
+    schedule:
+      interval: "weekly"
