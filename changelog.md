@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EditorConfig support for VSCode and IntelliJ
 - Added gitattributes file to ignore unnecessary files in git
 - Added markdownlint configuration and markdown lint fix
+- Dependabot for automatic dependency updates and security fixes
 
 ## [6.2.0/3.13.4] - 2025-05-26
 
