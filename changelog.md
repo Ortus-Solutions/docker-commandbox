@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Updated CommandBox to v6.2.1
 - EditorConfig support for VSCode and IntelliJ
 - Added gitattributes file to ignore unnecessary files in git
 - Added markdownlint configuration and markdown lint fix
