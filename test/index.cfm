@@ -1,8 +1,10 @@
-<cfif structKeyExists( url, "debug" )>
-	<cfscript>
-		system = createObject( "java", "java.lang.System" );
-		env = system.getenv();
-	</cfscript>
+
+<cfscript>
+	system = createObject( "java", "java.lang.System" );
+	env = system.getenv();
+	debugEnabled = structKeyExists( env, "ENVIRONMENT" ) ? ( env.ENVIRONMENT == "development" ) : false;
+</cfscript>
+<cfif debugEnabled && structKeyExists( url, "debug" )>
 	<cfheader name="Content-Type" value="application/json"/>
 	<cfswitch expression="#url.debug#">
 		<cfcase value="cgi">
@@ -33,8 +35,10 @@
 				Is up and Running on Docker!
 			</div>
 		</h1>
-		<p style="text-align: center">
-			If you want to see some debugging information for this instance, click on the debug link: <a href="index.cfm?debug=true">see debugging</a>
-		</p>
+		<cfif debugEnabled>
+			<p style="text-align: center">
+				If you want to see some debugging information for this instance, click on the debug link: <a href="index.cfm?debug=true">see debugging</a>
+			</p>
+		</cfif>
 	</body>
 </cfif>
