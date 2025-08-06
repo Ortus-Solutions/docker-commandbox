@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+microdnf upgrade \
+			--refresh \
+			--best \
+			--nodocs \
+			--noplugins \
+			--setopt=install_weak_deps=0
+
 microdnf install -y \
                 jq \
                 procps \
