@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [Unreleased]
+## [6.2.1/3.13.6] - 2025-08-06
+
+### Changed
+
+- JDK/JRE 11 images bumped to version `11.0.28_6`
+- JDK/JRE 17 images bumped to version `17.0.16_8`
+- JDK/JRE 21 images bumped to version `21.0.8_9`
+- JDK/JRE 24 images bumped to version `24.0.2_12`
 
 ## [6.2.1/3.13.5] - 2025-07-03
 
@@ -90,45 +97,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.1.0/3.10.1] - 2024-12-25
 
 ### Changed
+
 - Adobe 2023 image bump to release version `2023.0.12+330713`
 - Adobe 2021 image bump to release version `2021.0.18+330341`
 
 ## [6.1.0/3.10.0] - 2024-11-05
 
 ### Changed
+
 - CommandBox Binary to v6.1.0
 - Lucee Tagged images to v5.4.6+9
 
 ## [6.0.0/3.9.10] - 2024-09-10
 
 ### Changed
+
 - Adobe 2023 image bump to release version `2023.0.10+330680`
 - Adobe 2021 image bump to release version `2021.0.16+330307`
 
 ## [6.0.0/3.9.9] - 2024-09-09
 
 ### Changed
+
 - Adobe 2023 image bump to release version `2023.0.09+330677`
 - Adobe 2021 image bump to release version `2021.0.15+330303`
 
 ## [6.0.0/3.9.8] - 2024-07-26
 
 ### Changed
+
 - BoxLang Images to Beta 7
 
 ## [6.0.0/3.9.7] - 2024-07-24
 
 ### Changed
+
 - BoxLang Images to Beta 6
 
 ## [6.0.0/3.9.6] - 2024-07-05
 
 ### Changed
+
 - BoxLang Images to Beta 4
 
 ## [6.0.0/3.9.5] - 2024-06-26
 
 ### Added
+
 - Add JDK21 builds for Alpine, UBI, and Ubuntu
 - ARM arch builds for Alpine JDK21 Images
 - Add BoxLang images
@@ -136,30 +151,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.0/3.9.4] - 2024-05-03
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.08+330668`
 - Adobe 2021 image bumped to release version `2021.0.14+330296`
 
 ## [6.0.0/3.9.3] - 2024-05-03
 
 ### Changed
+
 - JDK/JRE 11 images bumped to version `11.0.23_9`
 - JDK/JRE 17 images bumped to version `17.0.11_9`
 
 ## [6.0.0/3.9.2] - 2024-03-28
 
 ### Changed
+
 - `:lucee5` tags changed to match CommandBox 6 Lucee version of `5.4.4+38`
 - Ortus ORM Extension version in `:lucee5` images updated to `v6.5.2`
 
 ### Added
+
 - `:lucee5-light` image added
 
 ### Fixed
+
 - Changed JVM log util format to use `JAVA_TOOL_OPTIONS` env variable to prevent overwrite of custom `BOX_SERVER_JVM_ARGS` in environment and `server.json` files
 
 ## [6.0.0/3.9.1] - 2024-03-28
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.07+330663`
 - Adobe 2021 image bumped to release version `2021.0.13+330286`
 
@@ -167,9 +188,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.0/3.9.0] - 2024-02-16
 
 ### Changed
+
 - CommandBox Binary updated to v6.0.0
 
 ### Removed
+
 - removed Runwar args as they are no longer suppored
 - Changed log pattern to server config default
 - Removed code turning off the directory watcher as it is no longer on by default
@@ -177,32 +200,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.9.1/3.8.5] - 2024-01-24
 
 ### Changed
+
 - JDK/JRE 11 images bumped to version `11.0.22_7`
 - JDK/JRE 17 images bumped to version `17.0.10_7`
 
 ## [5.9.1/3.8.4] - 2023-11-14
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.06+330617`
 - Adobe 2021 image bumped to release version `2021.0.12+330257`
 
 ## [5.9.1/3.8.3] - 2023-10-11
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.05+330608`
 - Adobe 2021 image bumped to release version `2021.0.11+330247`
 
 ## [5.9.1/3.8.2] - 2023-10-02
+
 - Lucee 5 Ortus ORM extension updated to 6.3.2
 
 ## [5.9.1/3.8.1] - 2023-09-29
 
 ### Changed
+
 - Lucee 5 Ortus ORM extension updated to 6.3.1
 
 ## [5.9.1/3.8.0] - 2023-08-17
 
 ### Changed
+
 - CommandBox Binary Updated to `v5.9.1`
 - Lucee image versions updated to `v5.4.3+2`
 - Adobe 2023 image bumped to release version `2023.0.04+330500`
@@ -210,22 +239,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Current version of `commandbox-cfconfig` will now fail to start the server if the assigned configfile is not found
 
 ### Added
+
 - [Ortus Lucee ORM Extension](https://www.ortussolutions.com/products/orm-extension) now bundled with Lucee images, since Lucee 5.4+ no longer includes an ORM extension
 
 ## [5.9.0/3.7.12] - 2023-08-15
 
 ### Changed
+
 - Lucee image versions bumped to `v5.3.12+1`
 
 ## [5.9.0/3.7.11] - 2023-07-27
 
 ### Changed
+
 - JRE 11 versions to `11.0.20_8`
 - JRE 17 versions to `17.0.8_7`
 
 ## [5.9.0/3.7.10] - 2023-07-12
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.3+330486`
 - Adobe 2021 image bumped to release version `2021.0.9+330148`
 - Adobe 2018 image bumped to release version `2018.0.19+330149`
@@ -233,6 +266,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.9.0/3.7.9] - 2023-07-12
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.2+330482`
 - Adobe 2021 image bumped to release version `2021.0.8+330144`
 - Adobe 2018 image bumped to release version `2018.0.18+330145`
@@ -240,11 +274,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.9.0/3.7.8] - 2023-07-12
 
 ### Added
+
 - Add Java tool options for serialization for all Adobe containers, [per technotes](https://helpx.adobe.com/security/products/coldfusion/apsb23-40.html)
 
 ## [5.9.0/3.7.7] - 2023-07-12
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.1+330480`
 - Adobe 2021 image bumped to release version `2021.0.7+330142`
 - Adobe 2018 image bumped to release version `2018.0.17+330143`
@@ -252,11 +288,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.9.0/3.7.6] - 2023-05-23
 
 ### Changed
+
 - Adobe 2023 image bumped to release version `2023.0.0+330468`
 
 ## [5.9.0/3.7.5] - 2023-05-23
 
 ### Fixed
+
 - Fixes an issue with manifests no longer being generated by BuildX
 
 ## [5.9.0/3.7.4] - 2023-05-03
