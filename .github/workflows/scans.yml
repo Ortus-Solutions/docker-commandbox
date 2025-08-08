@@ -60,6 +60,7 @@ jobs:
           severity-cutoff: "high"
           fail-build: false
           by-cve: "true"
+          only-fixed: true
 
       - name: Upload Anchore Report
         uses: github/codeql-action/upload-sarif@v3

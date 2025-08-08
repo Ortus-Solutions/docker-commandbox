@@ -6,6 +6,8 @@ apt-get update
 # Upgrade all packages
 apt-get -y upgrade
 
+apt-get autoremove -y
+
 apt-get install --assume-yes \
                                 apt-utils \
                                 ca-certificates \
