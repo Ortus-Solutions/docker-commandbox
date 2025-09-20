@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
+## [Unreleased]
+
+### Changed
+
+- Add pre-dependendency install upgrades of packages to ensure latest security patches are applied
+
+## [6.2.1/3.13.7] - 2025-09-20
+
+### Changed
+
+- Adobe Coldfusion 2021 updated to `2021.0.22+330451`
+- Adobe Coldfusion 2023 updated to `2023.0.16+330828`
+- Adobe Coldfusion 2025 updated to `2025.0.04+331512`
+
 ## [6.2.1/3.13.6] - 2025-08-06
 
 ### Changed

@@ -1,7 +1,14 @@
 #!/bin/sh
 set -e
 
-apt-get update && apt-get install --assume-yes \
+apt-get update
+
+# Upgrade all packages
+apt-get -y upgrade
+
+apt-get autoremove -y
+
+apt-get install --assume-yes \
                                 apt-utils \
                                 ca-certificates \
                                 curl \
