@@ -406,7 +406,7 @@ Create a `server.json` in your application root for advanced configuration:
 ```json
 {
   "app": {
-    "cfengine": "boxlang@1.0.0"
+    "cfengine": "boxlang@1.6.0"
   },
   "web": {
     "http": {
