@@ -12,7 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add pre-dependendency install upgrades of packages to ensure latest security patches are applied
--
+- Boxlang images version bumped to `v1.6.0`
+- Adobe Coldfusion 2025 images bumped to `2025.0.04+331512`
+- Adobe Coldfusion 2023 images bumped to `2023.0.16+330828`
+- Adobe Coldfusion 2021 images bumped to `2021.0.20+330407`
 
 ## [6.2.1/3.13.6] - 2025-08-06
 
