@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-microdnf upgrade \
+microdnf upgrade -y \
 			--refresh \
 			--best \
 			--nodocs \
