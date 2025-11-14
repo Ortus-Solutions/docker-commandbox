@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-ubi9-minimal
+FROM eclipse-temurin:11-jdk-ubi10-minimal
 
 ARG COMMANDBOX_VERSION
 
@@ -48,7 +48,7 @@ RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN rm -rf $BUILD_DIR/util/debian
 
-RUN ${BUILD_DIR}/util/ubi9/install-dependencies.sh
+RUN ${BUILD_DIR}/util/redhat/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh

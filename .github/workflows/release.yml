@@ -40,12 +40,12 @@ jobs:
             BUILD_IMAGE_TAG: lucee5
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6.Dockerfile
             BUILD_IMAGE_TAG: lucee6
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee7.Dockerfile
+            BUILD_IMAGE_TAG: lucee7
           - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
-            BUILD_IMAGE_TAG: adobe2021
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
@@ -54,34 +54,34 @@ jobs:
             BUILD_IMAGE_TAG: boxlang
 
           # ubi9 Builds
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Base.Dockerfile
             BUILD_IMAGE_TAG: ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Base.Dockerfile
-            BUILD_IMAGE_TAG: jre11-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK11.Dockerfile
-            BUILD_IMAGE_TAG: jdk11-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK17.Dockerfile
-            BUILD_IMAGE_TAG: jdk17-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JDK21.Dockerfile
-            BUILD_IMAGE_TAG: jdk21-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/base/ubi9.JRE17.Dockerfile
-            BUILD_IMAGE_TAG: jre17-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee6.Dockerfile
-            BUILD_IMAGE_TAG: lucee6-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAG: lucee-light-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-light-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2021.Dockerfile
-            BUILD_IMAGE_TAG: adobe2021-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAG: adobe2023-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAG: adobe2025-ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/ubi9/BoxLang.Dockerfile
-            BUILD_IMAGE_TAG: boxlang-ubi9
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Base.Dockerfile
+            BUILD_IMAGE_TAG: jre11-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK11.Dockerfile
+            BUILD_IMAGE_TAG: jdk11-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK17.Dockerfile
+            BUILD_IMAGE_TAG: jdk17-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK21.Dockerfile
+            BUILD_IMAGE_TAG: jdk21-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE17.Dockerfile
+            BUILD_IMAGE_TAG: jre17-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
+            BUILD_IMAGE_TAG: lucee5-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
+            BUILD_IMAGE_TAG: lucee6-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
+            BUILD_IMAGE_TAG: lucee7-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
+            BUILD_IMAGE_TAG: lucee-light-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
+            BUILD_IMAGE_TAG: lucee5-light-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
+            BUILD_IMAGE_TAG: adobe2023-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2025.Dockerfile
+            BUILD_IMAGE_TAG: adobe2025-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/redhat/BoxLang.Dockerfile
+            BUILD_IMAGE_TAG: boxlang-rhel
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
@@ -103,12 +103,12 @@ jobs:
             BUILD_IMAGE_TAG: lucee5-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee6.Dockerfile
             BUILD_IMAGE_TAG: lucee6-alpine
+          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee7.Dockerfile
+            BUILD_IMAGE_TAG: lucee7-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
             BUILD_IMAGE_TAG: lucee-light-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAG: lucee5-light-alpine
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2021.Dockerfile
-            BUILD_IMAGE_TAG: adobe2021-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
             BUILD_IMAGE_TAG: adobe2023-alpine
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2025.Dockerfile
@@ -135,7 +135,7 @@ jobs:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
           COMMANDBOX_VERSION: 6.2.1
-          IMAGE_VERSION: 3.13.7
+          IMAGE_VERSION: 3.14.8
         run: |
           # Tag Builds
           if [[ $GITHUB_REF == refs/tags/* ]]; then

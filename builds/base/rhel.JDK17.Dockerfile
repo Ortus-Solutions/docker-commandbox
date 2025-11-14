@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-ubi9-minimal
+FROM eclipse-temurin:17-jdk-ubi10-minimal
 
 ARG COMMANDBOX_VERSION
 
@@ -48,14 +48,13 @@ RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN rm -rf $BUILD_DIR/util/debian
 
-RUN ${BUILD_DIR}/util/ubi9/install-dependencies.sh
+RUN ${BUILD_DIR}/util/redhat/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
 # Add our custom classes added in the previous step to the java classpath
 ENV CLASSPATH="$JAVA_HOME/classes"
-
 
 # Default Port Environment Variables
 ENV PORT 8080
