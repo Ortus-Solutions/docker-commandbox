@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RedHat UBI images bumped to ubi-10
 - `-ubi9` tags no changed to `-rhel` for clarity on OS.  Old `-ubi9` tags will no longer will be created
 - Lucee 6 images bumped to `v6.2.3+35`
-- Lucee 7 images added
+- Lucee 7 images added (`v7.0.0+395`)
+- Adobe 2021 Support Removed
 
 
 ## [6.2.1/3.13.7]
