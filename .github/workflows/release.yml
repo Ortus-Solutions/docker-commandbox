@@ -152,10 +152,14 @@ jobs:
 
       - name: Test built image
         env:
+          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
+          DOCKER_BUILDKIT: 1
+          COMPOSE_DOCKER_CLI_BUILD: 1
+          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
         run: |
-          chmod +x ${{ github.workspace }}/build/run.sh
-          ${{ github.workspace }}/build/run.sh
+          docker compose -f docker-compose.test.yml up --build --exit-code-from sut
+          docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
 
       - name: DockerHub Login
         if: github.event_name != 'pull_request'
@@ -377,11 +381,12 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ${{ github.workspace }}
-          file: ${{ github.workspace }}/${{ matrix.dockerfile }}
+          file: ${{ github.workspace }}/${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           push: true
           pull: true
           build-args: |
             COMMANDBOX_VERSION=${{ env.commandbox_version }}
+            BASE_IMAGE_ARG=${{ env.ACTUAL_BASE_IMAGE }}
           platforms: ${{ env.arch_platforms }}
           builder: buildx-multi-arch
           tags: ${{ env.IMAGE_TAG }}
