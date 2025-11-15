@@ -6,6 +6,15 @@ apt-get update
 # Upgrade all packages
 apt-get -y upgrade
 
+# TODO: Remove this manual update when the next Ubuntu version is released and test if CVEs are resolved
+# Manually update specific packages with known CVE vulnerabilities to latest available versions
+apt-get install -y \
+    linux-libc-dev \
+    libkrb5support0 \
+    libkrb5-3 \
+    libk5crypto3 \
+    libgssapi-krb5-2
+
 apt-get autoremove -y
 
 apt-get install --assume-yes \
