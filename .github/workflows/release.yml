@@ -32,8 +32,16 @@ jobs:
             BUILD_IMAGE_TAG: jdk23
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK24.Dockerfile
             BUILD_IMAGE_TAG: jdk24
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK25.Dockerfile
+            BUILD_IMAGE_TAG: jdk25
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE21.Dockerfile
+            BUILD_IMAGE_TAG: jre21
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE24.Dockerfile
+            BUILD_IMAGE_TAG: jre24
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE25.Dockerfile
+            BUILD_IMAGE_TAG: jre25
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
             BUILD_IMAGE_TAG: jdk8
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
@@ -64,8 +72,14 @@ jobs:
             BUILD_IMAGE_TAG: jdk17-rhel
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK21.Dockerfile
             BUILD_IMAGE_TAG: jdk21-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK24.Dockerfile
+            BUILD_IMAGE_TAG: jdk24-rhel
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE17.Dockerfile
             BUILD_IMAGE_TAG: jre17-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE21.Dockerfile
+            BUILD_IMAGE_TAG: jre21-rhel
+          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE24.Dockerfile
+            BUILD_IMAGE_TAG: jre24-rhel
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
             BUILD_IMAGE_TAG: lucee5-rhel
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
