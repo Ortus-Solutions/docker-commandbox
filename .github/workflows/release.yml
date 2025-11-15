@@ -18,117 +18,106 @@ jobs:
     strategy:
       matrix:
         include:
+          # Debian builds
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-            BUILD_IMAGE_TAG: latest
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-            BUILD_IMAGE_TAG: jre11
+            BUILD_IMAGE_TAGS: "latest,jre11"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
-            BUILD_IMAGE_TAG: jdk11
+            BUILD_IMAGE_TAGS: "jdk11"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK17.Dockerfile
-            BUILD_IMAGE_TAG: jdk17
+            BUILD_IMAGE_TAGS: "jdk17"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
-            BUILD_IMAGE_TAG: jdk21
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK23.Dockerfile
-            BUILD_IMAGE_TAG: jdk23
+            BUILD_IMAGE_TAGS: "jdk21"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK24.Dockerfile
-            BUILD_IMAGE_TAG: jdk24
+            BUILD_IMAGE_TAGS: "jdk24"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK25.Dockerfile
-            BUILD_IMAGE_TAG: jdk25
+            BUILD_IMAGE_TAGS: "jdk25"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE17.Dockerfile
-            BUILD_IMAGE_TAG: jre17
+            BUILD_IMAGE_TAGS: "jre17"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE21.Dockerfile
-            BUILD_IMAGE_TAG: jre21
+            BUILD_IMAGE_TAGS: "jre21"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE24.Dockerfile
-            BUILD_IMAGE_TAG: jre24
+            BUILD_IMAGE_TAGS: "jre24"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JRE25.Dockerfile
-            BUILD_IMAGE_TAG: jre25
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.JDK8.Dockerfile
-            BUILD_IMAGE_TAG: jdk8
+            BUILD_IMAGE_TAGS: "jre25"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
-            BUILD_IMAGE_TAG: lucee5
+            BUILD_IMAGE_TAGS: "lucee5"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6.Dockerfile
-            BUILD_IMAGE_TAG: lucee6
+            BUILD_IMAGE_TAGS: "lucee6"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee7.Dockerfile
-            BUILD_IMAGE_TAG: lucee7
+            BUILD_IMAGE_TAGS: "lucee7"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAG: lucee-light
+            BUILD_IMAGE_TAGS: "lucee-light"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-light
+            BUILD_IMAGE_TAGS: "lucee5-light"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAG: adobe2023
+            BUILD_IMAGE_TAGS: "adobe2023"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAG: adobe2025
+            BUILD_IMAGE_TAGS: "adobe2025"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/BoxLang.Dockerfile
-            BUILD_IMAGE_TAG: boxlang
+            BUILD_IMAGE_TAGS: "boxlang"
 
-          # ubi9 Builds
+          # RHEL/UBI9 builds
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Base.Dockerfile
-            BUILD_IMAGE_TAG: ubi9
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Base.Dockerfile
-            BUILD_IMAGE_TAG: jre11-rhel
+            BUILD_IMAGE_TAGS: "ubi9,jre11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK11.Dockerfile
-            BUILD_IMAGE_TAG: jdk11-rhel
+            BUILD_IMAGE_TAGS: "jdk11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK17.Dockerfile
-            BUILD_IMAGE_TAG: jdk17-rhel
+            BUILD_IMAGE_TAGS: "jdk17-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK21.Dockerfile
-            BUILD_IMAGE_TAG: jdk21-rhel
+            BUILD_IMAGE_TAGS: "jdk21-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK24.Dockerfile
-            BUILD_IMAGE_TAG: jdk24-rhel
+            BUILD_IMAGE_TAGS: "jdk24-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE17.Dockerfile
-            BUILD_IMAGE_TAG: jre17-rhel
+            BUILD_IMAGE_TAGS: "jre17-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE21.Dockerfile
-            BUILD_IMAGE_TAG: jre21-rhel
+            BUILD_IMAGE_TAGS: "jre21-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE24.Dockerfile
-            BUILD_IMAGE_TAG: jre24-rhel
+            BUILD_IMAGE_TAGS: "jre24-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-rhel
+            BUILD_IMAGE_TAGS: "lucee5-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
-            BUILD_IMAGE_TAG: lucee6-rhel
+            BUILD_IMAGE_TAGS: "lucee6-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
-            BUILD_IMAGE_TAG: lucee7-rhel
+            BUILD_IMAGE_TAGS: "lucee7-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAG: lucee-light-rhel
+            BUILD_IMAGE_TAGS: "lucee-light-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-light-rhel
+            BUILD_IMAGE_TAGS: "lucee5-light-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAG: adobe2023-rhel
+            BUILD_IMAGE_TAGS: "adobe2023-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAG: adobe2025-rhel
+            BUILD_IMAGE_TAGS: "adobe2025-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/BoxLang.Dockerfile
-            BUILD_IMAGE_TAG: boxlang-rhel
+            BUILD_IMAGE_TAGS: "boxlang-rhel"
 
           # Alpine builds
           # Note: No JDK builders currently support alpine with ARM
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
-            BUILD_IMAGE_TAG: alpine
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.Dockerfile
-            BUILD_IMAGE_TAG: jre11-alpine
+            BUILD_IMAGE_TAGS: "alpine,jre11-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
-            BUILD_IMAGE_TAG: jdk11-alpine
+            BUILD_IMAGE_TAGS: "jdk11-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK17.Dockerfile
-            BUILD_IMAGE_TAG: jdk17-alpine
+            BUILD_IMAGE_TAGS: "jdk17-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK21.Dockerfile
-            BUILD_IMAGE_TAG: jdk21-alpine
+            BUILD_IMAGE_TAGS: "jdk21-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JRE17.Dockerfile
-            BUILD_IMAGE_TAG: jre17-alpine
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Base.JDK8.Dockerfile
-            BUILD_IMAGE_TAG: jdk8-alpine
+            BUILD_IMAGE_TAGS: "jre17-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-alpine
+            BUILD_IMAGE_TAGS: "lucee5-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee6.Dockerfile
-            BUILD_IMAGE_TAG: lucee6-alpine
+            BUILD_IMAGE_TAGS: "lucee6-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee7.Dockerfile
-            BUILD_IMAGE_TAG: lucee7-alpine
+            BUILD_IMAGE_TAGS: "lucee7-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAG: lucee-light-alpine
+            BUILD_IMAGE_TAGS: "lucee-light-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAG: lucee5-light-alpine
+            BUILD_IMAGE_TAGS: "lucee5-light-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAG: adobe2023-alpine
+            BUILD_IMAGE_TAGS: "adobe2023-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAG: adobe2025-alpine
+            BUILD_IMAGE_TAGS: "adobe2025-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/BoxLang.Dockerfile
-            BUILD_IMAGE_TAG: boxlang-alpine
+            BUILD_IMAGE_TAGS: "boxlang-alpine"
 
     steps:
       - name: Checkout
@@ -147,29 +136,50 @@ jobs:
         id: setup
         env:
           DOCKER_IMAGE: ortussolutions/commandbox
-          BUILD_IMAGE_TAG: ${{ matrix.BUILD_IMAGE_TAG }}
+          BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
           COMMANDBOX_VERSION: 6.2.1
           IMAGE_VERSION: 3.14.8
         run: |
-          # Tag Builds
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
+          # Split the comma-separated tags
+          IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
 
-            if [[ $BUILD_IMAGE_TAG == latest ]]; then
-              BUILD_IMAGE_TAG="${GITHUB_REF#refs/tags/v}"
+          # Initialize arrays for final tags
+          FINAL_TAGS=()
+
+          # Process each tag
+          for tag in "${TAG_ARRAY[@]}"; do
+            # Tag Builds
+            if [[ $GITHUB_REF == refs/tags/* ]]; then
+              if [[ $tag == "latest" ]]; then
+                FINAL_TAGS+=("${GITHUB_REF#refs/tags/v}")
+              else
+                FINAL_TAGS+=("${tag}-${GITHUB_REF#refs/tags/v}")
+              fi
+            elif [[ $GITHUB_REF == 'refs/heads/development' ]]; then
+              # Snapshot builds
+              FINAL_TAGS+=("${tag}-snapshot")
             else
-              BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-${GITHUB_REF#refs/tags/v}"
+              # Main branch builds
+              FINAL_TAGS+=("${tag}")
             fi
+          done
 
-          elif [[ $GITHUB_REF == 'refs/heads/development' ]]; then
+          # Join tags with comma for Docker build
+          printf -v TAGS_STRING '%s,' "${FINAL_TAGS[@]}"
+          TAGS_STRING="${TAGS_STRING%,}"  # Remove trailing comma
 
-            # Snapshot builds
-            BUILD_IMAGE_TAG="${BUILD_IMAGE_TAG}-snapshot"
+          # Prefix with Docker image name
+          FULL_TAGS=""
+          for tag in "${FINAL_TAGS[@]}"; do
+            if [[ -z "$FULL_TAGS" ]]; then
+              FULL_TAGS="${DOCKER_IMAGE}:${tag}"
+            else
+              FULL_TAGS="${FULL_TAGS},${DOCKER_IMAGE}:${tag}"
+            fi
+          done
 
-          fi
-
-          TAGS="${DOCKER_IMAGE}:${BUILD_IMAGE_TAG}"
-
-          if [[ ${BUILD_IMAGE_TAG} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAG} != @(jd21-alpine|boxlang-alpine-snapshot|boxlang-alpine|boxlang-alpine-snapshot) ]]; then
+          # Determine architecture platforms based on tag content
+          if [[ ${BUILD_IMAGE_TAGS} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"jdk21-alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"boxlang-alpine"* ]]; then
             ARCH_PLATFORMS=linux/amd64
           else
             ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
@@ -179,7 +189,11 @@ jobs:
           echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
           echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "IMAGE_TAG=${TAGS}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${FULL_TAGS}" >> $GITHUB_ENV
+
+          # Set the first tag for testing purposes
+          FIRST_TAG="${TAG_ARRAY[0]}"
+          echo "BUILD_IMAGE_TAG=${FIRST_TAG}" >> $GITHUB_ENV
 
       - name: Test
         env:
@@ -187,6 +201,7 @@ jobs:
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+          BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
         run: |
           docker compose -f docker-compose.test.yml up --build --exit-code-from sut
           docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
