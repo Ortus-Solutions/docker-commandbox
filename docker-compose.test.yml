@@ -13,6 +13,7 @@ services:
       dockerfile: "./${BUILD_IMAGE_DOCKERFILE}"
       args :
         - COMMANDBOX_VERSION
+        - BASE_IMAGE_ARG
     command: /root/build/test.sh
     #Mount our test directory ( and our build directory to make local testing easier )
     volumes:
