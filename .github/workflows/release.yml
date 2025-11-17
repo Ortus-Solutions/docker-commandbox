@@ -379,9 +379,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v4
+        if: github.event_name != 'pull_request'
+        uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILDKIT: 1
         with:
+          provenance: false
+          builder: ${{ steps.buildx.outputs.name }}
           context: ${{ github.workspace }}
           file: ${{ github.workspace }}/${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           push: true
@@ -390,5 +394,4 @@ jobs:
             COMMANDBOX_VERSION=${{ env.commandbox_version }}
             BASE_IMAGE_ARG=${{ env.ACTUAL_BASE_IMAGE }}
           platforms: ${{ env.arch_platforms }}
-          builder: buildx-multi-arch
           tags: ${{ env.IMAGE_TAG }}
