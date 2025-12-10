@@ -292,7 +292,7 @@ jobs:
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
           BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
           COMMANDBOX_VERSION: 6.2.1
-          IMAGE_VERSION: 3.14.8
+          IMAGE_VERSION: 3.14.0
         run: |
           # Split the comma-separated tags
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
