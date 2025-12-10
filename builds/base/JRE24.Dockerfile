@@ -1,5 +1,4 @@
-FROM eclipse-temurin:8-jdk-noble
-
+FROM eclipse-temurin:24-jre-noble
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -41,6 +40,7 @@ RUN chmod +x $BUILD_DIR/*.sh
 # Ensure all runwar users have permission on the build scripts
 RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
+
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN rm -rf $BUILD_DIR/util/ubi9
@@ -49,11 +49,13 @@ RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
+# Add our custom classes added in the previous step to the java classpath
+ENV CLASSPATH="$JAVA_HOME/classes"
+
 
 # Default Port Environment Variables
 ENV PORT 8080
 ENV SSL_PORT 8443
-
 
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"

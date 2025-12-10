@@ -1,5 +1,4 @@
-FROM eclipse-temurin:17-jdk-ubi9-minimal
-
+FROM eclipse-temurin:25-jre-noble
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
@@ -10,8 +9,6 @@ ENV LANG C.UTF-8
 
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
-
-RUN microdnf install -y shadow-utils util-linux
 
 # Add a working group which any dynamic users can be assigned
 ENV WORKGROUP runwar
@@ -46,9 +43,8 @@ RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
-RUN rm -rf $BUILD_DIR/util/debian
-
-RUN ${BUILD_DIR}/util/ubi9/install-dependencies.sh
+RUN rm -rf $BUILD_DIR/util/ubi9
+RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
@@ -56,10 +52,10 @@ RUN $BUILD_DIR/util/install-commandbox.sh
 # Add our custom classes added in the previous step to the java classpath
 ENV CLASSPATH="$JAVA_HOME/classes"
 
+
 # Default Port Environment Variables
 ENV PORT 8080
 ENV SSL_PORT 8443
-
 
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"

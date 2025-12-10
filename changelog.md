@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [Unreleased]
+
+### Changed
+
+- RedHat UBI images bumped to ubi-10
+- `-ubi9` tags no changed to `-rhel` for clarity on OS.  Old `-ubi9` tags will no longer will be created
+- BoxLang images bumped to `v1.8.0`
+- Lucee 6 images bumped to `v6.2.3+35`
+- Lucee 7 images added (`v7.0.0+395`)
+- Adobe Coldfusion 2025 bumped to `2025.0.05+331552`
+- Adobe Coldfusion 2023 bumped to `2023.0.17+330864`
+- Adobe Coldfusion 2021 bumped to `2021.0.23+330486` - now only building Ubuntu version
+- Adobe 2021 Support to be removed in next version due to 11/25/2025 EOL/EOS notice
+
 
 ## [6.2.1/3.13.7]
 
@@ -16,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe Coldfusion 2023 images bumped to `2023.0.16+330828`
 - Adobe Coldfusion 2021 images bumped to `2021.0.20+330407`
 - Boxlang images bump to `v1.7.0`
+- JDK/JRE 11 images bumped to version `11.0.29_7`
+- JDK/JRE 17 images bumped to version `17.0.17_10`
+- JDK/JRE 21 images bumped to version `21.0.9_10`
+- JDK/JRE 24 images bumped to version `24.0.2_12`
 
 ## [6.2.1/3.13.6] - 2025-08-06
 
@@ -354,7 +372,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added [RHEL ubi9](https://catalog.redhat.com/software/containers/ubi9/ubi/615bcf606feffc5384e8452e) Builds with tags: `ubi9`, `jre-11-ubi9`, `jdk-11-ubi9`, `lucee5-ubi9`, `adobe2018-ubi9`, and `adobe2021-ubi9`
+- Added [RHEL ubi9](https://catalog.redhat.com/software/containers/redhat/ubi/615bcf606feffc5384e8452e) Builds with tags: `ubi9`, `jre-11-rhel`, `jdk-11-rhel`, `lucee5-rhel`, `adobe2018-rhel`, and `adobe2021-rhel`
 
 ### Changed
 

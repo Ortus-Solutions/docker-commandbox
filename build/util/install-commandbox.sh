@@ -18,6 +18,9 @@ echo "$(box version) successfully installed"
 
 box uninstall --system commandbox-update-check
 
+# Ensure we have updated versions of a couple core modules  TODO: Remove this after the next commandbox release
+box install --force commandbox-cfconfig,commandbox-boxlang
+
 # Swap out binary with thin client now that everything is expanded
 curl https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin -o ${BIN_DIR}/box
 

@@ -8,13 +8,14 @@ services:
   sut:
     environment:
       IMAGE_TESTING_IN_PROGRESS: "true"
-    build: 
+    build:
       context: .
       dockerfile: "./${BUILD_IMAGE_DOCKERFILE}"
       args :
         - COMMANDBOX_VERSION
+        - BASE_IMAGE_ARG
     command: /root/build/test.sh
     #Mount our test directory ( and our build directory to make local testing easier )
-    volumes: 
+    volumes:
       - ./test:/app
       - ./build:/root/build

@@ -1,9 +1,7 @@
-FROM eclipse-temurin:8-jdk-alpine
+FROM eclipse-temurin:24-jdk-ubi10-minimal
 
 ARG COMMANDBOX_VERSION
-ARG VERSION
 
-LABEL version ${VERSION}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
@@ -13,18 +11,22 @@ ENV LANG C.UTF-8
 # Since alpine runs as a single user, we need to create a "root" direcotry
 ENV HOME /root
 
-# Alpine workgroup is the same
-ENV WORKGROUP root
+RUN microdnf install -y shadow-utils util-linux
 
-# Flag as an alpine build
-RUN touch /etc/alpine-release
+# Add a working group which any dynamic users can be assigned
+ENV WORKGROUP runwar
+RUN groupadd $WORKGROUP && usermod -a -G $WORKGROUP root
 
 ### Directory Mappings ###
 # BIN_DIR = Where the box binary goes
-ENV BIN_DIR /usr/bin
+ENV BIN_DIR /usr/local/bin
 # LIB_DIR = Where the build files go
-ENV LIB_DIR /usr/lib
+ENV LIB_DIR /usr/local/lib
 WORKDIR $BIN_DIR
+
+# BUILD_DIR = WHERE runtime scripts go
+ENV BUILD_DIR $LIB_DIR/build
+WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
 ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
@@ -33,29 +35,31 @@ ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
 ENV APP_DIR /app
 WORKDIR $APP_DIR
 
-# BUILD_DIR = WHERE runtime scripts go
-ENV BUILD_DIR $LIB_DIR/build
-WORKDIR $BUILD_DIR
-
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
+RUN chmod +x $BUILD_DIR/*.sh
 
-# Ensure all workgroup users have permission on the build scripts
-RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
-RUN chmod -R +x $BUILD_DIR
+# Ensure all runwar users have permission on the build scripts
+RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
-# Basic Dependencies including binaries for PDF rendering
+
+# Basic Dependencies
+RUN rm -rf $BUILD_DIR/util/alpine
 RUN rm -rf $BUILD_DIR/util/debian
-RUN rm -rf $BUILD_DIR/util/ubi9
-RUN $BUILD_DIR/util/alpine/install-dependencies.sh
+
+RUN ${BUILD_DIR}/util/redhat/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
 
+# Add our custom classes added in the previous step to the java classpath
+ENV CLASSPATH="$JAVA_HOME/classes"
+
 # Default Port Environment Variables
 ENV PORT 8080
 ENV SSL_PORT 8443
+
 
 # Healthcheck environment variables
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
@@ -64,7 +68,5 @@ ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
 HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
 
 EXPOSE ${PORT} ${SSL_PORT}
-
-WORKDIR $APP_DIR
 
 CMD $BUILD_DIR/run.sh
