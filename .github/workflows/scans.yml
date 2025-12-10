@@ -53,7 +53,7 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAGS }}
 
       - name: Scan generated packages
-        uses: anchore/scan-action@v6
+        uses: anchore/scan-action@v7
         id: securityscan
         with:
           image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAGS }}
