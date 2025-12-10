@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Base.Dockerfile
-            BUILD_IMAGE_TAG: CommandBox
+          - BUILD_IMAGE_DOCKERFILE: builds/base/Base.Dockerfile
+            BUILD_IMAGE_TAGS: CommandBox
           # - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
           #   BUILD_IMAGE_TAG: lucee5.3.10.97
           # - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2018.Dockerfile
@@ -50,13 +50,13 @@ jobs:
           build-args: COMMANDBOX_VERSION=${{ env.COMMANDBOX_VERSION }}
           push: false
           load: true
-          tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
+          tags: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAGS }}
 
       - name: Scan generated packages
         uses: anchore/scan-action@v6
         id: securityscan
         with:
-          image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAG }}
+          image: ${{ env.DOCKER_IMAGE }}:${{ matrix.BUILD_IMAGE_TAGS }}
           severity-cutoff: "high"
           fail-build: false
           by-cve: "true"
