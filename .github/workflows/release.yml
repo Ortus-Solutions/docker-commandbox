@@ -207,6 +207,9 @@ jobs:
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-light"
             BASE_IMAGE: "ortussolutions/commandbox:latest"
+          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2021.Dockerfile
+            BUILD_IMAGE_TAGS: "adobe2021"
+            BASE_IMAGE: "ortussolutions/commandbox:jdk11"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023"
             BASE_IMAGE: "ortussolutions/commandbox:jdk17"

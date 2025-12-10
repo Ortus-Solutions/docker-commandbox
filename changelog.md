@@ -15,7 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BoxLang images bumped to `v1.8.0`
 - Lucee 6 images bumped to `v6.2.3+35`
 - Lucee 7 images added (`v7.0.0+395`)
-- Adobe 2021 Support Removed
+- Adobe Coldfusion 2025 bumped to `2025.0.05+331552`
+- Adobe Coldfusion 2023 bumped to `2023.0.17+330864`
+- Adobe Coldfusion 2021 bumped to `2021.0.23+330486` - now only building Ubuntu version
+- Adobe 2021 Support to be removed in next version due to 11/25/2025 EOL/EOS notice
 
 
 ## [6.2.1/3.13.7]
