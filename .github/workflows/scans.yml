@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Base.Dockerfile
+          - BUILD_IMAGE_DOCKERFILE: builds/base/Dockerfile
             BUILD_IMAGE_TAGS: CommandBox
           # - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
           #   BUILD_IMAGE_TAG: lucee5.3.10.97
