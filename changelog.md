@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [Unreleased]
+## [6.2.1/3.14.1] - 2025-12-17
+
+### Changed
+
+- Updated version of `commandbox-boxlang` module
+
+## [6.2.1/3.14.0] - 2025-12-10
 
 ### Changed
 
@@ -21,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 Support to be removed in next version due to 11/25/2025 EOL/EOS notice
 
 
-## [6.2.1/3.13.7]
+## [6.2.1/3.13.7] - 2025-11-15
 
 ### Changed
 
