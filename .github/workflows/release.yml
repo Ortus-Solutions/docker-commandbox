@@ -96,7 +96,7 @@ jobs:
         env:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
-          COMMANDBOX_VERSION: 6.2.1
+          COMMANDBOX_VERSION: 6.3.1
           IMAGE_VERSION: 3.14.1
         run: |
           # Split the comma-separated tags
@@ -291,7 +291,7 @@ jobs:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
           BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
-          COMMANDBOX_VERSION: 6.2.1
+          COMMANDBOX_VERSION: 6.3.1
           IMAGE_VERSION: 3.14.1
         run: |
           # Split the comma-separated tags
