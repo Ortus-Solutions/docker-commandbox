@@ -1,7 +1,7 @@
 FROM ortussolutions/commandbox:lucee5-snapshot as workbench
 
 # Generate the startup script only
-ENV FINALIZE_STARTUP true
+ENV FINALIZE_STARTUP=true
 RUN $BUILD_DIR/run.sh
 
 # Debian Slim is the smallest OpenJDK image on that kernel. For most apps, this should work to run your applications
