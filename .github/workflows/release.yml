@@ -171,7 +171,7 @@ jobs:
 
       - name: Build and Push Base Images
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         env:
           DOCKER_BUILDKIT: 1
         with:
@@ -383,7 +383,7 @@ jobs:
 
       - name: Build and push
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         env:
           DOCKER_BUILDKIT: 1
         with:
