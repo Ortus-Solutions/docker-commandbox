@@ -8,13 +8,13 @@ LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 # Default to UTF-8 file.encoding
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Since alpine runs as a single user, we need to create a "root" direcotry
-ENV HOME /root
+ENV HOME=/root
 
 # Alpine workgroup is root group
-ENV WORKGROUP root
+ENV WORKGROUP=root
 
 # Flag as an alpine release
 RUN touch /etc/alpine-release
@@ -22,17 +22,17 @@ RUN touch /etc/alpine-release
 ### Directory Mappings ###
 
 # BIN_DIR = Where the box binary goes
-ENV BIN_DIR /usr/bin
+ENV BIN_DIR=/usr/bin
 # LIB_DIR = Where the build files go
-ENV LIB_DIR /usr/lib
+ENV LIB_DIR=/usr/lib
 WORKDIR $BIN_DIR
 
 # APP_DIR = the directory where the application runs
-ENV APP_DIR /app
+ENV APP_DIR=/app
 WORKDIR $APP_DIR
 
 # BUILD_DIR = WHERE runtime scripts go
-ENV BUILD_DIR $LIB_DIR/build
+ENV BUILD_DIR=$LIB_DIR/build
 WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
@@ -58,12 +58,12 @@ RUN $BUILD_DIR/util/install-commandbox.sh
 ENV CLASSPATH="$JAVA_HOME/classes"
 
 # Default Port Environment Variables
-ENV PORT 8080
-ENV SSL_PORT 8443
+ENV PORT=8080
+ENV SSL_PORT=8443
 
 
 # Healthcheck environment variables
-ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
+ENV HEALTHCHECK_URI="http://127.0.0.1:${PORT}/"
 
 # Our healthcheck interval doesn't allow dynamic intervals - Default is 20s intervals with 15 retries
 HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1

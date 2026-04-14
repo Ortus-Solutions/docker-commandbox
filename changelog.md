@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [6.3.1/3.15.1]
+
+### Added
+- Added additional introspection for multi-site configuration in `server.json` file
+- Added `SKIP_PORT_ASSIGNMENTS` environment variable that, when `true`, will rely on the port settings defined in the `server.json` file.
+
 ## [6.3.1/3.15.0]
 
 ### Changed
