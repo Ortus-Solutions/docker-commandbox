@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [6.3.1/3.16.0]
+## [6.3.2/3.17.0]
+
+### Changed
+- Adobe Coldfusion 2025 to `2025.0.07+331586`
+- Adobe Coldfusion 2023 to `2023.0.19+330899`
+- Boxlang to 1.12.0
+
+## [6.3.2/3.16.0]
 
 ### Changed
 - CommandBox version changed to `6.3.2`
