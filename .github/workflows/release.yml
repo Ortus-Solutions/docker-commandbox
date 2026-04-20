@@ -42,7 +42,7 @@ jobs:
 
           # RHEL/UBI9 foundation images with promoted tags
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.Dockerfile
-            BUILD_IMAGE_TAGS: "ubi9,jre11-rhel"
+            BUILD_IMAGE_TAGS: "ubi10,jre11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK11.Dockerfile
             BUILD_IMAGE_TAGS: "jdk11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK17.Dockerfile

@@ -42,7 +42,7 @@ All images are published to [Docker Hub](https://hub.docker.com/r/ortussolutions
 - **Multi-Engine Support**: Run BoxLang Applications or CFML engines, including Lucee and Adobe ColdFusion, in a single container.
 - **Customizable**: Easily configure your server environment using `server.json` or environment variables.
 - **Pre-Built Engines**: Includes pre-built images with warmed-up engines to reduce startup times.
-- **Alpine and UBI9 Variants**: Lightweight Alpine Linux and RHEL Universal Base Image (UBI10) variants for optimized performance and security.
+- **Alpine and UBI10 Variants**: Lightweight Alpine Linux and RHEL Universal Base Image (UBI10) variants for optimized performance and security.
 - **Health Checks**: Built-in health checks to ensure your server is running smoothly.
 - **Docker Secrets Support**: Use Docker secrets for secure configuration management.
 - **Environment Variables**: Extensive support for environment variables to customize your server configuration at runtime.
@@ -98,13 +98,13 @@ _Note: For references to the specific versions of CommandBox used within image v
 - `:alpine-jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK17.Dockerfile)) - Alpine with JDK 17
 - `:alpine-jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK21.Dockerfile)) - Alpine with JDK 21
 
-#### RHEL Universal Base Image (UBI9) Variants
+#### RHEL Universal Base Image (UBI10) Variants
 
-- `:ubi9` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.Dockerfile)) - RHEL UBI9 (JDK 11)
-- `:ubi9-jdk11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK11.Dockerfile)) - UBI9 with JDK 11
-- `:ubi9-jre17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JRE17.Dockerfile)) - UBI9 with JRE 17
-- `:ubi9-jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK17.Dockerfile)) - UBI9 with JDK 17
-- `:ubi9-jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK21.Dockerfile)) - UBI9 with JDK 21
+- `:UBI10` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.Dockerfile)) - RHEL UBI10 (JDK 11)
+- `:UBI10-jdk11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK11.Dockerfile)) - UBI10 with JDK 11
+- `:UBI10-jre17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JRE17.Dockerfile)) - UBI10 with JRE 17
+- `:UBI10-jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK17.Dockerfile)) - UBI10 with JDK 17
+- `:UBI10-jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK21.Dockerfile)) - UBI10 with JDK 21
 
 ### Pre-Built Engine Images (Warmed Up)
 
@@ -114,7 +114,7 @@ These images include pre-downloaded and warmed-up engines to significantly reduc
 
 - `:boxlang` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/BoxLang.Dockerfile)) - BoxLang on Debian
 - `:boxlang-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/BoxLang.Dockerfile)) - BoxLang on Alpine
-- `:boxlang-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/BoxLang.Dockerfile)) - BoxLang on UBI9
+- `:boxlang-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/BoxLang.Dockerfile)) - BoxLang on UBI10
 
 #### Lucee CFML Engine
 
@@ -133,12 +133,12 @@ These images include pre-downloaded and warmed-up engines to significantly reduc
 - `:lucee-light-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/LuceeLight.Dockerfile)) - Lucee Light on Alpine
 - `:lucee5-light-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Lucee5Light.Dockerfile)) - Lucee 5.x Light on Alpine
 
-**UBI9-based Lucee Images:**
+**UBI10-based Lucee Images:**
 
-- `:lucee5-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5.Dockerfile)) - Lucee 5.x on UBI9
-- `:lucee6-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee6.Dockerfile)) - Lucee 6.x on UBI9
-- `:lucee-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/LuceeLight.Dockerfile)) - Lucee Light on UBI9
-- `:lucee5-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5Light.Dockerfile)) - Lucee 5.x Light on UBI9
+- `:lucee5-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5.Dockerfile)) - Lucee 5.x on UBI10
+- `:lucee6-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee6.Dockerfile)) - Lucee 6.x on UBI10
+- `:lucee-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/LuceeLight.Dockerfile)) - Lucee Light on UBI10
+- `:lucee5-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5Light.Dockerfile)) - Lucee 5.x Light on UBI10
 
 #### Adobe ColdFusion Engine
 
@@ -158,12 +158,12 @@ These images include pre-downloaded and warmed-up engines to significantly reduc
 - `:adobe2023-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023 on Alpine
 - `:adobe2025-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025 on Alpine
 
-**UBI9-based Adobe Images:**
+**UBI10-based Adobe Images:**
 
-- `:adobe2018-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2018.Dockerfile)) - Adobe ColdFusion 2018 on UBI9
-- `:adobe2021-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2021.Dockerfile)) - Adobe ColdFusion 2021 on UBI9
-- `:adobe2023-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023 on UBI9
-- `:adobe2025-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025 on UBI9
+- `:adobe2018-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2018.Dockerfile)) - Adobe ColdFusion 2018 on UBI10
+- `:adobe2021-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2021.Dockerfile)) - Adobe ColdFusion 2021 on UBI10
+- `:adobe2023-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023 on UBI10
+- `:adobe2025-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025 on UBI10
 
 ### Choosing the Right Tag
 
@@ -192,7 +192,7 @@ You may also [specify a custom WAR for deployment](https://commandbox.ortusbooks
 
 ## Supported Architectures and Operating Systems
 
-All Debian-based images currently support `linux/amd64`, `linux/arm64` and `linux/arm/v7` architecture. Alpine builds are currently only supported on `linux/amd64` and `linux/arm64` architectures.  The UBI9 builds are supported on `linux/amd64` and `linux/arm64` architectures.
+All Debian-based images currently support `linux/amd64`, `linux/arm64` and `linux/arm/v7` architecture. Alpine builds are currently only supported on `linux/amd64` and `linux/arm64` architectures.  The UBI10 builds are supported on `linux/amd64` and `linux/arm64` architectures.
 
 ## Usage
 

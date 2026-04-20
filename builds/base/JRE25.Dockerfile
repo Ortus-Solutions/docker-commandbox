@@ -43,7 +43,7 @@ RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
-RUN rm -rf $BUILD_DIR/util/ubi9
+RUN rm -rf $BUILD_DIR/util/redhat
 RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 
 # Commandbox Installation
