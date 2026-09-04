@@ -15,8 +15,6 @@ echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
 
 echo "$(box version) successfully installed"
 
-box uninstall --system commandbox-update-check
-
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
