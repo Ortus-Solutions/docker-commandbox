@@ -8,21 +8,14 @@ if [ -z "$COMMANDBOX_VERSION" ]; then
   exit 1
 fi
 
-# Installs the latest CommandBox Binary
-mkdir -p /tmp
-curl -k  -o /tmp/box.zip -location "https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/commandbox-bin-${COMMANDBOX_VERSION}.zip"
-unzip /tmp/box.zip -d ${BIN_DIR} && chmod 755 ${BIN_DIR}/box && rm -f /tmp/box.zip
+# Installs the latest CommandBox Binary. We can use the thin client as it will download all of its dependencies on first run.
+curl https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/commandbox-bin-${COMMANDBOX_VERSION}--thin -o ${BIN_DIR}/box
+chmod 755 ${BIN_DIR}/box
 echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
 
 echo "$(box version) successfully installed"
 
 box uninstall --system commandbox-update-check
-
-# Ensure we have updated versions of a couple core modules  TODO: Remove this after the next commandbox release
-box install --force commandbox-cfconfig,commandbox-boxlang
-
-# Swap out binary with thin client now that everything is expanded
-curl https://s3.amazonaws.com/downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin -o ${BIN_DIR}/box
 
 # Set container in to single server mode
 box config set server.singleServerMode=true
