@@ -9,17 +9,22 @@ if [ -z "$COMMANDBOX_VERSION" ]; then
 fi
 
 # Installs the latest CommandBox Binary. We can use the thin client as it will download all of its dependencies on first run.
-curl https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/commandbox-bin-${COMMANDBOX_VERSION}--thin -o ${BIN_DIR}/box
+curl https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin -o ${BIN_DIR}/box
 chmod 755 ${BIN_DIR}/box
 echo "commandbox_home=${COMMANDBOX_HOME}" > ${BIN_DIR}/commandbox.properties
 
 echo "$(box version) successfully installed"
 
+box uninstall --system commandbox-update-check
+
+# Ensure we have updated versions of a couple core modules  TODO: Remove this after the next commandbox release
+box install --force commandbox-cfconfig,commandbox-boxlang
+
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
 # Set our log pattern to be ISO with timezone info, as containers might be running in different zones
-box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
+# box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
 
 # Install GELF jar for Java.util JSON logging https://logging.paluch.biz/examples/jul-json.html
 mkdir -p $JAVA_HOME/classes
