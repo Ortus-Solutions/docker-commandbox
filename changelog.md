@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 ## [Unreleased]
 
+## [6.3.4/3.23.0]
+
+### Changed
 - Adobe ColdFusion 2023 to `2023.0.24+330957`
 - Adobe ColdFusion 2025 to `2025.0.13+331960`
 
