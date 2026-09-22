@@ -30,7 +30,7 @@ elif [[ -f "${DEFINED_SERVERCONFIGFILE}" ]] && [[ "$(jq 'any(.sites[]?; .binding
 fi
 
 if [[ "${SKIP_PORTS}" == "true" ]]; then
-	logMessage "INFO" "$( box server start \
+	logMessage "INFO" "$( box -clidebug server start \
 		trayEnable=false \
 		host=0.0.0.0 \
 		openbrowser=false \
@@ -41,7 +41,7 @@ if [[ "${SKIP_PORTS}" == "true" ]]; then
 		startScriptFile=${APP_DIR}/server-start.sh \
 		verbose=true )"
 else
-	logMessage "INFO" "$( box server start \
+	logMessage "INFO" "$( box -clidebug server start \
 		trayEnable=false \
 		host=0.0.0.0 \
 		openbrowser=false \
