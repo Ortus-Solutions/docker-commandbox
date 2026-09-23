@@ -41,6 +41,8 @@ if [[ "${SKIP_PORTS}" == "true" ]]; then
 		startScriptFile=${APP_DIR}/server-start.sh \
 		verbose=true )"
 else
+	logMessage "INFO" "Seeding final startup file with environment variables:"
+	printenv
 	logMessage "INFO" "$( box -clidebug server start \
 		trayEnable=false \
 		host=0.0.0.0 \
