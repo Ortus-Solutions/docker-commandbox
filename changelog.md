@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 ## [Unreleased]
 
+### Changed
+- BoxLang to `1.17.6`
+
 ## [6.3.4/3.23.0]
 
 ### Changed
