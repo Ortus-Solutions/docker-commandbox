@@ -16,20 +16,10 @@ echo "$(box version) successfully installed"
 
 box uninstall --system commandbox-update-check
 
-# Ensure we have updated versions of a couple core modules  TODO: Remove this after the next commandbox release
-box install --force commandbox-cfconfig,commandbox-boxlang
-
 # Set container in to single server mode
 box config set server.singleServerMode=true
 
 # Set our log pattern to be ISO with timezone info, as containers might be running in different zones
-# box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
-
-# Install GELF jar for Java.util JSON logging https://logging.paluch.biz/examples/jul-json.html
-mkdir -p "$LIB_DIR/java/classes"
-curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar -o "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar"
-curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar.md5 -o "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar.md5"
-md5sum "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar" > "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar.md5"
-rm -f "$JAVA_HOME/conf/logging.properties"
+box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
 
 $BUILD_DIR/util/optimize.sh
