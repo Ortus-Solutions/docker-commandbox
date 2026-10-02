@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - BoxLang to `1.17.6`
+- Breaking: Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.
+- Breaking: Image-managed binaries, libraries, build scripts, CommandBox, BoxLang, and server engines now use `/opt`. Default server home is `/opt/lib/serverHome`; build scripts are in `/opt/build`.
+- Custom-user startup now adjusts ownership and permissions without moving CommandBox or BoxLang homes. Server homes configured in `server.json` receive ownership adjustments before switching users.
+- Finalized startup now initializes custom-user permissions while preserving its baked configuration and records the server home in `startup-final.env`.
+- Downloaded logging classes moved out of the inherited Java installation; OS-managed packages and Java retain their upstream locations.
+- Updated Compose mounts, test commands, Filebeat defaults, and progressive-build examples for the new layout. Existing persisted data is not automatically migrated, and old default paths have no compatibility aliases.
 
 ## [6.3.4/3.23.0]
 

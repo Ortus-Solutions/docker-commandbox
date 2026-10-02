@@ -198,7 +198,7 @@ All Debian-based images currently support `linux/amd64`, `linux/arm64` and `linu
 
 This section assumes you are using the [Official Docker Image](https://hub.docker.com/r/ortussolutions/commandbox/)
 
-By default, the directory `/app` in the container is mapped as the Commandbox home.  To deploy a new application, first pull the image:
+By default, the application webroot is `/srv/app` in the container. CommandBox's package home is `/opt/commandbox`. To deploy a new application, first pull the image:
 
 ```
 docker pull ortussolutions/commandbox
@@ -207,14 +207,37 @@ docker pull ortussolutions/commandbox
 Then, from the root of your project, start with
 
 ```
-docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/app" ortussolutions/commandbox
+docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/srv/app" ortussolutions/commandbox
 ```
 
 By default the process ports of the container are `8080` (insecure) and `8443` (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
 
 ```
-docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/app" ortussolutions/commandbox
+docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/srv/app" ortussolutions/commandbox
 ```
+
+## Filesystem Migration
+
+This major release uses the same default locations on Debian, Alpine, and RHEL:
+
+| Setting | Default location |
+| --- | --- |
+| `APP_DIR` | `/srv/app` |
+| `BIN_DIR` | `/opt/bin` |
+| `LIB_DIR` | `/opt/lib` |
+| `BUILD_DIR` | `/opt/build` |
+| `COMMANDBOX_HOME` | `/opt/commandbox` |
+| `BOXLANG_HOME` and `BOXLANG_INSTALL_HOME` | `/opt/boxlang` |
+| Server home | `/opt/lib/serverHome` |
+| Downloaded Java logging classes | `/opt/lib/java/classes` |
+
+OS-managed packages and the inherited Java installation retain their upstream locations. CommandBox and engine-managed caches, logs, and configuration retain their internal structure within the new package homes.
+
+Before upgrading, update application volume destinations from `/app` to `/srv/app`, build-script mounts to `/opt/build`, and engine-state mounts to `/opt/lib/serverHome`. Update hardcoded `COPY`, `WORKDIR`, startup-script, and package-home paths in derived images. Prefer the existing path variables where possible. Rebuild derived images against the new major-version bases.
+
+There are no compatibility aliases for the old application, build, or package-home defaults, and startup does not move existing data. Back up persisted state and explicitly copy or remount it at the new locations before upgrading. Explicit `APP_DIR` and `BOX_SERVER_APP_SERVERHOMEDIRECTORY` overrides remain supported; mount the application and server state at those chosen paths. Changing an installation-path variable at runtime does not relocate packages already baked into an image.
+
+With `USER` and `USER_ID`, startup creates or reuses the account and adjusts ownership of the application, image scripts, package homes, and effective server home before switching users. CommandBox and BoxLang stay at their configured locations; they are not moved into `/home/<user>`. This also applies to finalized startup. Bind-mount ownership changes can affect host files, so choose the matching UID and use writable volumes. The entrypoint must start with permission to create users and adjust ownership; this is not equivalent to Docker's `--user` option. Custom `BIN_DIR` values must identify an image-owned, writable directory, not a system binary directory.
 
 ## Environment Variables
 
@@ -242,15 +265,15 @@ As of Commandbox `v5.3.0`, all CommandBox servers have HTTP/2 enabled by default
 
 The following environment variables may be provided to modify your runtime server configuration. Please note that environment variables are case sensitive and, while some lower/upper case aliases are accounted for, you should use consistent casing in order for these variables to take effect.
 
-- `BOX_SERVER_APP_SERVERHOMEDIRECTORY` - When provided, a custom path to your server home directory will be assigned. By default, this path is set as `${LIB_DIR}/serverHome`, which resolves to `/usr/local/lib/serverHome` in most builds. The Alpine-based builds will default to `/usr/lib/serverHome`. (_Note: You may also provide this variable in your app's customized `server.json` file_)
-- `APP_DIR` - Application directory (web root). By default, this is `/app`. If you are deploying an application with mappings outside of the root, you would want to provide this environment variable to point to the webroot (e.g. `/app/wwwroot`)
+- `BOX_SERVER_APP_SERVERHOMEDIRECTORY` - When provided, a custom path to your server home directory will be assigned. The default is `${LIB_DIR}/serverHome`, resolving to `/opt/lib/serverHome` on every distribution. An explicit environment value takes precedence over `app.serverHomeDirectory` in `server.json`; relative paths are resolved from `APP_DIR`.
+- `APP_DIR` - Application directory (web root). By default, this is `/srv/app`. If you are deploying an application with mappings outside of the root, provide this variable to point to the webroot (e.g. `/srv/app/wwwroot`).
 - `USER` - When provided the server process will run under the provided user account name
 - `USER_ID` - Numeric. When provided in conjunction with a `USER` environment variable, the UID of the user will be assigned this number. This can be useful for ensuring permissions of mounted volumes and files
 - `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.
 - `BOX_SERVER_CFCONFIGFILE` - A `cfconfig`-compatible JSON file may be provided with this environment variable. The file will be loaded and applied to your server. If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically.
 - `BOX_SERVER_APP_CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container (e.g. `lucee@5`). Defaults to the CommandBox default (currently `lucee@4.5`)
 - `BOX_SERVER_RUNWAR_CONSOLE_APPENDERLAYOUT` - When setting this to `JSONTemplateLayout`, the log output of the container will be in [`ndjson`](http://ndjson.org/). For more information on this setting, please see [the CommandBox documentation on customizing log layouts](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/console-log-layout#customize-layout)
-- `FINALIZE_STARTUP` - When provided a final startup script will be generated, which will be considered authoritative the next time the container/image starts. The caveat to this, however, is that the finalized startup script will bypass the evaluation checks for all of the other environment variables in this list as those values will be explicitly exported in the startup file.
+- `FINALIZE_STARTUP` - When provided, generates `/opt/bin/startup-final.sh`, which is authoritative on subsequent startup. `/opt/bin/startup-final.env` records its server home for ownership initialization. Server configuration is not reevaluated, but custom-user creation and permission adjustments still run. Preserve both files when copying finalized artifacts to another full CommandBox image.
 - `BOX_SERVER_PROFILE` - When set, this will be applied as the runtime [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles). By default, CommandBox will set this value to the `production` mode, since the container server binds to all interfaces on `0.0.0.0`. If you wish a lower level of security, you will need to provide this variable or set it in your `server.json` file.
 - `BOX_SERVER_WEB_REWRITES_ENABLE` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Setting this environment variable will overwrite any settings within the app's `server.json` file.
 - `CFPM_INSTALL` and `CFPM_UNINSTALL` - Supported for Adobe Coldfusion 2021+ engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed (or uninstalled, respectively), prior to the server start. A warmed-up server is required to use these variables.
@@ -318,7 +341,7 @@ For example the variable `REINIT_PASSWORD_FILE=/run/secrets/reinit_password` wou
 
 ```bash
 # Pull and run BoxLang image
-docker run -p 8080:8080 -v "$(pwd):/app" ortussolutions/commandbox:boxlang
+docker run -p 8080:8080 -v "$(pwd):/srv/app" ortussolutions/commandbox:boxlang
 ```
 
 ### Lucee Application with Custom Admin Password
@@ -326,7 +349,7 @@ docker run -p 8080:8080 -v "$(pwd):/app" ortussolutions/commandbox:boxlang
 ```bash
 docker run -p 8080:8080 \
   -e "cfconfig_adminPassword=mySecretPassword" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
 
@@ -335,7 +358,7 @@ docker run -p 8080:8080 \
 ```bash
 docker run -p 8080:8080 -p 8443:8443 \
   -e "BOX_SERVER_WEB_REWRITES_ENABLE=true" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:adobe2025
 ```
 
@@ -344,7 +367,7 @@ docker run -p 8080:8080 -p 8443:8443 \
 ```bash
 docker run -p 8080:8080 \
   -e "BOX_SERVER_PROFILE=development" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:snapshot
 ```
 
@@ -360,7 +383,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - .:/srv/app
     environment:
       - cfconfig_adminPassword=admin123
       - BOX_SERVER_WEB_REWRITES_ENABLE=true
@@ -376,7 +399,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - .:/srv/app
     environment:
       - cfconfig_adminPassword=admin123
       - BOX_SERVER_PROFILE=production
@@ -464,7 +487,7 @@ cfconfig_adminPassword=mySecretPassword
 cfconfig_requestTimeoutEnabled=true
 
 # Application Settings
-APP_DIR=/app
+APP_DIR=/srv/app
 BOX_SERVER_WEB_REWRITES_ENABLE=true
 ```
 
@@ -539,7 +562,7 @@ docker exec <container_id> df -h
 # Optimize JVM for container environments
 docker run -p 8080:8080 \
   -e "JAVA_OPTS=-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
 
@@ -550,7 +573,7 @@ docker run -p 8080:8080 \
 docker run -p 8080:8080 \
   -e "BOX_SERVER_PROFILE=production" \
   -e "BOX_SERVER_RUNWAR_ARGS=--enable-http2 --nio-enable" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:adobe2025
 ```
 
@@ -575,7 +598,7 @@ docker run --network commandbox-net -p 8080:8080 ortussolutions/commandbox:adobe
 docker run -p 8080:8080 \
   -e "USER=appuser" \
   -e "USER_ID=1000" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
 
@@ -607,7 +630,7 @@ secrets:
 # Use production profile for security
 docker run -p 8080:8080 \
   -e "BOX_SERVER_PROFILE=production" \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
 
@@ -628,8 +651,8 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 docker run -p 8080:8080 \
   --read-only \
   --tmpfs /tmp \
-  --tmpfs /usr/local/lib/serverHome/logs \
-  -v "$(pwd):/app" \
+  --tmpfs /opt/lib/serverHome/logs \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:alpine
 ```
 
@@ -641,7 +664,7 @@ docker run -p 8080:8080 \
   --memory=2g \
   --cpus=2 \
   --pids-limit=100 \
-  -v "$(pwd):/app" \
+  -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
 
@@ -749,34 +772,37 @@ A finalized image reduces container startup times by up to 80% and reduces the f
 To leverage this with a multi-stage build:
 
 ```dockerfile
-FROM ortussolutions/commandbox:lucee6 as workbench
+ARG BASE_IMAGE_ARG=ortussolutions/commandbox:lucee6
+FROM ${BASE_IMAGE_ARG} as workbench
 
 # Generate the startup script only
-ENV FINALIZE_STARTUP true
-RUN $BUILD_DIR/run.sh
+ENV FINALIZE_STARTUP=true
+RUN $BUILD_DIR/run.sh && \
+  mkdir -p /tmp/runtime && \
+  cp --parents "$(jq -r '.runwarJarPath' "$LIB_DIR/serverHome/serverInfo.json")" /tmp/runtime
 
-# Eclipse Temurin Focal image is the smallest OpenJDK image on that the same kernel used in the base image.
-# For most apps, this should work to run your applications
-FROM eclipse-temurin:11-jre-jammy as app
+FROM eclipse-temurin:21-jre-noble as app
 
 # COPY our generated files
-COPY --from=workbench /app /app
-COPY --from=workbench /usr/local/lib/serverHome /usr/local/lib/serverHome
-
-RUN mkdir -p /usr/local/lib/CommandBox/lib
-
-COPY --from=workbench /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar /usr/local/lib/CommandBox/lib/runwar-4.0.5.jar
-COPY --from=workbench /usr/local/bin/startup-final.sh /usr/local/bin/run.sh
+COPY --from=workbench /srv/app /srv/app
+COPY --from=workbench /opt/lib/serverHome /opt/lib/serverHome
+COPY --from=workbench /tmp/runtime/ /
+COPY --from=workbench /opt/lib/java/classes /opt/lib/java/classes
+COPY --from=workbench /opt/build/resources /opt/build/resources
+COPY --from=workbench /opt/bin/startup-final.sh /opt/bin/run.sh
 
 # Restore working directory environment
-ENV APP_DIR /app
+ENV APP_DIR=/srv/app
+ENV CLASSPATH=/opt/lib/java/classes
+ENV JAVA_TOOL_OPTIONS=-Djava.util.logging.config.file=/opt/build/resources/text.logging.properties
+ENV PORT=8080
 WORKDIR $APP_DIR
 
 # Restore the healthcheck, since that doesn't transfer from the first stage
 ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
 HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
 
-CMD /usr/local/bin/run.sh
+CMD ["/opt/bin/run.sh"]
 ```
 
 ### Single-Stage With Script Finalization

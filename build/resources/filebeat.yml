@@ -29,7 +29,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - ${BOX_SERVER_APP_SERVERHOMEDIRECTORY:/usr/local/lib/serverHome}/logs/server.out.txt
+    - ${BOX_SERVER_APP_SERVERHOMEDIRECTORY:/opt/lib/serverHome}/logs/server.out.txt
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.

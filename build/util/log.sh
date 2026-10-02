@@ -6,7 +6,6 @@ if [[ $box_server_runwar_console_appenderLayout ]]; then
     logFormat=${box_server_runwar_console_appenderLayout}
 fi
 
-rm -f $JAVA_HOME/conf/logging.properties
 if [[ $logFormat = 'JSONTemplateLayout' ]]; then
     export JAVA_TOOL_OPTIONS="-Djava.util.logging.config.file=$BUILD_DIR/resources/json.logging.properties $JAVA_TOOL_OPTIONS"
 else
@@ -20,6 +19,7 @@ logMessage () {
 	local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 	if [[ $logFormat = 'JSONTemplateLayout' ]]; then
+        printf '\n'
         echo $( jq --null-input \
                 --arg lvl "$level" \
                 --arg ts "$timestamp" \

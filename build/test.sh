@@ -31,6 +31,8 @@ fi
 
 cd $BUILD_DIR
 
+bash ./tests/test.paths.sh
+
 printf "\n\n*******************\n\n"
 
 # Test default environment with no additional variables

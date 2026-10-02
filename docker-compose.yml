@@ -6,8 +6,8 @@ services:
     image: ortussolutions/commandbox
     environment:
       cfconfig_adminPassword: testing
-    volumes: 
-      - ./test:/app
-      - ./build:/root/build
+    volumes:
+      - ./test:/srv/app
+      - ./build:/opt/build
     ports:
       - "8080:8080"

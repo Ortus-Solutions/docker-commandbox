@@ -14,8 +14,8 @@ services:
       args :
         - COMMANDBOX_VERSION
         - BASE_IMAGE_ARG
-    command: /root/build/test.sh
+    command: /opt/build/test.sh
     #Mount our test directory ( and our build directory to make local testing easier )
     volumes:
-      - ./test:/app
-      - ./build:/root/build
+      - ./test:/srv/app
+      - ./build:/opt/build

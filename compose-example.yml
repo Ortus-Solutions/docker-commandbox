@@ -4,7 +4,7 @@ services:
   # NGINX Container
   web:
     image: nginx
-    ports: 
+    ports:
       - "80:80"
       - "443:443"
     # Mount our shared webroot volume
@@ -12,20 +12,20 @@ services:
       - .:/usr/share/nginx/html
       - ./build/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     links:
-      - app:luceehost  
-  
+      - app:luceehost
+
   # Application Server
   app:
-    image: ortussolutions/commandbox 
+    image: ortussolutions/commandbox
     environment:
       PORT: 8080
       SSL_PORT: 8443
     volumes:
-      - .:/app
+      - .:/srv/app
 
   #MySQL
   mysql:
-    image: mysql:latest  
+    image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: "MyS3cur3P455!"
     volumes:

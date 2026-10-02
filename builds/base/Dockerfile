@@ -16,23 +16,26 @@ RUN groupadd $WORKGROUP && usermod -a -G $WORKGROUP root
 
 ### Directory Mappings ###
 # BIN_DIR = Where the box binary goes
-ENV BIN_DIR /usr/local/bin
+ENV BIN_DIR /opt/bin
+ENV BOXLANG_INSTALL_HOME=/opt/boxlang
+ENV PATH="${BIN_DIR}:${BOXLANG_INSTALL_HOME}/bin:${PATH}"
 # LIB_DIR = Where the build files go
-ENV LIB_DIR /usr/local/lib
+ENV LIB_DIR /opt/lib
 WORKDIR $BIN_DIR
 
 # BUILD_DIR = WHERE runtime scripts go
-ENV BUILD_DIR $LIB_DIR/build
+ENV BUILD_DIR /opt/build
 WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
-ENV COMMANDBOX_HOME=$HOME/.CommandBox
+ENV COMMANDBOX_HOME=/opt/commandbox
 
 # BOXLANG HOME = Where BoxLang Lives
-ENV BOXLANG_HOME=$HOME/.boxlang
+ENV BOXLANG_HOME=/opt/boxlang
+RUN mkdir -p "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome"
 
 # APP_DIR = the directory where the application runs
-ENV APP_DIR /app
+ENV APP_DIR /srv/app
 WORKDIR $APP_DIR
 
 # Copy file system
@@ -53,7 +56,7 @@ RUN ${BUILD_DIR}/util/debian/install-dependencies.sh
 RUN $BUILD_DIR/util/install-commandbox.sh
 
 # Add our custom classes added in the previous step to the java classpath
-ENV CLASSPATH="$JAVA_HOME/classes"
+ENV CLASSPATH="$LIB_DIR/java/classes"
 
 
 # Default Port Environment Variables

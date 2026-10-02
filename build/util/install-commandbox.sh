@@ -26,9 +26,10 @@ box config set server.singleServerMode=true
 # box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
 
 # Install GELF jar for Java.util JSON logging https://logging.paluch.biz/examples/jul-json.html
-mkdir -p $JAVA_HOME/classes
-curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar -o $JAVA_HOME/classes/logstash-gelf-1.15.0.jar
-curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar.md5 -o $JAVA_HOME/classes/logstash-gelf-1.15.0.jar.md5
-md5sum  $JAVA_HOME/classes/logstash-gelf-1.15.0.jar > $JAVA_HOME/classes/logstash-gelf-1.15.0.jar.md5
+mkdir -p "$LIB_DIR/java/classes"
+curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar -o "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar"
+curl http://search.maven.org/remotecontent?filepath=biz/paluch/logging/logstash-gelf/1.15.0/logstash-gelf-1.15.0.jar.md5 -o "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar.md5"
+md5sum "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar" > "$LIB_DIR/java/classes/logstash-gelf-1.15.0.jar.md5"
+rm -f "$JAVA_HOME/conf/logging.properties"
 
 $BUILD_DIR/util/optimize.sh

@@ -26,11 +26,11 @@ apt-get install -y \
 		echo 'set -e'; \
 		echo; \
 		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
-	} > /usr/local/bin/docker-java-home
+	} > "$BIN_DIR/docker-java-home"
 
 # Ensure all runwar users have permission on the java home
-chown -R $(whoami):${WORKGROUP} /usr/local/bin/docker-java-home
-chmod g+x /usr/local/bin/docker-java-home
+chown $(whoami):${WORKGROUP} "$BIN_DIR/docker-java-home"
+chmod g+x "$BIN_DIR/docker-java-home"
 
 # Ensure all runwar users have permission on the build scripts
 chown -R $(whoami):${WORKGROUP} $BUILD_DIR

@@ -83,6 +83,7 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
         mv $APP_DIR/server-start.sh $BIN_DIR/startup-final.sh
 
         chmod +x $BIN_DIR/startup-final.sh
+		printf 'export BOX_SERVER_APP_SERVERHOMEDIRECTORY=%q\n' "$BOX_SERVER_APP_SERVERHOMEDIRECTORY" > "$BIN_DIR/startup-final.env"
 
     fi
 

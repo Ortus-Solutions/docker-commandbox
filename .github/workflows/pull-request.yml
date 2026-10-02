@@ -18,63 +18,21 @@ jobs:
         include:
           # Foundation images (builds/base/* - eclipse-temurin based)
           - BUILD_IMAGE_DOCKERFILE: builds/base/Dockerfile
-            BUILD_IMAGE_TAGS: "latest,jre11"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK11.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk11"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK17.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk17"
+            BUILD_IMAGE_TAGS: "latest,jre21"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
             BUILD_IMAGE_TAGS: "jdk21"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK24.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk24"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK25.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk25"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE17.Dockerfile
-            BUILD_IMAGE_TAGS: "jre17"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE21.Dockerfile
-            BUILD_IMAGE_TAGS: "jre21"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE24.Dockerfile
-            BUILD_IMAGE_TAGS: "jre24"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE25.Dockerfile
-            BUILD_IMAGE_TAGS: "jre25"
 
-          # RHEL/UBI9 foundation images
+          # RHEL/UBI10 foundation images
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.Dockerfile
-            BUILD_IMAGE_TAGS: "ubi10,jre11-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK11.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk11-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK17.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk17-rhel"
+            BUILD_IMAGE_TAGS: "ubi10,jre21-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK21.Dockerfile
             BUILD_IMAGE_TAGS: "jdk21-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK24.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk24-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE17.Dockerfile
-            BUILD_IMAGE_TAGS: "jre17-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE21.Dockerfile
-            BUILD_IMAGE_TAGS: "jre21-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE24.Dockerfile
-            BUILD_IMAGE_TAGS: "jre24-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK25.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk25-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JRE25.Dockerfile
-            BUILD_IMAGE_TAGS: "jre25-rhel"
 
           # Alpine foundation images
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.Dockerfile
-            BUILD_IMAGE_TAGS: "alpine,jre11-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK11.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk11-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK17.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk17-alpine"
+            BUILD_IMAGE_TAGS: "alpine,jre21-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK21.Dockerfile
             BUILD_IMAGE_TAGS: "jdk21-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JRE17.Dockerfile
-            BUILD_IMAGE_TAGS: "jre17-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JRE21.Dockerfile
-            BUILD_IMAGE_TAGS: "jre21-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JRE25.Dockerfile
-            BUILD_IMAGE_TAGS: "jre25-alpine"
 
     steps:
       - name: Checkout
@@ -131,10 +89,10 @@ jobs:
             BASE_IMAGE: "ortussolutions/commandbox:latest"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6.Dockerfile
             BUILD_IMAGE_TAGS: "lucee6"
-            BASE_IMAGE: "ortussolutions/commandbox:jre17"
+            BASE_IMAGE: "ortussolutions/commandbox:latest"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7"
-            BASE_IMAGE: "ortussolutions/commandbox:jre25"
+            BASE_IMAGE: "ortussolutions/commandbox:latest"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light"
             BASE_IMAGE: "ortussolutions/commandbox:latest"
@@ -143,7 +101,7 @@ jobs:
             BASE_IMAGE: "ortussolutions/commandbox:latest"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk17"
+            BASE_IMAGE: "ortussolutions/commandbox:jdk21"
           - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2025"
             BASE_IMAGE: "ortussolutions/commandbox:jdk21"
@@ -154,22 +112,22 @@ jobs:
           # RHEL engine builds
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
             BUILD_IMAGE_TAGS: "lucee6-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:jre25-rhel"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk17-rhel"
+            BASE_IMAGE: "ortussolutions/commandbox:jdk21-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2025.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2025-rhel"
             BASE_IMAGE: "ortussolutions/commandbox:jdk21-rhel"
@@ -186,7 +144,7 @@ jobs:
             BASE_IMAGE: "ortussolutions/commandbox:alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:jre25-alpine"
+            BASE_IMAGE: "ortussolutions/commandbox:alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light-alpine"
             BASE_IMAGE: "ortussolutions/commandbox:alpine"
@@ -195,7 +153,7 @@ jobs:
             BASE_IMAGE: "ortussolutions/commandbox:alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk17-alpine"
+            BASE_IMAGE: "ortussolutions/commandbox:jdk21-alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2025.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2025-alpine"
             BASE_IMAGE: "ortussolutions/commandbox:jdk21-alpine"
@@ -220,6 +178,22 @@ jobs:
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
           echo "BUILD_IMAGE_TAG=${TAG_ARRAY[0]}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+
+      - name: Build Engine Base From This Checkout
+        env:
+          BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
+        run: |
+          case "$BASE_IMAGE" in
+            *:latest) BASE_DOCKERFILE=builds/base/Dockerfile ;;
+            *:jdk21) BASE_DOCKERFILE=builds/base/JDK21.Dockerfile ;;
+            *:ubi10) BASE_DOCKERFILE=builds/base/rhel.Dockerfile ;;
+            *:jdk21-rhel) BASE_DOCKERFILE=builds/base/rhel.JDK21.Dockerfile ;;
+            *:alpine) BASE_DOCKERFILE=builds/base/Alpine.Dockerfile ;;
+            *:jdk21-alpine) BASE_DOCKERFILE=builds/base/Alpine.JDK21.Dockerfile ;;
+            *) exit 1 ;;
+          esac
+          docker build --build-arg COMMANDBOX_VERSION=${{ env.commandbox_version }} \
+            --file "$BASE_DOCKERFILE" --tag "$BASE_IMAGE" .
 
       - name: Test Engine Images
         env:

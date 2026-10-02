@@ -184,25 +184,25 @@ jobs:
           # RHEL engine builds
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
             BUILD_IMAGE_TAGS: "lucee6-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6Light.Dockerfile
             BUILD_IMAGE_TAGS: "lucee6-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2025.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2025-rhel"
             BASE_IMAGE: "ortussolutions/commandbox:jdk21-rhel"
@@ -219,7 +219,7 @@ jobs:
             BASE_IMAGE: "ortussolutions/commandbox:alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:jre25-alpine"
+            BASE_IMAGE: "ortussolutions/commandbox:alpine"
           - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light-alpine"
             BASE_IMAGE: "ortussolutions/commandbox:alpine"
