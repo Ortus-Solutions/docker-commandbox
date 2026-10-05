@@ -808,7 +808,15 @@ As of v3.0.0 of the image you can create multi-stage builds which include only a
 
 A finalized image reduces container startup times by up to 80% and reduces the final image size by up to 50%. Multi-stage builds are ideal for creating production images. The environment variable `FINALIZE_STARTUP`, when provided, will only generate the startup script. The script written is considered authoritative and will be used on the next container start.
 
-Use the complete [progressive-build example](resources/examples/ProgressiveBuild.Dockerfile). Its final stage creates `commandbox:runwar` independently, copies the generated startup artifacts from `/opt/commandbox/run`, and sets ownership and shared-group permissions before selecting the non-root `USER`. The builder's account and `USER` instruction do not transfer between stages. Restore any required healthcheck in your final stage as well.
+Use the complete [progressive-build example](resources/examples/ProgressiveBuild.Dockerfile), which defaults to `ortussolutions/commandbox:boxlang`. Its final stage copies the application, server home, BoxLang home, and finalized startup files only. Copying `/opt/boxlang` includes the Runwar JARs under `/opt/boxlang/modules/bx-cli/src/libExt`; no build helpers or separate JAR staging are needed. The final stage creates `commandbox:runwar` independently, sets ownership and shared-group permissions, and restores the HTTP healthcheck. The builder's account and `USER` instruction do not transfer between stages.
+
+Test the example's copied paths, runtime permissions, HTTP startup, and restart with an existing engine image:
+
+```bash
+bash build/test-progressive.sh ortussolutions/commandbox:boxlang
+```
+
+The test defaults to `linux/amd64`; set `TEST_PLATFORM=linux/arm64` for an ARM64 base image. Release and pull-request builds run it against the locally built Debian Lucee6 and BoxLang images.
 
 ### Single-Stage With Script Finalization
 

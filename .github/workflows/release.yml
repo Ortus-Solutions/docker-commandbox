@@ -20,7 +20,6 @@ jobs:
       BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
       TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
       COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
-      RELEASE_DIAGNOSTICS_DIR: ${{ runner.temp }}/release-diagnostics
     strategy:
       fail-fast: false
       matrix:
@@ -46,6 +45,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Initialize diagnostics path
+        run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -184,7 +186,6 @@ jobs:
       BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
       TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
       COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
-      RELEASE_DIAGNOSTICS_DIR: ${{ runner.temp }}/release-diagnostics
     strategy:
       fail-fast: false
       matrix:
@@ -279,6 +280,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Initialize diagnostics path
+        run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -389,6 +393,13 @@ jobs:
       - name: Test Docker secrets
         timeout-minutes: 15
         run: bash build/test-release.sh secrets
+
+      - name: Test progressive build example
+        if: ${{ matrix.BUILD_IMAGE_DOCKERFILE == 'builds/debian/Lucee6.Dockerfile' || matrix.BUILD_IMAGE_DOCKERFILE == 'builds/debian/BoxLang.Dockerfile' }}
+        timeout-minutes: 25
+        shell: bash
+        run: |
+          timeout --kill-after=30s 20m bash build/test-progressive.sh "$TEST_IMAGE" 2>&1 | tee "$RELEASE_DIAGNOSTICS_DIR/progressive.log"
 
       - name: Build and push
         if: github.event_name != 'pull_request'
