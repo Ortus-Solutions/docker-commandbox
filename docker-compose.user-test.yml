@@ -4,4 +4,4 @@ services:
     group_add:
       - "1000"
     environment:
-      EXPECTED_UID: "1002"
+      EXPECTED_UID: ${TEST_EXPECTED_UID:-1002}

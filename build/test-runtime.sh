@@ -2,11 +2,18 @@
 set -e
 
 image=${1:?Pass a built CommandBox image}
+shift
+if [[ $# = 0 ]]; then
+	set -- default 1002:1000 1002:1002 root
+fi
+identities=( "$@" )
 container=commandbox-runtime-$$
 finalImage=commandbox-final-test:$$
+rootImage=commandbox-root-test:$$
 cleanup () {
 	docker rm -f "$container" >/dev/null 2>&1 || true
 	docker image rm "$finalImage" >/dev/null 2>&1 || true
+	docker image rm "$rootImage" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
@@ -38,10 +45,21 @@ RUN FINALIZE_STARTUP=true "$BUILD_DIR/run.sh" && printf 'not JSON\n' > "$APP_DIR
 DOCKERFILE
 		selectedImage=$finalImage
 	fi
-	for identity in default 1002:1000 1002:1002; do
+	for identity in "${identities[@]}"; do
+		runtimeImage=$selectedImage
 		userArgs=()
 		expectedUid=1000
-		if [[ $identity != default ]]; then
+		if [[ $identity = root ]]; then
+			expectedUid=0
+			docker build --build-arg BASE_IMAGE_ARG="$selectedImage" --tag "$rootImage" --file - . <<'DOCKERFILE'
+ARG BASE_IMAGE_ARG
+FROM ${BASE_IMAGE_ARG}
+COPY build/ /opt/build/
+USER root
+RUN test "$(id -u)" = 0 && box version
+DOCKERFILE
+			runtimeImage=$rootImage
+		elif [[ $identity != default ]]; then
 			userArgs=( --user "$identity" --group-add 1000 )
 			expectedUid=1002
 		fi
@@ -49,9 +67,9 @@ DOCKERFILE
 		if [[ $mode = finalized ]]; then
 			finalArgs=( -e BOX_SERVER_APP_SERVERHOMEDIRECTORY=/ignored )
 		fi
-		docker run -d --name "$container" "${userArgs[@]}" "${finalArgs[@]}" -e EXPECTED_UID="$expectedUid" "$selectedImage" >/dev/null
+		docker run -d --name "$container" "${userArgs[@]}" "${finalArgs[@]}" -e EXPECTED_UID="$expectedUid" "$runtimeImage" >/dev/null
 		checkServer
-		docker exec "$container" bash -ec 'test ! -w "$BIN_DIR"; test ! -w "$BUILD_DIR"; test -f "$STARTUP_DIR/startup.sh" || test -f "$STARTUP_DIR/startup-final.sh"'
+		docker exec "$container" bash -ec 'if [[ $EXPECTED_UID != 0 ]]; then test ! -w "$BIN_DIR"; test ! -w "$BUILD_DIR"; fi; test -f "$STARTUP_DIR/startup.sh" || test -f "$STARTUP_DIR/startup-final.sh"'
 		docker restart "$container" >/dev/null
 		checkServer
 		docker rm -f "$container" >/dev/null

@@ -16,8 +16,10 @@ set -e
 [[ $CLASSPATH = "$LIB_DIR/java/classes" ]]
 [[ ! -d $HOME/.CommandBox && ! -d $HOME/.boxlang ]]
 [[ ! -d /usr/local/boxlang ]]
-[[ ! -w $BIN_DIR && ! -w $BIN_DIR/box && ! -w $BUILD_DIR && ! -w $BUILD_DIR/run.sh ]]
-[[ ! -w $(readlink -f "$(command -v java)") ]]
+if [[ $(id -u) != 0 ]]; then
+	[[ ! -w $BIN_DIR && ! -w $BIN_DIR/box && ! -w $BUILD_DIR && ! -w $BUILD_DIR/run.sh ]]
+	[[ ! -w $(readlink -f "$(command -v java)") ]]
+fi
 for runtimePath in "$HOME" "$APP_DIR" "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome" "$STARTUP_DIR"; do
 	touch "$runtimePath/path-test"
 	rm "$runtimePath/path-test"
@@ -43,7 +45,10 @@ cat > "$fixtureDir/build/util/start-server.sh" <<'STARTUP'
 [[ $BOX_SERVER_APP_SERVERHOMEDIRECTORY = "$EXPECTED_SERVER_HOME" ]]
 [[ -f $COMMANDBOX_HOME/sentinel && -f $BOXLANG_HOME/sentinel ]]
 [[ ! -e $HOME/.CommandBox && ! -e $HOME/.boxlang ]]
-[[ -w $COMMANDBOX_HOME && -w $BOXLANG_HOME && -w $STARTUP_DIR && ! -w $BIN_DIR ]]
+[[ -w $COMMANDBOX_HOME && -w $BOXLANG_HOME && -w $STARTUP_DIR ]]
+if [[ $(id -u) != 0 ]]; then
+	[[ ! -w $BIN_DIR ]]
+fi
 [[ -w $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]
 rm -f "$STARTUP_DIR/path-test"
 touch "$APP_DIR/path-test" "$COMMANDBOX_HOME/path-test" \
@@ -85,15 +90,17 @@ runCase "$fixtureDir/alias-home" SERVER_HOME_DIRECTORY="$fixtureDir/alias-home"
 printf '{"app":{"serverHomeDirectory":null}}\n' > "$fixtureDir/app/server.json"
 runCase "$fixtureDir/lib/serverHome"
 
-chmod 555 "$fixtureDir/home"
-originalOwner=$(stat -c %u "$fixtureDir/home")
-if runCase "$fixtureDir/lib/serverHome" > "$fixtureDir/denied.log" 2>&1; then
-	echo 'An unwritable runtime directory should fail startup'
-	exit 1
+if [[ $(id -u) != 0 ]]; then
+	chmod 555 "$fixtureDir/home"
+	originalOwner=$(stat -c %u "$fixtureDir/home")
+	if runCase "$fixtureDir/lib/serverHome" > "$fixtureDir/denied.log" 2>&1; then
+		echo 'An unwritable runtime directory should fail startup'
+		exit 1
+	fi
+	grep -q 'Grant this UID or shared GID 1000 write access' "$fixtureDir/denied.log"
+	[[ $(stat -c %u "$fixtureDir/home") = "$originalOwner" ]]
+	chmod 755 "$fixtureDir/home"
 fi
-grep -q 'Grant this UID or shared GID 1000 write access' "$fixtureDir/denied.log"
-[[ $(stat -c %u "$fixtureDir/home") = "$originalOwner" ]]
-chmod 755 "$fixtureDir/home"
 
 cp "$fixtureDir/build/util/start-server.sh" "$fixtureDir/run/startup-final.sh"
 printf 'export BOX_SERVER_APP_SERVERHOMEDIRECTORY=%q\n' "$fixtureDir/final home" > "$fixtureDir/run/startup-final.env"
@@ -106,6 +113,7 @@ mkdir -p "$fixtureDir/custom home"
 touch "$fixtureDir/custom home/restrictive-file"
 chmod 600 "$fixtureDir/custom home/restrictive-file"
 env HOME="$fixtureDir/home" APP_DIR="$fixtureDir/app" \
+	BIN_DIR="$fixtureDir/bin" BUILD_DIR="$fixtureDir/build" \
 	COMMANDBOX_HOME="$fixtureDir/commandbox" BOXLANG_HOME="$fixtureDir/boxlang" \
 	BOXLANG_INSTALL_HOME="$fixtureDir/boxlang" LIB_DIR="$fixtureDir/lib" \
 	STARTUP_DIR="$fixtureDir/run" \

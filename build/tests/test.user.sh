@@ -16,7 +16,7 @@ originalBoxLangHome=$BOXLANG_HOME
 touch "$COMMANDBOX_HOME/user-test-sentinel" "$BOXLANG_HOME/user-test-sentinel"
 
 expectedUid=$(id -u)
-[[ $expectedUid != 0 ]]
+[[ $expectedUid = "${EXPECTED_UID:-1000}" ]]
 echo "Starting server with container UID $expectedUid"
 
 [[ $COMMANDBOX_HOME = "$originalCommandBoxHome" ]]
