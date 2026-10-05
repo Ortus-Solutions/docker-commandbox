@@ -2,9 +2,7 @@
 
 [![Docker Image Pulls Badge](https://badgen.net/docker/pulls/ortussolutions/commandbox)](https://hub.docker.com/r/ortussolutions/commandbox/)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Ortus-Solutions/docker-commandbox/release.yml?branch=development)](https://github.com/Ortus-Solutions/docker-commandbox/actions)
-[![GitHub License](https://badgen.net/github/license/Ortus-Solutions/docker-commandbox)](https://github.com/Ortus-Solutions/docker-commandbox?tab=License-1-ov-file#readme)
-
-![CommandBox Docker](commandbox-docker.jpg)
+![GitHub License](https://badgen.net/github/license/Ortus-Solutions/docker-commandbox)
 
 Welcome to the official Docker images for [CommandBox](https://www.ortussolutions.com/products/commandbox), the BoxLang and CFML development and deployment tool from [Ortus Solutions](https://www.ortussolutions.com/).  These images are designed to provide a lightweight, flexible, and powerful environment for running BoxLang and CFML applications using CommandBox as a powerful servlet container powered by [Undertow](https://undertow.io/).
 
@@ -55,7 +53,7 @@ All images are published to [Docker Hub](https://hub.docker.com/r/ortussolutions
 
 ## Available Tags
 
-_Note: For references to the specific versions of CommandBox used within image versions, [please see the Changelog](https://github.com/Ortus-Solutions/docker-commandbox/blob/main/changelog.md)._
+_Note: Image release versions are distinct from the CommandBox version packaged within each image._
 
 ### Quick Reference
 
@@ -71,7 +69,7 @@ _Note: For references to the specific versions of CommandBox used within image v
 
 #### Standard Debian-based Images
 
-- `:latest` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Dockerfile)) - Latest stable version (JDK 11)
+- `:latest` - Latest stable version (JDK 11)
 - `:snapshot` - Development/bleeding edge version
 - `:boxlang` - BoxLang runtime ready (JDK 21)
 - `:lucee6` - Lucee 6.x warmed up (JDK 11)
@@ -81,30 +79,30 @@ _Note: For references to the specific versions of CommandBox used within image v
 
 #### JDK/JRE Variants (Debian)
 
-- `:jdk8` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK8.Dockerfile)) - OpenJDK 8
-- `:jdk11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK11.Dockerfile)) - OpenJDK 11 (default)
-- `:jre17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JRE17.Dockerfile)) - OpenJDK 17 JRE
-- `:jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK17.Dockerfile)) - OpenJDK 17 JDK
-- `:jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK21.Dockerfile)) - OpenJDK 21 JDK
-- `:jdk23` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK23.Dockerfile)) - OpenJDK 23 JDK
-- `:jdk24` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/JDK24.Dockerfile)) - OpenJDK 24 JDK
+- `:jdk8` - OpenJDK 8
+- `:jdk11` - OpenJDK 11 (default)
+- `:jre17` - OpenJDK 17 JRE
+- `:jdk17` - OpenJDK 17 JDK
+- `:jdk21` - OpenJDK 21 JDK
+- `:jdk23` - OpenJDK 23 JDK
+- `:jdk24` - OpenJDK 24 JDK
 
 #### Alpine Linux Variants
 
-- `:alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.Dockerfile)) - Alpine Linux (JDK 11)
-- `:alpine-jdk8` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK8.Dockerfile)) - Alpine with JDK 8
-- `:alpine-jdk11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK11.Dockerfile)) - Alpine with JDK 11
-- `:alpine-jre17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JRE17.Dockerfile)) - Alpine with JRE 17
-- `:alpine-jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK17.Dockerfile)) - Alpine with JDK 17
-- `:alpine-jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/Alpine.JDK21.Dockerfile)) - Alpine with JDK 21
+- `:alpine` - Alpine Linux (JDK 11)
+- `:alpine-jdk8` - Alpine with JDK 8
+- `:alpine-jdk11` - Alpine with JDK 11
+- `:alpine-jre17` - Alpine with JRE 17
+- `:alpine-jdk17` - Alpine with JDK 17
+- `:alpine-jdk21` - Alpine with JDK 21
 
 #### RHEL Universal Base Image (UBI10) Variants
 
-- `:UBI10` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.Dockerfile)) - RHEL UBI10 (JDK 11)
-- `:UBI10-jdk11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK11.Dockerfile)) - UBI10 with JDK 11
-- `:UBI10-jre17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JRE17.Dockerfile)) - UBI10 with JRE 17
-- `:UBI10-jdk17` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK17.Dockerfile)) - UBI10 with JDK 17
-- `:UBI10-jdk21` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/base/rhel.JDK21.Dockerfile)) - UBI10 with JDK 21
+- `:UBI10` - RHEL UBI10 (JDK 11)
+- `:UBI10-jdk11` - UBI10 with JDK 11
+- `:UBI10-jre17` - UBI10 with JRE 17
+- `:UBI10-jdk17` - UBI10 with JDK 17
+- `:UBI10-jdk21` - UBI10 with JDK 21
 
 ### Pre-Built Engine Images (Warmed Up)
 
@@ -112,58 +110,58 @@ These images include pre-downloaded and warmed-up engines to significantly reduc
 
 #### BoxLang Runtime
 
-- `:boxlang` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/BoxLang.Dockerfile)) - BoxLang on Debian
-- `:boxlang-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/BoxLang.Dockerfile)) - BoxLang on Alpine
-- `:boxlang-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/BoxLang.Dockerfile)) - BoxLang on UBI10
+- `:boxlang` - BoxLang on Debian
+- `:boxlang-alpine` - BoxLang on Alpine
+- `:boxlang-rhel` - BoxLang on UBI10
 
 #### Lucee CFML Engine
 
 **Debian-based Lucee Images:**
 
-- `:lucee4` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee4.Dockerfile)) - Lucee 4.x
-- `:lucee5` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee5.Dockerfile)) - Lucee 5.x
-- `:lucee6` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee6.Dockerfile)) - Lucee 6.x
-- `:lucee-light` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/LuceeLight.Dockerfile)) - Lucee Light (latest)
-- `:lucee5-light` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Lucee5Light.Dockerfile)) - Lucee 5.x Light
+- `:lucee4` - Lucee 4.x
+- `:lucee5` - Lucee 5.x
+- `:lucee6` - Lucee 6.x
+- `:lucee-light` - Lucee Light (latest)
+- `:lucee5-light` - Lucee 5.x Light
 
 **Alpine-based Lucee Images:**
 
-- `:lucee5-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Lucee5.Dockerfile)) - Lucee 5.x on Alpine
-- `:lucee6-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Lucee6.Dockerfile)) - Lucee 6.x on Alpine
-- `:lucee-light-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/LuceeLight.Dockerfile)) - Lucee Light on Alpine
-- `:lucee5-light-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Lucee5Light.Dockerfile)) - Lucee 5.x Light on Alpine
+- `:lucee5-alpine` - Lucee 5.x on Alpine
+- `:lucee6-alpine` - Lucee 6.x on Alpine
+- `:lucee-light-alpine` - Lucee Light on Alpine
+- `:lucee5-light-alpine` - Lucee 5.x Light on Alpine
 
 **UBI10-based Lucee Images:**
 
-- `:lucee5-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5.Dockerfile)) - Lucee 5.x on UBI10
-- `:lucee6-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee6.Dockerfile)) - Lucee 6.x on UBI10
-- `:lucee-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/LuceeLight.Dockerfile)) - Lucee Light on UBI10
-- `:lucee5-light-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Lucee5Light.Dockerfile)) - Lucee 5.x Light on UBI10
+- `:lucee5-rhel` - Lucee 5.x on UBI10
+- `:lucee6-rhel` - Lucee 6.x on UBI10
+- `:lucee-light-rhel` - Lucee Light on UBI10
+- `:lucee5-light-rhel` - Lucee 5.x Light on UBI10
 
 #### Adobe ColdFusion Engine
 
 **Debian-based Adobe Images:**
 
-- `:adobe11` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe11.Dockerfile)) - Adobe ColdFusion 11
-- `:adobe2016` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2016.Dockerfile)) - Adobe ColdFusion 2016
-- `:adobe2018` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2018.Dockerfile)) - Adobe ColdFusion 2018
-- `:adobe2021` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2021.Dockerfile)) - Adobe ColdFusion 2021
-- `:adobe2023` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023
-- `:adobe2025` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/debian/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025
+- `:adobe11` - Adobe ColdFusion 11
+- `:adobe2016` - Adobe ColdFusion 2016
+- `:adobe2018` - Adobe ColdFusion 2018
+- `:adobe2021` - Adobe ColdFusion 2021
+- `:adobe2023` - Adobe ColdFusion 2023
+- `:adobe2025` - Adobe ColdFusion 2025
 
 **Alpine-based Adobe Images:**
 
-- `:adobe2018-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2018.Dockerfile)) - Adobe ColdFusion 2018 on Alpine
-- `:adobe2021-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2021.Dockerfile)) - Adobe ColdFusion 2021 on Alpine
-- `:adobe2023-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023 on Alpine
-- `:adobe2025-alpine` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/alpine/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025 on Alpine
+- `:adobe2018-alpine` - Adobe ColdFusion 2018 on Alpine
+- `:adobe2021-alpine` - Adobe ColdFusion 2021 on Alpine
+- `:adobe2023-alpine` - Adobe ColdFusion 2023 on Alpine
+- `:adobe2025-alpine` - Adobe ColdFusion 2025 on Alpine
 
 **UBI10-based Adobe Images:**
 
-- `:adobe2018-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2018.Dockerfile)) - Adobe ColdFusion 2018 on UBI10
-- `:adobe2021-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2021.Dockerfile)) - Adobe ColdFusion 2021 on UBI10
-- `:adobe2023-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2023.Dockerfile)) - Adobe ColdFusion 2023 on UBI10
-- `:adobe2025-rhel` ([Dockerfile](https://github.com/Ortus-Solutions/docker-commandbox/blob/master/builds/redhat/Adobe2025.Dockerfile)) - Adobe ColdFusion 2025 on UBI10
+- `:adobe2018-rhel` - Adobe ColdFusion 2018 on UBI10
+- `:adobe2021-rhel` - Adobe ColdFusion 2021 on UBI10
+- `:adobe2023-rhel` - Adobe ColdFusion 2023 on UBI10
+- `:adobe2025-rhel` - Adobe ColdFusion 2025 on UBI10
 
 ### Choosing the Right Tag
 
@@ -722,7 +720,7 @@ With `readOnlyRootFilesystem: true`, provide writable volumes for the applicatio
 
 ### Customizing Images
 
-To create your own, customized Docker image, use [our Dockerfile repository](https://github.com/Ortus-Solutions/docker-commandbox/tree/development/builds) as a reference to begin your customizations. You can extend any of the base images and add your own additional functionality or modules. For example, to install the [Ortus Redis extension for Lucee](https://www.ortussolutions.com/products/redis-lucee):
+To create your own customized Docker image, extend any of the base images and add your own functionality or modules using the examples below. For example, to install the [Ortus Redis extension for Lucee](https://www.ortussolutions.com/products/redis-lucee):
 
 ```dockerfile
 FROM ortussolutions/commandbox:lucee6
@@ -808,15 +806,57 @@ As of v3.0.0 of the image you can create multi-stage builds which include only a
 
 A finalized image reduces container startup times by up to 80% and reduces the final image size by up to 50%. Multi-stage builds are ideal for creating production images. The environment variable `FINALIZE_STARTUP`, when provided, will only generate the startup script. The script written is considered authoritative and will be used on the next container start.
 
-Use the complete [progressive-build example](resources/examples/ProgressiveBuild.Dockerfile), which defaults to `ortussolutions/commandbox:boxlang`. Its final stage copies the application, server home, BoxLang home, and finalized startup files only. Copying `/opt/boxlang` includes the Runwar JARs under `/opt/boxlang/modules/bx-cli/src/libExt`; no build helpers or separate JAR staging are needed. The final stage creates `commandbox:runwar` independently, sets ownership and shared-group permissions, and restores the HTTP healthcheck. The builder's account and `USER` instruction do not transfer between stages.
+The following complete progressive-build example defaults to `ortussolutions/commandbox:boxlang`. Its final stage copies the application, server home, BoxLang home, and finalized startup files only. Copying `/opt/boxlang` includes the Runwar JARs under `/opt/boxlang/modules/bx-cli/src/libExt`; no build helpers or separate JAR staging are needed. The final stage creates `commandbox:runwar` independently, sets ownership and shared-group permissions, and restores the HTTP healthcheck. The builder's account and `USER` instruction do not transfer between stages.
 
-Test the example's copied paths, runtime permissions, HTTP startup, and restart with an existing engine image:
+```dockerfile
+ARG BASE_IMAGE_ARG=ortussolutions/commandbox:boxlang
+FROM ${BASE_IMAGE_ARG} AS workbench
 
-```bash
-bash build/test-progressive.sh ortussolutions/commandbox:boxlang
+# Generate the startup script only
+ENV FINALIZE_STARTUP=true
+RUN "$BUILD_DIR/run.sh"
+
+FROM eclipse-temurin:21-jre-noble AS app
+
+# COPY our generated files
+COPY --from=workbench --chown=1000:1000 /srv/app /srv/app
+COPY --from=workbench --chown=1000:1000 /opt/lib/serverHome /opt/lib/serverHome
+COPY --from=workbench --chown=1000:1000 /opt/boxlang /opt/boxlang
+COPY --from=workbench --chown=1000:1000 /opt/commandbox/run/startup-final.sh /opt/commandbox/run/startup-final.sh
+COPY --from=workbench --chown=1000:1000 /opt/commandbox/run/startup-final.env /opt/commandbox/run/startup-final.env
+
+ENV APP_DIR=/srv/app
+ENV HOME=/home/commandbox
+ENV LIB_DIR=/opt/lib
+ENV COMMANDBOX_HOME=/opt/commandbox
+ENV BOXLANG_HOME=/opt/boxlang
+ENV BOXLANG_INSTALL_HOME=/opt/boxlang
+ENV STARTUP_DIR=/opt/commandbox/run
+RUN groupmod -n runwar ubuntu && \
+  usermod -l commandbox -d "$HOME" -g runwar -s /bin/bash ubuntu && \
+  mkdir -p "$HOME" && \
+  chown -R commandbox:runwar "$HOME" "$APP_DIR" "$LIB_DIR/serverHome" "$BOXLANG_HOME" "$COMMANDBOX_HOME" && \
+  chmod -R ug+rwX,o-w "$HOME" "$APP_DIR" "$LIB_DIR/serverHome" "$BOXLANG_HOME" "$COMMANDBOX_HOME" && \
+  find "$HOME" "$APP_DIR" "$LIB_DIR/serverHome" "$BOXLANG_HOME" "$COMMANDBOX_HOME" -type d -exec chmod g+s {} +
+WORKDIR $APP_DIR
+
+ENV HEALTHCHECK_URI=http://127.0.0.1:8080/
+HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail "$HEALTHCHECK_URI" || exit 1
+
+USER commandbox:runwar
+CMD ["/bin/bash", "-c", "umask 0002; . \"$STARTUP_DIR/startup-final.env\"; exec \"$STARTUP_DIR/startup-final.sh\""]
 ```
 
-The test defaults to `linux/amd64`; set `TEST_PLATFORM=linux/arm64` for an ARM64 base image. Release and pull-request builds run it against the locally built Debian Lucee6 and BoxLang images.
+To include your own application, add `COPY --chown=commandbox:runwar ./ /srv/app/` in the workbench stage before generating the startup script.
+
+Build and run the image from a directory containing this `Dockerfile`:
+
+```bash
+docker build --file Dockerfile --tag my-commandbox-app .
+docker run --rm -p 8080:8080 my-commandbox-app
+```
+
+The application is available at `http://localhost:8080/`. The finalized Java process inherits `umask 0002`, allowing newly created runtime files to remain writable by the shared `runwar` group.
 
 ### Single-Stage With Script Finalization
 
