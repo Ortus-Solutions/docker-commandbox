@@ -9,10 +9,15 @@ if [ -z "$COMMANDBOX_VERSION" ]; then
 fi
 
 # Installs the latest CommandBox Binary. We can use the thin client as it will download all of its dependencies on first run.
-curl https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin -o ${BIN_DIR}/box
+curl --fail --show-error --location \
+  --connect-timeout 30 --max-time 120 \
+  --retry 3 --retry-connrefused --retry-max-time 300 \
+  "https://downloads.ortussolutions.com/ortussolutions/commandbox/${COMMANDBOX_VERSION}/box-thin" \
+  -o "${BIN_DIR}/box"
 chmod 755 ${BIN_DIR}/box
 
-echo "$(box version) successfully installed"
+installedVersion=$(box version)
+echo "${installedVersion} successfully installed"
 
 box uninstall --system commandbox-update-check
 

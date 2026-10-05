@@ -1,4 +1,4 @@
-ARG BASE_IMAGE_ARG=ortussolutions/commandbox:lucee6
+ARG BASE_IMAGE_ARG=ortussolutions/commandbox:boxlang
 FROM ${BASE_IMAGE_ARG} as workbench
 
 # Generate the startup script only

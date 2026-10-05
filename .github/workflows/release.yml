@@ -10,12 +10,19 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-base-images:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 210
+    env:
+      BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+      TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      RELEASE_DIAGNOSTICS_DIR: ${{ runner.temp }}/release-diagnostics
     strategy:
+      fail-fast: false
       matrix:
         include:
           # Foundation images (builds/base/* - eclipse-temurin based) with promoted tags
@@ -41,13 +48,13 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@master
+        uses: docker/setup-qemu-action@v3
         with:
-          platforms: all
+          platforms: arm64
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@master
+        uses: docker/setup-buildx-action@v3
 
       - name: Setup Base Image Builds
         id: setup
@@ -102,33 +109,39 @@ jobs:
           echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
           echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "BASE_IMAGE_ARG=" >> $GITHUB_ENV
           echo "IMAGE_TAG=${FULL_TAGS}" >> $GITHUB_ENV
 
           # Set the first tag for testing purposes
           FIRST_TAG="${TAG_ARRAY[0]}"
           echo "BUILD_IMAGE_TAG=${FIRST_TAG}" >> $GITHUB_ENV
 
-      - name: Test built image
-        env:
-          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
-          DOCKER_BUILDKIT: 1
-          COMPOSE_DOCKER_CLI_BUILD: 1
-          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
-          BASE_IMAGE_ARG:
-        run: |
-          docker compose -f docker-compose.test.yml up --build --exit-code-from sut
-          docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
-
       - name: DockerHub Login
         if: github.event_name != 'pull_request'
+        timeout-minutes: 5
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Build native test image
+        timeout-minutes: 60
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: bash build/test-release.sh build
+
+      - name: Test built image
+        timeout-minutes: 30
+        run: bash build/test-release.sh integration
+
+      - name: Test Docker secrets
+        timeout-minutes: 15
+        run: bash build/test-release.sh secrets
+
       - name: Build and Push Base Images
         if: github.event_name != 'pull_request'
+        timeout-minutes: 90
         uses: docker/build-push-action@v6
         env:
           DOCKER_BUILDKIT: 1
@@ -143,10 +156,37 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_TAG }}
 
+      - name: Collect failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        run: bash build/test-release.sh diagnostics
+
+      - name: Upload failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+          path: ${{ env.RELEASE_DIAGNOSTICS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Clean up test containers
+        if: ${{ always() }}
+        timeout-minutes: 3
+        run: bash build/test-release.sh cleanup
+
   build-engine-images:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 210
     needs: build-base-images
+    env:
+      BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+      TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      RELEASE_DIAGNOSTICS_DIR: ${{ runner.temp }}/release-diagnostics
     strategy:
+      fail-fast: false
       matrix:
         include:
           # Debian engine builds
@@ -241,13 +281,13 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@master
+        uses: docker/setup-qemu-action@v3
         with:
-          platforms: all
+          platforms: arm64
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@master
+        uses: docker/setup-buildx-action@v3
 
       - name: Setup Engine Image Builds
         id: setup
@@ -319,6 +359,8 @@ jobs:
           echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
           echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
+          echo "BASE_IMAGE_ARG=${ACTUAL_BASE_IMAGE}" >> $GITHUB_ENV
           echo "IMAGE_TAG=${FULL_TAGS}" >> $GITHUB_ENV
           echo "ACTUAL_BASE_IMAGE=${ACTUAL_BASE_IMAGE}" >> $GITHUB_ENV
 
@@ -326,27 +368,31 @@ jobs:
           FIRST_TAG="${TAG_ARRAY[0]}"
           echo "BUILD_IMAGE_TAG=${FIRST_TAG}" >> $GITHUB_ENV
 
-      - name: Test Engine Images
-        env:
-          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
-          DOCKER_BUILDKIT: 1
-          COMPOSE_DOCKER_CLI_BUILD: 1
-          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
-          BASE_IMAGE_ARG: ${{ env.ACTUAL_BASE_IMAGE }}
-        run: |
-          docker compose -f docker-compose.test.yml up --build --exit-code-from sut
-          docker compose -f docker-compose.secret-test.yml up --build --exit-code-from sut
-
       - name: DockerHub Login
         if: github.event_name != 'pull_request'
+        timeout-minutes: 5
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Build native test image
+        timeout-minutes: 60
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: bash build/test-release.sh build
+
+      - name: Test Engine Images
+        timeout-minutes: 30
+        run: bash build/test-release.sh integration
+
+      - name: Test Docker secrets
+        timeout-minutes: 15
+        run: bash build/test-release.sh secrets
+
       - name: Build and push
         if: github.event_name != 'pull_request'
+        timeout-minutes: 90
         uses: docker/build-push-action@v6
         env:
           DOCKER_BUILDKIT: 1
@@ -362,3 +408,23 @@ jobs:
             BASE_IMAGE_ARG=${{ env.ACTUAL_BASE_IMAGE }}
           platforms: ${{ env.arch_platforms }}
           tags: ${{ env.IMAGE_TAG }}
+
+      - name: Collect failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        run: bash build/test-release.sh diagnostics
+
+      - name: Upload failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+          path: ${{ env.RELEASE_DIAGNOSTICS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Clean up test containers
+        if: ${{ always() }}
+        timeout-minutes: 3
+        run: bash build/test-release.sh cleanup
