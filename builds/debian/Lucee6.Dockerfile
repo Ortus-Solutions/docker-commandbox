@@ -6,7 +6,7 @@ FROM ${BASE_IMAGE_ARG}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-ENV BOX_SERVER_APP_CFENGINE=lucee@6.2.7+16
+ENV BOX_SERVER_APP_CFENGINE=lucee@6.2.8+20
 
 ENV LUCEE_EXTENSIONS=D062D72F-F8A2-46F0-8CBC91325B2F067B;version=6.5.2
 

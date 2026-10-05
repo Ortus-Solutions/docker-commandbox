@@ -7,6 +7,6 @@ LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 
-ENV BOX_SERVER_APP_CFENGINE=boxlang@1.17.6
+ENV BOX_SERVER_APP_CFENGINE=boxlang@1.18.6+62
 
 RUN ${BUILD_DIR}/util/warmup-server.sh

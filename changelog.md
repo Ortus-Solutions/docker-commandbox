@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- BoxLang to `1.17.6`
-- Breaking: Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.
-- Breaking: Image-managed binaries, libraries, build scripts, CommandBox, BoxLang, and server engines now use `/opt`. Default server home is `/opt/lib/serverHome`; build scripts are in `/opt/build`.
-- Breaking: All images now default to non-root `commandbox:runwar` (UID/GID `1000:1000`). Runtime `USER`/`USER_ID` account creation and ownership changes have been removed; use native Docker/Compose user selection with primary or supplementary GID `1000`.
-- Breaking: Generated and finalized startup files now live in `/opt/commandbox/run` (`STARTUP_DIR`), leaving image binaries and scripts root-owned and non-writable. Finalized startup preserves its baked configuration and records the server home in `startup-final.env`.
+- BoxLang image to `1.18.6+62`
+- Lucee 7 image bumped to `7.1.0+204`
+- Lucee 6 image bumped to `6.2.8+20`
+- *Breaking:* Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.
+- *Breaking:* Image-managed binaries, libraries, build scripts, CommandBox, BoxLang, and server engines now use `/opt`. Default server home is `/opt/lib/serverHome`; build scripts are in `/opt/build`.
+- *Breaking:* All images now default to non-root `commandbox:runwar` (UID/GID `1000:1000`). Runtime `USER`/`USER_ID` account creation and ownership changes have been removed; use native Docker/Compose user selection with primary or supplementary GID `1000`.
+- *Breaking:* Generated and finalized startup files now live in `/opt/commandbox/run` (`STARTUP_DIR`), leaving image binaries and scripts root-owned and non-writable. Finalized startup preserves its baked configuration and records the server home in `startup-final.env`.
 - Runtime state uses shared-group permissions, setgid directories, and `umask 0002`. Privileged OS cleanup runs only during base installation; engine warmup and package cleanup run non-root. Bind mounts and reused volumes must be prepared before startup.
 - Updated Compose mounts, test commands, Filebeat defaults, and progressive-build examples for the new layout. Existing persisted data is not automatically migrated, and old default paths have no compatibility aliases.
 
