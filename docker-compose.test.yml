@@ -6,6 +6,7 @@ version: '3.1'
 
 services:
   sut:
+    image: ${TEST_IMAGE:-docker-commandbox-sut:latest}
     environment:
       IMAGE_TESTING_IN_PROGRESS: "true"
     build:
@@ -15,7 +16,9 @@ services:
         - COMMANDBOX_VERSION
         - BASE_IMAGE_ARG
     command: /opt/build/test.sh
-    #Mount our test directory ( and our build directory to make local testing easier )
     volumes:
-      - ./test:/srv/app
-      - ./build:/opt/build
+      - test-app:/srv/app
+      - ./build:/opt/build:ro
+
+volumes:
+  test-app:

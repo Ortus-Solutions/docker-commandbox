@@ -29,11 +29,9 @@ apt-get install -y \
 	} > "$BIN_DIR/docker-java-home"
 
 # Ensure all runwar users have permission on the java home
-chown $(whoami):${WORKGROUP} "$BIN_DIR/docker-java-home"
-chmod g+x "$BIN_DIR/docker-java-home"
+chmod 755 "$BIN_DIR/docker-java-home"
 
 # Ensure all runwar users have permission on the build scripts
-chown -R $(whoami):${WORKGROUP} $BUILD_DIR
 
 # Cleanup before the layer is committed
 apt-get clean autoclean

@@ -213,7 +213,7 @@ docker run -p 8080:8080 -p 8443:8443 -v "/path/to/your/app:/srv/app" ortussoluti
 By default the process ports of the container are `8080` (insecure) and `8443` (secure - if enabled in your `server.json`) so, once the container comes online, you may access your application via browser using the applicable port (which we explicitly exposed for external access in the `run` command above).  You may also specify different port arguments in your `run` command to assign what is to be used in the container and exposed.  This prevents conflicts with other instances in the Docker machine using those ports:
 
 ```
-docker run -p 80:80 -p 443:443 -e "PORT=80" -e "SSL_PORT=443" -v "/path/to/your/app:/srv/app" ortussolutions/commandbox
+docker run -p 80:8080 -p 443:8443 -v "/path/to/your/app:/srv/app" ortussolutions/commandbox
 ```
 
 ## Filesystem Migration
@@ -229,7 +229,8 @@ This major release uses the same default locations on Debian, Alpine, and RHEL:
 | `COMMANDBOX_HOME` | `/opt/commandbox` |
 | `BOXLANG_HOME` and `BOXLANG_INSTALL_HOME` | `/opt/boxlang` |
 | Server home | `/opt/lib/serverHome` |
-| Downloaded Java logging classes | `/opt/lib/java/classes` |
+| `HOME` | `/home/commandbox` |
+| `STARTUP_DIR` | `/opt/commandbox/run` |
 
 OS-managed packages and the inherited Java installation retain their upstream locations. CommandBox and engine-managed caches, logs, and configuration retain their internal structure within the new package homes.
 
@@ -237,7 +238,31 @@ Before upgrading, update application volume destinations from `/app` to `/srv/ap
 
 There are no compatibility aliases for the old application, build, or package-home defaults, and startup does not move existing data. Back up persisted state and explicitly copy or remount it at the new locations before upgrading. Explicit `APP_DIR` and `BOX_SERVER_APP_SERVERHOMEDIRECTORY` overrides remain supported; mount the application and server state at those chosen paths. Changing an installation-path variable at runtime does not relocate packages already baked into an image.
 
-With `USER` and `USER_ID`, startup creates or reuses the account and adjusts ownership of the application, image scripts, package homes, and effective server home before switching users. CommandBox and BoxLang stay at their configured locations; they are not moved into `/home/<user>`. This also applies to finalized startup. Bind-mount ownership changes can affect host files, so choose the matching UID and use writable volumes. The entrypoint must start with permission to create users and adjust ownership; this is not equivalent to Docker's `--user` option. Custom `BIN_DIR` values must identify an image-owned, writable directory, not a system binary directory.
+### Runtime User
+
+All images run as `commandbox:runwar` with UID/GID `1000:1000` by default. The `USER` and `USER_ID` environment variables no longer select an identity. Use Docker `--user`, Compose `user`, or your orchestrator's security context instead. Startup never creates accounts, switches users, moves package homes, or changes ownership.
+
+Application files, `HOME`, CommandBox and BoxLang homes, server state, and `STARTUP_DIR` are writable by the shared `runwar` group. Writable directories inherit GID `1000`, and startup uses `umask 0002`. `/opt/bin`, `/opt/build`, and the inherited Java installation remain root-owned and non-writable. BoxLang's installed CLI and writable state currently share `/opt/boxlang`.
+
+An alternate numeric UID does not need a passwd entry, but must retain access to shared GID `1000`:
+
+```bash
+docker run --user 1002:1000 -p 8080:8080 ortussolutions/commandbox:lucee6
+docker run --user 1002:1002 --group-add 1000 -p 8080:8080 ortussolutions/commandbox:lucee6
+```
+
+```yaml
+services:
+  app:
+    image: ortussolutions/commandbox:lucee6
+    user: "1002:1002"
+    group_add:
+      - "1000"
+```
+
+Bind mounts replace image permissions. Prepare them on the host so the selected UID or GID `1000` can read and write the application and any custom server home. Alternatively, use a matching host UID with `--user "$(id -u):1000"`. Fresh named volumes inherit the image's permissions; reused volumes do not. Back up and explicitly update ownership/group access on existing volumes before upgrading. Startup fails with a permission diagnostic instead of modifying mounted ownership.
+
+Generated scripts and finalized metadata now live in `STARTUP_DIR`, not `BIN_DIR`. Rebuild finalized images against this release; preserve both `startup-final.sh` and `startup-final.env` when copying finalized artifacts.
 
 ## Environment Variables
 
@@ -267,13 +292,12 @@ The following environment variables may be provided to modify your runtime serve
 
 - `BOX_SERVER_APP_SERVERHOMEDIRECTORY` - When provided, a custom path to your server home directory will be assigned. The default is `${LIB_DIR}/serverHome`, resolving to `/opt/lib/serverHome` on every distribution. An explicit environment value takes precedence over `app.serverHomeDirectory` in `server.json`; relative paths are resolved from `APP_DIR`.
 - `APP_DIR` - Application directory (web root). By default, this is `/srv/app`. If you are deploying an application with mappings outside of the root, provide this variable to point to the webroot (e.g. `/srv/app/wwwroot`).
-- `USER` - When provided the server process will run under the provided user account name
-- `USER_ID` - Numeric. When provided in conjunction with a `USER` environment variable, the UID of the user will be assigned this number. This can be useful for ensuring permissions of mounted volumes and files
+- `STARTUP_DIR` - Writable directory for generated scripts and finalized metadata. Defaults to `/opt/commandbox/run`; a custom location must be writable by the container identity.
 - `cfconfig_[engine setting]` - Any environment variable provided which includes the `cfconfig_` prefix will be determined to be a `cfconfig` setting and the value after the prefix is presumed to be the setting name.
 - `BOX_SERVER_CFCONFIGFILE` - A `cfconfig`-compatible JSON file may be provided with this environment variable. The file will be loaded and applied to your server. If an `adminPassword` key exists, it will be applied as the Server and Web context passwords for Lucee engines. You may instead add a `.cfconfig.json` file to the root of the `APP_DIR` and it will be picked up automatically.
 - `BOX_SERVER_APP_CFENGINE` - Using the `server.json` syntax, allows you to specify the CFML engine for your container (e.g. `lucee@5`). Defaults to the CommandBox default (currently `lucee@4.5`)
 - `BOX_SERVER_RUNWAR_CONSOLE_APPENDERLAYOUT` - When setting this to `JSONTemplateLayout`, the log output of the container will be in [`ndjson`](http://ndjson.org/). For more information on this setting, please see [the CommandBox documentation on customizing log layouts](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/console-log-layout#customize-layout)
-- `FINALIZE_STARTUP` - When provided, generates `/opt/bin/startup-final.sh`, which is authoritative on subsequent startup. `/opt/bin/startup-final.env` records its server home for ownership initialization. Server configuration is not reevaluated, but custom-user creation and permission adjustments still run. Preserve both files when copying finalized artifacts to another full CommandBox image.
+- `FINALIZE_STARTUP` - When provided, generates `${STARTUP_DIR}/startup-final.sh`, which is authoritative on subsequent startup. `${STARTUP_DIR}/startup-final.env` records its baked server home. Server configuration is not reevaluated; no accounts or ownership are changed. Preserve both files when copying finalized artifacts to another full CommandBox image.
 - `BOX_SERVER_PROFILE` - When set, this will be applied as the runtime [CommandBox server profile](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/server-profiles). By default, CommandBox will set this value to the `production` mode, since the container server binds to all interfaces on `0.0.0.0`. If you wish a lower level of security, you will need to provide this variable or set it in your `server.json` file.
 - `BOX_SERVER_WEB_REWRITES_ENABLE` - A boolean value, specifying whether URL rewrites will be enabled/disabled on the server. Setting this environment variable will overwrite any settings within the app's `server.json` file.
 - `CFPM_INSTALL` and `CFPM_UNINSTALL` - Supported for Adobe Coldfusion 2021+ engines. When provided as a delimited list of [Coldfusion Package Manager](https://helpx.adobe.com/coldfusion/using/coldfusion-package-manager.html) packages, these will be installed (or uninstalled, respectively), prior to the server start. A warmed-up server is required to use these variables.
@@ -511,8 +535,8 @@ BOX_SERVER_WEB_REWRITES_ENABLE=true
 
 **Solutions**:
 
-- Set the correct user: `-e "USER_ID=$(id -u)" -e "USER=$(whoami)"`
-- Check file permissions on the host system
+- Select a native UID while retaining shared group access: `--user "$(id -u):1000"`
+- Prepare host and reused-volume permissions for the selected UID or GID `1000`; startup does not repair ownership
 - Use absolute paths for volume mounts
 
 #### Engine Download Failures
@@ -594,10 +618,9 @@ docker run --network commandbox-net -p 8080:8080 ortussolutions/commandbox:adobe
 #### User Management
 
 ```bash
-# Run as non-root user
+# The image already defaults to commandbox (1000:1000); optionally override its UID
 docker run -p 8080:8080 \
-  -e "USER=appuser" \
-  -e "USER_ID=1000" \
+  --user 1002:1000 \
   -v "$(pwd):/srv/app" \
   ortussolutions/commandbox:lucee6
 ```
@@ -680,6 +703,7 @@ spec:
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
+        runAsGroup: 1000
         fsGroup: 1000
       containers:
       - name: commandbox
@@ -691,6 +715,8 @@ spec:
             drop:
             - ALL
 ```
+
+With `readOnlyRootFilesystem: true`, provide writable volumes for the application, `HOME`, CommandBox and BoxLang homes, server home, and `/tmp`. `STARTUP_DIR` is within the CommandBox home unless overridden. Initialize these volumes with the required application/runtime files and group access before startup.
 
 ## Best Practices and Customization
 
@@ -720,6 +746,17 @@ RUN ${BUILD_DIR}/util/warmup-server.sh
 
 We recommend using the pre-tagged images as your base, rather than starting from scratch.
 
+Derived images inherit the non-root user. Use an explicit root section only for privileged installation, then restore the runtime identity:
+
+```dockerfile
+FROM ortussolutions/commandbox:lucee6
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+USER commandbox:runwar
+```
+
+Use `COPY --chown=commandbox:runwar` for writable application files. After copying, `RUN bash "$BUILD_DIR/util/prepare-runtime.sh"` restores shared-group write access and setgid directories for native UID overrides. Engine warmup also normalizes its generated files without needing root.
+
 ### Optimizing Startup Times
 
 Because, with the exception of the CommandBox default engine of Lucee 5, the CFML server engines are downloaded and installed at container runtime. This can result in significant startup time increases (even with Lucee 5 already downloaded in the base image, there is a time penalty for a "cold start"). It is recommended that builds for production use employ an engine-specific variation for the build, which ensures the server is downloaded, in place, and warmed up on container start.
@@ -730,7 +767,8 @@ For a basic example, the following will suffice:
 FROM ortussolutions/commandbox:lucee6
 
 # Copy application files to root
-COPY ./ ${APP_DIR}/
+COPY --chown=commandbox:runwar ./ ${APP_DIR}/
+RUN bash "$BUILD_DIR/util/prepare-runtime.sh"
 ```
 
 In many cases, you will have tier-specific builds, with custom configuration options. The following employs a `build` directory, which includes additional configuration files for tier-based deployments:
@@ -741,10 +779,11 @@ FROM ortussolutions/commandbox:lucee6
 ARG CI_ENVIRONMENT_NAME
 
 # Copy application files to root
-COPY ./ ${APP_DIR}/
+COPY --chown=commandbox:runwar ./ ${APP_DIR}/
 
 # Copy tier-only files over
-COPY ./build/env/${CI_ENVIRONMENT_NAME}/tier/ ${APP_DIR}/
+COPY --chown=commandbox:runwar ./build/env/${CI_ENVIRONMENT_NAME}/tier/ ${APP_DIR}/
+RUN bash "$BUILD_DIR/util/prepare-runtime.sh"
 
 # Install our box.json dependencies
 RUN cd ${APP_DIR} && box install
@@ -769,41 +808,7 @@ As of v3.0.0 of the image you can create multi-stage builds which include only a
 
 A finalized image reduces container startup times by up to 80% and reduces the final image size by up to 50%. Multi-stage builds are ideal for creating production images. The environment variable `FINALIZE_STARTUP`, when provided, will only generate the startup script. The script written is considered authoritative and will be used on the next container start.
 
-To leverage this with a multi-stage build:
-
-```dockerfile
-ARG BASE_IMAGE_ARG=ortussolutions/commandbox:lucee6
-FROM ${BASE_IMAGE_ARG} as workbench
-
-# Generate the startup script only
-ENV FINALIZE_STARTUP=true
-RUN $BUILD_DIR/run.sh && \
-  mkdir -p /tmp/runtime && \
-  cp --parents "$(jq -r '.runwarJarPath' "$LIB_DIR/serverHome/serverInfo.json")" /tmp/runtime
-
-FROM eclipse-temurin:21-jre-noble as app
-
-# COPY our generated files
-COPY --from=workbench /srv/app /srv/app
-COPY --from=workbench /opt/lib/serverHome /opt/lib/serverHome
-COPY --from=workbench /tmp/runtime/ /
-COPY --from=workbench /opt/lib/java/classes /opt/lib/java/classes
-COPY --from=workbench /opt/build/resources /opt/build/resources
-COPY --from=workbench /opt/bin/startup-final.sh /opt/bin/run.sh
-
-# Restore working directory environment
-ENV APP_DIR=/srv/app
-ENV CLASSPATH=/opt/lib/java/classes
-ENV JAVA_TOOL_OPTIONS=-Djava.util.logging.config.file=/opt/build/resources/text.logging.properties
-ENV PORT=8080
-WORKDIR $APP_DIR
-
-# Restore the healthcheck, since that doesn't transfer from the first stage
-ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/"
-HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCHECK_URI} || exit 1
-
-CMD ["/opt/bin/run.sh"]
-```
+Use the complete [progressive-build example](resources/examples/ProgressiveBuild.Dockerfile). Its final stage creates `commandbox:runwar` independently, copies the generated startup artifacts from `/opt/commandbox/run`, and sets ownership and shared-group permissions before selecting the non-root `USER`. The builder's account and `USER` instruction do not transfer between stages. Restore any required healthcheck in your final stage as well.
 
 ### Single-Stage With Script Finalization
 

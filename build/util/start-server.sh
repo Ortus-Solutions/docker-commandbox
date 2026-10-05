@@ -38,7 +38,7 @@ if [[ "${SKIP_PORTS}" == "true" ]]; then
 		dryRun=${DRY_RUN_FLAG} \
 		console=${DRY_RUN_FLAG} \
 		startScript=${SCRIPT_TYPE} \
-		startScriptFile=${APP_DIR}/server-start.sh \
+		startScriptFile=${STARTUP_DIR}/startup.sh \
 		verbose=true )"
 else
 	logMessage "INFO" "Seeding final startup file with environment variables:"
@@ -53,7 +53,7 @@ else
 		dryRun=${DRY_RUN_FLAG} \
 		console=${DRY_RUN_FLAG} \
 		startScript=${SCRIPT_TYPE} \
-		startScriptFile=${APP_DIR}/server-start.sh \
+		startScriptFile=${STARTUP_DIR}/startup.sh \
 		verbose=true )"
 fi
 
@@ -67,23 +67,21 @@ if [[ ! $IMAGE_TESTING_IN_PROGRESS ]]; then
 
     if [[ ! $FINALIZE_STARTUP ]]; then
 
-        logMessage "INFO" "Starting server using generated script: ${BIN_DIR}/startup.sh"
+		logMessage "INFO" "Starting server using generated script: ${STARTUP_DIR}/startup.sh"
 
-        mv $APP_DIR/server-start.sh $BIN_DIR/startup.sh
+		chmod +x "$STARTUP_DIR/startup.sh"
 
-        chmod +x $BIN_DIR/startup.sh
-
-        . $BIN_DIR/startup.sh
+		. "$STARTUP_DIR/startup.sh"
 
     else
 
-        logMessage "INFO" "Seeding finalized server startup script to ${BIN_DIR}/startup-final.sh"
+		logMessage "INFO" "Seeding finalized server startup script to ${STARTUP_DIR}/startup-final.sh"
 
         # If our image is being finalized, then we move the script to the terminal script location, which bypasses re-evaluation
-        mv $APP_DIR/server-start.sh $BIN_DIR/startup-final.sh
+		mv "$STARTUP_DIR/startup.sh" "$STARTUP_DIR/startup-final.sh"
 
-        chmod +x $BIN_DIR/startup-final.sh
-		printf 'export BOX_SERVER_APP_SERVERHOMEDIRECTORY=%q\n' "$BOX_SERVER_APP_SERVERHOMEDIRECTORY" > "$BIN_DIR/startup-final.env"
+		chmod +x "$STARTUP_DIR/startup-final.sh"
+		printf 'export BOX_SERVER_APP_SERVERHOMEDIRECTORY=%q\n' "$BOX_SERVER_APP_SERVERHOMEDIRECTORY" > "$STARTUP_DIR/startup-final.env"
 
     fi
 

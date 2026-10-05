@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+umask 0002
 
 ## Logger mixin
 . $BUILD_DIR/util/log.sh
@@ -54,57 +55,27 @@ configureServer () {
 }
 
 # If we have a finalized startup script bypass all further evaluation and use it authoritatively
-if [[ -f $BIN_DIR/startup-final.sh ]]; then
-	if [[ -f $BIN_DIR/startup-final.env ]]; then
-		. "$BIN_DIR/startup-final.env"
+if [[ -f $STARTUP_DIR/startup-final.sh ]]; then
+	if [[ -f $STARTUP_DIR/startup-final.env ]]; then
+		. "$STARTUP_DIR/startup-final.env"
 	fi
 	export BOX_SERVER_APP_SERVERHOMEDIRECTORY="${BOX_SERVER_APP_SERVERHOMEDIRECTORY:=${LIB_DIR}/serverHome}"
 else
 	configureServer
 fi
 
-# If a custom user is requested set it before we begin
-if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
-	logMessage 'INFO' "Configuration set to non-root user: ${USER}"
-	export USER_ID=${USER_ID:-1001}
-	export HOME=/home/$USER
-
-	if ! id -u "$USER" > /dev/null 2>&1; then
-		if [[ -f /etc/alpine-release ]]; then
-			adduser "$USER" --uid "$USER_ID" --home "$HOME" --disabled-password --ingroup "$WORKGROUP"
-		else
-			useradd -u "$USER_ID" "$USER"
-		fi
+for runtimePath in "$HOME" "$APP_DIR" "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$STARTUP_DIR" "$BOX_SERVER_APP_SERVERHOMEDIRECTORY"; do
+	if ! mkdir -p "$runtimePath" || [[ ! -w $runtimePath || ! -x $runtimePath ]]; then
+		logMessage 'ERROR' "Runtime directory is not writable by UID $(id -u): $runtimePath. Grant this UID or shared GID 1000 write access before starting the container."
+		exit 1
 	fi
-	usermod -a -G "$WORKGROUP" "$USER"
-	mkdir -p "$HOME" "$COMMANDBOX_HOME" "$BOXLANG_HOME" "${BOXLANG_INSTALL_HOME:-$BOXLANG_HOME}" "$BOX_SERVER_APP_SERVERHOMEDIRECTORY"
+done
 
-	# Ensure permissions on relevant directories and any files created previously
-	chown -R "$USER:$WORKGROUP" "$HOME" "$APP_DIR" "$BUILD_DIR" \
-		"$COMMANDBOX_HOME" "$BOXLANG_HOME" "${BOXLANG_INSTALL_HOME:-$BOXLANG_HOME}" "$BOX_SERVER_APP_SERVERHOMEDIRECTORY"
-	case "$BIN_DIR" in
-		/bin|/sbin|/usr/bin|/usr/sbin|/usr/local/bin|/usr/local/sbin)
-			logMessage 'ERROR' 'BIN_DIR must be an image-owned directory for custom-user startup, such as /opt/bin'
-			exit 1
-			;;
-	esac
-	chown -R "root:$WORKGROUP" "$BIN_DIR"
-	chmod g+rwx "$BIN_DIR"
-
-	printf -v userCommand 'export PATH=%q; exec %q' "$PATH" "$BUILD_DIR/run.sh"
-	if [[ -f /etc/alpine-release ]]; then
-		su -p -c "$userCommand" "$USER"
-	else
-		su --preserve-environment -c "$userCommand" "$USER"
-	fi
-	exit
-fi
-
-if [[ -f $BIN_DIR/startup-final.sh ]]; then
-	. "$BIN_DIR/startup-final.sh"
+if [[ -f $STARTUP_DIR/startup-final.sh ]]; then
+	. "$STARTUP_DIR/startup-final.sh"
 else
 	# Remove any previous generated startup scripts so that the config is re-read
-	rm -f "$BIN_DIR/startup.sh"
+	rm -f "$STARTUP_DIR/startup.sh"
 
 	# If box install flag is up, do installation
 	if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then

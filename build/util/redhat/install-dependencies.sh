@@ -29,12 +29,7 @@ microdnf install -y \
 		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
 	} > "$BIN_DIR/docker-java-home"
 
-# Ensure all runwar users have permission on the java home
-chown $(whoami):${WORKGROUP} "$BIN_DIR/docker-java-home"
-chmod g+x "$BIN_DIR/docker-java-home"
-
-# Ensure all runwar users have permission on the build scripts
-chown -R $(whoami):${WORKGROUP} $BUILD_DIR
+chmod 755 "$BIN_DIR/docker-java-home"
 
 # Cleanup before the layer is committed
 microdnf clean all

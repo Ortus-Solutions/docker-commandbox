@@ -8,14 +8,12 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 # Default to UTF-8 file.encoding
 ENV LANG=C.UTF-8
 
-# Since alpine runs as a single user, we need to create a "root" direcotry
-ENV HOME=/root
+ENV HOME=/home/commandbox
 
 RUN microdnf install -y shadow-utils util-linux
 
-# Add a working group which any dynamic users can be assigned
+# Shared runtime group
 ENV WORKGROUP=runwar
-RUN groupadd $WORKGROUP && usermod -a -G $WORKGROUP root
 
 ### Directory Mappings ###
 # BIN_DIR = Where the box binary goes
@@ -32,10 +30,11 @@ WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
 ENV COMMANDBOX_HOME=/opt/commandbox
+ENV STARTUP_DIR=$COMMANDBOX_HOME/run
 
 # BOXLANG HOME = Where BoxLang Lives
 ENV BOXLANG_HOME=/opt/boxlang
-RUN mkdir -p "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome"
+RUN mkdir -p "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome" "$HOME" "$STARTUP_DIR"
 
 # APP_DIR = the directory where the application runs
 ENV APP_DIR=/srv/app
@@ -46,10 +45,6 @@ COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
 RUN chmod +x $BUILD_DIR/*.sh
 
-# Ensure all runwar users have permission on the build scripts
-RUN chown -R $(whoami):${WORKGROUP} $BUILD_DIR
-
-
 # Basic Dependencies
 RUN rm -rf $BUILD_DIR/util/alpine
 RUN rm -rf $BUILD_DIR/util/debian
@@ -58,6 +53,7 @@ RUN ${BUILD_DIR}/util/redhat/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
+RUN bash "$BUILD_DIR/util/prepare-runtime.sh"
 
 # Add our custom classes added in the previous step to the java classpath
 ENV CLASSPATH="$LIB_DIR/java/classes"
@@ -76,4 +72,5 @@ HEALTHCHECK --interval=20s --timeout=30s --retries=15 CMD curl --fail ${HEALTHCH
 
 EXPOSE ${PORT} ${SSL_PORT}
 
+USER commandbox:runwar
 CMD $BUILD_DIR/run.sh

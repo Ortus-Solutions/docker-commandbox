@@ -22,4 +22,8 @@ box config set server.singleServerMode=true
 # Set our log pattern to be ISO with timezone info, as containers might be running in different zones
 box config set server.defaults.runwar.console.appenderLayoutOptions.pattern="[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n"
 
+cp "$BOXLANG_INSTALL_HOME/bin/box" "$BIN_DIR/box"
+chmod 755 "$BIN_DIR/box"
 $BUILD_DIR/util/optimize.sh
+rm -rf /var/lib/{cache,log}/
+rm -rf /usr/share/icons /usr/share/doc /usr/share/man /usr/share/locale /tmp/*.*

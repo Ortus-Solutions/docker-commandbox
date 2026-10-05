@@ -131,22 +131,17 @@ if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
 	printf "\n\n*******************\n\n"
 fi
 
-# USER Variable
 echo "Tests the ability to specify a custom webroot"
 
 ./tests/test.webroot.sh
 
 echo "Alternate webroot tests completed successfully"
 
-# USER Variable
-echo "Tests the ability to specify a custom runtime user and identifier"
-
-# sleep for a second to ensure PIDs from the previous server start are cleared
-sleep 3
+echo "Tests repeated startup using the container identity"
 
 ./tests/test.user.sh
 
-echo "USER environment variable tests completed successfully"
+echo "Native-user tests completed successfully"
 
 printf "\n\n*******************\n\n"
 cd $BUILD_DIR

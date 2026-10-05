@@ -9,7 +9,7 @@ fi
 if [[ $logFormat = 'JSONTemplateLayout' ]]; then
     export JAVA_TOOL_OPTIONS="-Dlogging.structured-format.console=ECS $JAVA_TOOL_OPTIONS"
 else
-    export JAVA_TOOL_OPTIONS="-Djava.util.logging.SimpleFormatter.format=[%4\$s] %1\$tFT%1\$tT.%1\$tL%1\$tz - %5\$s%n $JAVA_TOOL_OPTIONS"
+    export JAVA_TOOL_OPTIONS="-Djava.util.logging.SimpleFormatter.format=\"[%4\$s] %1\$tFT%1\$tT.%1\$tL%1\$tz - %5\$s%n\" $JAVA_TOOL_OPTIONS"
 fi
 
 # Global logger function

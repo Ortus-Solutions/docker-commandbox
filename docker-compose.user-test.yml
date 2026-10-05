@@ -1,0 +1,7 @@
+services:
+  sut:
+    user: ${TEST_USER:-1002:1000}
+    group_add:
+      - "1000"
+    environment:
+      EXPECTED_UID: "1002"

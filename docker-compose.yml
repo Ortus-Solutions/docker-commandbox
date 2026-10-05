@@ -8,6 +8,6 @@ services:
       cfconfig_adminPassword: testing
     volumes:
       - ./test:/srv/app
-      - ./build:/opt/build
+      - ./build:/opt/build:ro
     ports:
       - "8080:8080"

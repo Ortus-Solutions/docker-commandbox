@@ -10,11 +10,10 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 # Default to UTF-8 file.encoding
 ENV LANG=C.UTF-8
 
-# Since alpine runs as a single user, we need to create a "root" direcotry
-ENV HOME=/root
+ENV HOME=/home/commandbox
 
-# Alpine workgroup is root group
-ENV WORKGROUP=root
+# Shared runtime group
+ENV WORKGROUP=runwar
 
 # Flag as an alpine release
 RUN touch /etc/alpine-release
@@ -39,16 +38,15 @@ WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
 ENV COMMANDBOX_HOME=/opt/commandbox
+ENV STARTUP_DIR=$COMMANDBOX_HOME/run
 
 # BOXLANG HOME = Where BoxLang Lives
 ENV BOXLANG_HOME=/opt/boxlang
-RUN mkdir -p "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome"
+RUN mkdir -p "$COMMANDBOX_HOME" "$BOXLANG_HOME" "$LIB_DIR/serverHome" "$HOME" "$STARTUP_DIR"
 
 # Copy file system
 COPY ./test/ ${APP_DIR}/
 COPY ./build/ ${BUILD_DIR}/
-# Ensure all workgroup users have permission on the build scripts
-RUN chown -R nobody:${WORKGROUP} $BUILD_DIR
 RUN chmod -R +x $BUILD_DIR
 
 
@@ -59,6 +57,7 @@ RUN $BUILD_DIR/util/alpine/install-dependencies.sh
 
 # Commandbox Installation
 RUN $BUILD_DIR/util/install-commandbox.sh
+RUN bash "$BUILD_DIR/util/prepare-runtime.sh"
 
 # Add our custom classes added in the previous step to the java classpath
 ENV CLASSPATH="$LIB_DIR/java/classes"
@@ -78,4 +77,5 @@ EXPOSE ${PORT} ${SSL_PORT}
 
 WORKDIR $APP_DIR
 
+USER commandbox:runwar
 CMD $BUILD_DIR/run.sh
