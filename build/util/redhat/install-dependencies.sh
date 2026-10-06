@@ -8,16 +8,18 @@ microdnf upgrade -y \
 			--noplugins \
 			--setopt=install_weak_deps=0
 
+for package in gnupg2 wget; do
+	if rpm -q "$package" >/dev/null 2>&1; then
+		microdnf remove -y "$package"
+	fi
+done
+
 microdnf install -y \
+				--setopt=install_weak_deps=0 \
+				shadow-utils \
                 jq \
-                procps \
-                which \
-                wget \
-                bzip2 \
                 zip \
                 unzip \
-                gnupg \
-                readline \
                 fontconfig
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
@@ -26,7 +28,7 @@ microdnf install -y \
 		echo '#!/bin/sh'; \
 		echo 'set -e'; \
 		echo; \
-		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
+		echo 'dirname "$(dirname "$(readlink -f "$(command -v javac || command -v java)")")"'; \
 	} > "$BIN_DIR/docker-java-home"
 
 chmod 755 "$BIN_DIR/docker-java-home"

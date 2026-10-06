@@ -192,6 +192,18 @@ You may also [specify a custom WAR for deployment](https://commandbox.ortusbooks
 
 All Debian-based images currently support `linux/amd64`, `linux/arm64` and `linux/arm/v7` architecture. Alpine builds are currently only supported on `linux/amd64` and `linux/arm64` architectures.  The UBI10 builds are supported on `linux/amd64` and `linux/arm64` architectures.
 
+## OS Dependencies
+
+The images retain `jq`, `zip`, `unzip`, and `fontconfig`, plus tools and libraries required for CommandBox installation, TLS downloads, health checks, Java, and build-time account creation. Alpine also retains `openssl` for Temurin's optional system-certificate import and the C/C++ runtime libraries. Java's headless font and image rendering does not require Alpine's GLib or X11 packages.
+
+Development headers (`libreadline-dev` and its libc/ncurses development dependencies), GPG build utilities, and unused archive/download/process utilities are not installed by the image scripts. GPG and wget utilities inherited from Temurin are removed on Ubuntu and RHEL where applicable. Applications needing additional native libraries, compilers, or debugging utilities should install them in their derived images.
+
+Each dependency installer refreshes its distribution repositories and upgrades installed packages. Ubuntu recommended packages and RHEL weak dependencies are disabled. Rebuild with `--pull --no-cache` to refresh the upstream image and rerun package upgrades rather than reusing an old dependency layer.
+
+Ubuntu's `curl` depends on the Kerberos libraries (`libgssapi-krb5-2`, `libkrb5-3`, and `libkrb5support0`). Other required packages can also bring in Kerberos on RHEL. These libraries must be updated through the supported distribution repositories, not deleted or replaced with libraries from a different distribution. A scanner finding without a vendor-fixed package version can remain after an upgrade; check the distribution advisory and the exact installed package revision before deciding on remediation.
+
+Run [the dependency checks](build/tests/test.dependencies.sh) with `bash build/tests/test.dependencies.sh`. They validate clean Temurin JRE/JDK installs for all three distributions, required tools, ZIP round trips, removed packages, and JDK headless font/image rendering. The default test platform is `linux/amd64`; `TEST_PLATFORM` and optional distro arguments (`debian`, `alpine`, `redhat`) select a narrower run.
+
 ## Usage
 
 This section assumes you are using the [Official Docker Image](https://hub.docker.com/r/ortussolutions/commandbox/)
@@ -567,7 +579,7 @@ docker logs -f <container_id>
 docker exec -it <container_id> /bin/bash
 
 # Check Java processes
-docker exec <container_id> ps aux | grep java
+docker top <container_id>
 
 # View CommandBox server info
 docker exec <container_id> box server info

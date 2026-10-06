@@ -131,6 +131,14 @@ if [[ $BOX_SERVER_APP_CFENGINE == *"adobe@2021"* ]];then
 	printf "\n\n*******************\n\n"
 fi
 
+echo "Tests PDF and image rendering on Adobe engines"
+
+./tests/test.adobe.pdf.sh
+
+echo "Adobe rendering tests completed"
+
+printf "\n\n*******************\n\n"
+
 echo "Tests the ability to specify a custom webroot"
 
 ./tests/test.webroot.sh

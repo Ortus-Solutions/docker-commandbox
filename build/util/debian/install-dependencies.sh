@@ -6,17 +6,14 @@ apt-get update
 # Upgrade all packages
 apt-get -y upgrade
 
-apt-get autoremove -y
+apt-get purge -y --auto-remove gnupg wget
 
-apt-get install -y \
-			apt-utils \
+apt-get install -y --no-install-recommends \
 			ca-certificates \
 			curl \
 			jq \
-			bzip2 \
+			zip \
 			unzip \
-			gnupg \
-			libreadline-dev \
 			fontconfig
 
 # add a simple script that can auto-detect the appropriate JAVA_HOME value
@@ -25,7 +22,7 @@ apt-get install -y \
 		echo '#!/bin/sh'; \
 		echo 'set -e'; \
 		echo; \
-		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
+		echo 'dirname "$(dirname "$(readlink -f "$(command -v javac || command -v java)")")"'; \
 	} > "$BIN_DIR/docker-java-home"
 
 # Ensure all runwar users have permission on the java home

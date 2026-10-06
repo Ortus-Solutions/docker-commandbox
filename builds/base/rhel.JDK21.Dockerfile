@@ -10,8 +10,6 @@ ENV LANG=C.UTF-8
 
 ENV HOME=/home/commandbox
 
-RUN microdnf install -y shadow-utils util-linux
-
 # Shared runtime group
 ENV WORKGROUP=runwar
 

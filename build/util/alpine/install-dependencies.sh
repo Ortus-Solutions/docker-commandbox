@@ -5,17 +5,14 @@ apk update
 
 apk upgrade
 
- apk add curl \
+apk add --no-cache curl \
 			jq \
 			bash \
+			zip \
+			unzip \
 			openssl \
 			libgcc \
 			libstdc++ \
-			libx11 \
-			glib \
-			libxrender \
-			libxext \
-			libintl \
 			shadow \
 			fontconfig \
 			&& rm -f /var/cache/apk/*
