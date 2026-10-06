@@ -14,24 +14,70 @@ All images are published to [Docker Hub](https://hub.docker.com/r/ortussolutions
 - [Available Tags](#available-tags)
   - [Quick Reference](#quick-reference)
   - [Base Images](#base-images-no-engine-pre-installed)
+    - [Standard Debian-based Images](#standard-debian-based-images)
+    - [JDK/JRE Variants (Debian)](#jdkjre-variants-debian)
+    - [Alpine Linux Variants](#alpine-linux-variants)
+    - [RHEL Universal Base Image (UBI10) Variants](#rhel-universal-base-image-ubi10-variants)
   - [Pre-Built Engine Images](#pre-built-engine-images-warmed-up)
+    - [BoxLang Runtime](#boxlang-runtime)
+    - [Lucee CFML Engine](#lucee-cfml-engine)
+    - [Adobe ColdFusion Engine](#adobe-coldfusion-engine)
   - [Choosing the Right Tag](#choosing-the-right-tag)
 - [Description](#description)
 - [Supported Engines](#supported-engines)
 - [Supported Architectures and Operating Systems](#supported-architectures-and-operating-systems)
+- [OS Dependencies](#os-dependencies)
 - [Usage](#usage)
+- [Filesystem Migration](#filesystem-migration)
+  - [Runtime User](#runtime-user)
 - [Environment Variables](#environment-variables)
 - [Port Variables](#port-variables)
 - [Load Balancer Configuration](#load-balancer-configuration)
 - [HTTP/2 Support](#http2-support)
 - [Server Configuration Variables](#server-configuration-variables)
+  - [Docker Runtime Variables](#docker-runtime-variables)
+  - [Deprecated Environment Variables](#deprecated-environment-variables)
 - [Docker Secrets](#docker-secrets)
+  - [`<<SECRET:*>>` Prefix](#secret-prefix)
+  - [`_FILE` Suffix conventions](#_file-suffix-conventions)
 - [Quick Start Examples](#quick-start-examples)
+  - [BoxLang Application](#boxlang-application)
+  - [Lucee Application with Custom Admin Password](#lucee-application-with-custom-admin-password)
+  - [Adobe ColdFusion with SSL](#adobe-coldfusion-with-ssl)
+  - [Development with Auto-reload](#development-with-auto-reload)
 - [Docker Compose Examples](#docker-compose-examples)
+  - [Basic Application Stack](#basic-application-stack)
+  - [Multi-Service Application with Database](#multi-service-application-with-database)
 - [Configuration Examples](#configuration-examples)
+  - [Server.json Configuration](#serverjson-configuration)
+  - [CFConfig Integration](#cfconfig-integration)
+  - [Environment File (.env)](#environment-file-env)
 - [Troubleshooting](#troubleshooting)
-- [Best Practices and Customization](#best-practices-and-customization)
+  - [Common Issues](#common-issues)
+    - [Container Exits Immediately](#container-exits-immediately)
+    - [Permission Denied Errors](#permission-denied-errors)
+    - [Engine Download Failures](#engine-download-failures)
+    - [Memory Issues](#memory-issues)
+  - [Debugging Commands](#debugging-commands)
+  - [Performance Tuning](#performance-tuning)
+    - [JVM Settings](#jvm-settings)
+    - [CommandBox Settings](#commandbox-settings)
 - [Security Considerations](#security-considerations)
+  - [Production Deployment](#production-deployment)
+    - [Network Security](#network-security)
+    - [User Management](#user-management)
+    - [Environment Variables and Secrets](#environment-variables-and-secrets)
+    - [Server Profile Settings](#server-profile-settings)
+    - [Health Check Security](#health-check-security)
+  - [Container Hardening](#container-hardening)
+    - [Read-Only File System](#read-only-file-system)
+    - [Resource Limits](#resource-limits)
+    - [Security Context](#security-context)
+- [Best Practices and Customization](#best-practices-and-customization)
+  - [Customizing Images](#customizing-images)
+  - [Optimizing Startup Times](#optimizing-startup-times)
+  - [Multi-Stage Builds](#multi-stage-builds)
+  - [Single-Stage With Script Finalization](#single-stage-with-script-finalization)
 - [Issues](#issues)
 - [License](#license)
 
@@ -226,29 +272,7 @@ By default the process ports of the container are `8080` (insecure) and `8443` (
 docker run -p 80:8080 -p 443:8443 -v "/path/to/your/app:/srv/app" ortussolutions/commandbox
 ```
 
-## Filesystem Migration
-
-This major release uses the same default locations on Debian, Alpine, and RHEL:
-
-| Setting | Default location |
-| --- | --- |
-| `APP_DIR` | `/srv/app` |
-| `BIN_DIR` | `/opt/bin` |
-| `LIB_DIR` | `/opt/lib` |
-| `BUILD_DIR` | `/opt/build` |
-| `COMMANDBOX_HOME` | `/opt/commandbox` |
-| `BOXLANG_HOME` and `BOXLANG_INSTALL_HOME` | `/opt/boxlang` |
-| Server home | `/opt/lib/serverHome` |
-| `HOME` | `/home/commandbox` |
-| `STARTUP_DIR` | `/opt/commandbox/run` |
-
-OS-managed packages and the inherited Java installation retain their upstream locations. CommandBox and engine-managed caches, logs, and configuration retain their internal structure within the new package homes.
-
-Before upgrading, update application volume destinations from `/app` to `/srv/app`, build-script mounts to `/opt/build`, and engine-state mounts to `/opt/lib/serverHome`. Update hardcoded `COPY`, `WORKDIR`, startup-script, and package-home paths in derived images. Prefer the existing path variables where possible. Rebuild derived images against the new major-version bases.
-
-There are no compatibility aliases for the old application, build, or package-home defaults, and startup does not move existing data. Back up persisted state and explicitly copy or remount it at the new locations before upgrading. Explicit `APP_DIR` and `BOX_SERVER_APP_SERVERHOMEDIRECTORY` overrides remain supported; mount the application and server state at those chosen paths. Changing an installation-path variable at runtime does not relocate packages already baked into an image.
-
-### Runtime User
+## Runtime User
 
 All images run as `commandbox:runwar` with UID/GID `1000:1000` by default. The `USER` and `USER_ID` environment variables no longer select an identity. Use Docker `--user`, Compose `user`, or your orchestrator's security context instead. Startup never creates accounts, switches users, moves package homes, or changes ownership.
 
@@ -367,6 +391,29 @@ secrets:
 When any environment variable is suffixed with `_FILE`, the right-hand assignment will be loaded and expanded as the environment variable prior to the suffix.  The most common use-case for this is in sourcing Docker secrets, however it may also be used to source runtime-mounted files as variables.
 
 For example the variable `REINIT_PASSWORD_FILE=/run/secrets/reinit_password` would source the contents of the right-hand file path in as the `REINIT_PASSWORD` environment variable.
+
+## Filesystem Locations
+
+Starting from version 4.0.0, the default locations, and their corresponding environment variables, for the CommandBox installation on Debian, Alpine, and RHEL are:
+
+| Setting | Default location |
+| --- | --- |
+| `APP_DIR` | `/srv/app` |
+| `BIN_DIR` | `/opt/bin` |
+| `LIB_DIR` | `/opt/lib` |
+| `BUILD_DIR` | `/opt/build` |
+| `COMMANDBOX_HOME` | `/opt/commandbox` |
+| `BOXLANG_HOME` and `BOXLANG_INSTALL_HOME` | `/opt/boxlang` |
+| Server home | `/opt/lib/serverHome` |
+| `HOME` | `/home/commandbox` |
+| `STARTUP_DIR` | `/opt/commandbox/run` |
+
+OS-managed packages and the inherited Java installation retain their upstream locations. CommandBox and engine-managed caches, logs, and configuration retain their internal structure within the new package homes.
+
+Before upgrading, update application volume destinations from `/app` to `/srv/app`, build-script mounts to `/opt/build`, and engine-state mounts to `/opt/lib/serverHome`. Update hardcoded `COPY`, `WORKDIR`, startup-script, and package-home paths in derived images. Prefer the existing path variables where possible. Rebuild derived images against the new major-version bases.
+
+There are no compatibility aliases for the old application, build, or package-home defaults, and startup does not move existing data. Back up persisted state and explicitly copy or remount it at the new locations before upgrading. Explicit `APP_DIR` and `BOX_SERVER_APP_SERVERHOMEDIRECTORY` overrides remain supported; mount the application and server state at those chosen paths. Changing an installation-path variable at runtime does not relocate packages already baked into an image.
+
 
 
 ## Quick Start Examples
