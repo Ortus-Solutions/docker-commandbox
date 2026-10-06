@@ -100,12 +100,7 @@ jobs:
             fi
           done
 
-          # Determine architecture platforms based on tag content
-          if [[ ${BUILD_IMAGE_TAGS} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"jdk21-alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"boxlang-alpine"* ]]; then
-            ARCH_PLATFORMS=linux/amd64
-          else
-            ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
-          fi
+          ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
 
           # Set output parameters.
           echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
@@ -349,11 +344,10 @@ jobs:
             fi
           done
 
-          # Determine architecture platforms based on tag content
-          if [[ ${BUILD_IMAGE_TAGS} == *"alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"jdk21-alpine"* ]] && [[ ${BUILD_IMAGE_TAGS} != *"boxlang-alpine"* ]]; then
+          ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
+          # Adobe 2023 requires Java 17, which Temurin does not publish for Alpine arm64
+          if [[ ${BUILD_IMAGE_TAGS} == "adobe2023-alpine" ]]; then
             ARCH_PLATFORMS=linux/amd64
-          else
-            ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
           fi
 
           # Set output parameters.

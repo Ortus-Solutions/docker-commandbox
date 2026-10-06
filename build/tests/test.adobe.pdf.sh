@@ -37,14 +37,14 @@ CFM
 export IMAGE_TESTING_IN_PROGRESS=true
 # cfdocument and cfimage need these optional Adobe packages; run via bash because the engine's scripts are not executable
 serverHome=${BOX_SERVER_APP_SERVERHOMEDIRECTORY:-$LIB_DIR/serverHome}
-bash "$serverHome/WEB-INF/cfusion/bin/cfpm.sh" install document,image
+bash "$serverHome/WEB-INF/cfusion/bin/cfpm.sh" install document,image,chart
 runOutput="$( ${BUILD_DIR}/run.sh )"
 printf '%s\n' "${runOutput}"
 $BUILD_DIR/tests/test.up.sh
 
 checkRender () {
 	local type=$1 magic=$2 output="$checkDir/$1.out"
-	if ! curl --fail --silent --show-error --max-time 180 "http://127.0.0.1:${PORT}/adobe-render-check.cfm?type=${type}" -o "$output"; then
+	if ! curl --fail --silent --show-error --max-time 180 -b "$checkDir/cookies" -c "$checkDir/cookies" "http://127.0.0.1:${PORT}/adobe-render-check.cfm?type=${type}" -o "$output"; then
 		echo "Adobe ${type} rendering request failed"
 		box server log || true
 		exit 1
@@ -61,6 +61,16 @@ checkRender () {
 checkRender pdf '%PDF-'
 # writeToBrowser returns an HTML img tag with the PNG data embedded
 checkRender image '<img'
-checkRender chart 'PNG'
+
+# cfchart returns an img tag for a PNG that is not served back in this setup, so only the response is checked here
+checkRender chart '_cf_chart/'
+
+# Rendering can fail asynchronously after the HTTP response, so check the log for missing native libraries
+# (a HeadlessException is logged by the engine with or without the Alpine X11 libraries, so it is not treated as a failure)
+sleep 35
+if box server log 2>&1 | grep -a -E 'UnsatisfiedLinkError|Could not initialize class'; then
+	echo "Adobe rendering logged native library errors"
+	exit 1
+fi
 
 box server stop

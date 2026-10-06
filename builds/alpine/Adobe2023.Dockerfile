@@ -5,11 +5,6 @@ FROM ${BASE_IMAGE_ARG}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
-# Native libraries used by Adobe's PDF/CFDocument and image rendering
-USER root
-RUN apk add --no-cache libx11 libxrender libxext glib libintl
-USER commandbox:runwar
-
 RUN box config set server.defaults.jvm.javaVersion=openjdk17_jdk_jdk
 
 #Hard Code our engine environment

@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lucee 7 image bumped to `7.1.0+204`
 - Lucee 6 image bumped to `6.2.8+20`
 - Removed builds and support for Adobe 2021 images
-- *Breaking:* Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.
+- Alpine engine images are now built for `linux/arm64/v8` in addition to `linux/amd64`, as the Temurin Java 21 Alpine bases publish arm64 builds- *Breaking:* Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.
 - *Breaking:* Image-managed binaries, libraries, build scripts, CommandBox, BoxLang, and server engines now use `/opt`. Default server home is `/opt/lib/serverHome`; build scripts are in `/opt/build`.
 - *Breaking:* All images now default to non-root `commandbox:runwar` (UID/GID `1000:1000`). Runtime `USER`/`USER_ID` account creation and ownership changes have been removed; use native Docker/Compose user selection with primary or supplementary GID `1000`.
 - *Breaking:* Generated and finalized startup files now live in `/opt/commandbox/run` (`STARTUP_DIR`), leaving image binaries and scripts root-owned and non-writable. Finalized startup preserves its baked configuration and records the server home in `startup-final.env`.
