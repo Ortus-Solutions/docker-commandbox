@@ -47,7 +47,7 @@ jobs:
         env:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
-          COMMANDBOX_VERSION: 7.0.18-beta
+          COMMANDBOX_VERSION: 7.0.23-beta
         run: |
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
           echo "BUILD_IMAGE_TAG=${TAG_ARRAY[0]}" >> $GITHUB_ENV
@@ -172,7 +172,7 @@ jobs:
         id: setup
         env:
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
-          COMMANDBOX_VERSION: 7.0.18-beta
+          COMMANDBOX_VERSION: 7.0.23-beta
         run: |
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
           echo "BUILD_IMAGE_TAG=${TAG_ARRAY[0]}" >> $GITHUB_ENV
