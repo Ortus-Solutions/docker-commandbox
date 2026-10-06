@@ -20,7 +20,7 @@ env_secret_expand() {
     local var="$1"
     eval local val=\$$var
     local secret_name=$(expr match "$val" "<<SECRET:\([^}]\+\)>>$")
-    
+
     if [[ $secret_name ]]; then
         local secret="${ENV_SECRETS_DIR}/${secret_name}"
     elif [[ ${var:(-5)} = '_FILE' ]]; then
@@ -34,7 +34,7 @@ env_secret_expand() {
             val=$(cat "${secret}")
             if [ $suffix ]; then
                 echo "Expanding from _FILE suffix"
-                var=$(echo $var | rev | cut -d '_' -f 2- | rev);
+                var=${var%_FILE};
             fi
             export "$var"="$val"
             env_secret_debug "Expanded variable: $var=$val"

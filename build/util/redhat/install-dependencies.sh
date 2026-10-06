@@ -17,6 +17,7 @@ done
 microdnf install -y \
 				--setopt=install_weak_deps=0 \
 				shadow-utils \
+                procps-ng \
                 jq \
                 zip \
                 unzip \
