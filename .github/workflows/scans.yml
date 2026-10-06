@@ -66,4 +66,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: ${{ steps.securityscan.outputs.sarif }}
-          category: "BoxLang-Runtime-${{ github.env.BRANCH }}"
+          category: "grype-${{ matrix.BUILD_IMAGE_TAGS }}"
