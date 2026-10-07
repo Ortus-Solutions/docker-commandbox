@@ -130,6 +130,8 @@ _Note: Image release versions are distinct from the CommandBox version packaged 
 - `:jre17` - OpenJDK 17 JRE
 - `:jdk17` - OpenJDK 17 JDK
 - `:jdk21` - OpenJDK 21 JDK
+- `:jre25` - OpenJDK 25 JRE (base image only)
+- `:jdk25` - OpenJDK 25 JDK (base image only)
 - `:jdk23` - OpenJDK 23 JDK
 - `:jdk24` - OpenJDK 24 JDK
 

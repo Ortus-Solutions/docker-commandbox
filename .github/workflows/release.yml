@@ -29,6 +29,10 @@ jobs:
             BUILD_IMAGE_TAGS: "latest,jre21"
           - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
             BUILD_IMAGE_TAGS: "jdk21"
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE25.Dockerfile
+            BUILD_IMAGE_TAGS: "jre25"
+          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK25.Dockerfile
+            BUILD_IMAGE_TAGS: "jdk25"
 
           # RHEL/UBI9 foundation images with promoted tags
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.Dockerfile
