@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [Unreleased]
+## [6.3.5/3.24.0]
 
 ### Changed
 - BoxLang image to `1.18.6+62`
@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added an Adobe ColdFusion regression check for `cfdocument`, `cfimage` and `cfchart` rendering, which confirmed that Adobe 2025 on Alpine does not need the removed GLib/X11 libraries.pine no longer installs GLib or X11 libraries; headless Java font/image rendering remains supported. Derived images must install any additional application or debugging dependencies they require.
 - All distributions now explicitly include `zip` and `unzip`. Ubuntu recommended packages and RHEL weak dependencies are disabled; required RHEL account tools are installed by the dependency script without the unused `util-linux` package.
 - Added clean-image dependency checks for all three distributions and both JRE/JDK variants, including headless font/image rendering.
+
+## [6.3.5/3.24.0]
+
+### Changed
+- BoxLang to `1.18.0`
+- Bump CommandBox to `6.3.5`
+- Bump ACF 2023 to `2023.0.26+331018`
+- Bump ACF 2025 to `2025.0.14+332029`
 
 ## [6.3.4/3.23.0]
 
