@@ -3,3 +3,4 @@ test/*.json
 /*.log
 /.vscode
 /workbench/alerts/modules
+/workbench/util
