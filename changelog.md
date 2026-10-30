@@ -6,10 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
-## [Unreleased]
+## [6.3.5/3.24.0]
 
 ### Changed
-- BoxLang to `1.17.6`
+- BoxLang to `1.18.0`
+- Bump CommandBox to `6.3.5`
+- Bump ACF 2023 to `2023.0.26+331018`
+- Bump ACF 2025 to `2025.0.14+332029`
 
 ## [6.3.4/3.23.0]
 
