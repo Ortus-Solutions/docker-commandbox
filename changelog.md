@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump CommandBox to `6.3.5`
 - Bump ACF 2023 to `2023.0.26+331018`
 - Bump ACF 2025 to `2025.0.14+332029`
+- Lucee 6 image bumped to `6.2.7+16`
+- Lucee 7 image bumped to `7.0.4+34`
 
 ## [6.3.4/3.23.0]
 
