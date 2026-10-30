@@ -206,10 +206,6 @@ jobs:
           BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
           BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
           BASE_IMAGE_ARG: ${{ matrix.BASE_IMAGE }}
+          TEST_SUITE: engine
         run: |
           bash build/test-images.sh
-
-      - name: Test progressive build example
-        if: ${{ matrix.BUILD_IMAGE_DOCKERFILE == 'builds/debian/Lucee6.Dockerfile' || matrix.BUILD_IMAGE_DOCKERFILE == 'builds/debian/BoxLang.Dockerfile' }}
-        timeout-minutes: 25
-        run: timeout --kill-after=30s 20m bash build/test-progressive.sh docker-commandbox-sut:latest

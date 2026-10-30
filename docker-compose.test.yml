@@ -13,7 +13,7 @@ services:
       args :
         - COMMANDBOX_VERSION
         - BASE_IMAGE_ARG
-    command: /opt/build/test.sh
+    command: ${TEST_COMMAND:-/opt/build/test.sh}
     volumes:
       - test-app:/srv/app
       - ./build:/opt/build:ro
