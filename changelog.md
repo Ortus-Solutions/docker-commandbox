@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.3.5/3.24.0]
 
 ### Changed
-- BoxLang image to `1.18.6+62`
+- BoxLang image to `1.19.0+63`
 - Lucee 7 image bumped to `7.1.0+204`
 - Lucee 6 image bumped to `6.2.8+20`
 - Removed builds and support for Adobe 2021 images
@@ -215,7 +215,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Jarkarta support for [BoxLang](https://boxlang.io/) and Adobe 2025
-- Boxlang version bumped to `1.0.0-rc.2`
+- Boxlang version bumped to `1.0.0-rc.3`
 
 ## [6.1.0/3.10.2] - 2025-02-07
 
