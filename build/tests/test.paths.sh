@@ -14,9 +14,7 @@ set -e
 [[ $(command -v boxlang) = "$BOXLANG_INSTALL_HOME/bin/boxlang" ]]
 [[ $(command -v box) = "$BIN_DIR/box" ]]
 [[ $CLASSPATH = "$LIB_DIR/java/classes" ]]
-# TEMP: .boxlang check relaxed — BoxLang CLI (rc.3) creates ~/.boxlang on first
-# invocation even when BOXLANG_HOME is set. Restore once the CLI forwards the home dir.
-[[ ! -d $HOME/.CommandBox ]]
+[[ ! -d $HOME/.CommandBox && ! -d $HOME/.boxlang ]]
 [[ ! -d /usr/local/boxlang ]]
 if [[ $(id -u) != 0 ]]; then
 	[[ ! -w $BIN_DIR && ! -w $BIN_DIR/box && ! -w $BUILD_DIR && ! -w $BUILD_DIR/run.sh ]]
