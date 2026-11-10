@@ -25,11 +25,21 @@ jobs:
 
       - name: Load base matrix
         id: base
-        run: echo "json=$(cat .github/matrix/base.json)" >> "$GITHUB_OUTPUT"
+        run: |
+          {
+            echo 'json<<EOF'
+            cat .github/matrix/base.json
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Load engine matrix
         id: engine
-        run: echo "json=$(cat .github/matrix/engine.json)" >> "$GITHUB_OUTPUT"
+        run: |
+          {
+            echo 'json<<EOF'
+            cat .github/matrix/engine.json
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
   build-base-images-amd64:
     runs-on: ubuntu-latest
