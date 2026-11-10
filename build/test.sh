@@ -15,6 +15,14 @@ if [[ ! $APP_DIR ]]; then
 	exit 1
 fi
 
+COMMANDBOX_VERSION=$(box version)
+
+if [[ ! $COMMANDBOX_VERSION ]]; then
+	echo "CommandboxBox Binary is not available"
+	exit 1
+fi
+
+
 if [[ ! -f ${APP_DIR}/index.cfm ]]; then
 	echo "Test directory was not mounted in to ${APP_DIR}"
 	echo $( ls -la $APP_DIR )
@@ -26,13 +34,6 @@ cd $BUILD_DIR
 bash ./tests/test.paths.sh
 
 printf "\n\n*******************\n\n"
-
-COMMANDBOX_VERSION=$(box version)
-
-if [[ ! $COMMANDBOX_VERSION ]]; then
-	echo "CommandboxBox Binary is not available"
-	exit 1
-fi
 
 # Test default environment with no additional variables
 echo "Tests that basic commandbox system commands work in this environment"
