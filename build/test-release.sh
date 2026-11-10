@@ -36,16 +36,33 @@ collectSuite () {
 case "$phase" in
 	build)
 		: "${BUILD_IMAGE_DOCKERFILE:?}" "${COMMANDBOX_VERSION:?}" "${BUILDX_BUILDER:?}"
+		buildArgs=(
+			--builder "$BUILDX_BUILDER"
+			--platform linux/amd64
+			--load
+			--pull
+			--progress plain
+		)
+		if [[ -n ${BUILD_CACHE_SCOPE:-} ]]; then
+			buildArgs+=(
+				--cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}"
+				--cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true"
+			)
+		fi
+		buildArgs+=(
+			--file "$BUILD_IMAGE_DOCKERFILE"
+			--build-arg COMMANDBOX_VERSION
+			--build-arg BASE_IMAGE_ARG
+			--tag "$TEST_IMAGE"
+			.
+		)
 		recordResources
 		if [[ -n ${BASE_IMAGE_ARG:-} ]]; then
 			timeout --kill-after=5s 30s docker buildx imagetools inspect "$BASE_IMAGE_ARG" \
 				> "$diagnosticsDir/base-image.log" 2>&1 || true
 		fi
-		timeout --kill-after=30s 55m docker buildx build \
-			--builder "$BUILDX_BUILDER" --platform linux/amd64 --load --pull --progress plain \
-			--file "$BUILD_IMAGE_DOCKERFILE" \
-			--build-arg COMMANDBOX_VERSION --build-arg BASE_IMAGE_ARG \
-			--tag "$TEST_IMAGE" . 2>&1 | tee "$diagnosticsDir/build.log"
+		timeout --kill-after=30s 55m docker buildx build "${buildArgs[@]}" \
+			2>&1 | tee "$diagnosticsDir/build.log"
 		docker image inspect --format 'ID={{.Id}} User={{.Config.User}}' "$TEST_IMAGE" \
 			| tee "$diagnosticsDir/test-image.log"
 		;;

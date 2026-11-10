@@ -15,6 +15,7 @@ export BASE_IMAGE_ARG=example/base:test
 export MOCK_EXIT_CODE=0
 export MOCK_CLEANUP_CODE=0
 export MOCK_TIMEOUT_CODE=0
+export BUILD_CACHE_SCOPE=release-unit-test
 
 docker () {
 	printf '%s\n' "$*" >> "$MOCK_CALLS"
@@ -57,6 +58,8 @@ runPhase () {
 runPhase build 0
 grep -q 'buildx imagetools inspect example/base:test' "$MOCK_CALLS"
 grep -q 'buildx build --builder test-builder --platform linux/amd64 --load --pull --progress plain' "$MOCK_CALLS"
+grep -q 'cache-from type=gha,scope=release-unit-test' "$MOCK_CALLS"
+grep -q 'cache-to type=gha,scope=release-unit-test,mode=max,ignore-error=true' "$MOCK_CALLS"
 [[ -s $RELEASE_DIAGNOSTICS_DIR/base-image.log ]]
 
 runPhase integration 0

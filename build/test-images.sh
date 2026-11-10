@@ -17,7 +17,25 @@ cleanup () {
 }
 trap cleanup EXIT
 
-docker compose "${composeArgs[@]}" build
+buildArgs=(
+	--load
+	--platform linux/amd64
+)
+if [[ -n ${BUILD_CACHE_SCOPE:-} ]]; then
+	buildArgs+=(
+		--cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}"
+		--cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true"
+	)
+fi
+buildArgs+=(
+	--file "$BUILD_IMAGE_DOCKERFILE"
+	--build-arg COMMANDBOX_VERSION
+	--build-arg BASE_IMAGE_ARG
+	--tag "$TEST_IMAGE"
+	.
+)
+
+docker buildx build "${buildArgs[@]}"
 [[ $(docker image inspect --format '{{.Config.User}}' "$TEST_IMAGE") = commandbox:runwar ]]
 
 for identity in default 1002:1000 1002:1002 root; do

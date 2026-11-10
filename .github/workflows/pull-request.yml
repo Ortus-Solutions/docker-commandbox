@@ -12,8 +12,10 @@ concurrency:
 
 jobs:
   build-base-images:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
+      max-parallel: 4
       matrix:
         include:
           # Foundation images (builds/base/* - eclipse-temurin based)
@@ -40,11 +42,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@master
+        uses: docker/setup-buildx-action@v3
 
       - name: Setup Base Image Builds
         id: setup
@@ -54,6 +61,7 @@ jobs:
           COMMANDBOX_VERSION: 7.0.24-rc.3
         run: |
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
+          echo "BUILD_CACHE_SCOPE=base-${TAG_ARRAY[0]}" >> "$GITHUB_ENV"
           echo "BUILD_IMAGE_TAG=${TAG_ARRAY[0]}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
 
@@ -64,6 +72,8 @@ jobs:
           docker buildx build \
             --load \
             --platform linux/amd64 \
+            --cache-from type=gha,scope=${BUILD_CACHE_SCOPE} \
+            --cache-to type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true \
             --file ${{ matrix.BUILD_IMAGE_DOCKERFILE }} \
             --build-arg COMMANDBOX_VERSION=${{ env.commandbox_version }} \
             --tag ortussolutions/commandbox:${{ env.BUILD_IMAGE_TAG }} \
@@ -80,10 +90,30 @@ jobs:
         run: |
           bash build/test-images.sh
 
+      - name: Build Base Image for arm64
+        timeout-minutes: 90
+        env:
+          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
+          BUILD_IMAGE_TAG: ${{ env.BUILD_IMAGE_TAG }}
+        run: |
+          docker buildx build \
+            --load \
+            --platform linux/arm64/v8 \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION \
+            --tag "ortussolutions/commandbox:${BUILD_IMAGE_TAG}-arm64-pr" \
+            .
+
   build-engine-images:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build-base-images
+    env:
+      TEST_IMAGE: docker-commandbox-sut:pr-${{ strategy.job-index }}
     strategy:
+      fail-fast: false
+      max-parallel: 4
       matrix:
         include:
           # Debian engine builds
@@ -166,11 +196,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@master
+        uses: docker/setup-buildx-action@v3
 
       - name: Setup Engine Image Builds
         id: setup
@@ -179,6 +214,7 @@ jobs:
           COMMANDBOX_VERSION: 7.0.24-rc.3
         run: |
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
+          echo "BUILD_CACHE_SCOPE=engine-${BUILD_IMAGE_TAGS}" >> "$GITHUB_ENV"
           echo "BUILD_IMAGE_TAG=${TAG_ARRAY[0]}" >> $GITHUB_ENV
           echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
 
@@ -186,6 +222,7 @@ jobs:
         env:
           BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
         run: |
+          BASE_CACHE_SCOPE="base-${BASE_IMAGE##*:}"
           case "$BASE_IMAGE" in
             *:latest) BASE_DOCKERFILE=builds/base/Dockerfile ;;
             *:jdk21) BASE_DOCKERFILE=builds/base/JDK21.Dockerfile ;;
@@ -193,10 +230,16 @@ jobs:
             *:jdk21-rhel) BASE_DOCKERFILE=builds/base/rhel.JDK21.Dockerfile ;;
             *:alpine) BASE_DOCKERFILE=builds/base/Alpine.Dockerfile ;;
             *:jdk21-alpine) BASE_DOCKERFILE=builds/base/Alpine.JDK21.Dockerfile ;;
-            *) exit 1 ;;
+            *) printf 'No base Dockerfile mapping for %s\n' "$BASE_IMAGE" >&2; exit 1 ;;
           esac
-          docker build --build-arg COMMANDBOX_VERSION=${{ env.commandbox_version }} \
-            --file "$BASE_DOCKERFILE" --tag "$BASE_IMAGE" .
+          docker buildx build \
+            --load \
+            --platform linux/amd64 \
+            --cache-from "type=gha,scope=${BASE_CACHE_SCOPE}" \
+            --file "$BASE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION=${{ env.commandbox_version }} \
+            --tag "$BASE_IMAGE" \
+            .
 
       - name: Test Engine Images
         env:
@@ -209,3 +252,40 @@ jobs:
           TEST_SUITE: engine
         run: |
           bash build/test-images.sh
+
+      - name: Build Engine Image for arm64
+        if: matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        timeout-minutes: 90
+        env:
+          BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
+          BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+          COMMANDBOX_VERSION: ${{ env.commandbox_version }}
+        run: |
+          BASE_CACHE_SCOPE="base-${BASE_IMAGE##*:}"
+          case "$BASE_IMAGE" in
+            *:latest) BASE_DOCKERFILE=builds/base/Dockerfile ;;
+            *:jdk21) BASE_DOCKERFILE=builds/base/JDK21.Dockerfile ;;
+            *:ubi10) BASE_DOCKERFILE=builds/base/rhel.Dockerfile ;;
+            *:jdk21-rhel) BASE_DOCKERFILE=builds/base/rhel.JDK21.Dockerfile ;;
+            *:alpine) BASE_DOCKERFILE=builds/base/Alpine.Dockerfile ;;
+            *:jdk21-alpine) BASE_DOCKERFILE=builds/base/Alpine.JDK21.Dockerfile ;;
+            *) printf 'No base Dockerfile mapping for %s\n' "$BASE_IMAGE" >&2; exit 1 ;;
+          esac
+
+          docker buildx build \
+            --load \
+            --platform linux/arm64/v8 \
+            --cache-from "type=gha,scope=${BASE_CACHE_SCOPE}" \
+            --file "$BASE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION \
+            --tag "$BASE_IMAGE" \
+            .
+          docker buildx build \
+            --load \
+            --platform linux/arm64/v8 \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION \
+            --build-arg BASE_IMAGE_ARG="$BASE_IMAGE" \
+            --tag "${TEST_IMAGE}-arm64" \
+            .

@@ -18,7 +18,12 @@ cd ${APP_DIR} && box server stop
 
 # Clear out our warmup logs
 consoleLogPath=$(box server info property=consoleLogPath)
-printf '\n' > "$consoleLogPath"
+if [[ -f "$consoleLogPath" ]]; then
+	printf '\n' > "$consoleLogPath"
+else
+	printf 'Warmup console log was not found; skipping cleanup (reported path: %q)\n' \
+		"$consoleLogPath" >&2
+fi
 
 # Clean our artifacts so we don't keep a duplicate copy of the WAR download
 box artifacts clean --force

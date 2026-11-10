@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- GitHub Actions now caps Docker build matrix concurrency, reuses per-image BuildKit caches, and smoke-builds arm64 variants in pull requests
 - BoxLang image to `1.19.0+63`
 - Lucee 7 image bumped to `7.1.0+204`
 - Lucee 6 image bumped to `6.2.8+20`
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime state uses shared-group permissions, setgid directories, and `umask 0002`. Privileged OS cleanup runs only during base installation; engine warmup and package cleanup run non-root. Bind mounts and reused volumes must be prepared before startup.
 - Updated Compose mounts, test commands, Filebeat defaults, and progressive-build examples for the new layout. Existing persisted data is not automatically migrated, and old default paths have no compatibility aliases.
 - *Breaking:* Removed unused OS development packages, GPG build utilities, and distro-specific download/archive/process utilities. Alpine no longer installs GLib or X11 libraries; headless Java font/image rendering remains supported. Derived images must install any additional application or debugging dependencies they require.
+- *Breaking:* CommandBox 7 now uses graceful shutdown hooks (`SIGTERM`) for stop commands issued by the Docker daemon.  These shutdown hooks propagate to the underlying JVM behavior.  This differs from the previous behavior where stop commands were handled immediately without waiting for graceful shutdown (`SIGKILL`).  To revert to the previous behavior, add the following to your Dockerfile: `STOPSIGNAL SIGKILL`
 - Added an Adobe ColdFusion regression check for `cfdocument`, `cfimage` and `cfchart` rendering, which confirmed that Adobe 2025 on Alpine does not need the removed GLib/X11 libraries.pine no longer installs GLib or X11 libraries; headless Java font/image rendering remains supported. Derived images must install any additional application or debugging dependencies they require.
 - All distributions now explicitly include `zip` and `unzip`. Ubuntu recommended packages and RHEL weak dependencies are disabled; required RHEL account tools are installed by the dependency script without the unused `util-linux` package.
 - Added clean-image dependency checks for all three distributions and both JRE/JDK variants, including headless font/image rendering.
