@@ -1,6 +1,6 @@
 # CHANGELOG
 
-The versioning notation below denotes the following:  `[CommandBox Version]/[Image release version]`
+The versioning notation below denotes the following:  `[Image release version]`
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All distributions now explicitly include `zip` and `unzip`. Ubuntu recommended packages and RHEL weak dependencies are disabled; required RHEL account tools are installed by the dependency script without the unused `util-linux` package.
 - Added clean-image dependency checks for all three distributions and both JRE/JDK variants, including headless font/image rendering.
 
-## [6.3.5/3.24.0]
+## [3.24.0]
 
 ### Changed
 - BoxLang to `1.18.6+62`
@@ -38,32 +38,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lucee 6 image bumped to `6.2.7+16`
 - Lucee 7 image bumped to `7.0.4+34`
 
-## [6.3.4/3.23.0]
+## [3.23.0]
 
 ### Changed
 - Adobe ColdFusion 2023 to `2023.0.24+330957`
 - Adobe ColdFusion 2025 to `2025.0.13+331960`
 
-## [6.3.4/3.22.0]
+## [3.22.0]
 
 ### Changed
-- CommandBox version changed to `6.3.4`
+- Bump CommandBox to `6.3.4`
 - Adobe ColdFusion 2023 to `2023.0.23+330940`
 - Adobe  ColdFusion 2025 to `2025.0.12+331922`
 
-## [6.3.3/3.21.0]
+## [3.21.0]
 
 ### Changed
 - Adobe ColdFusion 2023 to `2023.0.22+330928`
 - Adobe  ColdFusion 2025 to `2025.0.11+331909`
 
-## [6.3.3/3.20.0]
+## [3.20.0]
 
 ### Changed
 - Adobe ColdFusion 2023 to `2023.0.21+330920`
 - Adobe  ColdFusion 2025 to `2025.0.10+331899`
 
-## [6.3.3/3.19.0]
+## [3.19.0]
 
 ### Changed
 - BoxLang to `1.14.0`
@@ -74,44 +74,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lucee 7 image bumped to `7.0.4+34`
 
 
-## [6.3.3/3.18.0]
+## [3.18.0]
 
 ### Changed
-- CommandBox version changed to `6.3.3`
+- Bump CommandBox to `6.3.3`
 - Update JVM/JRE Versions
 - Adobe ColdFusion 2025 to `2025.0.08+331874`
 
-## [6.3.2/3.17.0]
+## [3.17.0]
 
 ### Changed
 - Adobe Coldfusion 2025 to `2025.0.07+331586`
 - Adobe Coldfusion 2023 to `2023.0.19+330899`
 - Boxlang to 1.12.0
 
-## [6.3.2/3.16.0]
+## [3.16.0]
 
 ### Changed
-- CommandBox version changed to `6.3.2`
+- Bump CommandBox to `6.3.2`
 - Update JVM/JRE Versions
 
 ### Added
 - Added additional introspection for multi-site configuration in `server.json` file
 - Added `SKIP_PORT_ASSIGNMENTS` environment variable that, when `true`, will rely on the port settings defined in the `server.json` file.
 
-## [6.3.1/3.15.0]
+## [3.15.0]
 
 ### Changed
-- CommandBox version changed to `6.3.1`
+- Bump CommandBox to `6.3.1`
 - Adobe Coldfusion 2025 to `2025.0.06+331564`
 - Adobe Coldfusion 2023 to `2023.0.18+330879`
 
-## [6.2.1/3.14.1] - 2025-12-17
+## [3.14.1] - 2025-12-17
 
 ### Changed
 
 - Updated version of `commandbox-boxlang` module
 
-## [6.2.1/3.14.0] - 2025-12-10
+## [3.14.0] - 2025-12-10
 
 ### Changed
 
@@ -126,7 +126,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 Support to be removed in next version due to 11/25/2025 EOL/EOS notice
 
 
-## [6.2.1/3.13.7] - 2025-11-15
+## [3.13.7] - 2025-11-15
 
 ### Changed
 
@@ -140,7 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JDK/JRE 21 images bumped to version `21.0.9_10`
 - JDK/JRE 24 images bumped to version `24.0.2_12`
 
-## [6.2.1/3.13.6] - 2025-08-06
+## [3.13.6] - 2025-08-06
 
 ### Changed
 
@@ -149,17 +149,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JDK/JRE 21 images bumped to version `21.0.8_9`
 - JDK/JRE 24 images bumped to version `24.0.2_12`
 
-## [6.2.1/3.13.5] - 2025-07-03
+## [3.13.5] - 2025-07-03
 
 ### Added
 
-- Updated CommandBox to v6.2.1
+- Bump CommandBox to `6.2.1`
 - EditorConfig support for VSCode and IntelliJ
 - Added gitattributes file to ignore unnecessary files in git
 - Added markdownlint configuration and markdown lint fix
 - Dependabot for automatic dependency updates and security fixes
 
-## [6.2.0/3.13.4] - 2025-05-26
+## [3.13.4] - 2025-05-26
 
 ### Changed
 
@@ -168,13 +168,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe Coldfusion 2025 updated to `2025.0.02+331451`
 - Lucee 6 updated to `6.2.1+122`
 
-## [6.2.0/3.13.3] - 2025-04-29
+## [3.13.3] - 2025-04-29
 
 ### Changed
 
 - Boxlang version to 1.0.0
 
-## [6.2.0/3.13.1] - 2025-04-25
+## [3.13.1] - 2025-04-25
 
 ### Changed
 
@@ -185,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JDK/JRE 24 images bumped to version `24.0.1_9`
 
 
-## [6.2.0/3.13.0] - 2025-04-10
+## [3.13.0] - 2025-04-10
 
 ### Changed
 
@@ -196,11 +196,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added `:jdk23` and `:jdk24` Build tags
 
-## [6.2.0/3.12.0] - 2025-04-01
+## [3.12.0] - 2025-04-01
 
 ### Changed
 
-- CommandBox Binary to v6.2.0
+- Bump CommandBox to `6.2.0`
 
 
 ### Added
@@ -212,14 +212,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed Adobe Coldfusion 2018 Builds, as it is EOL
 
 
-## [6.1.0/3.11.0] - 2025-03-05
+## [3.11.0] - 2025-03-05
 
 ### Added
 
 - Jarkarta support for [BoxLang](https://boxlang.io/) and Adobe 2025
 - Boxlang version bumped to `1.0.0-rc.3`
 
-## [6.1.0/3.10.2] - 2025-02-07
+## [3.10.2] - 2025-02-07
 
 ### Changed
 
@@ -227,53 +227,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JDK/JRE 17 images bumped to version `17.0.14_7`
 - JDK/JRE 21 images bumped to version `21.0.6_7`
 
-## [6.1.0/3.10.1] - 2024-12-25
+## [3.10.1] - 2024-12-25
 
 ### Changed
 
 - Adobe 2023 image bump to release version `2023.0.12+330713`
 - Adobe 2021 image bump to release version `2021.0.18+330341`
 
-## [6.1.0/3.10.0] - 2024-11-05
+## [3.10.0] - 2024-11-05
 
 ### Changed
 
-- CommandBox Binary to v6.1.0
+- Bump CommandBox to `6.1.0`
 - Lucee Tagged images to v5.4.6+9
 
-## [6.0.0/3.9.10] - 2024-09-10
+## [3.9.10] - 2024-09-10
 
 ### Changed
 
 - Adobe 2023 image bump to release version `2023.0.10+330680`
 - Adobe 2021 image bump to release version `2021.0.16+330307`
 
-## [6.0.0/3.9.9] - 2024-09-09
+## [3.9.9] - 2024-09-09
 
 ### Changed
 
 - Adobe 2023 image bump to release version `2023.0.09+330677`
 - Adobe 2021 image bump to release version `2021.0.15+330303`
 
-## [6.0.0/3.9.8] - 2024-07-26
+## [3.9.8] - 2024-07-26
 
 ### Changed
 
 - BoxLang Images to Beta 7
 
-## [6.0.0/3.9.7] - 2024-07-24
+## [3.9.7] - 2024-07-24
 
 ### Changed
 
 - BoxLang Images to Beta 6
 
-## [6.0.0/3.9.6] - 2024-07-05
+## [3.9.6] - 2024-07-05
 
 ### Changed
 
 - BoxLang Images to Beta 4
 
-## [6.0.0/3.9.5] - 2024-06-26
+## [3.9.5] - 2024-06-26
 
 ### Added
 
@@ -281,21 +281,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ARM arch builds for Alpine JDK21 Images
 - Add BoxLang images
 
-## [6.0.0/3.9.4] - 2024-05-03
+## [3.9.4] - 2024-05-03
 
 ### Changed
 
 - Adobe 2023 image bumped to release version `2023.0.08+330668`
 - Adobe 2021 image bumped to release version `2021.0.14+330296`
 
-## [6.0.0/3.9.3] - 2024-05-03
+## [3.9.3] - 2024-05-03
 
 ### Changed
 
 - JDK/JRE 11 images bumped to version `11.0.23_9`
 - JDK/JRE 17 images bumped to version `17.0.11_9`
 
-## [6.0.0/3.9.2] - 2024-03-28
+## [3.9.2] - 2024-03-28
 
 ### Changed
 
@@ -310,7 +310,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Changed JVM log util format to use `JAVA_TOOL_OPTIONS` env variable to prevent overwrite of custom `BOX_SERVER_JVM_ARGS` in environment and `server.json` files
 
-## [6.0.0/3.9.1] - 2024-03-28
+## [3.9.1] - 2024-03-28
 
 ### Changed
 
@@ -318,11 +318,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 image bumped to release version `2021.0.13+330286`
 
 
-## [6.0.0/3.9.0] - 2024-02-16
+## [3.9.0] - 2024-02-16
 
 ### Changed
 
-- CommandBox Binary updated to v6.0.0
+- Bump CommandBox to `6.0.0`
 
 ### Removed
 
@@ -330,42 +330,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed log pattern to server config default
 - Removed code turning off the directory watcher as it is no longer on by default
 
-## [5.9.1/3.8.5] - 2024-01-24
+## [3.8.5] - 2024-01-24
 
 ### Changed
 
 - JDK/JRE 11 images bumped to version `11.0.22_7`
 - JDK/JRE 17 images bumped to version `17.0.10_7`
 
-## [5.9.1/3.8.4] - 2023-11-14
+## [3.8.4] - 2023-11-14
 
 ### Changed
 
 - Adobe 2023 image bumped to release version `2023.0.06+330617`
 - Adobe 2021 image bumped to release version `2021.0.12+330257`
 
-## [5.9.1/3.8.3] - 2023-10-11
+## [3.8.3] - 2023-10-11
 
 ### Changed
 
 - Adobe 2023 image bumped to release version `2023.0.05+330608`
 - Adobe 2021 image bumped to release version `2021.0.11+330247`
 
-## [5.9.1/3.8.2] - 2023-10-02
+## [3.8.2] - 2023-10-02
 
 - Lucee 5 Ortus ORM extension updated to 6.3.2
 
-## [5.9.1/3.8.1] - 2023-09-29
+## [3.8.1] - 2023-09-29
 
 ### Changed
 
 - Lucee 5 Ortus ORM extension updated to 6.3.1
 
-## [5.9.1/3.8.0] - 2023-08-17
+## [3.8.0] - 2023-08-17
 
 ### Changed
 
-- CommandBox Binary Updated to `v5.9.1`
+- Bump CommandBox to `5.9.1`
 - Lucee image versions updated to `v5.4.3+2`
 - Adobe 2023 image bumped to release version `2023.0.04+330500`
 - Adobe 2021 image bumped to release version `2021.0.10+330161`
@@ -375,20 +375,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [Ortus Lucee ORM Extension](https://www.ortussolutions.com/products/orm-extension) now bundled with Lucee images, since Lucee 5.4+ no longer includes an ORM extension
 
-## [5.9.0/3.7.12] - 2023-08-15
+## [3.7.12] - 2023-08-15
 
 ### Changed
 
 - Lucee image versions bumped to `v5.3.12+1`
 
-## [5.9.0/3.7.11] - 2023-07-27
+## [3.7.11] - 2023-07-27
 
 ### Changed
 
 - JRE 11 versions to `11.0.20_8`
 - JRE 17 versions to `17.0.8_7`
 
-## [5.9.0/3.7.10] - 2023-07-12
+## [3.7.10] - 2023-07-12
 
 ### Changed
 
@@ -396,7 +396,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 image bumped to release version `2021.0.9+330148`
 - Adobe 2018 image bumped to release version `2018.0.19+330149`
 
-## [5.9.0/3.7.9] - 2023-07-12
+## [3.7.9] - 2023-07-12
 
 ### Changed
 
@@ -404,13 +404,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 image bumped to release version `2021.0.8+330144`
 - Adobe 2018 image bumped to release version `2018.0.18+330145`
 
-## [5.9.0/3.7.8] - 2023-07-12
+## [3.7.8] - 2023-07-12
 
 ### Added
 
 - Add Java tool options for serialization for all Adobe containers, [per technotes](https://helpx.adobe.com/security/products/coldfusion/apsb23-40.html)
 
-## [5.9.0/3.7.7] - 2023-07-12
+## [3.7.7] - 2023-07-12
 
 ### Changed
 
@@ -418,62 +418,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adobe 2021 image bumped to release version `2021.0.7+330142`
 - Adobe 2018 image bumped to release version `2018.0.17+330143`
 
-## [5.9.0/3.7.6] - 2023-05-23
+## [3.7.6] - 2023-05-23
 
 ### Changed
 
 - Adobe 2023 image bumped to release version `2023.0.0+330468`
 
-## [5.9.0/3.7.5] - 2023-05-23
+## [3.7.5] - 2023-05-23
 
 ### Fixed
 
 - Fixes an issue with manifests no longer being generated by BuildX
 
-## [5.9.0/3.7.4] - 2023-05-03
+## [3.7.4] - 2023-05-03
 
 ### Changed
 
 - Removed arm/v7 ( 32 bit ) support due to JDK17 requirements
-- CommandBox binary updated to `5.9.0`
+- Bump CommandBox to `5.9.0`
 
-## [5.8.0/3.7.3] - 2023-03-23
+## [3.7.3] - 2023-03-23
 
 ### Fixed
 
 - Fixes an issue where CLI ID files were not being deleted after installing commandbox and warming up the server
 
-## [5.8.0/3.7.2] - 2023-03-17
+## [3.7.2] - 2023-03-17
 
 ### Fixed
 
 - Fixes an issue where specifying an alternate webroot ( e.g. `BOX_SERVER_WEB_WEBROOT` ) fail to start the container
 
-## [5.8.0/3.7.1] - 2023-03-15
+## [3.7.1] - 2023-03-15
 
 ### Changed
 
 - Updates `:adobe2021` tag to version `2021.0.06+330132`
 - Updates `:adobe2018` tag to version `2018.0.16+330130`
 
-## [5.8.0/3.7.0] - 2023-03-10
+## [3.7.0] - 2023-03-10
 
-## Changed
+### Changed
 
-- CommandBox version to 5.8.0
+- Bump CommandBox to `5.8.0`
 - Lucee image versions bumped to `v5.3.10+120`
 - Ubuntu base version changed to v22 ( Jammy )
 - Container stdout log format changed to JSON layout, to ease ingest of container logs from cloud providers
 - Changed the default Runwar Log4J pattern layout to include timestamps `[%p] %d{yyyy-MM-dd\'T\'HH:mm:ssXXX} %c - %m%n`.  Example message: `[INFO] 2023-03-09T22:39:37Z runwar.server - Server is up`
 - Added support, in container log output, for [JSON log formatting](https://commandbox.ortusbooks.com/embedded-server/configuring-your-server/console-log-layout#customize-layout)
 
-## [5.7.0/3.6.4] - 2022-12-15
+## [3.6.4] - 2022-12-15
 
 ### Changed
 
 - Lucee image versions bumped to `v5.3.10+97`
 
-## [5.7.0/3.6.3] - 2022-12-07
+## [3.6.3] - 2022-12-07
 
 ### Added
 
@@ -481,21 +481,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- CommandBox version to 5.7.0
+- Bump CommandBox to `5.7.0`
 - Removed the pruning of certain CommandBox modules to allow for more use cases
 
 ### Removed
 
 - Removed Adobe Coldfusion 2016 builds
 
-## [5.6.1/3.6.2] - 2022-10-31
+## [3.6.2] - 2022-10-31
 
 ### Changed
 
 - `:lucee5` image bumped to use v5.3.9+160
 - Resolves [Issue #63](https://github.com/Ortus-Solutions/docker-commandbox/issues/63) - Changed all Adobe images over to use JDK as base instead of JRE due to webservices compilation errors. Size increased by 141MB. [Adobe Bug Report](https://tracker.adobe.com/#/view/CF-4215554)
 
-## [5.6.1/3.6.1] - 2022-10-18
+## [3.6.1] - 2022-10-18
 
 ### Fixed
 
@@ -511,80 +511,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updates `:adobe2018` tag to version `2018.0.15+330106`
 
 
-## [5.6.1/3.6.0] - 2022-09-05
+## [3.6.0] - 2022-09-05
 
 ### Changed
 
-- Updates CommandBox Binary to v5.6.1
+- Bump CommandBox to `5.6.1`
 
-## [5.5.2/3.5.4] - 2022-07-29
+## [3.5.4] - 2022-07-29
 
 ### Changed
 
 - Update JRE base images to 11.0.16
 
 
-## [5.5.2/3.5.3] - 2022-05-03
+## [3.5.3] - 2022-05-03
 
 ### Added
 
 - Added default `BOX_SERVER_RUNWAR_ARGS` environment variable to disable the Undertow system file watcher.  On large applications, or applications with many static assets, this can speed up start times by 20-30s
 
-## [5.5.2/3.5.2] - 2022-05-03
+## [3.5.2] - 2022-05-03
 
 ### Changed
 
-- CommandBox binary updated to `5.5.2`
+- Bump CommandBox to `5.5.2`
 
-## [5.5.1/3.5.1] - 2022-05-03
+## [3.5.1] - 2022-05-03
 
 ### Changed
 
 - Updates `:adobe2021` tag to version `2021.0.04+330004`
 - Updates `:adobe2018` tag to version `2018.0.14+330003`
 
-## [5.5.1/3.5.0] - 2022-05-03
+## [3.5.0] - 2022-05-03
 
 ### Changed
 
 - Change base images to use the [`eclipse-temurin` base images](https://hub.docker.com/_/eclipse-temurin)
 - Change Ubuntu version to 20.0.0 (focal)
 - JREs updated to `jre-11.0.15`
-- CommandBox binary updated to `5.5.1`
+- Bump CommandBox to `5.5.1`
 
 ### Added
 
 - Added `linux/arm/v7` to supported architectures for Debian-based images
 
-## [5.4.2/3.4.5] - 2022-03-12
+## [3.4.5] - 2022-03-12
 
 ### Changed
 
 - Moved CFPM commands to after server has been fully seeded
 - JREs updated to `jre-11.0.14`
 
-## [5.4.2/3.4.4] - 2021-10-05
+## [3.4.4] - 2021-10-05
 
 ### Changed
 
-- Updates CommandBox binary to v5.4.2
+- Bump CommandBox to `5.4.2`
 
 
-## [5.4.1/3.4.3] - 2021-09-15
+## [3.4.3] - 2021-09-15
 
 ### Changed
 
-- Updates CommandBox binary to v5.4.1
+- Bump CommandBox to `5.4.1`
 
-## [5.4.0/3.4.2] - 2021-09-15
+## [3.4.2] - 2021-09-15
 
 ### Changed
 
 - Bumped `:adobe2021` version to `2021.0.2+328618`
 - Bumped `:adobe2018` version to `2018.0.12+328566`
-- Updates CommandBox binary to v5.4.0
+- Bump CommandBox to `5.4.0`
 
-## [5.3.1/3.4.1] - 2021-06-04
+## [3.4.1] - 2021-06-04
 
 ### Changed
 
@@ -595,11 +595,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed an issue where the `verbose` flag was not being applied to server starts
 
-## [5.3.1/3.4.0] - 2021-06-04
+## [3.4.0] - 2021-06-04
 
 ### Changed
 
-- Updates CommandBox binary to v5.3.1
+- Bump CommandBox to `5.3.1`
 - Marked support for the following environment variables as deprecated, in favor of native CommandBox environment variables. Support for these variables will end in v4.0.0 of the image
 -- `SERVER_HOME_DIRECTORY` ( `BOX_SERVER_APP_SERVERHOMEDIRECTORY` )
 -- `cfconfigfile` ( `BOX_SERVER_CFCONFIGFILE` )
@@ -614,7 +614,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Documentation updates and corrections
 
-## [5.2.1/3.3.0] - 2021-03-24
+## [3.3.0] - 2021-03-24
 
 ### Changed
 
@@ -636,7 +636,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - (Issue #60) Fixed an issue where the convention route `.cfconfig.json` was not being parsed to determine if an engine admin password had been set
 
 
-## [5.2.1/3.2.2] - 2021-03-23
+## [3.2.2] - 2021-03-23
 
 ### Changed
 
@@ -646,7 +646,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `:lucee5` images to version `5.3.7+48`
 
 
-## [5.2.1/3.2.1] - 2021-01-22
+## [3.2.1] - 2021-01-22
 
 ### Added
 
@@ -657,44 +657,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resolves issue #55 - Fixes a pathing problem with the generated startup script when `$APP_DIR` is not the default and single server mode is on
 - Fixes for several typos in comments and scripts
 
-## [5.2.1/3.2.0] - 2020-12-18
+## [3.2.0] - 2020-12-18
 
 ### Changed
 
-- Updates CommandBox binary to v5.2.1
+- Bump CommandBox to `5.2.1`
 
 ### Added
 
 - Enables [single-server mode](https://commandbox.ortusbooks.com/embedded-server/single-server-mode), by default, on all images  (_Note: When single server mode is enabled, the `cfconfig set` commands with a `to` argument - e.g `cfconfig set adminPassword=foo to=cfconfig.json` will only write to files if they are already in existence_)
 
-## [5.2.0/3.1.1] - 2020-11-16
+## [3.1.1] - 2020-11-16
 
 ### Changed
 
-- Updates CommandBox binary to v5.2.0
+- Bump CommandBox to `5.2.0`
 - `:adobe2018` to `v2018.0.10+320417`
 - `:adobe2016` to `v2016.0.16+320445`
 - `:lucee5` to `v5.3.7+47`
 
-## [5.1.0/3.1.0] - 2020-07-14
+## [3.1.0] - 2020-07-14
 
 ### Changed
 
-- Updates CommandBox binary to v5.1.0
+- Bump CommandBox to `5.1.0`
 
-## 5.0.1/3.0.2 - 2020-03-26
+## [3.0.2] - 2020-03-26
 
 ### Fixed
 
 - Fixes a regression from 3.0.1 caused by an incorrect conditional on checking for the presence of a rewrite configuration file
 
-## [5.0.1/3.0.1] - 2020-03-21
+## [3.0.1] - 2020-03-21
 
 ### Fixed
 
 - Fixes a regression where custom rewrite files were being ignored unless `HEADLESS` was present in the environment
 
-## [5.0.1/3.0.0] - 2020-03-18
+## [3.0.0] - 2020-03-18
 
 ### Added
 
@@ -703,7 +703,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - (OC-6) Refactor `$HEADLESS` implementation in to startup routine
 - (OC-10|Issue #44) Adds supports for _FILE convention variables
 
-## [5.0.0/2.8.1] - 2020-03-11
+## [2.8.1] - 2020-03-11
 
 ### Added
 
@@ -711,36 +711,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - (OC-5) Sets default CommandBox rewrite rules to deny "hidden" files ( e.g. `.env` ) and common config files ( `server.json` )
 
 
-## [5.0.0/2.8.0] - 2020-03-08
+## [2.8.0] - 2020-03-08
 
 ### Changed
 
-- Updates CommandBox binary to 5.0.0
+- Bump CommandBox to `5.0.0`
 
 ### Added
 
 - Changes startup mechanism to use CommandBox generated bash script ( removes need for `box` process wrapper )
 
-## [4.8.0/2.7.3] - 2019-09-26
+## [2.7.3] - 2019-09-26
 
 ### Fixed
 
 - Fixes an issue where log output would stop because of rotation
 
-## [4.8.0/2.7.2] - 2019-09-05
+## [2.7.2] - 2019-09-05
 
 ### Changed
 
-- Updates CommandBox binary to 4.8.0
+- Bump CommandBox to `4.8.0`
 - Updates all ACF engines to latest hotfix
 
-## [4.7.0/2.7.1] - 2019-03-07
+## [2.7.1] - 2019-03-07
 
 ### Changed
 
-- Updates Commandbox binary to 4.7.0
+- Bump CommandBox to `4.7.0`
 
-## [4.6.0/2.7.0] - 2019-03-05
+## [2.7.0] - 2019-03-05
 
 ### Added
 
@@ -750,14 +750,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Additional error handling and utilities for manual install
 - Adds `fontconfig` for Debian and Alpine to fix PDF generation errors on AdoptOpenJDK base
 
-## [4.6.0/2.6.1] - 2019-03-02
+## [2.6.1] - 2019-03-02
 
 ### Changed
 
 - Updates all ACF engines to latest hotfix
-- Updates CommandBox binary to v4.6.0
+- Bump CommandBox to `4.6.0`
 
-## [4.5.0/2.6.0] - 2019-03-01
+## [2.6.0] - 2019-03-01
 
 ### Added
 
@@ -768,23 +768,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updates all java versions to use AdoptOpenJDK builds
 - Changes the JRE used for Adobe Coldfusion 2018 images to JRE11
 
-## [4.5.0/2.5.0] - 2019-02-23
+## [2.5.0] - 2019-02-23
 
 ### Changed
 
-- Updates CommandBox binary to v4.5.0
+- Bump CommandBox to `4.5.0`
 
-## [4.4.0/2.4.0] - 2018-11-18
+## [2.4.0] - 2018-11-18
 
 ### Changed
 
-- Updates CommandBox binary to v4.4.0
+- Bump CommandBox to `4.4.0`
 
 ### Added
 
 - Adds the `commandbox-dotenv` module in to all base images
 
-## [4.2.0/2.3.0] - 2018-08-18
+## [2.3.0] - 2018-08-18
 
 ### Changed
 
@@ -795,19 +795,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimization and reductions to Debian-based image sizes
 - Adds additional APK binaries to Alpine images to support PDF/CFDocument rendering
 
-## [4.2.0/2.2.6] - 2018-08-5
+## [2.2.6] - 2018-08-5
 
 ### Changed
 
-- Updates CommandBox binary to v4.2.0
+- Bump CommandBox to `4.2.0`
 
-## [4.1.0/2.2.5] - 2018-06-27
+## [2.2.5] - 2018-06-27
 
 ### Changed
 
-- Updates CommandBox binary to v4.1.0
+- Bump CommandBox to `4.1.0`
 
-## [4.0.0/2.2.4] - 2018-06-16
+## [2.2.4] - 2018-06-16
 
 ### Changed
 
@@ -818,20 +818,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adds warmed-up engine builds for Alpine images
 - Additional optimizations to reduce image size
 
-## [4.0.0/2.2.3] - 2018-06-15
+## [2.2.3] - 2018-06-15
 
 ### Changed
 
 - Temporarily removes support for `HEAP_SIZE` environment variable due to parse failures with env variables in `server.json`
 
-## [4.0.0/2.2.2] - 2018-06-13
+## [2.2.2] - 2018-06-13
 
 ### Changed
 
 - Changes alpine image to use `openjdk:8-alpine`
 - Changes image tag in Dockerfile for base Debian image to match official tags on Docker Hub
 
-## [4.0.0/2.2.1] - 2018-06-12
+## [2.2.1] - 2018-06-12
 
 ### Added
 
@@ -841,45 +841,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixes an issue with `cfconfig_` prefixed environment variables failing
 
-## [4.0.0/2.2.0] - 2018-06-04
+## [2.2.0] - 2018-06-04
 
 ### Changed
 
 - Ubuntu base version to use OpenJDK Slim
-- Updates to CommandBox v4.0.0
+- Bump CommandBox to `4.0.0`
 - Changes default CommandBox server engine to Lucee 5
 
-## [3.9.2/2.1.4] - 2018-01-23
+## [2.1.4] - 2018-01-23
 
 ### Changed
 
-- Updates to Commandbox v3.9.2
+- Bump CommandBox to `3.9.2`
 - Changes Docker secrets placeholder for bash compatibility
 
-## [3.9.1/2.1.3] - 2017-11-28
+## [2.1.3] - 2017-11-28
 
 ### Fixed
 
 - Fixes a regression where `SSL_PORT` environment variables were being ignored
 
 
-## [3.9.0/2.1.2] - 2017-11-17
+## [2.1.2] - 2017-11-17
 
 ### Changed
 
-- Updates to CommandBox v3.9.0
+- Bump CommandBox to `3.9.0`
 
 ### Fixed
 
 - Fixes server setting argument name
 
-## [3.8.0/2.1.1] - 2017-11-02
+## [2.1.1] - 2017-11-02
 
 ### Changed
 
 - Updates CMD to not persist container runtime settings to server.json
 
-## [3.8.0/2.1.0] - 2017-10-31
+## [2.1.0] - 2017-10-31
 
 ### Added
 
@@ -888,13 +888,118 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updates to CommandBox v3.8+
+- Bump CommandBox to `3.8+`
 - Updates runtime output to avoid confusion
 - Changes image for alpine build to prevent CommandBox errors when installing dependencies
 
-## [3.7.0/2.0.3] - 2017-06-30
+## [2.0.3] - 2017-06-30
 
 ### Changed
 
-- Updates to CommandBox v3.7+
+- Bump CommandBox to `3.7+`
 - Delegates cfconfig environment variables to Commandbox v3.7
+
+[Unreleased]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.24.0...HEAD
+[3.24.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.23.0...v3.24.0
+[3.23.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.22.0...v3.23.0
+[3.22.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.21.0...v3.22.0
+[3.21.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.20.0...v3.21.0
+[3.20.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.19.0...v3.20.0
+[3.19.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.18.0...v3.19.0
+[3.18.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.17.0...v3.18.0
+[3.17.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.16.0...v3.17.0
+[3.16.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.15.0...v3.16.0
+[3.15.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.14.1...v3.15.0
+[3.14.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.14.0...v3.14.1
+[3.14.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.7...v3.14.0
+[3.13.7]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.6...v3.13.7
+[3.13.6]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.5...v3.13.6
+[3.13.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.4...v3.13.5
+[3.13.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.3...v3.13.4
+[3.13.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.1...v3.13.3
+[3.13.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.13.0...v3.13.1
+[3.13.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.12.0...v3.13.0
+[3.12.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.11.0...v3.12.0
+[3.11.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.10.2...v3.11.0
+[3.10.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.10.1...v3.10.2
+[3.10.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.10.0...v3.10.1
+[3.10.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.10...v3.10.0
+[3.9.10]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.9...v3.9.10
+[3.9.9]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.8...v3.9.9
+[3.9.8]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.7...v3.9.8
+[3.9.7]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.6...v3.9.7
+[3.9.6]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.5...v3.9.6
+[3.9.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.4...v3.9.5
+[3.9.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.3...v3.9.4
+[3.9.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.2...v3.9.3
+[3.9.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.1...v3.9.2
+[3.9.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.9.0...v3.9.1
+[3.9.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.5...v3.9.0
+[3.8.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.4...v3.8.5
+[3.8.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.3...v3.8.4
+[3.8.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.2...v3.8.3
+[3.8.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.1...v3.8.2
+[3.8.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.8.0...v3.8.1
+[3.8.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.12...v3.8.0
+[3.7.12]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.11...v3.7.12
+[3.7.11]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.10...v3.7.11
+[3.7.10]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.9...v3.7.10
+[3.7.9]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.8...v3.7.9
+[3.7.8]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.7...v3.7.8
+[3.7.7]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.6...v3.7.7
+[3.7.6]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.5...v3.7.6
+[3.7.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.4...v3.7.5
+[3.7.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.3...v3.7.4
+[3.7.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.2...v3.7.3
+[3.7.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.1...v3.7.2
+[3.7.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.7.0...v3.7.1
+[3.7.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.6.4...v3.7.0
+[3.6.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.6.3...v3.6.4
+[3.6.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.6.2...v3.6.3
+[3.6.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.6.1...v3.6.2
+[3.6.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.6.0...v3.6.1
+[3.6.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.5.4...v3.6.0
+[3.5.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.5.3...v3.5.4
+[3.5.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.5.2...v3.5.3
+[3.5.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.5.1...v3.5.2
+[3.5.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.5.0...v3.5.1
+[3.5.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.5...v3.5.0
+[3.4.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.4...v3.4.5
+[3.4.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.3...v3.4.4
+[3.4.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.2...v3.4.3
+[3.4.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.1...v3.4.2
+[3.4.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.4.0...v3.4.1
+[3.4.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.3.0...v3.4.0
+[3.3.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.2.2...v3.3.0
+[3.2.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.2.1...v3.2.2
+[3.2.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.2.0...v3.2.1
+[3.2.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.1.1...v3.2.0
+[3.1.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.1.0...v3.1.1
+[3.1.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.0.2...v3.1.0
+[3.0.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.0.1...v3.0.2
+[3.0.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.8.1...v3.0.0
+[2.8.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.8.0...v2.8.1
+[2.8.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.7.3...v2.8.0
+[2.7.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.7.2...v2.7.3
+[2.7.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.7.1...v2.7.2
+[2.7.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.7.0...v2.7.1
+[2.7.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.6.1...v2.7.0
+[2.6.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.6.0...v2.6.1
+[2.6.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.5.0...v2.6.0
+[2.5.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.4.0...v2.5.0
+[2.4.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.3.0...v2.4.0
+[2.3.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.6...v2.3.0
+[2.2.6]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.5...v2.2.6
+[2.2.5]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.4...v2.2.5
+[2.2.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.3...v2.2.4
+[2.2.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.2...v2.2.3
+[2.2.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.1...v2.2.2
+[2.2.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.2.0...v2.2.1
+[2.2.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.1.4...v2.2.0
+[2.1.4]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.1.3...v2.1.4
+[2.1.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.1.2...v2.1.3
+[2.1.2]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.1.1...v2.1.2
+[2.1.1]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.1.0...v2.1.1
+[2.1.0]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.0.3...v2.1.0
+[2.0.3]: https://github.com/Ortus-Solutions/docker-commandbox/compare/v2.0.3
