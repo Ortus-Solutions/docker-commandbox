@@ -1,0 +1,10 @@
+[
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/Dockerfile", "BUILD_IMAGE_TAGS": "latest,jre21" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/JDK21.Dockerfile", "BUILD_IMAGE_TAGS": "jdk21" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/JRE25.Dockerfile", "BUILD_IMAGE_TAGS": "jre25" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/JDK25.Dockerfile", "BUILD_IMAGE_TAGS": "jdk25" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/rhel.Dockerfile", "BUILD_IMAGE_TAGS": "ubi10,jre21-rhel" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/rhel.JDK21.Dockerfile", "BUILD_IMAGE_TAGS": "jdk21-rhel" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/Alpine.Dockerfile", "BUILD_IMAGE_TAGS": "alpine,jre21-alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/base/Alpine.JDK21.Dockerfile", "BUILD_IMAGE_TAGS": "jdk21-alpine" }
+]

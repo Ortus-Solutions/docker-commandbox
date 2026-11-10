@@ -1,0 +1,30 @@
+[
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Lucee5.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Lucee6.Dockerfile", "BUILD_IMAGE_TAGS": "lucee6", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Lucee7.Dockerfile", "BUILD_IMAGE_TAGS": "lucee7", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/LuceeLight.Dockerfile", "BUILD_IMAGE_TAGS": "lucee-light", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Lucee5Light.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5-light", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Lucee6Light.Dockerfile", "BUILD_IMAGE_TAGS": "lucee6-light", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Adobe2023.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2023", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/Adobe2025.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2025", "BASE_IMAGE": "ortussolutions/commandbox:jdk21" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/debian/BoxLang.Dockerfile", "BUILD_IMAGE_TAGS": "boxlang", "BASE_IMAGE": "ortussolutions/commandbox:latest" },
+
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Lucee5.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Lucee6.Dockerfile", "BUILD_IMAGE_TAGS": "lucee6-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Lucee7.Dockerfile", "BUILD_IMAGE_TAGS": "lucee7-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/LuceeLight.Dockerfile", "BUILD_IMAGE_TAGS": "lucee-light-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Lucee5Light.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5-light-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Lucee6Light.Dockerfile", "BUILD_IMAGE_TAGS": "lucee6-light-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Adobe2023.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2023-rhel", "BASE_IMAGE": "ortussolutions/commandbox:ubi10" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/Adobe2025.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2025-rhel", "BASE_IMAGE": "ortussolutions/commandbox:jdk21-rhel" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/redhat/BoxLang.Dockerfile", "BUILD_IMAGE_TAGS": "boxlang-rhel", "BASE_IMAGE": "ortussolutions/commandbox:jdk21-rhel" },
+
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Lucee5.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Lucee6.Dockerfile", "BUILD_IMAGE_TAGS": "lucee6-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Lucee7.Dockerfile", "BUILD_IMAGE_TAGS": "lucee7-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/LuceeLight.Dockerfile", "BUILD_IMAGE_TAGS": "lucee-light-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Lucee5Light.Dockerfile", "BUILD_IMAGE_TAGS": "lucee5-light-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Adobe2023.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2023-alpine", "BASE_IMAGE": "ortussolutions/commandbox:alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/Adobe2025.Dockerfile", "BUILD_IMAGE_TAGS": "adobe2025-alpine", "BASE_IMAGE": "ortussolutions/commandbox:jdk21-alpine" },
+  { "BUILD_IMAGE_DOCKERFILE": "builds/alpine/BoxLang.Dockerfile", "BUILD_IMAGE_TAGS": "boxlang-alpine", "BASE_IMAGE": "ortussolutions/commandbox:jdk21-alpine" }
+]

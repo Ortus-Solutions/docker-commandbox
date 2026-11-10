@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-phase=${1:?Supply build, integration, secrets, diagnostics, or cleanup}
+phase=${1:?Supply build, integration, secrets, smoke, diagnostics, or cleanup}
 : "${COMPOSE_PROJECT_NAME:?}" "${TEST_IMAGE:?}"
 diagnosticsDir=${RELEASE_DIAGNOSTICS_DIR:-${RUNNER_TEMP:-${TMPDIR:-/tmp}}/release-diagnostics}
 mkdir -p "$diagnosticsDir"
@@ -38,7 +38,7 @@ case "$phase" in
 		: "${BUILD_IMAGE_DOCKERFILE:?}" "${COMMANDBOX_VERSION:?}" "${BUILDX_BUILDER:?}"
 		buildArgs=(
 			--builder "$BUILDX_BUILDER"
-			--platform linux/amd64
+			--platform "${BUILD_PLATFORM:-linux/amd64}"
 			--load
 			--pull
 			--progress plain
@@ -89,6 +89,31 @@ case "$phase" in
 		trap 'exit 143' TERM
 		timeout --kill-after=30s "$suiteTimeout" docker compose -f "$composeFile" \
 			up --no-build --pull never --exit-code-from sut 2>&1 | tee "$diagnosticsDir/${phase}.log"
+		;;
+	smoke)
+		: "${TEST_IMAGE:?}"
+		recordResources
+		container=commandbox-smoke-$$
+		cleanupSmoke () {
+			docker rm -f "$container" >/dev/null 2>&1 || true
+		}
+		trap cleanupSmoke EXIT
+		docker run -d --name "$container" "$TEST_IMAGE" >/dev/null
+		ok=false
+		for _ in $(seq 1 "${SMOKE_RETRIES:-300}"); do
+			if docker exec "$container" curl --fail --silent --show-error http://127.0.0.1:8080/ >/dev/null 2>&1; then
+				ok=true
+				break
+			fi
+			sleep 2
+		done
+		if [[ $ok != true ]]; then
+			docker logs "$container" >&2 || true
+			printf 'Smoke test failed: server did not respond on :8080\n' >&2
+			exit 1
+		fi
+		docker rm -f "$container" >/dev/null
+		printf 'Smoke test passed\n'
 		;;
 	diagnostics)
 		recordResources

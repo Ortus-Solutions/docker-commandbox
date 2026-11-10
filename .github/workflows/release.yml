@@ -14,51 +14,45 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-base-images:
+  prepare-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      base-matrix: ${{ steps.base.outputs.json }}
+      engine-matrix: ${{ steps.engine.outputs.json }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Load base matrix
+        id: base
+        run: echo "json=$(cat .github/matrix/base.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Load engine matrix
+        id: engine
+        run: echo "json=$(cat .github/matrix/engine.json)" >> "$GITHUB_OUTPUT"
+
+  build-base-images-amd64:
+    runs-on: ubuntu-latest
+    needs: prepare-matrix
     timeout-minutes: 210
     env:
       BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
       TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
       COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      DOCKER_IMAGE: ortussolutions/commandbox
+      BUILD_PLATFORM: linux/amd64
+      PUSH_PLATFORM: linux/amd64
     strategy:
       fail-fast: false
       max-parallel: 4
       matrix:
-        include:
-          # Foundation images (builds/base/* - eclipse-temurin based) with promoted tags
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Dockerfile
-            BUILD_IMAGE_TAGS: "latest,jre21"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK21.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk21"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JRE25.Dockerfile
-            BUILD_IMAGE_TAGS: "jre25"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/JDK25.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk25"
-
-          # RHEL/UBI9 foundation images with promoted tags
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.Dockerfile
-            BUILD_IMAGE_TAGS: "ubi10,jre21-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK21.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk21-rhel"
-
-          # Alpine foundation images with promoted tags
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.Dockerfile
-            BUILD_IMAGE_TAGS: "alpine,jre21-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/base/Alpine.JDK21.Dockerfile
-            BUILD_IMAGE_TAGS: "jdk21-alpine"
-
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.base-matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
       - name: Initialize diagnostics path
         run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
 
       - name: Set up Docker Buildx
         id: buildx
@@ -70,58 +64,13 @@ jobs:
       - name: Setup Base Image Builds
         id: setup
         env:
-          DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
         run: |
-          IMAGE_VERSION=$(jq -r '.imageVersion' version.json)
           COMMANDBOX_VERSION=$(jq -r '.commandboxVersion' version.json)
-
-          # Split the comma-separated tags
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
-          echo "BUILD_CACHE_SCOPE=base-${TAG_ARRAY[0]}" >> "$GITHUB_ENV"
-
-          # Initialize arrays for final tags
-          FINAL_TAGS=()
-
-          # Process each tag
-          for tag in "${TAG_ARRAY[@]}"; do
-            if [[ $GITHUB_REF == 'refs/heads/development' ]]; then
-              # Snapshot builds
-              FINAL_TAGS+=("${tag}-snapshot")
-            else
-              # Main branch builds: floating tag plus version-pinned tag
-              FINAL_TAGS+=("${tag}")
-              if [[ $tag == "latest" ]]; then
-                FINAL_TAGS+=("${IMAGE_VERSION}")
-              else
-                FINAL_TAGS+=("${tag}-${IMAGE_VERSION}")
-              fi
-            fi
-          done
-
-          # Prefix with Docker image name
-          FULL_TAGS=""
-          for tag in "${FINAL_TAGS[@]}"; do
-            if [[ -z "$FULL_TAGS" ]]; then
-              FULL_TAGS="${DOCKER_IMAGE}:${tag}"
-            else
-              FULL_TAGS="${FULL_TAGS},${DOCKER_IMAGE}:${tag}"
-            fi
-          done
-
-          ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
-
-          # Set output parameters.
-          echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
-          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
-          echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "BASE_IMAGE_ARG=" >> $GITHUB_ENV
-          echo "IMAGE_TAG=${FULL_TAGS}" >> $GITHUB_ENV
-
-          # Set the first tag for testing purposes
-          FIRST_TAG="${TAG_ARRAY[0]}"
-          echo "BUILD_IMAGE_TAG=${FIRST_TAG}" >> $GITHUB_ENV
+          echo "BUILD_CACHE_SCOPE=base-${TAG_ARRAY[0]}-amd64" >> "$GITHUB_ENV"
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> "$GITHUB_ENV"
+          echo "BASE_IMAGE_ARG=" >> "$GITHUB_ENV"
 
       - name: DockerHub Login
         if: github.event_name != 'pull_request'
@@ -145,24 +94,35 @@ jobs:
         timeout-minutes: 15
         run: bash build/test-release.sh secrets
 
-      - name: Build and Push Base Images
+      - name: Build and push amd64 by digest
         if: github.event_name != 'pull_request'
         timeout-minutes: 90
-        uses: docker/build-push-action@v6
         env:
-          DOCKER_BUILDKIT: 1
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: |
+          docker buildx build \
+            --builder "$BUILDX_BUILDER" \
+            --platform "$PUSH_PLATFORM" \
+            --output "type=image,name=${DOCKER_IMAGE},push-by-digest=true,push=true" \
+            --provenance=false \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION="$COMMANDBOX_VERSION" \
+            --metadata-file "$RUNNER_TEMP/meta.json" \
+            .
+          digest=$(jq -r '."containerimage.digest"' "$RUNNER_TEMP/meta.json")
+          printf '%s' "$digest" > "$RUNNER_TEMP/digest.txt"
+          echo "Pushed ${DOCKER_IMAGE}@${digest}"
+
+      - name: Upload amd64 digest
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
-          provenance: false
-          builder: ${{ steps.buildx.outputs.name }}
-          context: .
-          file: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          build-args: |
-            COMMANDBOX_VERSION=${{ env.commandbox_version }}
-          platforms: ${{ env.arch_platforms }}
-          cache-from: type=gha,scope=${{ env.BUILD_CACHE_SCOPE }}
-          cache-to: type=gha,scope=${{ env.BUILD_CACHE_SCOPE }},mode=max,ignore-error=true
-          push: true
-          tags: ${{ env.IMAGE_TAG }}
+          name: base-amd64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/digest.txt
+          if-no-files-found: error
+          retention-days: 1
 
       - name: Collect failure diagnostics
         if: ${{ failure() }}
@@ -184,103 +144,22 @@ jobs:
         timeout-minutes: 3
         run: bash build/test-release.sh cleanup
 
-  build-engine-images:
-    runs-on: ubuntu-latest
+  build-base-images-arm64:
+    runs-on: ubuntu-24.04-arm
+    needs: prepare-matrix
     timeout-minutes: 210
-    needs: build-base-images
     env:
       BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
       TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
       COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      DOCKER_IMAGE: ortussolutions/commandbox
+      BUILD_PLATFORM: linux/arm64
+      PUSH_PLATFORM: linux/arm64/v8
     strategy:
       fail-fast: false
       max-parallel: 4
       matrix:
-        include:
-          # Debian engine builds
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee6"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee7.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee7"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee-light"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5-light"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Lucee6Light.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee6-light"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2023"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2025"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk21"
-          - BUILD_IMAGE_DOCKERFILE: builds/debian/BoxLang.Dockerfile
-            BUILD_IMAGE_TAGS: "boxlang"
-            BASE_IMAGE: "ortussolutions/commandbox:latest"
-
-          # RHEL engine builds
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee6-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee7-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6Light.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee6-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2023-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi10"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2025-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk21-rhel"
-          - BUILD_IMAGE_DOCKERFILE: builds/redhat/BoxLang.Dockerfile
-            BUILD_IMAGE_TAGS: "boxlang-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk21-rhel"
-
-          # Alpine engine builds
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee6.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee6-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee7.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee7-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/LuceeLight.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee-light-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Lucee5Light.Dockerfile
-            BUILD_IMAGE_TAGS: "lucee5-light-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2023.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2023-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/Adobe2025.Dockerfile
-            BUILD_IMAGE_TAGS: "adobe2025-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk21-alpine"
-          - BUILD_IMAGE_DOCKERFILE: builds/alpine/BoxLang.Dockerfile
-            BUILD_IMAGE_TAGS: "boxlang-alpine"
-            BASE_IMAGE: "ortussolutions/commandbox:jdk21-alpine"
-
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.base-matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -288,10 +167,176 @@ jobs:
       - name: Initialize diagnostics path
         run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Setup Base Image Builds
+        id: setup
+        env:
+          BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
+        run: |
+          COMMANDBOX_VERSION=$(jq -r '.commandboxVersion' version.json)
+          IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
+          echo "BUILD_CACHE_SCOPE=base-${TAG_ARRAY[0]}-arm64" >> "$GITHUB_ENV"
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> "$GITHUB_ENV"
+          echo "BASE_IMAGE_ARG=" >> "$GITHUB_ENV"
+
+      - name: DockerHub Login
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+        uses: docker/login-action@v3
         with:
-          platforms: arm64
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build native test image
+        timeout-minutes: 60
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: bash build/test-release.sh build
+
+      - name: Smoke test
+        timeout-minutes: 20
+        run: bash build/test-release.sh smoke
+
+      - name: Build and push arm64 by digest
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 90
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: |
+          docker buildx build \
+            --builder "$BUILDX_BUILDER" \
+            --platform "$PUSH_PLATFORM" \
+            --output "type=image,name=${DOCKER_IMAGE},push-by-digest=true,push=true" \
+            --provenance=false \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION="$COMMANDBOX_VERSION" \
+            --metadata-file "$RUNNER_TEMP/meta.json" \
+            .
+          digest=$(jq -r '."containerimage.digest"' "$RUNNER_TEMP/meta.json")
+          printf '%s' "$digest" > "$RUNNER_TEMP/digest.txt"
+          echo "Pushed ${DOCKER_IMAGE}@${digest}"
+
+      - name: Upload arm64 digest
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: base-arm64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/digest.txt
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Collect failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        run: bash build/test-release.sh diagnostics
+
+      - name: Upload failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+          path: ${{ env.RELEASE_DIAGNOSTICS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Clean up test containers
+        if: ${{ always() }}
+        timeout-minutes: 3
+        run: bash build/test-release.sh cleanup
+
+  build-base-manifests:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-matrix
+      - build-base-images-amd64
+      - build-base-images-arm64
+    timeout-minutes: 60
+    env:
+      DOCKER_IMAGE: ortussolutions/commandbox
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.base-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: DockerHub Login
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Download amd64 digest
+        uses: actions/download-artifact@v4
+        with:
+          name: base-amd64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/amd64
+
+      - name: Download arm64 digest
+        uses: actions/download-artifact@v4
+        with:
+          name: base-arm64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/arm64
+
+      - name: Create multi-arch manifest
+        if: github.event_name != 'pull_request'
+        env:
+          BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
+        run: |
+          IMAGE_VERSION=$(jq -r '.imageVersion' version.json)
+          amd64_digest=$(cat "$RUNNER_TEMP/amd64/digest.txt")
+          arm64_digest=$(cat "$RUNNER_TEMP/arm64/digest.txt")
+          tag_list=$(BUILD_IMAGE_TAGS="$BUILD_IMAGE_TAGS" GITHUB_REF="$GITHUB_REF" IMAGE_VERSION="$IMAGE_VERSION" DOCKER_IMAGE="$DOCKER_IMAGE" bash build/util/compute-tags.sh)
+          tag_args=()
+          while IFS= read -r tag; do
+            [[ -n $tag ]] && tag_args+=(-t "$tag")
+          done <<< "$tag_list"
+          docker buildx imagetools create "${tag_args[@]}" \
+            "${DOCKER_IMAGE}@${amd64_digest}" \
+            "${DOCKER_IMAGE}@${arm64_digest}"
+
+  build-engine-images-amd64:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-matrix
+      - build-base-manifests
+    timeout-minutes: 210
+    env:
+      BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+      TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      DOCKER_IMAGE: ortussolutions/commandbox
+      BUILD_PLATFORM: linux/amd64
+      PUSH_PLATFORM: linux/amd64
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.engine-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Initialize diagnostics path
+        run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
 
       - name: Set up Docker Buildx
         id: buildx
@@ -303,80 +348,15 @@ jobs:
       - name: Setup Engine Image Builds
         id: setup
         env:
-          DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
           BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
         run: |
           IMAGE_VERSION=$(jq -r '.imageVersion' version.json)
           COMMANDBOX_VERSION=$(jq -r '.commandboxVersion' version.json)
-          echo "BUILD_CACHE_SCOPE=engine-${BUILD_IMAGE_TAGS}" >> "$GITHUB_ENV"
-
-          # Split the comma-separated tags
-          IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
-
-          # Initialize arrays for final tags
-          FINAL_TAGS=()
-
-          # Process each tag
-          for tag in "${TAG_ARRAY[@]}"; do
-            if [[ $GITHUB_REF == 'refs/heads/development' ]]; then
-              # Snapshot builds
-              FINAL_TAGS+=("${tag}-snapshot")
-            else
-              # Main branch builds: floating tag plus version-pinned tag
-              FINAL_TAGS+=("${tag}")
-              if [[ $tag == "latest" ]]; then
-                FINAL_TAGS+=("${IMAGE_VERSION}")
-              else
-                FINAL_TAGS+=("${tag}-${IMAGE_VERSION}")
-              fi
-            fi
-          done
-
-          # Process base image tag for version builds
-          ACTUAL_BASE_IMAGE="$BASE_IMAGE"
-          if [[ $GITHUB_REF == 'refs/heads/development' ]]; then
-            # Snapshot builds
-            BASE_TAG="${BASE_IMAGE#*:}"
-            ACTUAL_BASE_IMAGE="${BASE_IMAGE%:*}:${BASE_TAG}-snapshot"
-          else
-            # Main branch builds: resolve base to its version-pinned tag
-            BASE_TAG="${BASE_IMAGE#*:}"
-            if [[ $BASE_TAG == "latest" ]]; then
-              ACTUAL_BASE_IMAGE="${BASE_IMAGE%:*}:${IMAGE_VERSION}"
-            else
-              ACTUAL_BASE_IMAGE="${BASE_IMAGE%:*}:${BASE_TAG}-${IMAGE_VERSION}"
-            fi
-          fi
-
-          # Prefix with Docker image name
-          FULL_TAGS=""
-          for tag in "${FINAL_TAGS[@]}"; do
-            if [[ -z "$FULL_TAGS" ]]; then
-              FULL_TAGS="${DOCKER_IMAGE}:${tag}"
-            else
-              FULL_TAGS="${FULL_TAGS},${DOCKER_IMAGE}:${tag}"
-            fi
-          done
-
-          ARCH_PLATFORMS=linux/amd64,linux/arm64/v8
-          # Adobe 2023 requires Java 17, which Temurin does not publish for Alpine arm64
-          if [[ ${BUILD_IMAGE_TAGS} == "adobe2023-alpine" ]]; then
-            ARCH_PLATFORMS=linux/amd64
-          fi
-
-          # Set output parameters.
-          echo "arch_platforms=${ARCH_PLATFORMS}" >> $GITHUB_ENV
-          echo "image_version=${IMAGE_VERSION}" >> $GITHUB_ENV
-          echo "commandbox_version=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> $GITHUB_ENV
-          echo "BASE_IMAGE_ARG=${ACTUAL_BASE_IMAGE}" >> $GITHUB_ENV
-          echo "IMAGE_TAG=${FULL_TAGS}" >> $GITHUB_ENV
-          echo "ACTUAL_BASE_IMAGE=${ACTUAL_BASE_IMAGE}" >> $GITHUB_ENV
-
-          # Set the first tag for testing purposes
-          FIRST_TAG="${TAG_ARRAY[0]}"
-          echo "BUILD_IMAGE_TAG=${FIRST_TAG}" >> $GITHUB_ENV
+          ACTUAL_BASE_IMAGE=$(BASE_IMAGE="$BASE_IMAGE" GITHUB_REF="$GITHUB_REF" IMAGE_VERSION="$IMAGE_VERSION" bash build/util/resolve-base-image.sh)
+          echo "BUILD_CACHE_SCOPE=engine-${BUILD_IMAGE_TAGS}-amd64" >> "$GITHUB_ENV"
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> "$GITHUB_ENV"
+          echo "BASE_IMAGE_ARG=${ACTUAL_BASE_IMAGE}" >> "$GITHUB_ENV"
 
       - name: DockerHub Login
         if: github.event_name != 'pull_request'
@@ -398,26 +378,37 @@ jobs:
           TEST_COMMAND: /opt/build/test-engine.sh
         run: bash build/test-release.sh integration
 
-      - name: Build and push
+      - name: Build and push amd64 by digest
         if: github.event_name != 'pull_request'
         timeout-minutes: 90
-        uses: docker/build-push-action@v6
         env:
-          DOCKER_BUILDKIT: 1
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: |
+          docker buildx build \
+            --builder "$BUILDX_BUILDER" \
+            --platform "$PUSH_PLATFORM" \
+            --pull \
+            --output "type=image,name=${DOCKER_IMAGE},push-by-digest=true,push=true" \
+            --provenance=false \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION="$COMMANDBOX_VERSION" \
+            --build-arg BASE_IMAGE_ARG="$BASE_IMAGE_ARG" \
+            --metadata-file "$RUNNER_TEMP/meta.json" \
+            .
+          digest=$(jq -r '."containerimage.digest"' "$RUNNER_TEMP/meta.json")
+          printf '%s' "$digest" > "$RUNNER_TEMP/digest.txt"
+          echo "Pushed ${DOCKER_IMAGE}@${digest}"
+
+      - name: Upload amd64 digest
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
-          provenance: false
-          builder: ${{ steps.buildx.outputs.name }}
-          context: ${{ github.workspace }}
-          file: ${{ github.workspace }}/${{ matrix.BUILD_IMAGE_DOCKERFILE }}
-          push: true
-          pull: true
-          cache-from: type=gha,scope=${{ env.BUILD_CACHE_SCOPE }}
-          cache-to: type=gha,scope=${{ env.BUILD_CACHE_SCOPE }},mode=max,ignore-error=true
-          build-args: |
-            COMMANDBOX_VERSION=${{ env.commandbox_version }}
-            BASE_IMAGE_ARG=${{ env.ACTUAL_BASE_IMAGE }}
-          platforms: ${{ env.arch_platforms }}
-          tags: ${{ env.IMAGE_TAG }}
+          name: engine-amd64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/digest.txt
+          if-no-files-found: error
+          retention-days: 1
 
       - name: Collect failure diagnostics
         if: ${{ failure() }}
@@ -439,9 +430,189 @@ jobs:
         timeout-minutes: 3
         run: bash build/test-release.sh cleanup
 
+  build-engine-images-arm64:
+    runs-on: ubuntu-24.04-arm
+    needs:
+      - prepare-matrix
+      - build-base-manifests
+    timeout-minutes: 210
+    env:
+      BUILD_IMAGE_DOCKERFILE: ${{ matrix.BUILD_IMAGE_DOCKERFILE }}
+      TEST_IMAGE: docker-commandbox-sut:${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      COMPOSE_PROJECT_NAME: commandbox-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+      DOCKER_IMAGE: ortussolutions/commandbox
+      BUILD_PLATFORM: linux/arm64
+      PUSH_PLATFORM: linux/arm64/v8
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.engine-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Initialize diagnostics path
+        run: echo "RELEASE_DIAGNOSTICS_DIR=$RUNNER_TEMP/release-diagnostics" >> "$GITHUB_ENV"
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Setup Engine Image Builds
+        id: setup
+        env:
+          BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
+          BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
+        run: |
+          IMAGE_VERSION=$(jq -r '.imageVersion' version.json)
+          COMMANDBOX_VERSION=$(jq -r '.commandboxVersion' version.json)
+          ACTUAL_BASE_IMAGE=$(BASE_IMAGE="$BASE_IMAGE" GITHUB_REF="$GITHUB_REF" IMAGE_VERSION="$IMAGE_VERSION" bash build/util/resolve-base-image.sh)
+          echo "BUILD_CACHE_SCOPE=engine-${BUILD_IMAGE_TAGS}-arm64" >> "$GITHUB_ENV"
+          echo "COMMANDBOX_VERSION=${COMMANDBOX_VERSION}" >> "$GITHUB_ENV"
+          echo "BASE_IMAGE_ARG=${ACTUAL_BASE_IMAGE}" >> "$GITHUB_ENV"
+
+      - name: DockerHub Login
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build native test image
+        if: matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        timeout-minutes: 60
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: bash build/test-release.sh build
+
+      - name: Smoke test
+        if: matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        timeout-minutes: 20
+        run: bash build/test-release.sh smoke
+
+      - name: Build and push arm64 by digest
+        if: github.event_name != 'pull_request' && matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        timeout-minutes: 90
+        env:
+          BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+        run: |
+          docker buildx build \
+            --builder "$BUILDX_BUILDER" \
+            --platform "$PUSH_PLATFORM" \
+            --pull \
+            --output "type=image,name=${DOCKER_IMAGE},push-by-digest=true,push=true" \
+            --provenance=false \
+            --cache-from "type=gha,scope=${BUILD_CACHE_SCOPE}" \
+            --cache-to "type=gha,scope=${BUILD_CACHE_SCOPE},mode=max,ignore-error=true" \
+            --file "$BUILD_IMAGE_DOCKERFILE" \
+            --build-arg COMMANDBOX_VERSION="$COMMANDBOX_VERSION" \
+            --build-arg BASE_IMAGE_ARG="$BASE_IMAGE_ARG" \
+            --metadata-file "$RUNNER_TEMP/meta.json" \
+            .
+          digest=$(jq -r '."containerimage.digest"' "$RUNNER_TEMP/meta.json")
+          printf '%s' "$digest" > "$RUNNER_TEMP/digest.txt"
+          echo "Pushed ${DOCKER_IMAGE}@${digest}"
+
+      - name: Upload arm64 digest
+        if: github.event_name != 'pull_request' && matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-arm64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/digest.txt
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Collect failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        run: bash build/test-release.sh diagnostics
+
+      - name: Upload failure diagnostics
+        if: ${{ failure() }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+          path: ${{ env.RELEASE_DIAGNOSTICS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Clean up test containers
+        if: ${{ always() }}
+        timeout-minutes: 3
+        run: bash build/test-release.sh cleanup
+
+  build-engine-manifests:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-matrix
+      - build-engine-images-amd64
+      - build-engine-images-arm64
+    timeout-minutes: 60
+    env:
+      DOCKER_IMAGE: ortussolutions/commandbox
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.prepare-matrix.outputs.engine-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: DockerHub Login
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 5
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Download amd64 digest
+        uses: actions/download-artifact@v4
+        with:
+          name: engine-amd64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/amd64
+
+      - name: Download arm64 digest
+        if: matrix.BUILD_IMAGE_TAGS != 'adobe2023-alpine'
+        uses: actions/download-artifact@v4
+        with:
+          name: engine-arm64-digest-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/arm64
+
+      - name: Create multi-arch manifest
+        if: github.event_name != 'pull_request'
+        env:
+          BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
+        run: |
+          IMAGE_VERSION=$(jq -r '.imageVersion' version.json)
+          amd64_digest=$(cat "$RUNNER_TEMP/amd64/digest.txt")
+          sources=("${DOCKER_IMAGE}@${amd64_digest}")
+          if [[ "$BUILD_IMAGE_TAGS" != "adobe2023-alpine" ]]; then
+            arm64_digest=$(cat "$RUNNER_TEMP/arm64/digest.txt")
+            sources+=("${DOCKER_IMAGE}@${arm64_digest}")
+          fi
+          tag_list=$(BUILD_IMAGE_TAGS="$BUILD_IMAGE_TAGS" GITHUB_REF="$GITHUB_REF" IMAGE_VERSION="$IMAGE_VERSION" DOCKER_IMAGE="$DOCKER_IMAGE" bash build/util/compute-tags.sh)
+          tag_args=()
+          while IFS= read -r tag; do
+            [[ -n $tag ]] && tag_args+=(-t "$tag")
+          done <<< "$tag_list"
+          docker buildx imagetools create "${tag_args[@]}" "${sources[@]}"
+
   finalize_release:
     runs-on: ubuntu-latest
-    needs: build-engine-images
+    needs: build-engine-manifests
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
