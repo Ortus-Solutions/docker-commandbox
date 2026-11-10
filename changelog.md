@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lucee 7 image bumped to `7.1.0+204`
 - Lucee 6 image bumped to `6.2.8+20`
 - Removed builds and support for Adobe 2021 images
+- Ubuntu distro bumped to v26 (resolute)
 - Alpine engine images are now built for `linux/arm64/v8` in addition to `linux/amd64`, as the Temurin Java 21 Alpine bases publish arm64 builds. Adobe 2023 on Alpine remains `linux/amd64` only because it requires Java 17, which Temurin does not publish for Alpine arm64
 - Alpine Lucee 5, Lucee 5 Light and Lucee 6 Light images no longer pin Java 11/17 and now run on the base image's Java 21, as the RHEL images already did
 - *Breaking:* Default application root changed from `/app` to `/srv/app` on all distributions. Update volume mounts and derived-image paths before upgrading.

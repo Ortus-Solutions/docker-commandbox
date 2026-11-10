@@ -1,4 +1,4 @@
-FROM eclipse-temurin:25-jdk-noble
+FROM eclipse-temurin:25-jdk-resolute
 ARG COMMANDBOX_VERSION
 
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"

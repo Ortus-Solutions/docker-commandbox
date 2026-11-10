@@ -877,7 +877,7 @@ FROM ${BASE_IMAGE_ARG} AS workbench
 ENV FINALIZE_STARTUP=true
 RUN "$BUILD_DIR/run.sh"
 
-FROM eclipse-temurin:21-jre-noble AS app
+FROM eclipse-temurin:21-jre-resolute AS app
 
 # COPY our generated files
 COPY --from=workbench --chown=1000:1000 /srv/app /srv/app
