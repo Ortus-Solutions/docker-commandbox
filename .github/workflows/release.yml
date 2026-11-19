@@ -42,7 +42,7 @@ jobs:
 
           # RHEL/UBI9 foundation images with promoted tags
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.Dockerfile
-            BUILD_IMAGE_TAGS: "ubi10,jre11-rhel"
+            BUILD_IMAGE_TAGS: "rhel,jre11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK11.Dockerfile
             BUILD_IMAGE_TAGS: "jdk11-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/base/rhel.JDK17.Dockerfile
@@ -223,19 +223,19 @@ jobs:
           # RHEL engine builds
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee6.Dockerfile
             BUILD_IMAGE_TAGS: "lucee6-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee7.Dockerfile
             BUILD_IMAGE_TAGS: "lucee7-rhel"
             BASE_IMAGE: "ortussolutions/commandbox:jre25-rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/LuceeLight.Dockerfile
             BUILD_IMAGE_TAGS: "lucee-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Lucee5Light.Dockerfile
             BUILD_IMAGE_TAGS: "lucee5-light-rhel"
-            BASE_IMAGE: "ortussolutions/commandbox:ubi9"
+            BASE_IMAGE: "ortussolutions/commandbox:rhel"
           - BUILD_IMAGE_DOCKERFILE: builds/redhat/Adobe2023.Dockerfile
             BUILD_IMAGE_TAGS: "adobe2023-rhel"
             BASE_IMAGE: "ortussolutions/commandbox:jdk17-rhel"
