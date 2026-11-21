@@ -218,7 +218,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Jarkarta support for [BoxLang](https://boxlang.io/) and Adobe 2025
-- Boxlang version bumped to `1.0.0-rc.3`
+- Boxlang version bumped to `1.0.0-rc.5`
 
 ## [3.10.2] - 2025-02-07
 
