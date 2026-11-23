@@ -25,7 +25,7 @@ if [[ $CFPM_UNINSTALL ]]; then
     
     for package in $CFPM_UNINSTALL
     do
-        $BOX_SERVER_APP_SERVERHOMEDIRECTORY/WEB_INF/cfusion/bin/cfpm.sh uninstall $package
+        $BOX_SERVER_APP_SERVERHOMEDIRECTORY/WEB-INF/cfusion/bin/cfpm.sh uninstall $package
     done
 
 fi
